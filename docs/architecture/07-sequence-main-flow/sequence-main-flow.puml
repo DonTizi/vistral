@@ -1,0 +1,90 @@
+@startuml
+skinparam defaultFontName "Segoe UI, Arial, Helvetica, sans-serif"
+skinparam defaultFontSize 11
+skinparam shadowing false
+skinparam roundCorner 4
+skinparam SequenceBoxBackgroundColor #f6f8fa
+skinparam SequenceBoxBorderColor #d1d5da
+skinparam ParticipantBackgroundColor #ffffff
+skinparam ParticipantBorderColor #b0b0b0
+skinparam SequenceLifeLineBorderColor #cccccc
+skinparam ArrowColor #666666
+skinparam ArrowFontColor #555555
+
+title Main Flow - Video Upload to Analysis Results
+
+actor User as user
+participant "Frontend\nNext.js" as fe
+participant "Backend API\nFastAPI" as api
+participant "Orchestrator" as orch
+participant "FFmpeg" as ffmpeg
+participant "Voxtral\nASR" as voxtral
+participant "Pixtral\nVision" as pixtral
+participant "Mistral Small\nLLM" as mistral
+participant "Graph\nBuilder" as graph
+database "Job Storage\nJSON" as db
+
+== Upload ==
+user -> fe : Drag & drop video
+fe -> api : POST /api/upload (multipart)
+api -> db : Create job (status: uploading)
+api --> fe : { job_id, stream_url }
+fe -> api : GET /api/jobs/{id}/stream (SSE subscribe)
+
+== Processing Pipeline ==
+api -> orch : Start pipeline async
+
+group Parallel: Audio + Frame Extraction
+    orch -> ffmpeg : Extract audio (16kHz WAV)
+    orch -> ffmpeg : Extract frames (scene detect + 30s fallback)
+    ffmpeg --> orch : audio.wav
+    ffmpeg --> orch : frames/*.jpg
+end
+
+orch -> api : SSE: { step: "extraction", progress: 100% }
+
+group Parallel: Transcription + Frame Dedup
+    orch -> voxtral : POST /v1/audio/transcriptions\n(multipart: file + diarize=true)
+    orch -> orch : phash dedup on frames
+    voxtral --> orch : transcript with speakers + timestamps
+    orch --> orch : unique frames list
+end
+
+orch -> api : SSE: { step: "transcription", progress: 100% }
+
+group Parallel: Pass A (entities) + Vision Analysis
+    orch -> mistral : POST /v1/chat/completions\n(Pass A: entity extraction from transcript)
+    orch -> pixtral : POST /v1/chat/completions\n(batch frames, json_object format)
+    mistral --> orch : entities (speakers, topics, claims, KPIs)
+    pixtral --> orch : vision events (OCR text, scene descriptions)
+end
+
+orch -> api : SSE: { step: "analysis", progress: 100% }
+
+== Knowledge Graph Construction ==
+orch -> graph : Build graph from transcript + vision + entities
+graph -> graph : Create nodes (speakers, topics, KPIs, slides, decisions, claims)
+graph -> graph : Create edges (said_by, shown_during, contradicts, etc.)
+graph -> graph : Cross-reference audio-visual signals
+graph -> graph : Generate 60s timeline snapshots
+graph -> graph : Serialize to compact format (~3.5k tokens)
+graph --> orch : Temporal Knowledge Graph
+
+orch -> api : SSE: { step: "graph", progress: 100% }
+
+== Insight Reasoning ==
+orch -> mistral : POST /v1/chat/completions\n(Pass B: reason on serialized graph)
+mistral --> orch : insights with evidence chains\n(topics, actions, decisions, contradictions, KPIs)
+
+orch -> db : Save all results (transcript + graph + insights)
+orch -> api : SSE: { step: "complete", progress: 100% }
+
+== Results ==
+api --> fe : SSE: processing complete
+fe -> api : GET /api/jobs/{id}/results
+api -> db : Read job results
+db --> api : Full results JSON
+api --> fe : { transcript, graph, insights }
+fe --> user : Analysis view with 3 panels + knowledge graph
+
+@enduml

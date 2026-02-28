@@ -1,0 +1,29 @@
+@startuml
+!include <C4/C4_Container>
+
+title Container Architecture - VISTRAL
+
+Person(user, "Business User", "Uploads videos, explores analysis results and knowledge graphs")
+
+System_Boundary(vistral, "VISTRAL Platform") {
+    Container(frontend, "Frontend SPA", "Next.js 14, TailwindCSS", "Landing page, processing animation, 3-panel analysis view, knowledge graph visualization")
+    Container(backend, "Backend API", "Python FastAPI", "Video processing pipeline orchestration, SSE streaming, REST endpoints")
+    Container(pipeline, "Processing Pipeline", "Python + FFmpeg", "Audio extraction, frame extraction, dedup, knowledge graph construction")
+    ContainerDb(storage, "Job Storage", "JSON Files", "Stores job results, transcripts, knowledge graphs, and pre-computed demos per job ID")
+}
+
+System_Ext(mistral_asr, "Voxtral Transcribe 2", "ASR + diarization")
+System_Ext(mistral_vision, "Pixtral Large", "Vision analysis")
+System_Ext(mistral_llm, "Mistral Small 3", "LLM reasoning")
+
+Rel(user, frontend, "Browses, uploads video, explores results", "HTTPS")
+Rel(frontend, backend, "Uploads video, fetches results, subscribes to SSE", "HTTPS REST + SSE")
+Rel(backend, pipeline, "Triggers processing pipeline for uploaded video", "Internal async call")
+Rel(pipeline, mistral_asr, "Sends audio WAV for transcription", "HTTPS multipart")
+Rel(pipeline, mistral_vision, "Sends base64 frames for OCR and scene analysis", "HTTPS JSON")
+Rel(pipeline, mistral_llm, "Sends transcript and graph for entity extraction and insights", "HTTPS JSON")
+Rel(pipeline, storage, "Writes job progress, transcript, graph, and insights", "File I/O")
+Rel(backend, storage, "Reads job results and demo data", "File I/O")
+
+SHOW_LEGEND()
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+!include <C4/C4_Container>
+
+title Deployment Architecture - VISTRAL (Hackathon)
+
+Person(user, "User", "Accesses via browser")
+
+System_Boundary(local, "Local Development / Demo Machine") {
+    Container(nextjs, "Frontend", "Next.js 14 dev server", "Port 3000. Static landing, SPA for processing and analysis views")
+    Container(fastapi, "Backend", "FastAPI + Uvicorn", "Port 8000. REST API, SSE streaming, pipeline orchestration")
+    Container(ffmpeg_bin, "FFmpeg", "Local binary", "Audio and frame extraction from uploaded videos")
+    ContainerDb(job_files, "Job Storage", "JSON files on disk", "./backend/data/jobs/ -- per-job results")
+    ContainerDb(demo_files, "Demo Data", "Pre-computed JSON", "./precompute/demos/ -- 3 demo results")
+    ContainerDb(video_files, "Video Storage", "Uploaded files", "./backend/data/uploads/ -- raw video files")
+}
+
+System_Ext(mistral_api, "Mistral AI API", "api.mistral.ai -- Voxtral, Pixtral, Mistral Small endpoints")
+
+Rel(user, nextjs, "Browses app", "HTTP :3000")
+Rel(nextjs, fastapi, "API calls + SSE", "HTTP :8000")
+Rel(fastapi, ffmpeg_bin, "Subprocess calls", "CLI")
+Rel(fastapi, job_files, "Read/write job data", "File I/O")
+Rel(fastapi, demo_files, "Read demo data", "File I/O")
+Rel(fastapi, video_files, "Store/serve videos", "File I/O")
+Rel(fastapi, mistral_api, "ASR, Vision, LLM calls", "HTTPS REST")
+
+SHOW_LEGEND()
+@enduml

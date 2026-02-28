@@ -1,0 +1,40 @@
+@startuml
+!include <C4/C4_Component>
+
+title Component Architecture - Backend API and Pipeline
+
+Container_Boundary(backend, "Backend API + Pipeline") {
+
+    Component(upload_router, "Upload Router", "FastAPI Router", "POST /api/upload - accepts video file, creates job, triggers pipeline")
+    Component(jobs_router, "Jobs Router", "FastAPI Router", "GET /api/jobs/{id}/stream (SSE), /results, /video")
+    Component(demo_router, "Demo Router", "FastAPI Router", "GET /api/demo/{name} - serves pre-computed demo results")
+
+    Component(orchestrator, "Pipeline Orchestrator", "Python asyncio", "Coordinates all pipeline stages in parallel, emits SSE progress events")
+
+    Component(audio_extractor, "Audio Extractor", "FFmpeg subprocess", "Extracts 16kHz mono WAV from video")
+    Component(transcriber, "Transcriber", "Voxtral API client", "ASR with speaker diarization and word timestamps")
+    Component(frame_extractor, "Frame Extractor", "FFmpeg subprocess", "Adaptive frame extraction via scene detection + interval fallback")
+    Component(frame_dedup, "Frame Deduplicator", "imagehash + PIL", "Perceptual hashing to skip near-duplicate frames")
+    Component(vision_analyzer, "Vision Analyzer", "Pixtral API client", "Batch OCR and scene analysis on unique frames")
+    Component(graph_builder, "Knowledge Graph Builder", "Python", "Merges transcript + vision into Temporal Knowledge Graph with nodes, edges, and snapshots")
+    Component(reasoner, "Reasoner", "Mistral Small API client", "Pass A: entity extraction from transcript. Pass B: insight extraction from graph")
+
+    ComponentDb(job_storage, "Job Storage", "JSON files", "Per-job results: transcript, graph, insights")
+}
+
+Rel(upload_router, orchestrator, "Starts pipeline async")
+Rel(jobs_router, job_storage, "Reads job results")
+Rel(demo_router, job_storage, "Reads pre-computed demo JSON")
+
+Rel(orchestrator, audio_extractor, "Step 1: Extract audio")
+Rel(orchestrator, frame_extractor, "Step 2a: Extract frames (parallel with ASR)")
+Rel(orchestrator, transcriber, "Step 2b: Transcribe audio (parallel with frames)")
+Rel(orchestrator, frame_dedup, "Step 3: Deduplicate frames")
+Rel(orchestrator, vision_analyzer, "Step 4a: Analyze frames (parallel with Pass A)")
+Rel(orchestrator, reasoner, "Step 4b: Pass A entity extraction (parallel with vision)")
+Rel(orchestrator, graph_builder, "Step 5: Build knowledge graph from all signals")
+Rel(orchestrator, reasoner, "Step 6: Pass B insight extraction from graph")
+Rel(orchestrator, job_storage, "Writes results at each step")
+
+SHOW_LEGEND()
+@enduml

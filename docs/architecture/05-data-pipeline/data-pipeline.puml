@@ -1,0 +1,82 @@
+@startuml
+skinparam defaultFontName "Segoe UI, Arial, Helvetica, sans-serif"
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 4
+skinparam ActivityBackgroundColor #ffffff
+skinparam ActivityBorderColor #b0b0b0
+skinparam ActivityFontColor #333333
+skinparam ArrowColor #999999
+skinparam ArrowFontColor #666666
+skinparam PartitionBackgroundColor #f6f8fa
+skinparam PartitionBorderColor #d1d5da
+
+title Data Pipeline - VISTRAL Processing Flow
+
+|#f0f8ff|Local Processing|
+|#fff8f0|Mistral API|
+|#f0fff0|Graph Engine|
+
+start
+
+|Local Processing|
+:Video Upload (MP4/WebM);
+
+fork
+    :FFmpeg Audio Extraction
+    16kHz mono WAV (~3s);
+fork again
+    :FFmpeg Adaptive Frame Extraction
+    scene detection threshold=0.3
+    + 30s interval fallback (~5s);
+end fork
+
+fork
+    |Mistral API|
+    :Voxtral Transcribe 2
+    ASR + speaker diarization
+    + word-level timestamps (~15-30s);
+fork again
+    |Local Processing|
+    :Perceptual Hash Dedup
+    imagehash phash, threshold=8
+    skip near-duplicate frames (~1s);
+end fork
+
+fork
+    |Mistral API|
+    :Mistral Small - Pass A
+    Entity extraction from transcript:
+    speakers, topics, claims, KPIs
+    + topic segmentation (~10-15s);
+fork again
+    |Mistral API|
+    :Pixtral Large - Vision Analysis
+    Batch frames (groups of 15)
+    OCR + scene description
+    JSON structured output (~15-30s);
+end fork
+
+|Graph Engine|
+:Knowledge Graph Builder (~2s)
+-- Merge transcript + vision + entities
+-- Create nodes: speaker, topic, KPI, slide, decision, claim
+-- Create edges: said_by, shown_during, contradicts, decided, committed_to
+-- Cross-reference audio-visual signals
+-- Generate 60s timeline snapshots
+-- Serialize graph (~3.5k tokens for 10min video);
+
+|Mistral API|
+:Mistral Small - Pass B
+Reasoning on serialized graph:
+action items, decisions, contradictions, KPIs
+Each insight with evidence chain (~10-15s);
+
+|Local Processing|
+:Save Results (JSON)
+transcript + knowledge graph + insights
++ evidence chains;
+
+stop
+
+@enduml

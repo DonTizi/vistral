@@ -1,0 +1,23 @@
+@startuml
+!include <C4/C4_Context>
+
+title System Context - VISTRAL
+
+Person(user, "Business User", "Analyst, manager, or compliance officer who needs insights from video content")
+
+System(vistral, "VISTRAL", "Video World-State Intelligence platform that builds Temporal Knowledge Graphs from enterprise videos and extracts traceable insights")
+
+System_Ext(mistral_asr, "Voxtral Transcribe 2", "Mistral ASR service: speech-to-text with speaker diarization and word-level timestamps")
+System_Ext(mistral_vision, "Pixtral Large", "Mistral Vision model: OCR, slide analysis, and scene description from video frames")
+System_Ext(mistral_llm, "Mistral Small 3", "Mistral LLM: entity extraction, topic segmentation, and insight reasoning on knowledge graphs")
+System_Ext(ffmpeg, "FFmpeg", "Local binary: audio extraction and adaptive frame extraction from video files")
+
+Rel(user, vistral, "Uploads video or selects demo", "HTTPS")
+Rel(vistral, mistral_asr, "Sends audio for transcription", "HTTPS REST API")
+Rel(vistral, mistral_vision, "Sends frames for visual analysis", "HTTPS REST API")
+Rel(vistral, mistral_llm, "Sends transcript/graph for reasoning", "HTTPS REST API")
+Rel(vistral, ffmpeg, "Extracts audio and frames", "CLI subprocess")
+Rel(vistral, user, "Streams progress via SSE, serves analysis results", "HTTPS SSE")
+
+SHOW_LEGEND()
+@enduml

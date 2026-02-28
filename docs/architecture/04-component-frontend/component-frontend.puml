@@ -1,0 +1,40 @@
+@startuml
+!include <C4/C4_Component>
+
+title Component Architecture - Frontend SPA
+
+Container_Boundary(frontend, "Frontend SPA [Next.js 14]") {
+
+    Component(layout, "Root Layout", "Next.js App Router", "Dark theme shell with Mistral design tokens, global styles")
+
+    Component(landing, "Landing Page", "React + TailwindCSS", "Hero section, drag-and-drop upload zone, demo selector cards")
+    Component(processing, "Processing Page", "React + SSE", "6-step pipeline visualizer, real-time timeline builder, progress bar")
+    Component(analysis, "Analysis Page", "React", "3-panel layout: video player, timeline, insights panel with tabs")
+    Component(graph_view, "Knowledge Graph View", "react-force-graph-2d", "Force-directed graph: color-coded nodes, labeled edges, hover/click interactions")
+
+    Component(video_player, "Video Player", "HTML5 Video", "Playback with active speaker indicator and visual context badge")
+    Component(timeline, "Interactive Timeline", "React", "Color-coded topic segments, speaker tracks, clickable event markers")
+    Component(insights_panel, "Insights Panel", "React", "Tabs: Summary, Topics, Actions, Decisions, Contradictions, Transcript")
+    Component(transcript_view, "Transcript View", "React", "Auto-scrolling transcript synced to video, speaker color-coded")
+
+    Component(use_sse, "useSSE Hook", "React Hook", "Subscribes to backend SSE stream for real-time pipeline progress")
+    Component(use_video_sync, "useVideoSync Hook", "React Hook", "Bidirectional sync between video time and UI components")
+    Component(api_client, "API Client", "fetch/axios", "HTTP client for upload, results, demo endpoints")
+}
+
+Rel(landing, api_client, "POST /api/upload")
+Rel(landing, processing, "Navigate on upload success")
+Rel(processing, use_sse, "Subscribe to SSE stream")
+Rel(processing, analysis, "Navigate when processing completes")
+Rel(analysis, api_client, "GET /api/jobs/{id}/results")
+Rel(analysis, video_player, "Renders video with sync")
+Rel(analysis, timeline, "Renders interactive timeline")
+Rel(analysis, insights_panel, "Renders insights with evidence chains")
+Rel(analysis, graph_view, "Toggle to knowledge graph view")
+Rel(insights_panel, transcript_view, "Transcript tab")
+Rel(use_video_sync, video_player, "Controls playback position")
+Rel(use_video_sync, timeline, "Highlights current position")
+Rel(use_video_sync, insights_panel, "Highlights active insight")
+
+SHOW_LEGEND()
+@enduml

@@ -1,0 +1,119 @@
+@startuml
+skinparam defaultFontName "Segoe UI, Arial, Helvetica, sans-serif"
+skinparam defaultFontSize 11
+skinparam shadowing false
+skinparam roundCorner 8
+skinparam ClassBorderColor #b0b0b0
+skinparam ClassFontColor #333333
+skinparam ClassAttributeFontColor #555555
+skinparam ClassAttributeBackgroundColor #fafafa
+skinparam ClassHeaderBackgroundColor #f0f0f0
+skinparam ArrowColor #999999
+skinparam ArrowFontColor #666666
+skinparam NoteFontSize 10
+
+title Temporal Knowledge Graph - Data Model
+
+package "Graph Nodes" {
+    class Node {
+        id : string
+        type : NodeType
+        label : string
+        first_seen : float (seconds)
+        last_seen : float (seconds)
+        attributes : dict
+    }
+
+    enum NodeType {
+        speaker
+        topic
+        kpi
+        slide
+        decision
+        claim
+    }
+}
+
+package "Graph Edges" {
+    class Edge {
+        source : string (node_id)
+        target : string (node_id)
+        relation : RelationType
+        timestamp : float (seconds)
+        confidence : float (0-1)
+        evidence : Evidence
+    }
+
+    enum RelationType {
+        mentioned
+        said_by
+        shown_during
+        contradicts
+        decided
+        committed_to
+        related_to
+    }
+
+    class Evidence {
+        source_type : "audio" | "visual" | "merged"
+        quote : string | null
+        description : string | null
+        frame_path : string | null
+    }
+}
+
+package "Graph Container" {
+    class TemporalKnowledgeGraph {
+        nodes : Node[]
+        edges : Edge[]
+        timeline : TimelineSnapshot[]
+        metadata : GraphMetadata
+    }
+
+    class TimelineSnapshot {
+        timestamp : float
+        active_nodes : string[]
+        active_edges : string[]
+        current_topic : string
+        current_speaker : string
+    }
+
+    class GraphMetadata {
+        duration_seconds : float
+        total_nodes : int
+        total_edges : int
+        node_types : dict
+    }
+}
+
+package "Insight Output" {
+    class InsightResult {
+        summary : string
+        topics : TopicInsight[]
+        action_items : ActionItem[]
+        decisions : Decision[]
+        contradictions : Contradiction[]
+        kpis : KPI[]
+        key_quotes : Quote[]
+    }
+
+    class EvidenceChain {
+        timestamp : float
+        source : "audio" | "visual"
+        quote : string
+        description : string
+        confidence : float
+    }
+}
+
+Node --> NodeType : has type
+Edge --> RelationType : has relation
+Edge --> Evidence : carries
+Edge "2" --> Node : connects
+TemporalKnowledgeGraph *-- Node : contains
+TemporalKnowledgeGraph *-- Edge : contains
+TemporalKnowledgeGraph *-- TimelineSnapshot : contains
+TemporalKnowledgeGraph *-- GraphMetadata : has
+InsightResult *-- EvidenceChain : every insight has
+
+@enduml

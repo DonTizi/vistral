@@ -1,0 +1,61 @@
+@startuml
+skinparam defaultFontName "Segoe UI, Arial, Helvetica, sans-serif"
+skinparam defaultFontSize 11
+skinparam shadowing false
+skinparam roundCorner 4
+
+title Parallel Pipeline Timing - 10 Minute Video
+
+concise "FFmpeg Audio" as audio
+concise "Voxtral ASR" as asr
+concise "FFmpeg Frames" as frames
+concise "Frame Dedup" as dedup
+concise "Pixtral Vision" as vision
+concise "Pass A (Entities)" as pass_a
+concise "Graph Builder" as graph
+concise "Pass B (Insights)" as pass_b
+
+@0
+audio is "Extract" #LightBlue
+frames is "Extract" #LightBlue
+
+@3
+audio is {-}
+asr is "Transcribe" #LightGreen
+
+@5
+frames is {-}
+dedup is "Dedup" #LightYellow
+
+@6
+dedup is {-}
+
+@20
+asr is {-}
+pass_a is "Entities" #Orange
+vision is "OCR + Scene" #Pink
+
+@32
+pass_a is {-}
+
+@35
+vision is {-}
+
+@37
+graph is "Build Graph" #LightCyan
+
+@39
+graph is {-}
+pass_b is "Insights" #Orchid
+
+@50
+pass_b is {-}
+
+@0
+audio is "Extract"
+@3
+asr is "Transcribe"
+@5
+frames is {-}
+
+@enduml
