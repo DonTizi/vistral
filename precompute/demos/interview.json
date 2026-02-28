@@ -1,0 +1,232 @@
+{
+  "job_id": "demo-interview",
+  "status": "completed",
+  "video_url": null,
+  "transcript": [
+    {"speaker": "Sarah Kim", "text": "Alright, thanks for coming in today James. I'm Sarah Kim, Engineering Manager here at Nexus. I've got your resume pulled up and I'm really excited to chat.", "start": 0.0, "end": 9.0},
+    {"speaker": "Sarah Kim", "text": "Let me also introduce David Cho, one of our senior staff engineers who'll be sitting in for the panel portion.", "start": 9.5, "end": 15.0},
+    {"speaker": "David Cho", "text": "Hey James, good to meet you. I'll mostly be listening and jumping in with some technical questions later.", "start": 15.5, "end": 21.0},
+    {"speaker": "James Park", "text": "Thanks Sarah, thanks David. Really glad to be here. I've been following Nexus for a while now. The distributed systems work you're doing is right up my alley.", "start": 22.0, "end": 30.0},
+    {"speaker": "Sarah Kim", "text": "Great to hear. So let's start with your background. Can you walk us through your experience with large-scale distributed systems?", "start": 31.0, "end": 38.0},
+    {"speaker": "James Park", "text": "Absolutely. I've been working in backend infrastructure for about 8 years now. Most recently at Stratum, I was the tech lead on their real-time data pipeline.", "start": 39.0, "end": 48.0},
+    {"speaker": "James Park", "text": "We were processing around 2 million events per second across 400 nodes. The system had to maintain sub-50 millisecond latency at the 99th percentile.", "start": 48.5, "end": 58.0},
+    {"speaker": "Sarah Kim", "text": "That's impressive scale. What was the most challenging aspect of maintaining that latency target?", "start": 59.0, "end": 64.0},
+    {"speaker": "James Park", "text": "Honestly, it was the tail latency. Getting P50 down is relatively straightforward, but P99 is a different beast. We had to redesign our partitioning strategy three times.", "start": 65.0, "end": 75.0},
+    {"speaker": "James Park", "text": "The key insight was moving to a consistent hashing scheme with virtual nodes. That eliminated the hot partition problem that was causing our tail latency spikes.", "start": 75.5, "end": 85.0},
+    {"speaker": "Sarah Kim", "text": "That's a solid approach. Now, your resume mentions you led a team of 12 engineers at Stratum. Can you tell me about that experience?", "start": 86.0, "end": 94.0},
+    {"speaker": "James Park", "text": "Right, so I was leading a team of about 15 engineers. We were split into three squads: ingest, processing, and storage.", "start": 95.0, "end": 103.0},
+    {"speaker": "David Cho", "text": "Just a quick note, James. Your resume says 12 engineers, but you just mentioned 15. Could you clarify that?", "start": 104.0, "end": 111.0},
+    {"speaker": "James Park", "text": "Oh, good catch. So it started as 12 when I first took on the lead role, and we grew to 15 over the two years. I should have been clearer about that.", "start": 112.0, "end": 121.0},
+    {"speaker": "Sarah Kim", "text": "No worries, growth is a good thing. Let's move into system design. I'd like you to design a real-time notification system that can handle 500,000 concurrent users.", "start": 122.0, "end": 132.0},
+    {"speaker": "James Park", "text": "Great problem. Let me think about this from the top down. First, we need to consider the connection layer. For 500K concurrent users, I'd go with WebSocket connections behind a load balancer.", "start": 133.0, "end": 144.0},
+    {"speaker": "James Park", "text": "We'd need roughly 50 WebSocket servers assuming each can handle about 10,000 connections. Each server maintains a local connection registry.", "start": 145.0, "end": 154.0},
+    {"speaker": "James Park", "text": "For the messaging layer, I'd use a pub-sub system. Kafka would be my choice here because of its durability guarantees and replay capability.", "start": 155.0, "end": 164.0},
+    {"speaker": "David Cho", "text": "Why Kafka over something lighter like Redis pub-sub? For notifications, do you really need the durability overhead?", "start": 165.0, "end": 172.0},
+    {"speaker": "James Park", "text": "That's a fair challenge. For pure real-time with no delivery guarantees, Redis pub-sub would be fine. But in my experience, users expect notifications to be reliable.", "start": 173.0, "end": 183.0},
+    {"speaker": "James Park", "text": "If a user is temporarily disconnected and reconnects, they should see missed notifications. Kafka's consumer offsets give us that for free. With Redis you'd need to build that yourself.", "start": 184.0, "end": 195.0},
+    {"speaker": "David Cho", "text": "Good reasoning. How would you handle the fanout problem? Say one event needs to notify 100,000 users.", "start": 196.0, "end": 203.0},
+    {"speaker": "James Park", "text": "For high-fanout scenarios, I'd use a two-tier approach. Hot topics with many subscribers get their own dedicated Kafka partitions. We'd pre-compute the subscriber lists and fan out at the WebSocket server level.", "start": 204.0, "end": 216.0},
+    {"speaker": "James Park", "text": "The key metric I'd target is end-to-end delivery under 200 milliseconds for P95. That includes Kafka produce, consume, and WebSocket push.", "start": 217.0, "end": 227.0},
+    {"speaker": "Sarah Kim", "text": "Solid design. Let's shift gears to coding philosophy. How do you approach code reviews?", "start": 228.0, "end": 235.0},
+    {"speaker": "James Park", "text": "I believe code reviews are the single most important engineering practice. They're not just about catching bugs, they're about knowledge sharing and maintaining consistency.", "start": 236.0, "end": 247.0},
+    {"speaker": "James Park", "text": "At Stratum, I introduced a rule that no PR ships without at least two approvals, and one has to be from someone outside your immediate squad.", "start": 248.0, "end": 258.0},
+    {"speaker": "James Park", "text": "That cross-squad review really helped break down silos. Before that, we had three different error handling patterns across the codebase. Within a quarter, we converged on one.", "start": 259.0, "end": 270.0},
+    {"speaker": "Sarah Kim", "text": "I love that approach. We actually have a similar philosophy here. What about testing? How do you think about test coverage?", "start": 271.0, "end": 279.0},
+    {"speaker": "James Park", "text": "I'm a big advocate for testing at the right level. I don't obsess over coverage percentages. 80% coverage with well-designed tests beats 95% coverage with brittle unit tests every time.", "start": 280.0, "end": 292.0},
+    {"speaker": "James Park", "text": "For distributed systems specifically, I invest heavily in integration tests and chaos testing. We ran weekly game days at Stratum where we'd inject failures into production-like environments.", "start": 293.0, "end": 305.0},
+    {"speaker": "David Cho", "text": "Weekly game days, that's commitment. What was the most interesting failure mode you discovered through those?", "start": 306.0, "end": 313.0},
+    {"speaker": "James Park", "text": "We found that when three specific Kafka brokers went down simultaneously, our consumer group rebalancing took 45 seconds instead of the expected 5. That would have been catastrophic in production.", "start": 314.0, "end": 326.0},
+    {"speaker": "James Park", "text": "Turned out it was a configuration issue with session timeouts. Five-minute fix once we found it, but it would have been a P0 incident if we hadn't caught it.", "start": 327.0, "end": 337.0},
+    {"speaker": "Sarah Kim", "text": "Let's talk about culture fit. What kind of engineering culture do you thrive in?", "start": 340.0, "end": 346.0},
+    {"speaker": "James Park", "text": "I do my best work in environments with high trust and low bureaucracy. I want to be able to ship fast but also have the discipline to do things right.", "start": 347.0, "end": 357.0},
+    {"speaker": "James Park", "text": "I'm big on documentation. I know engineers hate writing docs, but I believe an undocumented system is a ticking time bomb. At Stratum, I set up a culture where every design decision goes through an RFC process.", "start": 358.0, "end": 372.0},
+    {"speaker": "Sarah Kim", "text": "That resonates deeply with us. We actually just implemented an RFC process last quarter. What about work-life balance?", "start": 373.0, "end": 381.0},
+    {"speaker": "James Park", "text": "I'm a firm believer in sustainable pace. Crunch time happens, but it shouldn't be the norm. I've seen teams burn out from chronic overtime, and the code quality always suffers.", "start": 382.0, "end": 393.0},
+    {"speaker": "James Park", "text": "I also care about mentorship. Helping junior engineers grow is one of the most rewarding parts of being a senior engineer. At Stratum, I set up a structured mentorship program for new hires.", "start": 394.0, "end": 406.0},
+    {"speaker": "David Cho", "text": "That's great to hear. Quick technical question to close out: if you had to pick one technology you're most excited about right now, what would it be?", "start": 407.0, "end": 416.0},
+    {"speaker": "James Park", "text": "Without hesitation, it's eBPF. The ability to run sandboxed programs in the kernel without modifying kernel source code is a game changer for observability.", "start": 417.0, "end": 427.0},
+    {"speaker": "James Park", "text": "We used it at Stratum for network-level tracing and it gave us visibility we never had before. I'd love to bring that expertise here.", "start": 428.0, "end": 436.0},
+    {"speaker": "Sarah Kim", "text": "That's actually something we've been exploring. This has been a great conversation, James. Let me outline next steps.", "start": 437.0, "end": 445.0},
+    {"speaker": "Sarah Kim", "text": "We'd like to bring you back for a follow-up session with the VP of Engineering. I'll also need to set up a reference check. And David, could you prepare a brief technical assessment for James?", "start": 446.0, "end": 458.0},
+    {"speaker": "David Cho", "text": "Absolutely. I'll put together a take-home that focuses on distributed systems design. Should take about two hours.", "start": 459.0, "end": 466.0},
+    {"speaker": "James Park", "text": "Sounds great. I'm really excited about the opportunity. Thanks for your time today, both of you.", "start": 467.0, "end": 474.0},
+    {"speaker": "Sarah Kim", "text": "Thank you James. We'll be in touch early next week. Have a great rest of your day.", "start": 475.0, "end": 480.0}
+  ],
+  "graph": {
+    "nodes": [
+      {"id": "speaker_0", "type": "speaker", "label": "Sarah Kim", "first_seen": 0.0, "last_seen": 480.0, "attributes": {"role": "Engineering Manager / Interviewer", "key_contributions": ["Led the interview", "Assessed system design skills", "Outlined next steps"]}},
+      {"id": "speaker_1", "type": "speaker", "label": "James Park", "first_seen": 22.0, "last_seen": 474.0, "attributes": {"role": "Candidate / Senior Engineer", "key_contributions": ["Presented distributed systems experience", "Designed notification system", "Shared coding philosophy"]}},
+      {"id": "speaker_2", "type": "speaker", "label": "David Cho", "first_seen": 15.5, "last_seen": 466.0, "attributes": {"role": "Senior Staff Engineer / Panel Member", "key_contributions": ["Asked probing technical questions", "Flagged resume discrepancy", "Assigned take-home assessment"]}},
+      {"id": "topic_0", "type": "topic", "label": "Background & Experience", "first_seen": 31.0, "last_seen": 121.0, "attributes": {"key_points": ["8 years in backend infrastructure", "Tech lead at Stratum on real-time data pipeline", "2M events/sec across 400 nodes", "Led team of 12-15 engineers"], "speakers_involved": ["speaker_0", "speaker_1", "speaker_2"]}},
+      {"id": "topic_1", "type": "topic", "label": "System Design: Notification System", "first_seen": 122.0, "last_seen": 227.0, "attributes": {"key_points": ["WebSocket connections with 50 servers", "Kafka-based pub-sub messaging layer", "Two-tier fanout for high-subscriber topics", "P95 target: 200ms end-to-end"], "speakers_involved": ["speaker_0", "speaker_1", "speaker_2"]}},
+      {"id": "topic_2", "type": "topic", "label": "Coding Philosophy & Testing", "first_seen": 228.0, "last_seen": 337.0, "attributes": {"key_points": ["Two-approval code review policy with cross-squad reviews", "Prefers well-designed tests over high coverage numbers", "Weekly chaos testing game days", "Discovered critical Kafka rebalancing bug"], "speakers_involved": ["speaker_0", "speaker_1", "speaker_2"]}},
+      {"id": "topic_3", "type": "topic", "label": "Culture Fit & Values", "first_seen": 340.0, "last_seen": 436.0, "attributes": {"key_points": ["Values high trust and low bureaucracy", "Strong advocate for documentation and RFCs", "Believes in sustainable pace over crunch", "Passionate about mentorship", "Excited about eBPF for observability"], "speakers_involved": ["speaker_0", "speaker_1", "speaker_2"]}},
+      {"id": "kpi_0", "type": "kpi", "label": "Years of Experience: 8", "first_seen": 39.0, "last_seen": 48.0, "attributes": {"name": "Years of Experience", "value": "8 years", "context": "Backend infrastructure and distributed systems"}},
+      {"id": "kpi_1", "type": "kpi", "label": "System Scale: 2M events/sec", "first_seen": 48.5, "last_seen": 58.0, "attributes": {"name": "System Scale (Throughput)", "value": "2 million events per second", "context": "Real-time data pipeline at Stratum across 400 nodes"}},
+      {"id": "kpi_2", "type": "kpi", "label": "Latency Target: <50ms P99", "first_seen": 48.5, "last_seen": 85.0, "attributes": {"name": "Latency Target", "value": "Sub-50ms at P99", "context": "Tail latency for the real-time pipeline, achieved through consistent hashing with virtual nodes"}},
+      {"id": "kpi_3", "type": "kpi", "label": "Team Size: 12-15 engineers", "first_seen": 86.0, "last_seen": 121.0, "attributes": {"name": "Team Size", "value": "12 growing to 15", "context": "Three squads: ingest, processing, and storage at Stratum"}},
+      {"id": "claim_0", "type": "claim", "label": "Resume states team of 12 engineers", "first_seen": 86.0, "last_seen": 94.0, "attributes": {"content": "Resume says James led a team of 12 engineers at Stratum", "source": "visual", "type": "factual"}},
+      {"id": "claim_1", "type": "claim", "label": "James says team was 15 engineers", "first_seen": 95.0, "last_seen": 103.0, "attributes": {"content": "James states he was leading about 15 engineers", "speaker": "speaker_1", "type": "factual"}},
+      {"id": "decision_0", "type": "decision", "label": "Schedule follow-up with VP Engineering", "first_seen": 446.0, "last_seen": 458.0, "attributes": {"context": "Next step in the interview process"}},
+      {"id": "decision_1", "type": "decision", "label": "Conduct reference check", "first_seen": 446.0, "last_seen": 458.0, "attributes": {"context": "Standard hiring process verification"}},
+      {"id": "decision_2", "type": "decision", "label": "Assign take-home technical assessment", "first_seen": 459.0, "last_seen": 466.0, "attributes": {"context": "Distributed systems design, estimated 2 hours"}}
+    ],
+    "edges": [
+      {"source": "speaker_0", "target": "topic_0", "relation": "mentioned", "timestamp": 31.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "Can you walk us through your experience with large-scale distributed systems?", "description": null, "frame_path": null}},
+      {"source": "speaker_1", "target": "kpi_0", "relation": "mentioned", "timestamp": 39.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "I've been working in backend infrastructure for about 8 years now", "description": null, "frame_path": null}},
+      {"source": "speaker_1", "target": "kpi_1", "relation": "mentioned", "timestamp": 48.5, "confidence": 0.93, "evidence": {"source_type": "audio", "quote": "processing around 2 million events per second across 400 nodes", "description": null, "frame_path": null}},
+      {"source": "speaker_1", "target": "kpi_2", "relation": "mentioned", "timestamp": 48.5, "confidence": 0.93, "evidence": {"source_type": "audio", "quote": "maintain sub-50 millisecond latency at the 99th percentile", "description": null, "frame_path": null}},
+      {"source": "claim_0", "target": "speaker_0", "relation": "said_by", "timestamp": 86.0, "confidence": 0.90, "evidence": {"source_type": "audio", "quote": "your resume mentions you led a team of 12 engineers", "description": null, "frame_path": null}},
+      {"source": "claim_1", "target": "speaker_1", "relation": "said_by", "timestamp": 95.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "I was leading a team of about 15 engineers", "description": null, "frame_path": null}},
+      {"source": "claim_0", "target": "claim_1", "relation": "contradicts", "timestamp": 104.0, "confidence": 0.85, "evidence": {"source_type": "merged", "quote": "Resume says 12 engineers but candidate says 15", "description": "Resume states team of 12 engineers, candidate verbally claims 15. Candidate explains it grew from 12 to 15 over two years. Minor discrepancy but raises attention to detail.", "frame_path": null}},
+      {"source": "speaker_2", "target": "topic_0", "relation": "mentioned", "timestamp": 104.0, "confidence": 0.88, "evidence": {"source_type": "audio", "quote": "Your resume says 12 engineers, but you just mentioned 15", "description": null, "frame_path": null}},
+      {"source": "speaker_1", "target": "topic_1", "relation": "mentioned", "timestamp": 133.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "For 500K concurrent users, I'd go with WebSocket connections behind a load balancer", "description": null, "frame_path": null}},
+      {"source": "speaker_2", "target": "topic_1", "relation": "mentioned", "timestamp": 165.0, "confidence": 0.90, "evidence": {"source_type": "audio", "quote": "Why Kafka over something lighter like Redis pub-sub?", "description": null, "frame_path": null}},
+      {"source": "speaker_1", "target": "kpi_3", "relation": "mentioned", "timestamp": 95.0, "confidence": 0.92, "evidence": {"source_type": "audio", "quote": "I was leading a team of about 15 engineers", "description": null, "frame_path": null}},
+      {"source": "speaker_1", "target": "topic_2", "relation": "mentioned", "timestamp": 236.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "code reviews are the single most important engineering practice", "description": null, "frame_path": null}},
+      {"source": "speaker_1", "target": "topic_3", "relation": "mentioned", "timestamp": 347.0, "confidence": 0.92, "evidence": {"source_type": "audio", "quote": "I do my best work in environments with high trust and low bureaucracy", "description": null, "frame_path": null}},
+      {"source": "speaker_0", "target": "decision_0", "relation": "decided", "timestamp": 446.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "We'd like to bring you back for a follow-up session with the VP of Engineering", "description": null, "frame_path": null}},
+      {"source": "speaker_0", "target": "decision_1", "relation": "decided", "timestamp": 446.0, "confidence": 0.93, "evidence": {"source_type": "audio", "quote": "I'll also need to set up a reference check", "description": null, "frame_path": null}},
+      {"source": "speaker_2", "target": "decision_2", "relation": "committed_to", "timestamp": 459.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "I'll put together a take-home that focuses on distributed systems design", "description": null, "frame_path": null}}
+    ],
+    "timeline": [
+      {"timestamp": 0.0, "active_nodes": ["speaker_0"], "active_edges": [], "current_topic": "Introduction", "current_speaker": "Sarah Kim"},
+      {"timestamp": 60.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "kpi_0", "kpi_1", "kpi_2"], "active_edges": ["speaker_0->topic_0", "speaker_1->kpi_0", "speaker_1->kpi_1", "speaker_1->kpi_2"], "current_topic": "Background & Experience", "current_speaker": "James Park"},
+      {"timestamp": 120.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "kpi_0", "kpi_1", "kpi_2", "kpi_3", "claim_0", "claim_1"], "active_edges": ["speaker_0->topic_0", "speaker_1->kpi_0", "speaker_1->kpi_1", "claim_0->claim_1"], "current_topic": "Background & Experience", "current_speaker": "James Park"},
+      {"timestamp": 180.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "kpi_0", "kpi_1", "kpi_2", "kpi_3", "claim_0", "claim_1"], "active_edges": ["speaker_0->topic_0", "speaker_1->topic_1", "speaker_2->topic_1", "claim_0->claim_1"], "current_topic": "System Design: Notification System", "current_speaker": "James Park"},
+      {"timestamp": 240.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "kpi_0", "kpi_1", "kpi_2", "kpi_3", "claim_0", "claim_1"], "active_edges": ["speaker_1->topic_1", "speaker_1->topic_2", "claim_0->claim_1"], "current_topic": "Coding Philosophy & Testing", "current_speaker": "James Park"},
+      {"timestamp": 300.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "kpi_0", "kpi_1", "kpi_2", "kpi_3"], "active_edges": ["speaker_1->topic_2"], "current_topic": "Coding Philosophy & Testing", "current_speaker": "James Park"},
+      {"timestamp": 360.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "topic_3", "kpi_0", "kpi_1", "kpi_2", "kpi_3"], "active_edges": ["speaker_1->topic_3"], "current_topic": "Culture Fit & Values", "current_speaker": "James Park"},
+      {"timestamp": 420.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "topic_3", "kpi_0", "kpi_1", "kpi_2", "kpi_3"], "active_edges": ["speaker_1->topic_3"], "current_topic": "Culture Fit & Values", "current_speaker": "James Park"},
+      {"timestamp": 480.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "topic_3", "decision_0", "decision_1", "decision_2"], "active_edges": ["speaker_0->decision_0", "speaker_0->decision_1", "speaker_2->decision_2"], "current_topic": "Next Steps", "current_speaker": "Sarah Kim"}
+    ],
+    "metadata": {
+      "duration_seconds": 480.0,
+      "total_nodes": 16,
+      "total_edges": 16,
+      "node_types": {"speaker": 3, "topic": 4, "kpi": 4, "claim": 2, "decision": 3}
+    }
+  },
+  "insights": {
+    "summary": "Technical interview for a Senior Engineer position at Nexus, conducted by Sarah Kim (Engineering Manager) with David Cho (Senior Staff Engineer) on the panel. Candidate James Park demonstrated strong distributed systems expertise with 8 years of experience, including leading a real-time data pipeline processing 2M events/sec at Stratum. He delivered a solid system design for a notification system and showed strong coding philosophy around code reviews and chaos testing. A minor discrepancy was noted between his resume (12 engineers) and verbal statement (15 engineers), which he clarified as team growth. The panel decided to advance him to a follow-up interview with the VP of Engineering.",
+    "topics": [
+      {
+        "name": "Background & Experience",
+        "start_time": 31.0,
+        "end_time": 121.0,
+        "key_points": ["8 years in backend infrastructure and distributed systems", "Tech lead at Stratum on real-time data pipeline", "2M events/sec across 400 nodes with sub-50ms P99 latency", "Solved tail latency with consistent hashing and virtual nodes", "Led team that grew from 12 to 15 engineers across 3 squads"],
+        "speakers_involved": ["Sarah Kim", "James Park", "David Cho"],
+        "evidence": [
+          {"timestamp": 39.0, "source": "audio", "quote": "I've been working in backend infrastructure for about 8 years now"},
+          {"timestamp": 48.5, "source": "audio", "quote": "processing around 2 million events per second across 400 nodes"},
+          {"timestamp": 75.5, "source": "audio", "quote": "moving to a consistent hashing scheme with virtual nodes"}
+        ]
+      },
+      {
+        "name": "System Design: Notification System",
+        "start_time": 122.0,
+        "end_time": 227.0,
+        "key_points": ["WebSocket-based connection layer with 50 servers for 500K users", "Kafka pub-sub for durability and replay over Redis", "Two-tier fanout for high-subscriber topics", "P95 target of 200ms end-to-end delivery"],
+        "speakers_involved": ["Sarah Kim", "James Park", "David Cho"],
+        "evidence": [
+          {"timestamp": 145.0, "source": "audio", "quote": "roughly 50 WebSocket servers assuming each can handle about 10,000 connections"},
+          {"timestamp": 184.0, "source": "audio", "quote": "Kafka's consumer offsets give us that for free. With Redis you'd need to build that yourself"},
+          {"timestamp": 217.0, "source": "audio", "quote": "end-to-end delivery under 200 milliseconds for P95"}
+        ]
+      },
+      {
+        "name": "Coding Philosophy & Testing",
+        "start_time": 228.0,
+        "end_time": 337.0,
+        "key_points": ["Two-approval code review policy with cross-squad reviews", "Eliminated inconsistent error handling patterns", "Favors well-designed tests over high coverage metrics", "Weekly chaos testing game days", "Discovered critical Kafka rebalancing bug through game day"],
+        "speakers_involved": ["Sarah Kim", "James Park", "David Cho"],
+        "evidence": [
+          {"timestamp": 248.0, "source": "audio", "quote": "no PR ships without at least two approvals, and one has to be from someone outside your immediate squad"},
+          {"timestamp": 280.0, "source": "audio", "quote": "80% coverage with well-designed tests beats 95% coverage with brittle unit tests every time"},
+          {"timestamp": 314.0, "source": "audio", "quote": "our consumer group rebalancing took 45 seconds instead of the expected 5"}
+        ]
+      },
+      {
+        "name": "Culture Fit & Values",
+        "start_time": 340.0,
+        "end_time": 436.0,
+        "key_points": ["Values high trust and low bureaucracy", "Strong advocate for documentation and RFC processes", "Believes in sustainable pace over crunch culture", "Passionate about mentorship and growing junior engineers", "Excited about eBPF for observability"],
+        "speakers_involved": ["Sarah Kim", "James Park", "David Cho"],
+        "evidence": [
+          {"timestamp": 358.0, "source": "audio", "quote": "an undocumented system is a ticking time bomb"},
+          {"timestamp": 382.0, "source": "audio", "quote": "I'm a firm believer in sustainable pace. Crunch time happens, but it shouldn't be the norm"},
+          {"timestamp": 417.0, "source": "audio", "quote": "it's eBPF. The ability to run sandboxed programs in the kernel without modifying kernel source code is a game changer"}
+        ]
+      }
+    ],
+    "action_items": [
+      {
+        "description": "Schedule follow-up interview with the VP of Engineering",
+        "assignee": "Sarah Kim",
+        "priority": "high",
+        "evidence": [{"timestamp": 446.0, "source": "audio", "quote": "We'd like to bring you back for a follow-up session with the VP of Engineering"}]
+      },
+      {
+        "description": "Conduct reference check for James Park",
+        "assignee": "Sarah Kim",
+        "priority": "high",
+        "evidence": [{"timestamp": 446.0, "source": "audio", "quote": "I'll also need to set up a reference check"}]
+      },
+      {
+        "description": "Prepare distributed systems take-home assessment (2 hours estimated)",
+        "assignee": "David Cho",
+        "priority": "medium",
+        "evidence": [{"timestamp": 459.0, "source": "audio", "quote": "I'll put together a take-home that focuses on distributed systems design. Should take about two hours."}]
+      }
+    ],
+    "decisions": [
+      {
+        "description": "Advance James Park to follow-up interview round with VP Engineering",
+        "made_by": "Sarah Kim",
+        "timestamp": 446.0,
+        "context": "Based on strong performance in system design, coding philosophy, and culture fit discussions.",
+        "evidence": [{"timestamp": 446.0, "source": "audio", "quote": "We'd like to bring you back for a follow-up session with the VP of Engineering"}]
+      },
+      {
+        "description": "Assign take-home technical assessment focused on distributed systems",
+        "made_by": "David Cho",
+        "timestamp": 459.0,
+        "context": "To further evaluate candidate's distributed systems design capabilities. Estimated at 2 hours.",
+        "evidence": [{"timestamp": 459.0, "source": "audio", "quote": "I'll put together a take-home that focuses on distributed systems design"}]
+      }
+    ],
+    "contradictions": [
+      {
+        "description": "Team size discrepancy: resume says 12 engineers, candidate verbally states 15",
+        "claim_a": {
+          "source": "Sarah Kim (reading resume)",
+          "quote": "your resume mentions you led a team of 12 engineers at Stratum",
+          "timestamp": 86.0,
+          "source_type": "audio"
+        },
+        "claim_b": {
+          "source": "James Park",
+          "quote": "I was leading a team of about 15 engineers",
+          "timestamp": 95.0,
+          "source_type": "audio"
+        },
+        "explanation": "James Park's resume states he led a team of 12 engineers, but during the interview he said 15. When flagged by David Cho, James clarified the team started at 12 and grew to 15 over two years. While the explanation is reasonable, the resume should be updated to reflect the accurate range. This minor inconsistency was caught by the panel.",
+        "severity": "low"
+      }
+    ],
+    "kpis": [
+      {"name": "Years of Experience", "value": "8 years", "context": "Backend infrastructure and distributed systems. Most recently tech lead at Stratum.", "mentioned_by": "James Park", "timestamp": 39.0, "evidence": [{"timestamp": 39.0, "source": "audio", "quote": "I've been working in backend infrastructure for about 8 years now"}]},
+      {"name": "System Throughput", "value": "2M events/sec", "context": "Real-time data pipeline at Stratum across 400 nodes.", "mentioned_by": "James Park", "timestamp": 48.5, "evidence": [{"timestamp": 48.5, "source": "audio", "quote": "processing around 2 million events per second across 400 nodes"}]},
+      {"name": "Latency Target (P99)", "value": "Sub-50ms", "context": "Tail latency for the data pipeline. Achieved through consistent hashing with virtual nodes.", "mentioned_by": "James Park", "timestamp": 48.5, "evidence": [{"timestamp": 48.5, "source": "audio", "quote": "maintain sub-50 millisecond latency at the 99th percentile"}]},
+      {"name": "Team Size", "value": "12 to 15 engineers", "context": "Grew over two years. Three squads: ingest, processing, storage.", "mentioned_by": "James Park", "timestamp": 95.0, "evidence": [{"timestamp": 95.0, "source": "audio", "quote": "I was leading a team of about 15 engineers. We were split into three squads"}]}
+    ],
+    "key_quotes": [
+      {"speaker": "James Park", "quote": "Getting P50 down is relatively straightforward, but P99 is a different beast. We had to redesign our partitioning strategy three times.", "timestamp": 65.0, "context": "Demonstrating deep understanding of distributed systems latency challenges"},
+      {"speaker": "James Park", "quote": "Code reviews are the single most important engineering practice. They're not just about catching bugs, they're about knowledge sharing and maintaining consistency.", "timestamp": 236.0, "context": "Revealing engineering philosophy and leadership approach"},
+      {"speaker": "James Park", "quote": "80% coverage with well-designed tests beats 95% coverage with brittle unit tests every time.", "timestamp": 280.0, "context": "Pragmatic testing philosophy focused on value over vanity metrics"},
+      {"speaker": "James Park", "quote": "An undocumented system is a ticking time bomb.", "timestamp": 358.0, "context": "Strong stance on documentation culture, aligned with Nexus's RFC process"},
+      {"speaker": "David Cho", "quote": "Your resume says 12 engineers, but you just mentioned 15. Could you clarify that?", "timestamp": 104.0, "context": "Panel member catching a discrepancy between resume and verbal claim"}
+    ]
+  },
+  "vision_events": []
+}
