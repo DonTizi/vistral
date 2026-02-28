@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
 import { VistralLogo } from '@/components/ui/VistralLogo';
 
-import type { JobResults, GraphNode } from '@/lib/types';
+import type { JobResults, GraphNode, TranscriptSegment } from '@/lib/types';
 
 const ForceGraph2D = dynamic(() => import('react-force-graph-2d'), { ssr: false });
 
@@ -85,6 +85,22 @@ export default function AnalysisPage() {
     };
   }, [data]);
 
+  const speakerList = useMemo(() => {
+    if (!data) return [];
+    return [...new Set(data.transcript.map(s => s.speaker))];
+  }, [data]);
+
+  const segmentsBySpeaker = useMemo(() => {
+    if (!data) return new Map<string, TranscriptSegment[]>();
+    const map = new Map<string, TranscriptSegment[]>();
+    for (const seg of data.transcript) {
+      let arr = map.get(seg.speaker);
+      if (!arr) { arr = []; map.set(seg.speaker, arr); }
+      arr.push(seg);
+    }
+    return map;
+  }, [data]);
+
   if (loading) return (
     <main className="min-h-screen flex items-center justify-center">
       <div className="text-[#999999]">Loading analysis...</div>
@@ -101,7 +117,6 @@ export default function AnalysisPage() {
   );
 
   const { insights, transcript, graph } = data;
-  const speakerList = useMemo(() => [...new Set(transcript.map(s => s.speaker))], [transcript]);
   const videoDuration = graph.metadata.duration_seconds;
 
   return (
@@ -178,7 +193,7 @@ export default function AnalysisPage() {
               <div key={speaker} className="space-y-1">
                 <span className="text-xs" style={{ color: SPEAKER_COLORS[si % SPEAKER_COLORS.length] }}>{speaker}</span>
                 <div className="relative h-4 bg-[#242424] rounded">
-                  {transcript.filter(s => s.speaker === speaker).map((seg, i) => {
+                  {(segmentsBySpeaker.get(speaker) ?? []).map((seg, i) => {
                     const left = (seg.start / videoDuration) * 100;
                     const width = ((seg.end - seg.start) / videoDuration) * 100;
                     return (

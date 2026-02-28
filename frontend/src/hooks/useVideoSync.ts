@@ -3,6 +3,7 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 
 export function useVideoSync() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [videoEl, setVideoEl] = useState<HTMLVideoElement | null>(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -18,29 +19,29 @@ export function useVideoSync() {
 
   const bindVideo = useCallback((el: HTMLVideoElement | null) => {
     videoRef.current = el;
+    setVideoEl(el);
   }, []);
 
   useEffect(() => {
-    const el = videoRef.current;
-    if (!el) return;
+    if (!videoEl) return;
 
-    const onTimeUpdate = () => setCurrentTime(el.currentTime);
-    const onLoadedMetadata = () => setDuration(el.duration);
+    const onTimeUpdate = () => setCurrentTime(videoEl.currentTime);
+    const onLoadedMetadata = () => setDuration(videoEl.duration);
     const onPlay = () => setIsPlaying(true);
     const onPause = () => setIsPlaying(false);
 
-    el.addEventListener('timeupdate', onTimeUpdate);
-    el.addEventListener('loadedmetadata', onLoadedMetadata);
-    el.addEventListener('play', onPlay);
-    el.addEventListener('pause', onPause);
+    videoEl.addEventListener('timeupdate', onTimeUpdate);
+    videoEl.addEventListener('loadedmetadata', onLoadedMetadata);
+    videoEl.addEventListener('play', onPlay);
+    videoEl.addEventListener('pause', onPause);
 
     return () => {
-      el.removeEventListener('timeupdate', onTimeUpdate);
-      el.removeEventListener('loadedmetadata', onLoadedMetadata);
-      el.removeEventListener('play', onPlay);
-      el.removeEventListener('pause', onPause);
+      videoEl.removeEventListener('timeupdate', onTimeUpdate);
+      videoEl.removeEventListener('loadedmetadata', onLoadedMetadata);
+      videoEl.removeEventListener('play', onPlay);
+      videoEl.removeEventListener('pause', onPause);
     };
-  });
+  }, [videoEl]);
 
   return { videoRef, currentTime, duration, isPlaying, seekTo, togglePlay, bindVideo };
 }
