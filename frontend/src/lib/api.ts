@@ -42,6 +42,28 @@ export const api = {
     return res.json();
   },
 
+  getSettings: async (): Promise<{ mistral_api_key: string; has_api_key: boolean; jobs_count: number; uploads_count: number }> => {
+    const res = await fetch(`${API_BASE}/api/settings`);
+    if (!res.ok) await throwApiError(res, 'Failed to fetch settings');
+    return res.json();
+  },
+
+  updateApiKey: async (apiKey: string): Promise<{ status: string; mistral_api_key: string }> => {
+    const res = await fetch(`${API_BASE}/api/settings/api-key`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ api_key: apiKey }),
+    });
+    if (!res.ok) await throwApiError(res, 'Failed to update API key');
+    return res.json();
+  },
+
+  purgeData: async (): Promise<{ status: string; jobs_deleted: number; uploads_deleted: number }> => {
+    const res = await fetch(`${API_BASE}/api/data`, { method: 'DELETE' });
+    if (!res.ok) await throwApiError(res, 'Failed to purge data');
+    return res.json();
+  },
+
   getStreamUrl: (jobId: string) => `${API_BASE}/api/jobs/${jobId}/stream`,
   getVideoUrl: (jobId: string) => `${API_BASE}/api/jobs/${jobId}/video`,
 };
