@@ -225,6 +225,10 @@ Documented in [`docs/adr/`](docs/adr/):
 | [004](docs/adr/004-sse-for-realtime-progress.md) | Server-Sent Events for real-time progress |
 | [005](docs/adr/005-json-files-over-database.md) | JSON file storage over database |
 
+## Built for
+
+[Mistral AI Hackathon 2026](https://mistral.ai)
+
 ## License
 
 MIT
