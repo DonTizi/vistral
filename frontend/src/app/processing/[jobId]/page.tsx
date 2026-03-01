@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useSSE } from '@/hooks/useSSE';
 import { api } from '@/lib/api';
 import { cn } from '@/lib/utils';
-import { VistralLogo } from '@/components/ui/VistralLogo';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 
 
@@ -100,19 +99,11 @@ export default function ProcessingPage() {
       : STEP_SUBTITLES[currentStep?.step ?? 'upload'] ?? 'Extracting temporal knowledge from your video';
 
   return (
-    <main className="min-h-screen relative">
+    <main className="h-full overflow-auto relative">
       {/* Subtle glow */}
       <div className="absolute inset-0 mistral-glow pointer-events-none" />
 
-      <div className="relative z-10 flex flex-col min-h-screen">
-        {/* Nav */}
-        <nav className="w-full px-8 py-5 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3">
-            <VistralLogo className="w-5 h-5" />
-            <span className="text-sm font-semibold text-[#FFFAEB] tracking-wide">VISTRAL</span>
-          </a>
-          <span className="text-xs text-[#555]">Processing</span>
-        </nav>
+      <div className="relative z-10 flex flex-col min-h-full">
         <div className="h-px mistral-gradient-bar opacity-40" />
 
         <div className="flex-1 flex flex-col items-center justify-center px-4 pb-16">

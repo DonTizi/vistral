@@ -2,9 +2,22 @@
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '@/lib/api';
-import { MistralLogo } from '@/components/ui/MistralLogo';
 import { VistralLogo } from '@/components/ui/VistralLogo';
+import { Button } from '@/components/ui/Button';
 import { Preloader } from '@/components/Preloader';
+
+function VideoFileIcon({ color, foldColor, label, labelColor = 'white', labelSize = 8, children }: {
+  color: string; foldColor: string; label: string; labelColor?: string; labelSize?: number; children?: React.ReactNode;
+}) {
+  return (
+    <svg width="48" height="56" viewBox="0 0 48 56" fill="none" className="drop-shadow-lg">
+      <path d="M4 4C4 1.79 5.79 0 8 0H30L44 14V52C44 54.21 42.21 56 40 56H8C5.79 56 4 54.21 4 52V4Z" fill={color} />
+      <path d="M30 0L44 14H34C31.79 14 30 12.21 30 10V0Z" fill={foldColor} />
+      {children}
+      <text x="24" y="51" textAnchor="middle" fill={labelColor} fontSize={labelSize} fontWeight="700" fontFamily="Inter, sans-serif">{label}</text>
+    </svg>
+  );
+}
 
 const DEMOS = [
   {
@@ -50,11 +63,16 @@ function ArrowRight({ className }: { className?: string }) {
   );
 }
 
+const YOUTUBE_RE = /^https?:\/\/(www\.)?(youtube\.com\/(watch\?v=|shorts\/|embed\/)|youtu\.be\/)/;
+
 export default function LandingPage() {
   const router = useRouter();
   const [isDragging, setIsDragging] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showUrlInput, setShowUrlInput] = useState(false);
+  const [urlValue, setUrlValue] = useState('');
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const handleFile = useCallback(async (file: File) => {
     if (!file.type.startsWith('video/')) {
@@ -84,25 +102,33 @@ export default function LandingPage() {
     if (file) handleFile(file);
   }, [handleFile]);
 
+  const handleUrlSubmit = useCallback(async () => {
+    const url = urlValue.trim();
+    if (!url) return;
+
+    if (!YOUTUBE_RE.test(url)) {
+      setError('Only YouTube URLs are supported — this project was built for a hackathon!');
+      return;
+    }
+
+    setIsDownloading(true);
+    setError(null);
+    try {
+      const { job_id } = await api.uploadUrl(url);
+      router.push(`/processing/${job_id}`);
+    } catch (e: any) {
+      setError(e.message || 'Download failed');
+      setIsDownloading(false);
+    }
+  }, [urlValue, router]);
+
   return (
     <Preloader>
-    <main className="min-h-screen relative">
+    <main className="h-full overflow-auto relative">
       {/* Warm ambient glow */}
       <div className="absolute inset-0 mistral-glow pointer-events-none" />
 
-      <div className="relative z-10 flex flex-col min-h-screen">
-        {/* Nav */}
-        <nav className="w-full px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <VistralLogo className="w-6 h-6" />
-            <span className="text-sm font-bold text-[#FFFAEB] tracking-widest">VISTRAL</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <MistralLogo className="w-3.5 h-2.5" variant="rainbow" />
-            <span className="text-[11px] text-[#555]">Powered by Mistral AI</span>
-          </div>
-        </nav>
-
+      <div className="relative z-10 flex flex-col min-h-full">
         {/* Rainbow accent bar */}
         <div className="h-[2px] mistral-gradient-bar" />
 
@@ -119,16 +145,16 @@ export default function LandingPage() {
               Temporal knowledge graphs from enterprise videos with traceable evidence chains.
             </p>
 
-            {/* Upload zone — compact, purposeful */}
+            {/* Upload zone — Mistral console style */}
             <div className="w-full mb-8">
               <div
-                className={`upload-zone relative rounded-xl py-8 px-6 text-center border
-                  ${isDragging ? 'dragging border-[#FA500F]' : 'border-[#333]'}
-                  ${isUploading ? 'pointer-events-none opacity-60' : 'cursor-pointer'}`}
+                className={`relative rounded-2xl py-10 px-6 text-center transition-all duration-200
+                  ${isDragging ? 'bg-[#FA500F]/5 ring-2 ring-[#FA500F]/20' : ''}
+                  ${(isUploading || isDownloading) ? 'pointer-events-none opacity-60' : 'cursor-pointer'}`}
                 onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
                 onDragLeave={() => setIsDragging(false)}
                 onDrop={handleDrop}
-                onClick={() => !isUploading && document.getElementById('file-input')?.click()}
+                onClick={() => !(isUploading || isDownloading) && !showUrlInput && document.getElementById('file-input')?.click()}
               >
                 <input
                   id="file-input"
@@ -137,23 +163,111 @@ export default function LandingPage() {
                   className="hidden"
                   onChange={handleFileInput}
                 />
-                <div className="flex flex-col items-center gap-2.5">
-                  {isUploading ? (
+
+                {(isUploading || isDownloading) ? (
+                  <div className="flex flex-col items-center gap-3">
                     <div className="w-8 h-8 rounded-full border-2 border-[#FA500F] border-t-transparent animate-spin" />
-                  ) : (
-                    <div className="w-10 h-10 rounded-xl bg-[#2a2a2a] flex items-center justify-center">
-                      <svg className="w-5 h-5 text-[#FA500F]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                      </svg>
-                    </div>
-                  )}
-                  <div>
                     <p className="text-sm font-medium text-[#FFFAEB]">
-                      {isUploading ? 'Uploading...' : 'Drop a video or click to browse'}
+                      {isDownloading ? 'Downloading from YouTube...' : 'Uploading...'}
                     </p>
-                    <p className="text-xs text-[#666] mt-1">MP4, WebM, MOV — up to 500MB</p>
                   </div>
-                </div>
+                ) : (
+                  <div className="flex flex-col items-center gap-4">
+                    {/* Video file type icons */}
+                    <div className="flex items-end justify-center -space-x-3 mb-1">
+                      <div className="relative z-0 -rotate-6">
+                        <VideoFileIcon color="#FA500F" foldColor="#C73D0B" label="MP4">
+                          <path d="M19 26L29 32L19 38V26Z" fill="white" />
+                        </VideoFileIcon>
+                      </div>
+                      <div className="relative z-10 translate-y-[-4px]">
+                        <VideoFileIcon color="#FFD800" foldColor="#CCB000" label="WEBM" labelColor="#1A1A1A" labelSize={7}>
+                          <rect x="13" y="22" width="22" height="4" rx="1" fill="#1A1A1A" />
+                          <line x1="18" y1="22" x2="16" y2="26" stroke="#FFD800" strokeWidth="1.5" />
+                          <line x1="24" y1="22" x2="22" y2="26" stroke="#FFD800" strokeWidth="1.5" />
+                          <line x1="30" y1="22" x2="28" y2="26" stroke="#FFD800" strokeWidth="1.5" />
+                          <rect x="13" y="26" width="22" height="12" rx="1" fill="#1A1A1A" opacity="0.8" />
+                        </VideoFileIcon>
+                      </div>
+                      <div className="relative z-0 rotate-6">
+                        <VideoFileIcon color="#4FC3F7" foldColor="#2E9FD4" label="MOV">
+                          <circle cx="24" cy="31" r="8" fill="none" stroke="white" strokeWidth="2" />
+                          <circle cx="24" cy="31" r="3" fill="white" />
+                          <circle cx="24" cy="23.5" r="1.2" fill="white" />
+                          <circle cx="24" cy="38.5" r="1.2" fill="white" />
+                          <circle cx="17" cy="28" r="1.2" fill="white" />
+                          <circle cx="31" cy="34" r="1.2" fill="white" />
+                        </VideoFileIcon>
+                      </div>
+                    </div>
+
+                    <h2 className="text-lg font-semibold text-[#FFFAEB]">Analyze your videos</h2>
+                    <p className="text-sm text-[#888]">MP4, WebM, MOV &nbsp;·&nbsp; up to 500MB</p>
+
+                    <div className="flex items-center gap-3">
+                      <Button
+                        variant="primary"
+                        size="md"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          document.getElementById('file-input')?.click();
+                        }}
+                        className="flex items-center gap-2"
+                      >
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                        </svg>
+                        Upload a video
+                      </Button>
+
+                      <Button
+                        variant="secondary"
+                        size="md"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowUrlInput(!showUrlInput);
+                          setError(null);
+                        }}
+                        className="flex items-center gap-2"
+                      >
+                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                        </svg>
+                        YouTube URL
+                      </Button>
+                    </div>
+
+                    {/* YouTube URL input */}
+                    {showUrlInput && (
+                      <div
+                        className="w-full max-w-sm flex gap-2 mt-1"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <input
+                          type="url"
+                          value={urlValue}
+                          onChange={(e) => { setUrlValue(e.target.value); setError(null); }}
+                          onKeyDown={(e) => { if (e.key === 'Enter') handleUrlSubmit(); }}
+                          placeholder="https://youtube.com/watch?v=..."
+                          className="flex-1 bg-[#1e1e1e] border border-[#333] rounded-lg px-3 py-2 text-sm text-[#FFFAEB] placeholder-[#555] focus:outline-none focus:border-[#FA500F] transition-colors"
+                          autoFocus
+                        />
+                        <Button
+                          variant="primary"
+                          size="md"
+                          onClick={handleUrlSubmit}
+                          disabled={!urlValue.trim()}
+                          className="shrink-0"
+                        >
+                          Go
+                        </Button>
+                      </div>
+                    )}
+
+                    <p className="text-xs text-[#666]">or drop your file here</p>
+                  </div>
+                )}
+
                 {error && <p className="text-red-400 text-xs mt-3">{error}</p>}
               </div>
             </div>
@@ -190,9 +304,8 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Footer — meaningful, readable */}
-        <footer className="w-full px-8 py-4 flex items-center justify-center gap-2">
-          <MistralLogo className="w-3.5 h-2.5 opacity-40" variant="rainbow" />
+        {/* Footer */}
+        <footer className="w-full px-8 py-4 flex items-center justify-center">
           <span className="text-[#555] text-[10px] tracking-wide">
             Voxtral  ·  Pixtral  ·  Mistral Small
           </span>

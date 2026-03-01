@@ -6,8 +6,6 @@ import { api } from '@/lib/api';
 import { formatTime, cn, NODE_COLORS, SPEAKER_COLORS, RELATION_COLORS } from '@/lib/utils';
 import { useVideoSync } from '@/hooks/useVideoSync';
 import { Badge } from '@/components/ui/Badge';
-import { VistralLogo } from '@/components/ui/VistralLogo';
-
 import type { JobResults, GraphNode, TranscriptSegment } from '@/lib/types';
 
 const ForceGraph2D = dynamic(() => import('react-force-graph-2d'), { ssr: false });
@@ -30,8 +28,29 @@ export default function AnalysisPage() {
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>('Summary');
   const [videoCollapsed, setVideoCollapsed] = useState(false);
+  const storageKey = `vistral-speakers-${jobId}`;
+  const [speakerNames, setSpeakerNames] = useState<Record<string, string>>(() => {
+    if (typeof window === 'undefined') return {};
+    try {
+      const saved = localStorage.getItem(storageKey);
+      return saved ? JSON.parse(saved) : {};
+    } catch { return {}; }
+  });
+  const [editing, setEditing] = useState<{ speaker: string; value: string } | null>(null);
+  const editInputRef = useRef<HTMLInputElement>(null);
   const { currentTime, seekTo, bindVideo } = useVideoSync();
   const transcriptRef = useRef<HTMLDivElement>(null);
+
+  // Persist speaker names to localStorage
+  useEffect(() => {
+    try {
+      if (Object.keys(speakerNames).length > 0) {
+        localStorage.setItem(storageKey, JSON.stringify(speakerNames));
+      } else {
+        localStorage.removeItem(storageKey);
+      }
+    } catch {}
+  }, [speakerNames, storageKey]);
 
   useEffect(() => {
     (async () => {
@@ -47,6 +66,14 @@ export default function AnalysisPage() {
       }
     })();
   }, [jobId, isDemo]);
+
+  // Focus edit input when editing speaker
+  useEffect(() => {
+    if (editing && editInputRef.current) {
+      editInputRef.current.focus();
+      editInputRef.current.select();
+    }
+  }, [editing]);
 
   // Auto-scroll transcript
   useEffect(() => {
@@ -75,7 +102,7 @@ export default function AnalysisPage() {
     return {
       nodes: data.graph.nodes.map(n => ({
         id: n.id,
-        label: n.label,
+        label: n.type === 'speaker' ? (speakerNames[n.label] || n.label) : n.label,
         type: n.type,
         color: NODE_COLORS[n.type] || '#999',
         val: n.type === 'speaker' ? 8 : n.type === 'topic' ? 6 : 4,
@@ -88,12 +115,56 @@ export default function AnalysisPage() {
         timestamp: e.timestamp,
       })),
     };
-  }, [data]);
+  }, [data, speakerNames]);
 
   const speakerList = useMemo(() => {
     if (!data) return [];
-    return [...new Set(data.transcript.map(s => s.speaker))];
+    const all = new Set(data.transcript.map(s => s.speaker));
+    for (const t of data.insights.topics) {
+      for (const s of t.speakers_involved) all.add(s);
+    }
+    return [...all];
   }, [data]);
+
+  const speakerColor = useCallback((name: string) => {
+    const idx = speakerList.indexOf(name);
+    return SPEAKER_COLORS[(idx >= 0 ? idx : speakerList.length + name.length) % SPEAKER_COLORS.length];
+  }, [speakerList]);
+
+  const displayName = (original: string) => speakerNames[original] || original;
+
+  const speakerStats = useMemo(() => {
+    if (!data) return { byName: new Map<string, { talkTime: number; segmentCount: number }>(), total: 0 };
+    const byName = new Map<string, { talkTime: number; segmentCount: number }>();
+    let total = 0;
+    for (const seg of data.transcript) {
+      const dur = seg.end - seg.start;
+      total += dur;
+      const prev = byName.get(seg.speaker) || { talkTime: 0, segmentCount: 0 };
+      byName.set(seg.speaker, {
+        talkTime: prev.talkTime + dur,
+        segmentCount: prev.segmentCount + 1,
+      });
+    }
+    return { byName, total };
+  }, [data]);
+
+  const commitRename = useCallback(() => {
+    setEditing(prev => {
+      if (!prev) return null;
+      const trimmed = prev.value.trim();
+      if (trimmed && trimmed !== prev.speaker) {
+        setSpeakerNames(names => ({ ...names, [prev.speaker]: trimmed }));
+      } else if (trimmed === prev.speaker) {
+        setSpeakerNames(names => {
+          const next = { ...names };
+          delete next[prev.speaker];
+          return next;
+        });
+      }
+      return null;
+    });
+  }, []);
 
   const segmentsBySpeaker = useMemo(() => {
     if (!data) return new Map<string, TranscriptSegment[]>();
@@ -118,18 +189,14 @@ export default function AnalysisPage() {
     } as Record<string, number>;
   }, [data]);
 
-  const handleSeek = useCallback((time: number) => {
-    seekTo(time);
-  }, [seekTo]);
-
   if (loading) return (
-    <main className="min-h-screen flex items-center justify-center">
+    <main className="h-full flex items-center justify-center">
       <div className="text-[#777]">Loading analysis...</div>
     </main>
   );
 
   if (error || !data) return (
-    <main className="min-h-screen flex items-center justify-center">
+    <main className="h-full flex items-center justify-center">
       <div className="text-center space-y-2">
         <p className="text-red-400">{error || 'No data available'}</p>
         <a href="/" className="text-[#FA500F] text-sm hover:underline">Back to home</a>
@@ -141,29 +208,22 @@ export default function AnalysisPage() {
   const videoDuration = graph.metadata.duration_seconds;
 
   return (
-    <main className="h-screen flex flex-col overflow-hidden bg-[#141414]">
+    <main className="h-full flex flex-col overflow-hidden bg-[#141414]">
       {/* ── Header ── */}
       <header className="flex items-center justify-between px-4 h-10 bg-[#1A1A1A] border-b border-[#2a2a2a] shrink-0">
-        <div className="flex items-center gap-3">
-          <a href="/" className="flex items-center gap-2">
-            <VistralLogo className="w-4 h-4" />
-            <span className="text-xs font-semibold tracking-wider text-[#999]"><span className="text-[#FA500F]">V</span>ISTRAL</span>
-          </a>
-          <div className="w-px h-4 bg-[#333]" />
-          <div className="flex items-center gap-2">
-            {currentSpeaker && (
-              <div className="flex items-center gap-1.5">
-                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: SPEAKER_COLORS[speakerList.indexOf(currentSpeaker) % SPEAKER_COLORS.length] }} />
-                <span className="text-xs text-[#ccc]">{currentSpeaker}</span>
-              </div>
-            )}
-            {currentTopic && (
-              <>
-                <span className="text-[#444] text-xs">/</span>
-                <span className="text-xs text-[#888]">{currentTopic.name}</span>
-              </>
-            )}
-          </div>
+        <div className="flex items-center gap-2">
+          {currentSpeaker && (
+            <div className="flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: speakerColor(currentSpeaker) }} />
+              <span className="text-xs text-[#ccc]">{displayName(currentSpeaker)}</span>
+            </div>
+          )}
+          {currentTopic && (
+            <>
+              <span className="text-[#444] text-xs">/</span>
+              <span className="text-xs text-[#888]">{currentTopic.name}</span>
+            </>
+          )}
         </div>
         <div className="flex items-center gap-2">
           <span className="text-[10px] text-[#555] font-mono">{formatTime(currentTime)} / {formatTime(videoDuration)}</span>
@@ -207,91 +267,243 @@ export default function AnalysisPage() {
           </button>
 
           {/* Timeline */}
-          <div className="flex-1 overflow-y-auto p-3 space-y-2">
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-[10px] font-medium text-[#666] uppercase tracking-wider">Timeline</span>
-              <span className="text-[10px] text-[#444] font-mono">{formatTime(videoDuration)}</span>
-            </div>
+          <div className="flex-1 overflow-y-auto p-3">
+            <div className="timeline-hud px-3 pt-3 pb-2.5 space-y-1.5">
+              {/* Header — compact */}
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-semibold text-[#FA500F]/70 uppercase tracking-[0.15em]">Timeline</span>
+                <div className="h-px flex-1 bg-[#2E2E2E]" />
+                <span className="text-[10px] text-[#999] font-mono tabular-nums">{formatTime(videoDuration)}</span>
+              </div>
 
-            {/* Topics bar */}
-            <div className="relative h-7 bg-[#1E1E1E] rounded overflow-hidden border border-[#2a2a2a]">
-              {insights.topics.map((topic, i) => {
-                const left = (topic.start_time / videoDuration) * 100;
-                const width = ((topic.end_time - topic.start_time) / videoDuration) * 100;
-                return (
-                  <div
-                    key={i}
-                    className="absolute h-full cursor-pointer hover:brightness-110 transition-all"
-                    style={{
-                      left: `${left}%`, width: `${width}%`,
-                      backgroundColor: `hsl(${(i * 60) % 360}, 40%, 28%)`,
-                    }}
-                    onClick={() => handleSeek(topic.start_time)}
-                    title={topic.name}
-                  >
-                    <span className="text-[9px] text-[#bbb] px-1.5 truncate block leading-7 font-medium">{topic.name}</span>
-                  </div>
-                );
-              })}
-              <div
-                className="absolute top-0 w-0.5 h-full bg-[#FA500F] z-10 shadow-[0_0_4px_rgba(250,80,15,0.5)]"
-                style={{ left: `${(currentTime / videoDuration) * 100}%` }}
-              />
-            </div>
+              {/* Time ruler — readable */}
+              <div className="relative h-3.5">
+                {Array.from({ length: Math.ceil(videoDuration / 60) + 1 }, (_, i) => {
+                  const pos = (i * 60 / videoDuration) * 100;
+                  if (pos > 100) return null;
+                  return (
+                    <div key={i} className="absolute flex flex-col items-center" style={{ left: `${pos}%`, transform: 'translateX(-50%)' }}>
+                      <div className="w-px h-1.5 bg-[#444]" />
+                      <span className="text-[8px] text-[#666] font-mono tabular-nums">{formatTime(i * 60)}</span>
+                    </div>
+                  );
+                })}
+              </div>
 
-            {/* Speaker segments */}
-            {speakerList.map((speaker, si) => (
-              <div key={speaker} className="flex items-center gap-2">
-                <span className="text-[10px] w-20 truncate text-right shrink-0" style={{ color: SPEAKER_COLORS[si % SPEAKER_COLORS.length] + 'cc' }}>{speaker}</span>
-                <div className="relative h-3 flex-1 bg-[#1E1E1E] rounded-sm">
-                  {(segmentsBySpeaker.get(speaker) ?? []).map((seg, i) => {
-                    const left = (seg.start / videoDuration) * 100;
-                    const width = ((seg.end - seg.start) / videoDuration) * 100;
-                    return (
-                      <div
-                        key={i}
-                        className="absolute h-full rounded-sm cursor-pointer hover:brightness-125"
-                        style={{
-                          left: `${left}%`, width: `${Math.max(0.4, width)}%`,
-                          backgroundColor: SPEAKER_COLORS[si % SPEAKER_COLORS.length] + '70',
-                        }}
-                        onClick={() => handleSeek(seg.start)}
-                      />
-                    );
-                  })}
+              {/* Topics bar — active highlight + hide text on tiny segments */}
+              <div className="relative h-8 rounded overflow-hidden timeline-track">
+                {insights.topics.map((topic, i) => {
+                  const left = (topic.start_time / videoDuration) * 100;
+                  const width = ((topic.end_time - topic.start_time) / videoDuration) * 100;
+                  const isActive = currentTopic?.name === topic.name;
+                  return (
+                    <div
+                      key={i}
+                      className={cn(
+                        'absolute h-full cursor-pointer timeline-topic-segment',
+                        isActive && 'timeline-topic-active'
+                      )}
+                      style={{
+                        left: `${left}%`, width: `${width}%`,
+                        background: `linear-gradient(180deg, hsl(${(i * 55) % 360}, 40%, ${isActive ? 34 : 26}%) 0%, hsl(${(i * 55) % 360}, 35%, ${isActive ? 24 : 16}%) 100%)`,
+                      }}
+                      onClick={() => seekTo(topic.start_time)}
+                      title={topic.name}
+                    >
+                      {width > 6 && (
+                        <span className="text-[9px] text-[#FFFAEB]/55 px-1.5 truncate block leading-8 font-medium">{topic.name}</span>
+                      )}
+                    </div>
+                  );
+                })}
+                {/* Playhead */}
+                <div
+                  className="absolute top-0 h-full z-10 timeline-playhead pointer-events-none"
+                  style={{ left: `${(currentTime / videoDuration) * 100}%` }}
+                >
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-full bg-[#FA500F]" />
+                  <div className="absolute -top-[3px] left-1/2 -translate-x-1/2 w-[7px] h-[7px] bg-[#FA500F] rotate-45 rounded-[1px]" />
+                  <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] bg-[#FA500F] rotate-45 rounded-[1px] opacity-50" />
                 </div>
               </div>
-            ))}
 
-            {/* Events markers */}
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] w-20 text-right text-[#666] shrink-0">Events</span>
-              <div className="relative h-3 flex-1 bg-[#1E1E1E] rounded-sm">
-                {graph.edges.filter(e => e.relation === 'contradicts').map((edge, i) => (
-                  <div
-                    key={i}
-                    className="absolute w-1.5 h-full bg-red-500/80 rounded-sm cursor-pointer hover:bg-red-400"
-                    style={{ left: `${(edge.timestamp / videoDuration) * 100}%` }}
-                    onClick={() => handleSeek(edge.timestamp)}
-                    title="Contradiction"
-                  />
-                ))}
-                {insights.decisions.map((d, i) => (
-                  <div
-                    key={`d${i}`}
-                    className="absolute w-1.5 h-full bg-yellow-500/80 rounded-sm cursor-pointer hover:bg-yellow-400"
-                    style={{ left: `${(d.timestamp / videoDuration) * 100}%` }}
-                    onClick={() => handleSeek(d.timestamp)}
-                    title={`Decision: ${d.description}`}
-                  />
-                ))}
+              {/* Speaker segments — taller, stronger contrast */}
+              <div className="space-y-1">
+                {speakerList.map((speaker, si) => {
+                  const color = speakerColor(speaker);
+                  return (
+                    <div key={speaker} className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5 w-20 justify-end shrink-0">
+                        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color, boxShadow: `0 0 4px ${color}40` }} />
+                        <span className="text-[10px] truncate" style={{ color: color + 'bb' }}>{displayName(speaker)}</span>
+                      </div>
+                      <div className="relative h-4 flex-1 rounded-sm timeline-track overflow-hidden">
+                        {(segmentsBySpeaker.get(speaker) ?? []).map((seg, i) => {
+                          const left = (seg.start / videoDuration) * 100;
+                          const width = ((seg.end - seg.start) / videoDuration) * 100;
+                          return (
+                            <div
+                              key={i}
+                              className="absolute h-full rounded-[2px] cursor-pointer timeline-speaker-seg"
+                              style={{
+                                left: `${left}%`, width: `${Math.max(0.5, width)}%`,
+                                background: `linear-gradient(180deg, ${color}a0 0%, ${color}60 100%)`,
+                                boxShadow: `0 0 4px ${color}20`,
+                              }}
+                              onClick={() => seekTo(seg.start)}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {/* Events — inline with speakers, bigger dots */}
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5 w-20 justify-end shrink-0">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#666]" />
+                    <span className="text-[10px] text-[#666]">Events</span>
+                  </div>
+                  <div className="relative h-4 flex-1 rounded-sm timeline-track overflow-hidden">
+                    {graph.edges.filter(e => e.relation === 'contradicts').map((edge, i) => (
+                      <div
+                        key={i}
+                        className="absolute top-1/2 w-2 h-2 rounded-full cursor-pointer timeline-event-dot"
+                        style={{
+                          left: `${(edge.timestamp / videoDuration) * 100}%`,
+                          background: `radial-gradient(circle, ${RELATION_COLORS.contradicts} 35%, ${RELATION_COLORS.contradicts}4d 70%, transparent 100%)`,
+                          boxShadow: `0 0 6px ${RELATION_COLORS.contradicts}80, 0 0 10px ${RELATION_COLORS.contradicts}26`,
+                          transform: 'translateY(-50%)',
+                        }}
+                        onClick={() => seekTo(edge.timestamp)}
+                        title="Contradiction"
+                      />
+                    ))}
+                    {insights.decisions.map((d, i) => (
+                      <div
+                        key={`d${i}`}
+                        className="absolute top-1/2 w-2 h-2 rounded-full cursor-pointer timeline-event-dot"
+                        style={{
+                          left: `${(d.timestamp / videoDuration) * 100}%`,
+                          background: `radial-gradient(circle, ${RELATION_COLORS.decided} 35%, ${RELATION_COLORS.decided}4d 70%, transparent 100%)`,
+                          boxShadow: `0 0 6px ${RELATION_COLORS.decided}80, 0 0 10px ${RELATION_COLORS.decided}26`,
+                          transform: 'translateY(-50%)',
+                        }}
+                        onClick={() => seekTo(d.timestamp)}
+                        title={`Decision: ${d.description}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Legend — compact */}
+              <div className="flex items-center gap-4 pt-1.5 border-t border-[#2E2E2E]">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-[6px] h-[6px] rounded-full" style={{ backgroundColor: RELATION_COLORS.contradicts, boxShadow: `0 0 3px ${RELATION_COLORS.contradicts}66` }} />
+                  <span className="text-[9px] text-[#777]">Contradiction</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-[6px] h-[6px] rounded-full" style={{ backgroundColor: RELATION_COLORS.decided, boxShadow: `0 0 3px ${RELATION_COLORS.decided}66` }} />
+                  <span className="text-[9px] text-[#777]">Decision</span>
+                </div>
               </div>
             </div>
 
-            {/* Legend */}
-            <div className="flex items-center gap-3 pt-1">
-              <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-sm bg-red-500/80" /><span className="text-[9px] text-[#555]">Contradiction</span></div>
-              <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-sm bg-yellow-500/80" /><span className="text-[9px] text-[#555]">Decision</span></div>
+            {/* ── Speaker Panel ── */}
+            <div className="timeline-hud px-3 pt-3 pb-2.5 mt-2">
+              <div className="flex items-center gap-2 mb-2.5">
+                <span className="text-[10px] font-semibold text-[#FA500F]/70 uppercase tracking-[0.15em]">Speakers</span>
+                <div className="h-px flex-1 bg-[#2E2E2E]" />
+                <span className="text-[10px] text-[#555]">{speakerList.length}</span>
+              </div>
+
+              <div className="space-y-1">
+                {speakerList.map(speaker => {
+                  const color = speakerColor(speaker);
+                  const stats = speakerStats.byName.get(speaker);
+                  const pct = speakerStats.total > 0 && stats ? Math.round((stats.talkTime / speakerStats.total) * 100) : 0;
+                  const isEditing = editing?.speaker === speaker;
+                  const isCurrent = currentSpeaker === speaker;
+                  const segments = segmentsBySpeaker.get(speaker) ?? [];
+                  const nextSeg = segments.find(s => s.start > currentTime) || segments[0];
+
+                  return (
+                    <div
+                      key={speaker}
+                      className={cn(
+                        'group flex items-center gap-2.5 px-2 py-1.5 rounded-md transition-all duration-150',
+                        isCurrent ? 'bg-[#ffffff06]' : 'hover:bg-[#ffffff04]'
+                      )}
+                    >
+                      {/* Color dot */}
+                      <div
+                        className={cn('w-2 h-2 rounded-full shrink-0 transition-shadow', isCurrent && 'pulse-dot')}
+                        style={{ backgroundColor: color, boxShadow: isCurrent ? `0 0 8px ${color}60` : `0 0 4px ${color}30` }}
+                      />
+
+                      {/* Name — click to edit */}
+                      <div className="flex-1 min-w-0">
+                        {isEditing ? (
+                          <input
+                            ref={editInputRef}
+                            value={editing.value}
+                            onChange={e => setEditing(prev => prev ? { ...prev, value: e.target.value } : null)}
+                            onBlur={commitRename}
+                            onKeyDown={e => {
+                              if (e.key === 'Enter') commitRename();
+                              if (e.key === 'Escape') setEditing(null);
+                            }}
+                            className="w-full bg-[#1A1A1A] border border-[#FA500F]/40 rounded px-1.5 py-0.5 text-[11px] text-[#FFFAEB] outline-none focus:border-[#FA500F]/70 font-medium"
+                            spellCheck={false}
+                          />
+                        ) : (
+                          <button
+                            onClick={() => setEditing({ speaker, value: speakerNames[speaker] || speaker })}
+                            className="flex items-center gap-1.5 cursor-pointer group/name"
+                            title="Click to rename"
+                          >
+                            <span className="text-[11px] font-medium truncate" style={{ color }}>
+                              {displayName(speaker)}
+                            </span>
+                            {speakerNames[speaker] && (
+                              <span className="text-[9px] text-[#444] truncate">({speaker})</span>
+                            )}
+                            <svg width="10" height="10" viewBox="0 0 16 16" className="shrink-0 opacity-0 group-hover/name:opacity-50 transition-opacity" fill="currentColor" style={{ color: color + '80' }}>
+                              <path d="M12.1 3.9a1.5 1.5 0 00-2.12 0L4 9.88V12h2.12l5.98-5.98a1.5 1.5 0 000-2.12zM9.27 4.5l2.23 2.23" />
+                            </svg>
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Talk time bar */}
+                      <div className="w-16 shrink-0">
+                        <div className="h-1 rounded-full bg-[#1A1A1A] overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all duration-500"
+                            style={{ width: `${pct}%`, backgroundColor: color + '80' }}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Stats */}
+                      <span className="text-[10px] text-[#555] font-mono tabular-nums w-8 text-right shrink-0">{pct}%</span>
+
+                      {/* Navigate button */}
+                      <button
+                        onClick={() => nextSeg && seekTo(nextSeg.start)}
+                        className="shrink-0 w-5 h-5 flex items-center justify-center rounded hover:bg-[#ffffff08] transition-colors opacity-0 group-hover:opacity-100 cursor-pointer"
+                        title={`Jump to ${displayName(speaker)}`}
+                      >
+                        <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" className="text-[#666]">
+                          <path d="M6 3l5 5-5 5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
@@ -347,14 +559,38 @@ export default function AnalysisPage() {
                 </div>
 
                 {insights.key_quotes.length > 0 && (
-                  <div className="space-y-1.5">
-                    <h3 className="text-[10px] font-medium text-[#666] uppercase tracking-wider">Key Quotes</h3>
-                    {insights.key_quotes.slice(0, 3).map((q, i) => (
-                      <div key={i} className="border-l-2 border-[#333] pl-3 py-1.5 cursor-pointer hover:border-[#FA500F] hover:bg-[#1E1E1E] transition-colors rounded-r" onClick={() => handleSeek(q.timestamp)}>
-                        <p className="text-[12px] text-[#bbb] italic">&ldquo;{q.quote}&rdquo;</p>
-                        <p className="text-[10px] text-[#555] mt-0.5">{q.speaker} &middot; {formatTime(q.timestamp)}</p>
-                      </div>
-                    ))}
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-[10px] font-semibold text-[#FA500F]/70 uppercase tracking-[0.15em]">Key Quotes</span>
+                      <div className="h-px flex-1 bg-[#2E2E2E]" />
+                    </div>
+                    {insights.key_quotes.slice(0, 3).map((q, i) => {
+                      const color = speakerColor(q.speaker);
+                      return (
+                        <div
+                          key={i}
+                          className="group flex items-start gap-3 py-2.5 px-2 rounded-md cursor-pointer hover:bg-[#1E1E1E] transition-all duration-150"
+                          onClick={() => seekTo(q.timestamp)}
+                        >
+                          {/* Left accent bar */}
+                          <div className="w-[2px] self-stretch rounded-full bg-[#FA500F]/20 group-hover:bg-[#FA500F]/40 transition-colors flex-shrink-0 mt-0.5" />
+
+                          {/* Content */}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[12.5px] text-[#aaa] leading-relaxed italic group-hover:text-[#ccc] transition-colors">
+                              {q.quote}
+                            </p>
+                            <div className="flex items-center justify-between mt-1.5">
+                              <div className="flex items-center gap-1.5">
+                                <div className="w-[4px] h-[4px] rounded-full" style={{ backgroundColor: color }} />
+                                <span className="text-[10px] text-[#666]">{displayName(q.speaker)}</span>
+                              </div>
+                              <span className="text-[10px] text-[#555] font-mono tabular-nums group-hover:text-[#FA500F]/70 transition-colors">{formatTime(q.timestamp)}</span>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -366,7 +602,7 @@ export default function AnalysisPage() {
                   <div
                     key={i}
                     className="px-4 py-3 cursor-pointer hover:bg-[#1E1E1E] transition-colors"
-                    onClick={() => handleSeek(topic.start_time)}
+                    onClick={() => seekTo(topic.start_time)}
                   >
                     <div className="flex items-center justify-between mb-1.5">
                       <span className="text-[13px] font-medium text-[#ddd]">{topic.name}</span>
@@ -382,7 +618,7 @@ export default function AnalysisPage() {
                     </ul>
                     <div className="flex gap-1.5">
                       {topic.speakers_involved.map(s => (
-                        <Badge key={s} size="sm" color={SPEAKER_COLORS[speakerList.indexOf(s) % SPEAKER_COLORS.length]}>{s}</Badge>
+                        <Badge key={s} size="sm" color={speakerColor(s)}>{displayName(s)}</Badge>
                       ))}
                     </div>
                   </div>
@@ -403,7 +639,7 @@ export default function AnalysisPage() {
                     <div
                       key={i}
                       className="flex items-start px-4 py-2.5 cursor-pointer hover:bg-[#1E1E1E] transition-colors"
-                      onClick={() => item.evidence[0] && handleSeek(item.evidence[0].timestamp)}
+                      onClick={() => item.evidence[0] && seekTo(item.evidence[0].timestamp)}
                     >
                       <div className="flex-1 min-w-0 pr-3">
                         <p className="text-[12px] text-[#ddd] leading-snug">{item.description}</p>
@@ -411,7 +647,7 @@ export default function AnalysisPage() {
                           <p className="text-[10px] text-[#555] mt-1 truncate italic">&ldquo;{item.evidence[0].quote}&rdquo; &middot; {formatTime(item.evidence[0].timestamp)}</p>
                         )}
                       </div>
-                      <span className="w-24 text-center text-[11px] text-[#888] shrink-0">{item.assignee}</span>
+                      <span className="w-24 text-center text-[11px] text-[#888] shrink-0">{displayName(item.assignee)}</span>
                       <div className="w-16 flex justify-center shrink-0">
                         <span
                           className="text-[10px] font-medium px-1.5 py-0.5 rounded"
@@ -436,7 +672,7 @@ export default function AnalysisPage() {
                   <div
                     key={i}
                     className="px-4 py-3 cursor-pointer hover:bg-[#1E1E1E] transition-colors"
-                    onClick={() => handleSeek(d.timestamp)}
+                    onClick={() => seekTo(d.timestamp)}
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
@@ -444,7 +680,7 @@ export default function AnalysisPage() {
                         <p className="text-[11px] text-[#666] mt-1">{d.context}</p>
                       </div>
                       <div className="text-right shrink-0">
-                        <span className="text-[11px] text-[#888]">{d.made_by}</span>
+                        <span className="text-[11px] text-[#888]">{displayName(d.made_by)}</span>
                         <div className="text-[10px] text-[#555] font-mono">{formatTime(d.timestamp)}</div>
                       </div>
                     </div>
@@ -464,15 +700,15 @@ export default function AnalysisPage() {
                       <span className="text-[9px] text-[#555] uppercase tracking-wide">{c.severity}</span>
                     </div>
                     <div className="grid grid-cols-2 gap-2 mb-2">
-                      <div className="bg-[#1A1A1A] border border-[#2a2a2a] rounded p-2.5 cursor-pointer hover:border-[#333] transition-colors" onClick={() => handleSeek(c.claim_a.timestamp)}>
+                      <div className="bg-[#1A1A1A] border border-[#2a2a2a] rounded p-2.5 cursor-pointer hover:border-[#333] transition-colors" onClick={() => seekTo(c.claim_a.timestamp)}>
                         <div className="text-[9px] text-[#555] uppercase tracking-wide mb-1">Claim A &middot; {c.claim_a.source_type}</div>
                         <p className="text-[11px] text-[#bbb] italic leading-snug">&ldquo;{c.claim_a.quote}&rdquo;</p>
-                        <p className="text-[9px] text-[#444] mt-1 font-mono">{c.claim_a.source} &middot; {formatTime(c.claim_a.timestamp)}</p>
+                        <p className="text-[9px] text-[#444] mt-1 font-mono">{displayName(c.claim_a.source)} &middot; {formatTime(c.claim_a.timestamp)}</p>
                       </div>
-                      <div className="bg-[#1A1A1A] border border-[#2a2a2a] rounded p-2.5 cursor-pointer hover:border-[#333] transition-colors" onClick={() => handleSeek(c.claim_b.timestamp)}>
+                      <div className="bg-[#1A1A1A] border border-[#2a2a2a] rounded p-2.5 cursor-pointer hover:border-[#333] transition-colors" onClick={() => seekTo(c.claim_b.timestamp)}>
                         <div className="text-[9px] text-[#555] uppercase tracking-wide mb-1">Claim B &middot; {c.claim_b.source_type}</div>
                         <p className="text-[11px] text-[#bbb] italic leading-snug">&ldquo;{c.claim_b.quote}&rdquo;</p>
-                        <p className="text-[9px] text-[#444] mt-1 font-mono">{c.claim_b.source} &middot; {formatTime(c.claim_b.timestamp)}</p>
+                        <p className="text-[9px] text-[#444] mt-1 font-mono">{displayName(c.claim_b.source)} &middot; {formatTime(c.claim_b.timestamp)}</p>
                       </div>
                     </div>
                     <p className="text-[11px] text-[#FA500F]/80">{c.explanation}</p>
@@ -494,7 +730,7 @@ export default function AnalysisPage() {
                     <div
                       key={i}
                       className="flex items-center px-4 py-2.5 cursor-pointer hover:bg-[#1E1E1E] transition-colors"
-                      onClick={() => handleSeek(kpi.timestamp)}
+                      onClick={() => seekTo(kpi.timestamp)}
                     >
                       <div className="flex-1 min-w-0">
                         <span className="text-[12px] text-[#ddd]">{kpi.name}</span>
@@ -502,7 +738,7 @@ export default function AnalysisPage() {
                       </div>
                       <span className="w-28 text-right text-[13px] font-semibold text-[#FA500F] shrink-0 font-mono">{kpi.value}</span>
                       <div className="w-24 text-right shrink-0">
-                        <span className="text-[10px] text-[#666]">{kpi.mentioned_by}</span>
+                        <span className="text-[10px] text-[#666]">{displayName(kpi.mentioned_by)}</span>
                         <div className="text-[9px] text-[#444] font-mono">{formatTime(kpi.timestamp)}</div>
                       </div>
                     </div>
@@ -516,7 +752,6 @@ export default function AnalysisPage() {
               <div ref={transcriptRef} className="divide-y divide-[#1E1E1E]">
                 {transcript.map((seg, i) => {
                   const isActive = seg.start <= currentTime && seg.end > currentTime;
-                  const si = speakerList.indexOf(seg.speaker);
                   return (
                     <div
                       key={i}
@@ -524,11 +759,11 @@ export default function AnalysisPage() {
                         'flex gap-3 px-4 py-2 cursor-pointer transition-colors',
                         isActive ? 'bg-[#FA500F]/8 border-l-2 border-[#FA500F]' : 'hover:bg-[#1E1E1E] border-l-2 border-transparent'
                       )}
-                      onClick={() => handleSeek(seg.start)}
+                      onClick={() => seekTo(seg.start)}
                     >
                       <span className="text-[10px] text-[#444] font-mono w-10 text-right shrink-0 pt-0.5">{formatTime(seg.start)}</span>
                       <div className="shrink-0 w-16">
-                        <span className="text-[10px] font-medium" style={{ color: SPEAKER_COLORS[si % SPEAKER_COLORS.length] }}>{seg.speaker}</span>
+                        <span className="text-[10px] font-medium" style={{ color: speakerColor(seg.speaker) }}>{displayName(seg.speaker)}</span>
                       </div>
                       <p className="text-[12px] text-[#bbb] leading-relaxed">{seg.text}</p>
                     </div>
@@ -575,9 +810,9 @@ export default function AnalysisPage() {
                   }}
                   onNodeClick={(node: any) => {
                     const graphNode = data.graph.nodes.find((n: GraphNode) => n.id === node.id);
-                    if (graphNode) handleSeek(graphNode.first_seen);
+                    if (graphNode) seekTo(graphNode.first_seen);
                   }}
-                  width={typeof window !== 'undefined' ? window.innerWidth * 0.5 - 20 : 600}
+                  width={typeof window !== 'undefined' ? (window.innerWidth - 224) * 0.5 - 20 : 600}
                   height={typeof window !== 'undefined' ? window.innerHeight - 100 : 500}
                 />
               </div>

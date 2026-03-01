@@ -14,6 +14,42 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
+@router.get("/api/jobs")
+async def list_jobs():
+    """List all completed analyses with metadata."""
+    analyses = []
+    try:
+        entries = list(JOBS_DIR.iterdir())
+    except FileNotFoundError:
+        return analyses
+
+    for job_dir in entries:
+        if not job_dir.is_dir():
+            continue
+        results_path = job_dir / "results.json"
+        try:
+            stat = results_path.stat()
+            with open(results_path) as f:
+                data = json.load(f)
+            insights = data.get("insights", {})
+            summary = insights.get("summary", "")
+            topics = insights.get("topics", [])
+            title = topics[0]["name"] if topics else summary[:60] if summary else job_dir.name
+            analyses.append({
+                "job_id": job_dir.name,
+                "title": title,
+                "summary": summary[:120] + ("..." if len(summary) > 120 else ""),
+                "created_at": stat.st_mtime,
+                "topics_count": len(topics),
+                "status": data.get("status", "completed"),
+            })
+        except (json.JSONDecodeError, KeyError, OSError):
+            continue
+
+    analyses.sort(key=lambda x: x["created_at"], reverse=True)
+    return analyses
+
+
 @router.get("/api/jobs/{job_id}/stream")
 async def stream_progress(job_id: str):
     """Server-Sent Events endpoint for real-time pipeline progress.

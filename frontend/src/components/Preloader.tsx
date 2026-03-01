@@ -145,12 +145,22 @@ function PreloaderOverlay() {
 }
 
 export function Preloader({ children }: { children: React.ReactNode }) {
-  const [showPreloader, setShowPreloader] = useState(true);
+  const [showPreloader, setShowPreloader] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowPreloader(false), 2800);
-    return () => clearTimeout(timer);
+    if (!sessionStorage.getItem('vistral-preloader-shown')) {
+      setShowPreloader(true);
+    }
   }, []);
+
+  useEffect(() => {
+    if (!showPreloader) return;
+    const timer = setTimeout(() => {
+      setShowPreloader(false);
+      sessionStorage.setItem('vistral-preloader-shown', '1');
+    }, 2800);
+    return () => clearTimeout(timer);
+  }, [showPreloader]);
 
   return (
     <>
