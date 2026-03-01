@@ -27,16 +27,17 @@ async def stream_progress(job_id: str):
         orchestrator = active_pipelines.get(job_id)
 
         if orchestrator:
-            # Stream from live pipeline
+            last_real_event = {"step": "upload", "progress": 0, "message": "Initializing pipeline..."}
             while True:
                 try:
-                    event = await asyncio.wait_for(orchestrator.events.get(), timeout=60)
+                    event = await asyncio.wait_for(orchestrator.events.get(), timeout=30)
+                    last_real_event = event
                     yield f"data: {json.dumps(event)}\n\n"
                     if event.get("step") in ("complete", "error"):
                         break
                 except asyncio.TimeoutError:
-                    # Send keepalive
-                    yield f"data: {json.dumps({'step': 'heartbeat', 'progress': 0, 'message': 'waiting'})}\n\n"
+                    heartbeat = {**last_real_event, "heartbeat": True}
+                    yield f"data: {json.dumps(heartbeat)}\n\n"
         else:
             # Pipeline might be done already — check for results
             results_path = JOBS_DIR / job_id / "results.json"

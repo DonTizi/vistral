@@ -1,6 +1,7 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useSSE } from '@/hooks/useSSE';
 import { api } from '@/lib/api';
 import { cn } from '@/lib/utils';
@@ -44,6 +45,17 @@ const STEPS = [
 
 const STEP_INDEX = new Map(STEPS.map((s, i) => [s.key, i]));
 
+const STEP_SUBTITLES: Record<string, string> = {
+  upload: 'Preparing your video for analysis',
+  audio: 'Extracting and processing audio channels',
+  transcription: 'Voxtral is transcribing speech',
+  frames: 'Deduplicating visual keyframes',
+  vision: 'Pixtral is analyzing visual content',
+  analysis: 'Cross-referencing audio and visual entities',
+  graph: 'Constructing the Temporal Knowledge Graph',
+  insights: 'Reasoning over knowledge graph patterns',
+};
+
 function getStepStatus(stepKey: string, currentStep: string | undefined, isComplete: boolean) {
   if (isComplete) return 'done';
   const currentIdx = currentStep ? (STEP_INDEX.get(currentStep) ?? -1) : -1;
@@ -58,6 +70,7 @@ export default function ProcessingPage() {
   const router = useRouter();
   const jobId = params.jobId as string;
   const { events, currentStep, isComplete, error } = useSSE(api.getStreamUrl(jobId));
+  const eventLogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isComplete) {
@@ -66,10 +79,25 @@ export default function ProcessingPage() {
     }
   }, [isComplete, jobId, router]);
 
+  // Auto-scroll event log
+  useEffect(() => {
+    if (eventLogRef.current) {
+      eventLogRef.current.scrollTop = eventLogRef.current.scrollHeight;
+    }
+  }, [events.length]);
+
   const activeStepKey = currentStep?.step === 'complete' ? 'insights' :
                          currentStep?.step === 'analysis' ? 'graph' :
                          currentStep?.step;
   const overallProgress = currentStep?.progress ?? 0;
+  const isProcessing = !isComplete && !error;
+
+  // Dynamic subtitle based on current step
+  const subtitle = isComplete
+    ? 'Redirecting to analysis...'
+    : error
+      ? 'Something went wrong'
+      : STEP_SUBTITLES[currentStep?.step ?? 'upload'] ?? 'Extracting temporal knowledge from your video';
 
   return (
     <main className="min-h-screen relative">
@@ -94,9 +122,18 @@ export default function ProcessingPage() {
               <h1 className="text-2xl font-bold text-[#FFFAEB]">
                 {isComplete ? 'Analysis Complete' : error ? 'Processing Error' : 'Building Knowledge Graph'}
               </h1>
-              <p className="text-sm text-[#777777]">
-                {isComplete ? 'Redirecting to analysis...' : 'Extracting temporal knowledge from your video'}
-              </p>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={subtitle}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.3 }}
+                  className={cn('text-sm', isProcessing ? 'text-shimmer' : 'text-[#777777]')}
+                >
+                  {subtitle}
+                </motion.p>
+              </AnimatePresence>
             </div>
 
             {/* Pipeline Steps */}
@@ -106,18 +143,22 @@ export default function ProcessingPage() {
                 return (
                   <div key={step.key} className="flex items-center gap-1 flex-1">
                     <div className="flex flex-col items-center gap-2.5 flex-1">
-                      <div className={cn(
-                        'w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500',
-                        status === 'done' && 'bg-[#FA500F] text-white',
-                        status === 'active' && 'bg-[#FA500F]/10 text-[#FA500F] border border-[#FA500F] shadow-[0_0_20px_rgba(250,80,15,0.2)]',
-                        status === 'pending' && 'bg-[#1A1A1A] text-[#555555] border border-[#2a2a2a]',
-                      )}>
+                      <motion.div
+                        animate={status === 'done' ? { scale: [1, 1.15, 1] } : {}}
+                        transition={{ duration: 0.35, ease: 'easeOut' }}
+                        className={cn(
+                          'w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500',
+                          status === 'done' && 'bg-[#FA500F] text-white',
+                          status === 'active' && 'bg-[#FA500F]/10 text-[#FA500F] border border-[#FA500F] glow-pulse',
+                          status === 'pending' && 'bg-[#1A1A1A] text-[#555555] border border-[#2a2a2a]',
+                        )}
+                      >
                         {status === 'done' ? (
                           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                           </svg>
                         ) : step.icon}
-                      </div>
+                      </motion.div>
                       <span className={cn(
                         'text-xs font-medium transition-colors text-center',
                         status === 'active' ? 'text-[#FA500F]' : status === 'done' ? 'text-[#FFFAEB]' : 'text-[#555555]',
@@ -136,32 +177,47 @@ export default function ProcessingPage() {
               })}
             </div>
 
-            {/* Progress Bar — rainbow gradient */}
+            {/* Progress Bar */}
             <div className="space-y-3">
               <ProgressBar progress={overallProgress} className="bg-[#1A1A1A]" />
               <div className="flex justify-between text-xs">
-                <span className="text-[#777777]">{currentStep?.message || 'Initializing pipeline...'}</span>
+                <span className={cn(isProcessing ? 'text-shimmer' : 'text-[#777777]')}>
+                  {currentStep?.message || 'Initializing pipeline...'}
+                </span>
                 <span className="text-[#FA500F] font-medium">{Math.round(overallProgress)}%</span>
               </div>
             </div>
 
             {/* Event Log */}
-            <div className="bg-[#1A1A1A] border border-[#2a2a2a] rounded-xl p-4 max-h-48 overflow-y-auto">
+            <div
+              ref={eventLogRef}
+              className="bg-[#1A1A1A] border border-[#2a2a2a] rounded-xl p-4 max-h-48 overflow-y-auto"
+            >
               <div className="space-y-1.5">
-                {events.map((e, i) => (
-                  <div key={i} className="flex items-center gap-3 text-xs">
-                    <span className="text-[#444444] font-mono w-5 text-right shrink-0">{String(i + 1).padStart(2, '0')}</span>
-                    <div className={cn(
-                      'w-1.5 h-1.5 rounded-full shrink-0',
-                      e.step === 'error' ? 'bg-red-400' : e.step === 'complete' ? 'bg-green-400' : 'bg-[#FA500F]'
-                    )} />
-                    <span className={cn(
-                      e.step === 'error' ? 'text-red-400' : e.step === 'complete' ? 'text-green-400' : 'text-[#888888]'
-                    )}>
-                      {e.message}
-                    </span>
-                  </div>
-                ))}
+                <AnimatePresence initial={false}>
+                  {events.map((e, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.25, ease: 'easeOut' }}
+                      className="flex items-center gap-3 text-xs"
+                    >
+                      <span className="text-[#444444] font-mono w-5 text-right shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                      <div className={cn(
+                        'w-1.5 h-1.5 rounded-full shrink-0',
+                        e.step === 'error' ? 'bg-red-400' :
+                        e.step === 'complete' ? 'bg-green-400' :
+                        i === events.length - 1 ? 'bg-[#FA500F] pulse-dot' : 'bg-[#FA500F]'
+                      )} />
+                      <span className={cn(
+                        e.step === 'error' ? 'text-red-400' : e.step === 'complete' ? 'text-green-400' : 'text-[#888888]'
+                      )}>
+                        {e.message}
+                      </span>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
                 {events.length === 0 && <span className="text-[#555555] text-xs">Waiting for pipeline...</span>}
               </div>
             </div>

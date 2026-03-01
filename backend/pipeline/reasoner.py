@@ -6,6 +6,7 @@ Pass B: Insight extraction from serialized knowledge graph (reasoning).
 
 import json
 import logging
+import re
 
 import httpx
 
@@ -19,34 +20,73 @@ logger = logging.getLogger(__name__)
 CHAT_URL = f"{MISTRAL_BASE_URL}/chat/completions"
 
 
-async def _call_mistral(prompt: str, system: str = "", max_tokens: int = 4096) -> dict:
-    """Make a single chat completion call to Mistral Small with JSON output."""
+def _clean_json(raw: str) -> str:
+    """Strip code fences and fix common LLM JSON issues."""
+    text = raw.strip()
+    # Remove markdown code fences
+    if text.startswith("```"):
+        text = re.sub(r"^```(?:json)?\s*\n?", "", text)
+        text = re.sub(r"\n?```\s*$", "", text)
+    # Remove trailing commas before } or ]
+    text = re.sub(r",\s*([}\]])", r"\1", text)
+    return text
+
+
+async def _call_mistral(prompt: str, system: str = "", max_tokens: int = 4096, retries: int = 2) -> dict:
+    """Make a chat completion call to Mistral Small with JSON output.
+
+    Retries on JSON parse failures (typically truncated output) with
+    increased max_tokens on each attempt.
+    """
     messages = []
     if system:
         messages.append({"role": "system", "content": system})
     messages.append({"role": "user", "content": prompt})
 
-    async with httpx.AsyncClient(timeout=120) as client:
-        resp = await client.post(
-            CHAT_URL,
-            headers={
-                "Authorization": f"Bearer {MISTRAL_API_KEY}",
-                "Content-Type": "application/json",
-            },
-            json={
-                "model": MODEL_REASONING,
-                "messages": messages,
-                "response_format": {"type": "json_object"},
-                "max_tokens": max_tokens,
-                "temperature": 0.1,
-            },
-        )
+    current_max_tokens = max_tokens
 
-    if resp.status_code != 200:
-        raise RuntimeError(f"Mistral API error ({resp.status_code}): {resp.text[:500]}")
+    for attempt in range(retries + 1):
+        async with httpx.AsyncClient(timeout=120) as client:
+            resp = await client.post(
+                CHAT_URL,
+                headers={
+                    "Authorization": f"Bearer {MISTRAL_API_KEY}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": MODEL_REASONING,
+                    "messages": messages,
+                    "response_format": {"type": "json_object"},
+                    "max_tokens": current_max_tokens,
+                    "temperature": 0.1,
+                },
+            )
 
-    content = resp.json()["choices"][0]["message"]["content"]
-    return json.loads(content)
+        if resp.status_code != 200:
+            raise RuntimeError(f"Mistral API error ({resp.status_code}): {resp.text[:500]}")
+
+        content = resp.json()["choices"][0]["message"]["content"]
+        finish_reason = resp.json()["choices"][0].get("finish_reason", "")
+
+        try:
+            return json.loads(content)
+        except json.JSONDecodeError:
+            cleaned = _clean_json(content)
+            try:
+                return json.loads(cleaned)
+            except json.JSONDecodeError:
+                if attempt < retries:
+                    # Likely truncated — increase token budget and retry
+                    current_max_tokens = min(current_max_tokens * 2, 16384)
+                    logger.warning(
+                        "JSON parse failed (attempt %d/%d, finish_reason=%s), "
+                        "retrying with max_tokens=%d",
+                        attempt + 1, retries + 1, finish_reason, current_max_tokens,
+                    )
+                    continue
+                logger.error("Failed to parse LLM JSON after %d attempts (first 500 chars): %s",
+                             retries + 1, content[:500])
+                raise
 
 
 async def extract_entities(transcript: list[TranscriptSegment]) -> ExtractedEntities:
@@ -59,7 +99,7 @@ async def extract_entities(transcript: list[TranscriptSegment]) -> ExtractedEnti
     prompt = PASS_A_PROMPT.format(transcript=transcript_text)
 
     logger.info("Pass A: Extracting entities from %d transcript segments", len(transcript))
-    result = await _call_mistral(prompt, max_tokens=4096)
+    result = await _call_mistral(prompt, max_tokens=8192)
 
     entities = ExtractedEntities(
         speakers=result.get("speakers", []),

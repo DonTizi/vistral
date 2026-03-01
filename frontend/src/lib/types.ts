@@ -139,4 +139,6 @@ export interface PipelineEvent {
   progress: number;
   message: string;
   data?: any;
+  heartbeat?: boolean;
+  ticker?: boolean;
 }

@@ -1,6 +1,7 @@
 """Adaptive frame extraction from video using FFmpeg scene detection."""
 
 import asyncio
+import json
 import logging
 import re
 from pathlib import Path
@@ -11,11 +12,58 @@ from backend.models import FrameInfo
 logger = logging.getLogger(__name__)
 
 
+async def _get_video_duration(video_path: Path) -> float | None:
+    """Get video duration in seconds using ffprobe."""
+    cmd = [
+        "ffprobe",
+        "-v", "quiet",
+        "-print_format", "json",
+        "-show_format",
+        str(video_path),
+    ]
+    try:
+        proc = await asyncio.create_subprocess_exec(
+            *cmd,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        stdout, _ = await proc.communicate()
+        info = json.loads(stdout.decode())
+        return float(info["format"]["duration"])
+    except Exception as e:
+        logger.warning("Could not get video duration via ffprobe: %s", e)
+        return None
+
+
+def _compute_frame_interval(duration_seconds: float | None) -> int:
+    """Compute adaptive frame interval based on video duration.
+
+    Returns:
+        Interval in seconds: 30s for <15min, 60s for 15-30min, 90s for >30min.
+    """
+    if duration_seconds is None:
+        return MIN_FRAME_INTERVAL
+
+    duration_minutes = duration_seconds / 60.0
+
+    if duration_minutes > 30:
+        interval = 90
+    elif duration_minutes > 15:
+        interval = 60
+    else:
+        interval = MIN_FRAME_INTERVAL
+
+    logger.info("Video duration: %.1f min -> frame interval: %ds",
+                duration_minutes, interval)
+    return interval
+
+
 async def extract_frames(video_path: Path, output_dir: Path) -> list[FrameInfo]:
     """Extract frames using scene detection + minimum interval fallback.
 
-    Uses FFmpeg's scene detection filter (threshold=0.3) combined with a 30s
-    minimum interval to produce a balanced set of representative frames.
+    Uses FFmpeg's scene detection filter combined with a dynamic minimum
+    interval (adapted to video length) to produce a balanced set of
+    representative frames.
 
     Args:
         video_path: Path to input video.
@@ -27,11 +75,15 @@ async def extract_frames(video_path: Path, output_dir: Path) -> list[FrameInfo]:
     frames_dir = output_dir / "frames"
     frames_dir.mkdir(exist_ok=True)
 
+    # Get duration and compute adaptive interval
+    duration = await _get_video_duration(video_path)
+    interval = _compute_frame_interval(duration)
+
     # Scene detection + interval fallback filter
     vf = (
         f"select='gt(scene\\,{SCENE_DETECT_THRESHOLD})"
         f"+isnan(prev_selected_t)"
-        f"+gte(t-prev_selected_t\\,{MIN_FRAME_INTERVAL})',"
+        f"+gte(t-prev_selected_t\\,{interval})',"
         f"showinfo"
     )
 
@@ -45,7 +97,7 @@ async def extract_frames(video_path: Path, output_dir: Path) -> list[FrameInfo]:
     ]
 
     logger.info("Extracting frames with scene detection (threshold=%.1f, interval=%ds)",
-                SCENE_DETECT_THRESHOLD, MIN_FRAME_INTERVAL)
+                SCENE_DETECT_THRESHOLD, interval)
 
     proc = await asyncio.create_subprocess_exec(
         *cmd,
@@ -67,7 +119,7 @@ async def extract_frames(video_path: Path, output_dir: Path) -> list[FrameInfo]:
     frames = []
 
     for i, fpath in enumerate(frame_files):
-        ts = timestamps[i] if i < len(timestamps) else i * MIN_FRAME_INTERVAL
+        ts = timestamps[i] if i < len(timestamps) else i * interval
         frames.append(FrameInfo(index=i, timestamp=ts, path=str(fpath)))
 
     # Fallback: if no frames extracted, take first frame

@@ -1,21 +1,29 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-mistral-bg: #1a1a1a;
-  --color-mistral-card: #242424;
-  --color-mistral-border: #333333;
+  --color-mistral-bg: #1A1A1A;
+  --color-mistral-card: #222222;
+  --color-mistral-border: #2E2E2E;
   --color-mistral-accent: #FA500F;
   --color-mistral-accent-hover: #E04600;
   --color-mistral-text: #FFFAEB;
   --color-mistral-text-secondary: #999999;
   --color-mistral-beige: #FFF0C3;
-  --font-sans: Arial, Helvetica, sans-serif;
+  --color-mistral-yellow: #FFD800;
+  --color-mistral-orange-light: #FFAF00;
+  --color-mistral-orange: #FF8205;
+  --color-mistral-orange-dark: #FA500F;
+  --color-mistral-red: #E10500;
+  --color-mistral-beige-light: #FFFAEB;
+  --color-mistral-beige-medium: #FFF0C3;
+  --color-mistral-beige-dark: #E9E2CB;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 :root {
-  --color-bg: #1a1a1a;
-  --color-card: #242424;
-  --color-border: #333333;
+  --color-bg: #1A1A1A;
+  --color-card: #222222;
+  --color-border: #2E2E2E;
   --color-accent: #FA500F;
   --color-accent-hover: #E04600;
   --color-text: #FFFAEB;
@@ -26,10 +34,127 @@
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-text-secondary); }
+/* Warm glow from top — more visible, cinematic feel */
+.mistral-glow {
+  background:
+    radial-gradient(
+      ellipse 80% 50% at 50% -5%,
+      rgba(250, 80, 15, 0.10) 0%,
+      rgba(255, 130, 5, 0.04) 40%,
+      transparent 70%
+    );
+}
+
+.mistral-gradient-bar {
+  background: linear-gradient(
+    90deg,
+    #FFD800 0%,
+    #FFAF00 25%,
+    #FF8205 50%,
+    #FA500F 75%,
+    #E10500 100%
+  );
+}
+
+/* Upload zone — elevated with inner glow on hover */
+.upload-zone {
+  transition: all 0.25s ease;
+  background: #1E1E1E;
+  border-style: dashed;
+}
+.upload-zone:hover {
+  border-color: #FA500F;
+  background: linear-gradient(180deg, rgba(250, 80, 15, 0.04) 0%, rgba(250, 80, 15, 0.01) 100%);
+  box-shadow: 0 0 24px rgba(250, 80, 15, 0.06);
+}
+.upload-zone.dragging {
+  border-color: #FA500F;
+  background: linear-gradient(180deg, rgba(250, 80, 15, 0.07) 0%, rgba(250, 80, 15, 0.02) 100%);
+  box-shadow: 0 0 0 4px rgba(250, 80, 15, 0.10), 0 0 32px rgba(250, 80, 15, 0.08);
+}
+
+/* Demo card — lift on hover */
+.demo-card {
+  transition: all 0.2s ease;
+}
+.demo-card:hover {
+  border-color: rgba(250, 80, 15, 0.5);
+  background: #282828;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+.demo-card:hover .demo-arrow {
+  transform: translateX(3px);
+  color: #FA500F;
+}
+
+/* Scrollbar — thin & unobtrusive */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+
+/* Mistral-style light card */
+.mistral-card {
+  background-color: #FFFAEB;
+  color: #1A1A1A;
+  border: 1px solid #E9E2CB;
+}
+.mistral-card:hover {
+  border-color: #FA500F;
+}
+
+/* Powered badge */
+.powered-badge {
+  background: rgba(250, 80, 15, 0.08);
+  border: 1px solid rgba(250, 80, 15, 0.15);
+  transition: all 0.2s ease;
+}
+.powered-badge:hover {
+  background: rgba(250, 80, 15, 0.12);
+  border-color: rgba(250, 80, 15, 0.25);
+}
+
+/* Agentic processing animations */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #777777 0%,
+    #777777 40%,
+    #FA500F 50%,
+    #777777 60%,
+    #777777 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+.pulse-dot {
+  animation: pulseDot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.8); opacity: 0.5; }
+}
+
+.glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(250, 80, 15, 0.15); }
+  50% { box-shadow: 0 0 24px rgba(250, 80, 15, 0.4), 0 0 48px rgba(250, 80, 15, 0.15); }
+}

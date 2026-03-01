@@ -12,6 +12,7 @@ import asyncio
 import json
 import logging
 import time
+from contextlib import asynccontextmanager
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
@@ -27,6 +28,60 @@ from backend.pipeline.graph_builder import build_graph, serialize_graph
 from backend.pipeline.reasoner import extract_entities, extract_insights
 
 logger = logging.getLogger(__name__)
+
+# Descriptive messages cycled during each step's ticker
+_TICKER_MESSAGES: dict[str, list[str]] = {
+    "audio": [
+        "Extracting audio track from video container",
+        "Extracting visual frames with scene detection",
+        "Converting audio to optimal format for ASR",
+        "Filtering keyframes at scene boundaries",
+        "Preparing media for parallel processing",
+    ],
+    "frames": [
+        "Computing perceptual hashes for frame dedup",
+        "Comparing frame similarity with hamming distance",
+        "Filtering near-duplicate frames",
+        "Selecting visually distinct keyframes",
+    ],
+    "transcription": [
+        "Voxtral is transcribing speech to text",
+        "Identifying speakers with diarization",
+        "Aligning word-level timestamps",
+        "Segmenting transcript by speaker turns",
+        "Detecting language and dialect patterns",
+        "Merging consecutive speaker segments",
+    ],
+    "vision": [
+        "Pixtral is analyzing frame content",
+        "Running OCR on detected text regions",
+        "Classifying slide layouts and diagrams",
+        "Extracting visual entities from frames",
+        "Detecting charts, tables, and figures",
+    ],
+    "analysis": [
+        "Extracting named entities from transcript",
+        "Identifying topics and themes",
+        "Cross-referencing visual and audio entities",
+        "Building entity co-occurrence matrix",
+    ],
+    "graph": [
+        "Creating temporal knowledge graph nodes",
+        "Linking entities with relationship edges",
+        "Computing edge confidence scores",
+        "Detecting contradictions between sources",
+        "Building timeline snapshots",
+        "Validating graph connectivity",
+    ],
+    "insights": [
+        "Reasoning over knowledge graph structure",
+        "Extracting action items with evidence chains",
+        "Identifying key decisions and commitments",
+        "Summarizing topic arcs and transitions",
+        "Scoring insight confidence levels",
+        "Generating executive summary",
+    ],
+}
 
 
 class PipelineOrchestrator:
@@ -44,6 +99,40 @@ class PipelineOrchestrator:
     def events(self) -> asyncio.Queue[dict]:
         return self._events
 
+    @asynccontextmanager
+    async def _progress_ticker(self, step: str, start_pct: float, end_pct: float):
+        """Emit interpolated progress events during long operations.
+
+        Uses asymptotic easing — increments shrink as progress approaches the
+        target so it never overshoots. Cycles through descriptive messages.
+        """
+        messages = _TICKER_MESSAGES.get(step, [f"Processing {step}..."])
+        current_pct = start_pct
+        msg_index = 0
+        interval = 3.0  # seconds between ticks
+
+        async def _tick():
+            nonlocal current_pct, msg_index
+            while True:
+                await asyncio.sleep(interval)
+                # Asymptotic easing: close 30% of remaining gap each tick
+                remaining = end_pct - current_pct
+                increment = max(remaining * 0.3, 0.5)
+                current_pct = min(current_pct + increment, end_pct - 1)
+                msg = messages[min(msg_index, len(messages) - 1)]
+                msg_index += 1
+                await self._emit(step, round(current_pct, 1), msg, ticker=True)
+
+        task = asyncio.create_task(_tick())
+        try:
+            yield
+        finally:
+            task.cancel()
+            try:
+                await task
+            except asyncio.CancelledError:
+                pass
+
     async def run(self) -> dict[str, Any]:
         """Execute the full pipeline. Returns complete results dict."""
         start = time.time()
@@ -53,18 +142,20 @@ class PipelineOrchestrator:
 
             # --- Step 1: Audio + Frame extraction (parallel) ---
             await self._emit("audio", 10, "Extracting audio and frames")
-            audio_task = extract_audio(self.video_path, self.job_dir)
-            frames_task = extract_frames(self.video_path, self.job_dir)
-            audio_path, raw_frames = await asyncio.gather(audio_task, frames_task)
+            async with self._progress_ticker("audio", 10, 20):
+                audio_task = extract_audio(self.video_path, self.job_dir)
+                frames_task = extract_frames(self.video_path, self.job_dir)
+                audio_path, raw_frames = await asyncio.gather(audio_task, frames_task)
             await self._emit("audio", 20, f"Audio extracted, {len(raw_frames)} frames found")
 
             # --- Step 2: Voxtral ASR + Frame dedup (parallel) ---
             await self._emit("transcription", 25, "Transcribing audio with Voxtral")
-            transcript_task = transcribe(audio_path)
-            unique_frames = await asyncio.to_thread(dedup_frames, raw_frames)
-            await self._emit("frames", 30, f"{len(unique_frames)} unique frames after dedup")
-
-            transcript = await transcript_task
+            async with self._progress_ticker("transcription", 25, 44):
+                transcript_task = transcribe(audio_path)
+                async with self._progress_ticker("frames", 25, 30):
+                    unique_frames = await asyncio.to_thread(dedup_frames, raw_frames)
+                await self._emit("frames", 30, f"{len(unique_frames)} unique frames after dedup")
+                transcript = await transcript_task
             await self._emit("transcription", 45, f"Transcription complete: {len(transcript)} segments")
 
             # Get video duration from transcript or estimate
@@ -72,20 +163,23 @@ class PipelineOrchestrator:
 
             # --- Step 3: Pass A entities + Pixtral vision (parallel) ---
             await self._emit("analysis", 50, "Extracting entities and analyzing frames")
-            entities_task = extract_entities(transcript)
-            vision_task = analyze_frames(unique_frames)
-            entities, vision_events = await asyncio.gather(entities_task, vision_task)
+            async with self._progress_ticker("vision", 50, 64):
+                entities_task = extract_entities(transcript)
+                vision_task = analyze_frames(unique_frames)
+                entities, vision_events = await asyncio.gather(entities_task, vision_task)
             await self._emit("vision", 65, f"Vision: {len(vision_events)} events. Entities extracted.")
 
             # --- Step 4: Knowledge Graph construction ---
             await self._emit("graph", 70, "Building Temporal Knowledge Graph")
-            graph = build_graph(transcript, vision_events, entities, duration)
-            serialized = serialize_graph(graph)
+            async with self._progress_ticker("graph", 70, 79):
+                graph = build_graph(transcript, vision_events, entities, duration)
+                serialized = serialize_graph(graph)
             await self._emit("graph", 80, f"Graph built: {graph.metadata['total_nodes']} nodes, {graph.metadata['total_edges']} edges")
 
             # --- Step 5: Pass B insight reasoning ---
             await self._emit("insights", 85, "Extracting insights from knowledge graph")
-            insights = await extract_insights(serialized)
+            async with self._progress_ticker("insights", 85, 94):
+                insights = await extract_insights(serialized)
             await self._emit("insights", 95, "Insights extracted with evidence chains")
 
             # --- Save results ---
@@ -123,7 +217,7 @@ class PipelineOrchestrator:
             json.dump(results, f, indent=2, default=str)
         logger.info("Results saved to %s", output_path)
 
-    async def _emit(self, step: str, progress: float, message: str, data: Any = None) -> None:
+    async def _emit(self, step: str, progress: float, message: str, data: Any = None, ticker: bool = False) -> None:
         """Emit a pipeline progress event to the SSE queue."""
         event = {
             "step": step,
@@ -132,6 +226,8 @@ class PipelineOrchestrator:
         }
         if data:
             event["data"] = data
+        if ticker:
+            event["ticker"] = True
         await self._events.put(event)
         logger.info("[%s] %s: %s (%.0f%%)", self.job_id, step, message, progress)
 

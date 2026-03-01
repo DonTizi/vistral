@@ -19,12 +19,17 @@ MISTRAL_BASE_URL = "https://api.mistral.ai/v1"
 
 # Models
 MODEL_ASR = "voxtral-mini-latest"
-MODEL_VISION = "pixtral-large-latest"
+MODEL_VISION = "pixtral-12b-2409"
 MODEL_REASONING = "mistral-small-latest"
 MODEL_REASONING_FALLBACK = "mistral-large-latest"
 
 # Pipeline
-MAX_FRAMES_PER_BATCH = 15
+MAX_FRAMES_PER_BATCH = 8            # Pixtral API hard limit is 8 images
+MAX_TOTAL_FRAMES = 150             # hard cap before vision analysis
+DEDUP_WINDOW_SIZE = 5              # compare against N last unique hashes
+VISION_CONCURRENCY = 4             # concurrent Pixtral batches
+VISION_MAX_RETRIES = 3             # retries on 429/5xx
+VISION_RETRY_BASE_DELAY = 2.0     # exponential backoff base (2s, 4s, 8s)
 FRAME_MAX_WIDTH = 1024
 PHASH_THRESHOLD = 8
 SCENE_DETECT_THRESHOLD = 0.3

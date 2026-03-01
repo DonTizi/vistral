@@ -1,12 +1,11 @@
 'use client';
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { api } from '@/lib/api';
 import { formatTime, cn, NODE_COLORS, SPEAKER_COLORS, RELATION_COLORS } from '@/lib/utils';
 import { useVideoSync } from '@/hooks/useVideoSync';
 import { Badge } from '@/components/ui/Badge';
-import { Card } from '@/components/ui/Card';
 import { VistralLogo } from '@/components/ui/VistralLogo';
 
 import type { JobResults, GraphNode, TranscriptSegment } from '@/lib/types';
@@ -16,6 +15,12 @@ const ForceGraph2D = dynamic(() => import('react-force-graph-2d'), { ssr: false 
 const TABS = ['Summary', 'Topics', 'Actions', 'Decisions', 'Contradictions', 'KPIs', 'Transcript', 'Graph'] as const;
 type Tab = typeof TABS[number];
 
+const PRIORITY_COLORS: Record<string, string> = {
+  high: '#EF4444',
+  medium: '#EAB308',
+  low: '#6B7280',
+};
+
 export default function AnalysisPage() {
   const params = useParams();
   const jobId = params.jobId as string;
@@ -24,6 +29,7 @@ export default function AnalysisPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>('Summary');
+  const [videoCollapsed, setVideoCollapsed] = useState(false);
   const { currentTime, seekTo, bindVideo } = useVideoSync();
   const transcriptRef = useRef<HTMLDivElement>(null);
 
@@ -64,7 +70,6 @@ export default function AnalysisPage() {
     return data.insights.topics.find(t => t.start_time <= currentTime && t.end_time > currentTime) || null;
   }, [data, currentTime]);
 
-  // Graph data for force graph
   const graphData = useMemo(() => {
     if (!data?.graph) return { nodes: [], links: [] };
     return {
@@ -101,9 +106,25 @@ export default function AnalysisPage() {
     return map;
   }, [data]);
 
+  const tabCounts = useMemo(() => {
+    if (!data) return {};
+    const { insights } = data;
+    return {
+      Topics: insights.topics.length,
+      Actions: insights.action_items.length,
+      Decisions: insights.decisions.length,
+      Contradictions: insights.contradictions.length,
+      KPIs: insights.kpis.length,
+    } as Record<string, number>;
+  }, [data]);
+
+  const handleSeek = useCallback((time: number) => {
+    seekTo(time);
+  }, [seekTo]);
+
   if (loading) return (
     <main className="min-h-screen flex items-center justify-center">
-      <div className="text-[#999999]">Loading analysis...</div>
+      <div className="text-[#777]">Loading analysis...</div>
     </main>
   );
 
@@ -120,91 +141,121 @@ export default function AnalysisPage() {
   const videoDuration = graph.metadata.duration_seconds;
 
   return (
-    <main className="h-screen flex flex-col overflow-hidden">
-      {/* Top Bar */}
-      <header className="flex items-center justify-between px-4 py-2.5 bg-[#1A1A1A] shrink-0 relative">
-        <a href="/" className="flex items-center gap-2.5">
-          <VistralLogo className="w-5 h-5" />
-          <span className="text-sm font-semibold tracking-wide"><span className="text-[#FA500F]">V</span>ISTRAL</span>
-        </a>
-        <div className="absolute bottom-0 left-0 right-0 h-px mistral-gradient-bar opacity-40" />
+    <main className="h-screen flex flex-col overflow-hidden bg-[#141414]">
+      {/* ── Header ── */}
+      <header className="flex items-center justify-between px-4 h-10 bg-[#1A1A1A] border-b border-[#2a2a2a] shrink-0">
+        <div className="flex items-center gap-3">
+          <a href="/" className="flex items-center gap-2">
+            <VistralLogo className="w-4 h-4" />
+            <span className="text-xs font-semibold tracking-wider text-[#999]"><span className="text-[#FA500F]">V</span>ISTRAL</span>
+          </a>
+          <div className="w-px h-4 bg-[#333]" />
+          <div className="flex items-center gap-2">
+            {currentSpeaker && (
+              <div className="flex items-center gap-1.5">
+                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: SPEAKER_COLORS[speakerList.indexOf(currentSpeaker) % SPEAKER_COLORS.length] }} />
+                <span className="text-xs text-[#ccc]">{currentSpeaker}</span>
+              </div>
+            )}
+            {currentTopic && (
+              <>
+                <span className="text-[#444] text-xs">/</span>
+                <span className="text-xs text-[#888]">{currentTopic.name}</span>
+              </>
+            )}
+          </div>
+        </div>
         <div className="flex items-center gap-2">
-          {currentSpeaker && <Badge color={SPEAKER_COLORS[speakerList.indexOf(currentSpeaker) % SPEAKER_COLORS.length]}>{currentSpeaker}</Badge>}
-          {currentTopic && <Badge color="#22C55E">{currentTopic.name}</Badge>}
-          {isDemo && <Badge color="#FA500F">Demo</Badge>}
+          <span className="text-[10px] text-[#555] font-mono">{formatTime(currentTime)} / {formatTime(videoDuration)}</span>
+          {isDemo && <span className="text-[10px] text-[#FA500F] font-medium px-1.5 py-0.5 rounded bg-[#FA500F]/10">DEMO</span>}
         </div>
       </header>
 
       <div className="flex flex-1 overflow-hidden">
-        {/* Left Panel: Video + Timeline */}
-        <div className="flex flex-col w-[55%] border-r border-[#333333]">
+        {/* ── Left Panel: Video + Timeline ── */}
+        <div className="flex flex-col w-[50%] border-r border-[#2a2a2a]">
           {/* Video */}
-          <div className="bg-black aspect-video relative shrink-0">
+          <div className={cn(
+            'bg-black relative shrink-0 transition-all duration-200',
+            videoCollapsed ? 'h-0 overflow-hidden' : 'aspect-video'
+          )}>
             {data.video_url ? (
               <video
                 ref={bindVideo}
-                src={data.video_url}
+                src={api.getVideoUrl(jobId)}
                 className="w-full h-full object-contain"
                 controls
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-[#666666]">
-                <div className="text-center space-y-1">
-                  <p className="text-sm">No video available (demo mode)</p>
-                  <p className="text-xs">Timeline navigation still works</p>
+              <div className="w-full h-full flex items-center justify-center text-[#444]">
+                <div className="text-center space-y-0.5">
+                  <p className="text-xs">No video available</p>
+                  <p className="text-[10px] text-[#333]">Timeline navigation still works</p>
                 </div>
               </div>
             )}
           </div>
 
+          {/* Collapse toggle */}
+          <button
+            onClick={() => setVideoCollapsed(!videoCollapsed)}
+            className="flex items-center justify-center h-5 bg-[#1A1A1A] border-b border-[#2a2a2a] hover:bg-[#222] transition-colors cursor-pointer"
+          >
+            <svg width="10" height="6" viewBox="0 0 10 6" className={cn('text-[#555] transition-transform', videoCollapsed && 'rotate-180')}>
+              <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+            </svg>
+          </button>
+
           {/* Timeline */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3">
-            <h3 className="text-sm font-medium text-[#999999]">Timeline</h3>
+          <div className="flex-1 overflow-y-auto p-3 space-y-2">
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-[10px] font-medium text-[#666] uppercase tracking-wider">Timeline</span>
+              <span className="text-[10px] text-[#444] font-mono">{formatTime(videoDuration)}</span>
+            </div>
 
             {/* Topics bar */}
-            <div className="relative h-8 bg-[#242424] rounded-lg overflow-hidden">
+            <div className="relative h-7 bg-[#1E1E1E] rounded overflow-hidden border border-[#2a2a2a]">
               {insights.topics.map((topic, i) => {
                 const left = (topic.start_time / videoDuration) * 100;
                 const width = ((topic.end_time - topic.start_time) / videoDuration) * 100;
                 return (
                   <div
                     key={i}
-                    className="absolute h-full cursor-pointer hover:brightness-125 transition-all"
+                    className="absolute h-full cursor-pointer hover:brightness-110 transition-all"
                     style={{
                       left: `${left}%`, width: `${width}%`,
-                      backgroundColor: `hsl(${(i * 60) % 360}, 50%, 35%)`,
+                      backgroundColor: `hsl(${(i * 60) % 360}, 40%, 28%)`,
                     }}
-                    onClick={() => seekTo(topic.start_time)}
+                    onClick={() => handleSeek(topic.start_time)}
                     title={topic.name}
                   >
-                    <span className="text-[10px] text-white px-1 truncate block leading-8">{topic.name}</span>
+                    <span className="text-[9px] text-[#bbb] px-1.5 truncate block leading-7 font-medium">{topic.name}</span>
                   </div>
                 );
               })}
-              {/* Playhead */}
               <div
-                className="absolute top-0 w-0.5 h-full bg-[#FA500F] z-10"
+                className="absolute top-0 w-0.5 h-full bg-[#FA500F] z-10 shadow-[0_0_4px_rgba(250,80,15,0.5)]"
                 style={{ left: `${(currentTime / videoDuration) * 100}%` }}
               />
             </div>
 
             {/* Speaker segments */}
             {speakerList.map((speaker, si) => (
-              <div key={speaker} className="space-y-1">
-                <span className="text-xs" style={{ color: SPEAKER_COLORS[si % SPEAKER_COLORS.length] }}>{speaker}</span>
-                <div className="relative h-4 bg-[#242424] rounded">
+              <div key={speaker} className="flex items-center gap-2">
+                <span className="text-[10px] w-20 truncate text-right shrink-0" style={{ color: SPEAKER_COLORS[si % SPEAKER_COLORS.length] + 'cc' }}>{speaker}</span>
+                <div className="relative h-3 flex-1 bg-[#1E1E1E] rounded-sm">
                   {(segmentsBySpeaker.get(speaker) ?? []).map((seg, i) => {
                     const left = (seg.start / videoDuration) * 100;
                     const width = ((seg.end - seg.start) / videoDuration) * 100;
                     return (
                       <div
                         key={i}
-                        className="absolute h-full rounded cursor-pointer hover:brightness-125"
+                        className="absolute h-full rounded-sm cursor-pointer hover:brightness-125"
                         style={{
-                          left: `${left}%`, width: `${Math.max(0.5, width)}%`,
-                          backgroundColor: SPEAKER_COLORS[si % SPEAKER_COLORS.length] + '80',
+                          left: `${left}%`, width: `${Math.max(0.4, width)}%`,
+                          backgroundColor: SPEAKER_COLORS[si % SPEAKER_COLORS.length] + '70',
                         }}
-                        onClick={() => seekTo(seg.start)}
+                        onClick={() => handleSeek(seg.start)}
                       />
                     );
                   })}
@@ -213,71 +264,95 @@ export default function AnalysisPage() {
             ))}
 
             {/* Events markers */}
-            <div className="space-y-1">
-              <span className="text-xs text-[#999999]">Events</span>
-              <div className="relative h-6 bg-[#242424] rounded">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] w-20 text-right text-[#666] shrink-0">Events</span>
+              <div className="relative h-3 flex-1 bg-[#1E1E1E] rounded-sm">
                 {graph.edges.filter(e => e.relation === 'contradicts').map((edge, i) => (
                   <div
                     key={i}
-                    className="absolute w-2 h-full bg-red-500 rounded cursor-pointer hover:bg-red-400"
+                    className="absolute w-1.5 h-full bg-red-500/80 rounded-sm cursor-pointer hover:bg-red-400"
                     style={{ left: `${(edge.timestamp / videoDuration) * 100}%` }}
-                    onClick={() => seekTo(edge.timestamp)}
+                    onClick={() => handleSeek(edge.timestamp)}
                     title="Contradiction"
                   />
                 ))}
                 {insights.decisions.map((d, i) => (
                   <div
                     key={`d${i}`}
-                    className="absolute w-2 h-full bg-yellow-500 rounded cursor-pointer hover:bg-yellow-400"
+                    className="absolute w-1.5 h-full bg-yellow-500/80 rounded-sm cursor-pointer hover:bg-yellow-400"
                     style={{ left: `${(d.timestamp / videoDuration) * 100}%` }}
-                    onClick={() => seekTo(d.timestamp)}
+                    onClick={() => handleSeek(d.timestamp)}
                     title={`Decision: ${d.description}`}
                   />
                 ))}
               </div>
             </div>
+
+            {/* Legend */}
+            <div className="flex items-center gap-3 pt-1">
+              <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-sm bg-red-500/80" /><span className="text-[9px] text-[#555]">Contradiction</span></div>
+              <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-sm bg-yellow-500/80" /><span className="text-[9px] text-[#555]">Decision</span></div>
+            </div>
           </div>
         </div>
 
-        {/* Right Panel: Insights */}
-        <div className="flex flex-col w-[45%] overflow-hidden">
-          {/* Tabs */}
-          <div className="flex gap-1 p-2 border-b border-[#333333] overflow-x-auto shrink-0">
-            {TABS.map(tab => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={cn(
-                  'px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors cursor-pointer',
-                  activeTab === tab ? 'bg-[#FA500F] text-white' : 'text-[#999999] hover:text-[#FFFAEB] hover:bg-[#242424]/80'
-                )}
-              >
-                {tab}
-                {tab === 'Contradictions' && insights.contradictions.length > 0 && (
-                  <span className="ml-1 text-[10px] bg-red-500/30 text-red-400 px-1 rounded">{insights.contradictions.length}</span>
-                )}
-              </button>
-            ))}
+        {/* ── Right Panel: Insights ── */}
+        <div className="flex flex-col w-[50%] overflow-hidden">
+          {/* Tabs — underline style */}
+          <div className="flex items-center border-b border-[#2a2a2a] shrink-0 bg-[#1A1A1A] px-1">
+            {TABS.map(tab => {
+              const count = tabCounts[tab];
+              const isActive = activeTab === tab;
+              return (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={cn(
+                    'relative px-3 py-2 text-[11px] font-medium whitespace-nowrap transition-colors cursor-pointer',
+                    isActive ? 'text-[#FFFAEB]' : 'text-[#666] hover:text-[#999]'
+                  )}
+                >
+                  {tab}
+                  {count !== undefined && count > 0 && (
+                    <span className={cn(
+                      'ml-1 text-[9px] font-mono',
+                      isActive ? 'text-[#FA500F]' : 'text-[#555]'
+                    )}>{count}</span>
+                  )}
+                  {isActive && <div className="absolute bottom-0 left-2 right-2 h-0.5 bg-[#FA500F] rounded-full" />}
+                </button>
+              );
+            })}
           </div>
 
           {/* Tab Content */}
-          <div className="flex-1 overflow-y-auto p-4">
+          <div className="flex-1 overflow-y-auto">
             {activeTab === 'Summary' && (
-              <div className="space-y-4">
-                <p className="text-sm leading-relaxed text-[#FFFAEB]">{insights.summary}</p>
-                <div className="grid grid-cols-2 gap-3">
-                  <Card><div className="text-center"><div className="text-2xl font-bold text-[#FA500F]">{insights.topics.length}</div><div className="text-xs text-[#999999]">Topics</div></div></Card>
-                  <Card><div className="text-center"><div className="text-2xl font-bold text-[#FA500F]">{insights.action_items.length}</div><div className="text-xs text-[#999999]">Action Items</div></div></Card>
-                  <Card><div className="text-center"><div className="text-2xl font-bold text-[#EAB308]">{insights.decisions.length}</div><div className="text-xs text-[#999999]">Decisions</div></div></Card>
-                  <Card><div className="text-center"><div className="text-2xl font-bold text-red-400">{insights.contradictions.length}</div><div className="text-xs text-[#999999]">Contradictions</div></div></Card>
+              <div className="p-4 space-y-4">
+                <p className="text-[13px] leading-relaxed text-[#ccc]">{insights.summary}</p>
+
+                {/* Stats row */}
+                <div className="grid grid-cols-4 gap-px bg-[#2a2a2a] rounded overflow-hidden">
+                  {[
+                    { label: 'Topics', value: insights.topics.length, color: '#22C55E' },
+                    { label: 'Actions', value: insights.action_items.length, color: '#FA500F' },
+                    { label: 'Decisions', value: insights.decisions.length, color: '#EAB308' },
+                    { label: 'Contradictions', value: insights.contradictions.length, color: '#EF4444' },
+                  ].map(stat => (
+                    <div key={stat.label} className="bg-[#1A1A1A] p-3 text-center">
+                      <div className="text-lg font-semibold" style={{ color: stat.color }}>{stat.value}</div>
+                      <div className="text-[10px] text-[#666] mt-0.5">{stat.label}</div>
+                    </div>
+                  ))}
                 </div>
+
                 {insights.key_quotes.length > 0 && (
-                  <div className="space-y-2">
-                    <h3 className="text-sm font-medium text-[#999999]">Key Quotes</h3>
+                  <div className="space-y-1.5">
+                    <h3 className="text-[10px] font-medium text-[#666] uppercase tracking-wider">Key Quotes</h3>
                     {insights.key_quotes.slice(0, 3).map((q, i) => (
-                      <div key={i} className="border-l-2 border-[#FA500F] pl-3 cursor-pointer hover:bg-[#242424] rounded-r p-2" onClick={() => seekTo(q.timestamp)}>
-                        <p className="text-sm italic text-[#FFFAEB]">&ldquo;{q.quote}&rdquo;</p>
-                        <p className="text-xs text-[#999999] mt-1">{q.speaker} &middot; {formatTime(q.timestamp)}</p>
+                      <div key={i} className="border-l-2 border-[#333] pl-3 py-1.5 cursor-pointer hover:border-[#FA500F] hover:bg-[#1E1E1E] transition-colors rounded-r" onClick={() => handleSeek(q.timestamp)}>
+                        <p className="text-[12px] text-[#bbb] italic">&ldquo;{q.quote}&rdquo;</p>
+                        <p className="text-[10px] text-[#555] mt-0.5">{q.speaker} &middot; {formatTime(q.timestamp)}</p>
                       </div>
                     ))}
                   </div>
@@ -286,118 +361,159 @@ export default function AnalysisPage() {
             )}
 
             {activeTab === 'Topics' && (
-              <div className="space-y-3">
+              <div className="divide-y divide-[#2a2a2a]">
                 {insights.topics.map((topic, i) => (
-                  <Card key={i} onClick={() => seekTo(topic.start_time)}>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-sm">{topic.name}</span>
-                        <span className="text-xs text-[#999999]">{formatTime(topic.start_time)} - {formatTime(topic.end_time)}</span>
-                      </div>
-                      <ul className="space-y-1">
-                        {topic.key_points.map((p, j) => (
-                          <li key={j} className="text-xs text-[#999999] flex gap-2"><span className="text-[#FA500F]">-</span>{p}</li>
-                        ))}
-                      </ul>
-                      <div className="flex gap-1 flex-wrap">
-                        {topic.speakers_involved.map(s => (
-                          <Badge key={s} color={SPEAKER_COLORS[speakerList.indexOf(s) % SPEAKER_COLORS.length]}>{s}</Badge>
-                        ))}
-                      </div>
+                  <div
+                    key={i}
+                    className="px-4 py-3 cursor-pointer hover:bg-[#1E1E1E] transition-colors"
+                    onClick={() => handleSeek(topic.start_time)}
+                  >
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-[13px] font-medium text-[#ddd]">{topic.name}</span>
+                      <span className="text-[10px] text-[#555] font-mono">{formatTime(topic.start_time)} – {formatTime(topic.end_time)}</span>
                     </div>
-                  </Card>
+                    <ul className="space-y-0.5 mb-2">
+                      {topic.key_points.map((p, j) => (
+                        <li key={j} className="text-[11px] text-[#888] flex gap-1.5">
+                          <span className="text-[#555] shrink-0">&#8226;</span>
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="flex gap-1.5">
+                      {topic.speakers_involved.map(s => (
+                        <Badge key={s} size="sm" color={SPEAKER_COLORS[speakerList.indexOf(s) % SPEAKER_COLORS.length]}>{s}</Badge>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             )}
 
             {activeTab === 'Actions' && (
-              <div className="space-y-3">
-                {insights.action_items.map((item, i) => (
-                  <Card key={i} onClick={() => item.evidence[0] && seekTo(item.evidence[0].timestamp)}>
-                    <div className="space-y-2">
-                      <div className="flex items-start justify-between gap-2">
-                        <span className="text-sm font-medium">{item.description}</span>
-                        <Badge color={item.priority === 'high' ? '#EF4444' : item.priority === 'medium' ? '#EAB308' : '#22C55E'}>{item.priority}</Badge>
+              <div>
+                {/* Header row */}
+                <div className="flex items-center px-4 py-1.5 bg-[#1A1A1A] border-b border-[#2a2a2a] text-[9px] text-[#555] uppercase tracking-wider font-medium">
+                  <span className="flex-1">Action Item</span>
+                  <span className="w-24 text-center">Assignee</span>
+                  <span className="w-16 text-center">Priority</span>
+                </div>
+                <div className="divide-y divide-[#222]">
+                  {insights.action_items.map((item, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start px-4 py-2.5 cursor-pointer hover:bg-[#1E1E1E] transition-colors"
+                      onClick={() => item.evidence[0] && handleSeek(item.evidence[0].timestamp)}
+                    >
+                      <div className="flex-1 min-w-0 pr-3">
+                        <p className="text-[12px] text-[#ddd] leading-snug">{item.description}</p>
+                        {item.evidence[0] && (
+                          <p className="text-[10px] text-[#555] mt-1 truncate italic">&ldquo;{item.evidence[0].quote}&rdquo; &middot; {formatTime(item.evidence[0].timestamp)}</p>
+                        )}
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-[#999999]">
-                        <span>Assigned to: <span className="text-[#FFFAEB]">{item.assignee}</span></span>
+                      <span className="w-24 text-center text-[11px] text-[#888] shrink-0">{item.assignee}</span>
+                      <div className="w-16 flex justify-center shrink-0">
+                        <span
+                          className="text-[10px] font-medium px-1.5 py-0.5 rounded"
+                          style={{
+                            color: PRIORITY_COLORS[item.priority],
+                            backgroundColor: PRIORITY_COLORS[item.priority] + '15',
+                          }}
+                        >
+                          {item.priority}
+                        </span>
                       </div>
-                      {item.evidence[0] && (
-                        <p className="text-xs text-[#666666] italic">&ldquo;{item.evidence[0].quote}&rdquo; - {formatTime(item.evidence[0].timestamp)}</p>
-                      )}
                     </div>
-                  </Card>
-                ))}
-                {insights.action_items.length === 0 && <p className="text-sm text-[#666666]">No action items detected</p>}
+                  ))}
+                  {insights.action_items.length === 0 && <p className="text-[12px] text-[#555] p-4">No action items detected</p>}
+                </div>
               </div>
             )}
 
             {activeTab === 'Decisions' && (
-              <div className="space-y-3">
+              <div className="divide-y divide-[#2a2a2a]">
                 {insights.decisions.map((d, i) => (
-                  <Card key={i} onClick={() => seekTo(d.timestamp)}>
-                    <div className="space-y-2">
-                      <span className="text-sm font-medium">{d.description}</span>
-                      <div className="text-xs text-[#999999]">
-                        <span>By <span className="text-[#FFFAEB]">{d.made_by}</span> at {formatTime(d.timestamp)}</span>
+                  <div
+                    key={i}
+                    className="px-4 py-3 cursor-pointer hover:bg-[#1E1E1E] transition-colors"
+                    onClick={() => handleSeek(d.timestamp)}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-[12px] text-[#ddd] font-medium leading-snug">{d.description}</p>
+                        <p className="text-[11px] text-[#666] mt-1">{d.context}</p>
                       </div>
-                      <p className="text-xs text-[#666666]">{d.context}</p>
+                      <div className="text-right shrink-0">
+                        <span className="text-[11px] text-[#888]">{d.made_by}</span>
+                        <div className="text-[10px] text-[#555] font-mono">{formatTime(d.timestamp)}</div>
+                      </div>
                     </div>
-                  </Card>
+                  </div>
                 ))}
-                {insights.decisions.length === 0 && <p className="text-sm text-[#666666]">No decisions detected</p>}
+                {insights.decisions.length === 0 && <p className="text-[12px] text-[#555] p-4">No decisions detected</p>}
               </div>
             )}
 
             {activeTab === 'Contradictions' && (
-              <div className="space-y-3">
+              <div className="divide-y divide-[#2a2a2a]">
                 {insights.contradictions.map((c, i) => (
-                  <Card key={i} className="border-red-500/30">
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2">
-                        <Badge color="#EF4444">{c.severity}</Badge>
-                        <span className="text-sm font-medium">{c.description}</span>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-[#1A1A1A] rounded-lg p-3 cursor-pointer hover:bg-[#2a2a2a]" onClick={() => seekTo(c.claim_a.timestamp)}>
-                          <div className="text-xs text-[#999999] mb-1">Claim A ({c.claim_a.source_type})</div>
-                          <p className="text-xs text-[#FFFAEB] italic">&ldquo;{c.claim_a.quote}&rdquo;</p>
-                          <p className="text-[10px] text-[#666666] mt-1">{c.claim_a.source} &middot; {formatTime(c.claim_a.timestamp)}</p>
-                        </div>
-                        <div className="bg-[#1A1A1A] rounded-lg p-3 cursor-pointer hover:bg-[#2a2a2a]" onClick={() => seekTo(c.claim_b.timestamp)}>
-                          <div className="text-xs text-[#999999] mb-1">Claim B ({c.claim_b.source_type})</div>
-                          <p className="text-xs text-[#FFFAEB] italic">&ldquo;{c.claim_b.quote}&rdquo;</p>
-                          <p className="text-[10px] text-[#666666] mt-1">{c.claim_b.source} &middot; {formatTime(c.claim_b.timestamp)}</p>
-                        </div>
-                      </div>
-                      <p className="text-xs text-[#FA500F]">{c.explanation}</p>
+                  <div key={i} className="px-4 py-3">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: PRIORITY_COLORS[c.severity] }} />
+                      <span className="text-[12px] text-[#ddd] font-medium">{c.description}</span>
+                      <span className="text-[9px] text-[#555] uppercase tracking-wide">{c.severity}</span>
                     </div>
-                  </Card>
+                    <div className="grid grid-cols-2 gap-2 mb-2">
+                      <div className="bg-[#1A1A1A] border border-[#2a2a2a] rounded p-2.5 cursor-pointer hover:border-[#333] transition-colors" onClick={() => handleSeek(c.claim_a.timestamp)}>
+                        <div className="text-[9px] text-[#555] uppercase tracking-wide mb-1">Claim A &middot; {c.claim_a.source_type}</div>
+                        <p className="text-[11px] text-[#bbb] italic leading-snug">&ldquo;{c.claim_a.quote}&rdquo;</p>
+                        <p className="text-[9px] text-[#444] mt-1 font-mono">{c.claim_a.source} &middot; {formatTime(c.claim_a.timestamp)}</p>
+                      </div>
+                      <div className="bg-[#1A1A1A] border border-[#2a2a2a] rounded p-2.5 cursor-pointer hover:border-[#333] transition-colors" onClick={() => handleSeek(c.claim_b.timestamp)}>
+                        <div className="text-[9px] text-[#555] uppercase tracking-wide mb-1">Claim B &middot; {c.claim_b.source_type}</div>
+                        <p className="text-[11px] text-[#bbb] italic leading-snug">&ldquo;{c.claim_b.quote}&rdquo;</p>
+                        <p className="text-[9px] text-[#444] mt-1 font-mono">{c.claim_b.source} &middot; {formatTime(c.claim_b.timestamp)}</p>
+                      </div>
+                    </div>
+                    <p className="text-[11px] text-[#FA500F]/80">{c.explanation}</p>
+                  </div>
                 ))}
-                {insights.contradictions.length === 0 && <p className="text-sm text-[#666666]">No contradictions detected</p>}
+                {insights.contradictions.length === 0 && <p className="text-[12px] text-[#555] p-4">No contradictions detected</p>}
               </div>
             )}
 
             {activeTab === 'KPIs' && (
-              <div className="space-y-3">
-                {insights.kpis.map((kpi, i) => (
-                  <Card key={i} onClick={() => seekTo(kpi.timestamp)}>
-                    <div className="space-y-1">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium text-[#FA500F]">{kpi.name}</span>
-                        <span className="text-sm font-bold">{kpi.value}</span>
+              <div>
+                <div className="flex items-center px-4 py-1.5 bg-[#1A1A1A] border-b border-[#2a2a2a] text-[9px] text-[#555] uppercase tracking-wider font-medium">
+                  <span className="flex-1">Metric</span>
+                  <span className="w-28 text-right">Value</span>
+                  <span className="w-24 text-right">Source</span>
+                </div>
+                <div className="divide-y divide-[#222]">
+                  {insights.kpis.map((kpi, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center px-4 py-2.5 cursor-pointer hover:bg-[#1E1E1E] transition-colors"
+                      onClick={() => handleSeek(kpi.timestamp)}
+                    >
+                      <div className="flex-1 min-w-0">
+                        <span className="text-[12px] text-[#ddd]">{kpi.name}</span>
+                        <p className="text-[10px] text-[#555] truncate mt-0.5">{kpi.context}</p>
                       </div>
-                      <p className="text-xs text-[#999999]">{kpi.context}</p>
-                      <p className="text-xs text-[#666666]">Mentioned by {kpi.mentioned_by} at {formatTime(kpi.timestamp)}</p>
+                      <span className="w-28 text-right text-[13px] font-semibold text-[#FA500F] shrink-0 font-mono">{kpi.value}</span>
+                      <div className="w-24 text-right shrink-0">
+                        <span className="text-[10px] text-[#666]">{kpi.mentioned_by}</span>
+                        <div className="text-[9px] text-[#444] font-mono">{formatTime(kpi.timestamp)}</div>
+                      </div>
                     </div>
-                  </Card>
-                ))}
-                {insights.kpis.length === 0 && <p className="text-sm text-[#666666]">No KPIs detected</p>}
+                  ))}
+                  {insights.kpis.length === 0 && <p className="text-[12px] text-[#555] p-4">No KPIs detected</p>}
+                </div>
               </div>
             )}
 
             {activeTab === 'Transcript' && (
-              <div ref={transcriptRef} className="space-y-1">
+              <div ref={transcriptRef} className="divide-y divide-[#1E1E1E]">
                 {transcript.map((seg, i) => {
                   const isActive = seg.start <= currentTime && seg.end > currentTime;
                   const si = speakerList.indexOf(seg.speaker);
@@ -405,18 +521,16 @@ export default function AnalysisPage() {
                     <div
                       key={i}
                       className={cn(
-                        'flex gap-3 p-2 rounded-lg cursor-pointer transition-colors',
-                        isActive ? 'bg-[#FA500F]/10 border border-[#FA500F]/30' : 'hover:bg-[#242424]'
+                        'flex gap-3 px-4 py-2 cursor-pointer transition-colors',
+                        isActive ? 'bg-[#FA500F]/8 border-l-2 border-[#FA500F]' : 'hover:bg-[#1E1E1E] border-l-2 border-transparent'
                       )}
-                      onClick={() => seekTo(seg.start)}
+                      onClick={() => handleSeek(seg.start)}
                     >
-                      <div className="shrink-0 w-16 text-right">
-                        <span className="text-[10px] text-[#666666] font-mono">{formatTime(seg.start)}</span>
+                      <span className="text-[10px] text-[#444] font-mono w-10 text-right shrink-0 pt-0.5">{formatTime(seg.start)}</span>
+                      <div className="shrink-0 w-16">
+                        <span className="text-[10px] font-medium" style={{ color: SPEAKER_COLORS[si % SPEAKER_COLORS.length] }}>{seg.speaker}</span>
                       </div>
-                      <div className="shrink-0">
-                        <Badge color={SPEAKER_COLORS[si % SPEAKER_COLORS.length]}>{seg.speaker}</Badge>
-                      </div>
-                      <p className="text-sm text-[#FFFAEB] leading-relaxed">{seg.text}</p>
+                      <p className="text-[12px] text-[#bbb] leading-relaxed">{seg.text}</p>
                     </div>
                   );
                 })}
@@ -424,13 +538,13 @@ export default function AnalysisPage() {
             )}
 
             {activeTab === 'Graph' && (
-              <div className="h-[calc(100vh-180px)] bg-[#1A1A1A] rounded-xl border border-[#333333] overflow-hidden relative">
+              <div className="h-[calc(100vh-88px)] bg-[#141414] relative">
                 {/* Legend */}
-                <div className="absolute top-3 left-3 z-10 bg-[#242424]/90 rounded-lg p-2 space-y-1">
+                <div className="absolute top-3 left-3 z-10 bg-[#1A1A1A]/95 border border-[#2a2a2a] rounded p-2 space-y-1">
                   {Object.entries(NODE_COLORS).map(([type, color]) => (
-                    <div key={type} className="flex items-center gap-2">
-                      <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: color }} />
-                      <span className="text-[10px] text-[#999999] capitalize">{type}</span>
+                    <div key={type} className="flex items-center gap-1.5">
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
+                      <span className="text-[9px] text-[#666] capitalize">{type}</span>
                     </div>
                   ))}
                 </div>
@@ -444,31 +558,27 @@ export default function AnalysisPage() {
                   linkDirectionalArrowLength={4}
                   linkDirectionalArrowRelPos={1}
                   linkWidth={1.5}
-                  backgroundColor="#1A1A1A"
+                  backgroundColor="#141414"
                   nodeCanvasObject={(node: any, ctx: CanvasRenderingContext2D, globalScale: number) => {
                     const label = node.label;
                     const fontSize = 11 / globalScale;
                     ctx.font = `${fontSize}px Inter, system-ui, sans-serif`;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-
-                    // Draw node circle
                     const r = Math.sqrt(node.val) * 2;
                     ctx.beginPath();
                     ctx.arc(node.x, node.y, r, 0, 2 * Math.PI);
                     ctx.fillStyle = node.color;
                     ctx.fill();
-
-                    // Draw label
-                    ctx.fillStyle = '#FFFAEB';
+                    ctx.fillStyle = '#ccc';
                     ctx.fillText(label, node.x, node.y + r + fontSize);
                   }}
                   onNodeClick={(node: any) => {
                     const graphNode = data.graph.nodes.find((n: GraphNode) => n.id === node.id);
-                    if (graphNode) seekTo(graphNode.first_seen);
+                    if (graphNode) handleSeek(graphNode.first_seen);
                   }}
-                  width={typeof window !== 'undefined' ? window.innerWidth * 0.45 - 40 : 600}
-                  height={typeof window !== 'undefined' ? window.innerHeight - 200 : 500}
+                  width={typeof window !== 'undefined' ? window.innerWidth * 0.5 - 20 : 600}
+                  height={typeof window !== 'undefined' ? window.innerHeight - 100 : 500}
                 />
               </div>
             )}

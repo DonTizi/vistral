@@ -1,5 +1,6 @@
 """Transcribe audio using Voxtral API with speaker diarization."""
 
+import json
 import logging
 from pathlib import Path
 
@@ -33,7 +34,8 @@ async def transcribe(audio_path: Path) -> list[TranscriptSegment]:
                 data={
                     "model": MODEL_ASR,
                     "response_format": "verbose_json",
-                    "timestamp_granularities": '["segment","word"]',
+                    "timestamp_granularities[]": "segment",
+                    "diarize": "true",
                 },
             )
 
@@ -41,6 +43,7 @@ async def transcribe(audio_path: Path) -> list[TranscriptSegment]:
         raise RuntimeError(f"Voxtral transcription failed ({resp.status_code}): {resp.text[:500]}")
 
     data = resp.json()
+    logger.debug("Voxtral raw response: %s", json.dumps(data, indent=2)[:2000])
     segments: list[TranscriptSegment] = []
 
     # Voxtral returns segments with speaker labels when diarization is available
@@ -59,7 +62,13 @@ async def transcribe(audio_path: Path) -> list[TranscriptSegment]:
         return segments
 
     for seg in raw_segments:
-        speaker = seg.get("speaker") or "Speaker A"
+        # Voxtral may use "speaker", "speaker_label", or "speaker_id"
+        speaker = (
+            seg.get("speaker")
+            or seg.get("speaker_label")
+            or seg.get("speaker_id")
+            or "Speaker A"
+        )
 
         segments.append(TranscriptSegment(
             speaker=speaker,
