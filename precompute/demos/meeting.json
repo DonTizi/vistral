@@ -1,90 +1,803 @@
 {
   "job_id": "demo-meeting",
   "status": "completed",
-  "video_url": null,
+  "video_url": "https://www.youtube.com/watch?v=VjBSIMVVQkY",
   "transcript": [
-    {"speaker": "Alice Chen", "text": "Good morning everyone. Let's start with the Q3 budget review. As you know, we've had a strong quarter.", "start": 0.0, "end": 8.5},
-    {"speaker": "Alice Chen", "text": "Revenue grew 18% year-over-year, which exceeded our initial targets.", "start": 8.5, "end": 14.2},
-    {"speaker": "Bob Martinez", "text": "That's great news. On the engineering side, we shipped 3 major features and reduced our bug backlog by 40%.", "start": 15.0, "end": 23.5},
-    {"speaker": "Alice Chen", "text": "Excellent. Now let's look at the slide. Here's our revenue breakdown by region.", "start": 24.0, "end": 30.0},
-    {"speaker": "Alice Chen", "text": "North America accounts for 62% of revenue, EMEA at 25%, and APAC at 13%.", "start": 30.0, "end": 38.0},
-    {"speaker": "Carol Zhang", "text": "I want to flag something. The slide shows revenue growth at 8% year-over-year, but Alice just mentioned 18%. Can we clarify?", "start": 40.0, "end": 50.5},
-    {"speaker": "Alice Chen", "text": "Good catch Carol. The 18% is the total company growth including the acquisition. The slide shows organic growth at 8%.", "start": 51.0, "end": 60.0},
-    {"speaker": "Bob Martinez", "text": "That's an important distinction. We should make sure our investor deck is consistent about this.", "start": 61.0, "end": 68.0},
-    {"speaker": "Alice Chen", "text": "Agreed. Bob, can you take an action item to align the investor deck with these numbers by Friday?", "start": 69.0, "end": 76.0},
-    {"speaker": "Bob Martinez", "text": "Sure, I'll have that updated by end of day Thursday.", "start": 77.0, "end": 81.0},
-    {"speaker": "Alice Chen", "text": "Now let's discuss the marketing budget. We're proposing a 15% increase for Q4.", "start": 85.0, "end": 93.0},
-    {"speaker": "Carol Zhang", "text": "What's the expected ROI on that increase? Last quarter our CAC went up by 20%.", "start": 94.0, "end": 101.0},
-    {"speaker": "Alice Chen", "text": "Great question. We expect the additional spend to bring CAC back down to $45 from the current $52. Our target is a 3x return.", "start": 102.0, "end": 113.0},
-    {"speaker": "Bob Martinez", "text": "The engineering team will need an additional headcount of 5 to support the new campaigns infrastructure.", "start": 114.0, "end": 122.0},
-    {"speaker": "Alice Chen", "text": "That's already budgeted. Let's move to hiring. We have 12 open positions across the company.", "start": 123.0, "end": 131.0},
-    {"speaker": "Carol Zhang", "text": "On the hiring front, we've closed 8 positions this quarter. Average time-to-hire is 34 days, down from 42.", "start": 132.0, "end": 142.0},
-    {"speaker": "Alice Chen", "text": "Impressive improvement. Let's set a target of 28 days for Q4. Carol, can you own that?", "start": 143.0, "end": 151.0},
-    {"speaker": "Carol Zhang", "text": "Absolutely. I'll put together a plan to streamline our interview process.", "start": 152.0, "end": 158.0},
-    {"speaker": "Bob Martinez", "text": "One more thing on the technical side. Our cloud costs are projected to increase 25% next quarter due to the new ML pipeline.", "start": 160.0, "end": 172.0},
-    {"speaker": "Alice Chen", "text": "That's concerning. Can we optimize before that hits?", "start": 173.0, "end": 177.0},
-    {"speaker": "Bob Martinez", "text": "We've already identified $15K in monthly savings through right-sizing. I'll present the full optimization plan next week.", "start": 178.0, "end": 188.0},
-    {"speaker": "Alice Chen", "text": "Perfect. Let's make the decision now: we approve the 15% marketing budget increase for Q4, contingent on the ROI targets Carol outlined.", "start": 190.0, "end": 202.0},
-    {"speaker": "Carol Zhang", "text": "I'd like to also propose we invest in a new analytics dashboard. Current reporting takes 3 hours per week manually.", "start": 205.0, "end": 215.0},
-    {"speaker": "Bob Martinez", "text": "We can build that in-house. Estimated 2 sprints, about 4 weeks with the current team.", "start": 216.0, "end": 224.0},
-    {"speaker": "Alice Chen", "text": "Approved. Bob, add it to the Q4 roadmap. Let's wrap up. Great meeting everyone. Key takeaways: marketing budget approved, investor deck needs updating, hiring target is 28 days, and we're building the analytics dashboard.", "start": 225.0, "end": 245.0},
-    {"speaker": "Bob Martinez", "text": "Clear. I'll send meeting notes by end of day.", "start": 246.0, "end": 250.0},
-    {"speaker": "Carol Zhang", "text": "Thanks everyone. See you next week.", "start": 251.0, "end": 254.0}
+    {
+      "speaker": "Alice Chen",
+      "text": "Good morning everyone. Let's start with the Q3 budget review. As you know, we've had a strong quarter.",
+      "start": 0.0,
+      "end": 8.5
+    },
+    {
+      "speaker": "Alice Chen",
+      "text": "Revenue grew 18% year-over-year, which exceeded our initial targets.",
+      "start": 8.5,
+      "end": 14.2
+    },
+    {
+      "speaker": "Bob Martinez",
+      "text": "That's great news. On the engineering side, we shipped 3 major features and reduced our bug backlog by 40%.",
+      "start": 15.0,
+      "end": 23.5
+    },
+    {
+      "speaker": "Alice Chen",
+      "text": "Excellent. Now let's look at the slide. Here's our revenue breakdown by region.",
+      "start": 24.0,
+      "end": 30.0
+    },
+    {
+      "speaker": "Alice Chen",
+      "text": "North America accounts for 62% of revenue, EMEA at 25%, and APAC at 13%.",
+      "start": 30.0,
+      "end": 38.0
+    },
+    {
+      "speaker": "Carol Zhang",
+      "text": "I want to flag something. The slide shows revenue growth at 8% year-over-year, but Alice just mentioned 18%. Can we clarify?",
+      "start": 40.0,
+      "end": 50.5
+    },
+    {
+      "speaker": "Alice Chen",
+      "text": "Good catch Carol. The 18% is the total company growth including the acquisition. The slide shows organic growth at 8%.",
+      "start": 51.0,
+      "end": 60.0
+    },
+    {
+      "speaker": "Bob Martinez",
+      "text": "That's an important distinction. We should make sure our investor deck is consistent about this.",
+      "start": 61.0,
+      "end": 68.0
+    },
+    {
+      "speaker": "Alice Chen",
+      "text": "Agreed. Bob, can you take an action item to align the investor deck with these numbers by Friday?",
+      "start": 69.0,
+      "end": 76.0
+    },
+    {
+      "speaker": "Bob Martinez",
+      "text": "Sure, I'll have that updated by end of day Thursday.",
+      "start": 77.0,
+      "end": 81.0
+    },
+    {
+      "speaker": "Alice Chen",
+      "text": "Now let's discuss the marketing budget. We're proposing a 15% increase for Q4.",
+      "start": 85.0,
+      "end": 93.0
+    },
+    {
+      "speaker": "Carol Zhang",
+      "text": "What's the expected ROI on that increase? Last quarter our CAC went up by 20%.",
+      "start": 94.0,
+      "end": 101.0
+    },
+    {
+      "speaker": "Alice Chen",
+      "text": "Great question. We expect the additional spend to bring CAC back down to $45 from the current $52. Our target is a 3x return.",
+      "start": 102.0,
+      "end": 113.0
+    },
+    {
+      "speaker": "Bob Martinez",
+      "text": "The engineering team will need an additional headcount of 5 to support the new campaigns infrastructure.",
+      "start": 114.0,
+      "end": 122.0
+    },
+    {
+      "speaker": "Alice Chen",
+      "text": "That's already budgeted. Let's move to hiring. We have 12 open positions across the company.",
+      "start": 123.0,
+      "end": 131.0
+    },
+    {
+      "speaker": "Carol Zhang",
+      "text": "On the hiring front, we've closed 8 positions this quarter. Average time-to-hire is 34 days, down from 42.",
+      "start": 132.0,
+      "end": 142.0
+    },
+    {
+      "speaker": "Alice Chen",
+      "text": "Impressive improvement. Let's set a target of 28 days for Q4. Carol, can you own that?",
+      "start": 143.0,
+      "end": 151.0
+    },
+    {
+      "speaker": "Carol Zhang",
+      "text": "Absolutely. I'll put together a plan to streamline our interview process.",
+      "start": 152.0,
+      "end": 158.0
+    },
+    {
+      "speaker": "Bob Martinez",
+      "text": "One more thing on the technical side. Our cloud costs are projected to increase 25% next quarter due to the new ML pipeline.",
+      "start": 160.0,
+      "end": 172.0
+    },
+    {
+      "speaker": "Alice Chen",
+      "text": "That's concerning. Can we optimize before that hits?",
+      "start": 173.0,
+      "end": 177.0
+    },
+    {
+      "speaker": "Bob Martinez",
+      "text": "We've already identified $15K in monthly savings through right-sizing. I'll present the full optimization plan next week.",
+      "start": 178.0,
+      "end": 188.0
+    },
+    {
+      "speaker": "Alice Chen",
+      "text": "Perfect. Let's make the decision now: we approve the 15% marketing budget increase for Q4, contingent on the ROI targets Carol outlined.",
+      "start": 190.0,
+      "end": 202.0
+    },
+    {
+      "speaker": "Carol Zhang",
+      "text": "I'd like to also propose we invest in a new analytics dashboard. Current reporting takes 3 hours per week manually.",
+      "start": 205.0,
+      "end": 215.0
+    },
+    {
+      "speaker": "Bob Martinez",
+      "text": "We can build that in-house. Estimated 2 sprints, about 4 weeks with the current team.",
+      "start": 216.0,
+      "end": 224.0
+    },
+    {
+      "speaker": "Alice Chen",
+      "text": "Approved. Bob, add it to the Q4 roadmap. Let's wrap up. Great meeting everyone. Key takeaways: marketing budget approved, investor deck needs updating, hiring target is 28 days, and we're building the analytics dashboard.",
+      "start": 225.0,
+      "end": 245.0
+    },
+    {
+      "speaker": "Bob Martinez",
+      "text": "Clear. I'll send meeting notes by end of day.",
+      "start": 246.0,
+      "end": 250.0
+    },
+    {
+      "speaker": "Carol Zhang",
+      "text": "Thanks everyone. See you next week.",
+      "start": 251.0,
+      "end": 254.0
+    }
   ],
   "graph": {
     "nodes": [
-      {"id": "speaker_0", "type": "speaker", "label": "Alice Chen", "first_seen": 0.0, "last_seen": 245.0, "attributes": {"role": "CEO / Meeting Lead", "key_contributions": ["Led Q3 review", "Approved marketing budget", "Set hiring targets"]}},
-      {"id": "speaker_1", "type": "speaker", "label": "Bob Martinez", "first_seen": 15.0, "last_seen": 250.0, "attributes": {"role": "VP Engineering", "key_contributions": ["Reported engineering metrics", "Identified cloud cost savings", "Committed to analytics dashboard"]}},
-      {"id": "speaker_2", "type": "speaker", "label": "Carol Zhang", "first_seen": 40.0, "last_seen": 254.0, "attributes": {"role": "VP Operations / HR", "key_contributions": ["Flagged revenue discrepancy", "Reported hiring improvements", "Proposed analytics dashboard"]}},
-      {"id": "topic_0", "type": "topic", "label": "Q3 Revenue Review", "first_seen": 0.0, "last_seen": 68.0, "attributes": {"key_points": ["18% total revenue growth (incl. acquisition)", "8% organic growth", "NA 62%, EMEA 25%, APAC 13%"], "speakers_involved": ["speaker_0", "speaker_1", "speaker_2"]}},
-      {"id": "topic_1", "type": "topic", "label": "Marketing Budget Q4", "first_seen": 85.0, "last_seen": 131.0, "attributes": {"key_points": ["15% budget increase proposed and approved", "Target CAC: $45 (from $52)", "Expected 3x ROI"], "speakers_involved": ["speaker_0", "speaker_2"]}},
-      {"id": "topic_2", "type": "topic", "label": "Hiring & Operations", "first_seen": 131.0, "last_seen": 158.0, "attributes": {"key_points": ["8 positions closed in Q3", "Time-to-hire improved: 42 -> 34 days", "Q4 target: 28 days"], "speakers_involved": ["speaker_0", "speaker_2"]}},
-      {"id": "topic_3", "type": "topic", "label": "Cloud Costs & Technical", "first_seen": 160.0, "last_seen": 188.0, "attributes": {"key_points": ["25% cloud cost increase projected", "$15K monthly savings identified", "ML pipeline driving costs"], "speakers_involved": ["speaker_0", "speaker_1"]}},
-      {"id": "topic_4", "type": "topic", "label": "Analytics Dashboard", "first_seen": 205.0, "last_seen": 245.0, "attributes": {"key_points": ["Current reporting: 3 hours/week manual", "Build in-house: 2 sprints (~4 weeks)", "Approved for Q4 roadmap"], "speakers_involved": ["speaker_0", "speaker_1", "speaker_2"]}},
-      {"id": "kpi_0", "type": "kpi", "label": "Revenue Growth: 18% (total)", "first_seen": 8.5, "last_seen": 60.0, "attributes": {"name": "Revenue Growth (Total)", "value": "18% YoY", "context": "Includes acquisition revenue"}},
-      {"id": "kpi_1", "type": "kpi", "label": "Revenue Growth: 8% (organic)", "first_seen": 40.0, "last_seen": 60.0, "attributes": {"name": "Revenue Growth (Organic)", "value": "8% YoY", "context": "Excluding acquisition"}},
-      {"id": "kpi_2", "type": "kpi", "label": "Bug Backlog: -40%", "first_seen": 15.0, "last_seen": 23.5, "attributes": {"name": "Bug Backlog Reduction", "value": "40%", "context": "Q3 engineering achievement"}},
-      {"id": "kpi_3", "type": "kpi", "label": "CAC: $52 -> $45 target", "first_seen": 102.0, "last_seen": 113.0, "attributes": {"name": "Customer Acquisition Cost", "value": "$52 current, $45 target", "context": "Marketing efficiency metric"}},
-      {"id": "kpi_4", "type": "kpi", "label": "Time-to-Hire: 34 days", "first_seen": 132.0, "last_seen": 151.0, "attributes": {"name": "Time-to-Hire", "value": "34 days (from 42)", "context": "Q3 improvement, Q4 target 28 days"}},
-      {"id": "kpi_5", "type": "kpi", "label": "Cloud Costs: +25% projected", "first_seen": 160.0, "last_seen": 188.0, "attributes": {"name": "Cloud Cost Increase", "value": "+25%", "context": "Due to new ML pipeline"}},
-      {"id": "slide_0", "type": "slide", "label": "Q3 Revenue Breakdown", "first_seen": 24.0, "last_seen": 50.5, "attributes": {"ocr_text": ["Q3 Revenue Overview", "Revenue Growth: +8% YoY", "North America: 62%", "EMEA: 25%", "APAC: 13%"], "scene_description": "Presentation slide showing Q3 revenue breakdown by region with bar chart"}},
-      {"id": "slide_1", "type": "slide", "label": "Q4 Marketing Budget Proposal", "first_seen": 85.0, "last_seen": 113.0, "attributes": {"ocr_text": ["Q4 Marketing Budget", "Proposed Increase: 15%", "Target CAC: $45", "Expected ROI: 3x"], "scene_description": "Slide showing marketing budget proposal with ROI projections"}},
-      {"id": "slide_2", "type": "slide", "label": "Hiring Dashboard", "first_seen": 132.0, "last_seen": 158.0, "attributes": {"ocr_text": ["Hiring Dashboard", "Open Positions: 12", "Closed Q3: 8", "Avg Time-to-Hire: 34 days"], "scene_description": "Dashboard slide showing hiring metrics and pipeline"}},
-      {"id": "claim_0", "type": "claim", "label": "Revenue grew 18% YoY", "first_seen": 8.5, "last_seen": 8.5, "attributes": {"content": "Revenue grew 18% year-over-year", "speaker": "speaker_0", "type": "factual"}},
-      {"id": "claim_1", "type": "claim", "label": "Slide shows 8% growth", "first_seen": 40.0, "last_seen": 40.0, "attributes": {"content": "Revenue growth +8% YoY shown on slide", "source": "visual", "type": "factual"}},
-      {"id": "decision_0", "type": "decision", "label": "Approve 15% marketing budget increase", "first_seen": 190.0, "last_seen": 202.0, "attributes": {"context": "Contingent on ROI targets"}},
-      {"id": "decision_1", "type": "decision", "label": "Build analytics dashboard in-house", "first_seen": 225.0, "last_seen": 245.0, "attributes": {"context": "2 sprints, Q4 roadmap"}}
+      {
+        "id": "speaker_0",
+        "type": "speaker",
+        "label": "Alice Chen",
+        "first_seen": 0.0,
+        "last_seen": 245.0,
+        "attributes": {
+          "role": "CEO / Meeting Lead",
+          "key_contributions": [
+            "Led Q3 review",
+            "Approved marketing budget",
+            "Set hiring targets"
+          ]
+        }
+      },
+      {
+        "id": "speaker_1",
+        "type": "speaker",
+        "label": "Bob Martinez",
+        "first_seen": 15.0,
+        "last_seen": 250.0,
+        "attributes": {
+          "role": "VP Engineering",
+          "key_contributions": [
+            "Reported engineering metrics",
+            "Identified cloud cost savings",
+            "Committed to analytics dashboard"
+          ]
+        }
+      },
+      {
+        "id": "speaker_2",
+        "type": "speaker",
+        "label": "Carol Zhang",
+        "first_seen": 40.0,
+        "last_seen": 254.0,
+        "attributes": {
+          "role": "VP Operations / HR",
+          "key_contributions": [
+            "Flagged revenue discrepancy",
+            "Reported hiring improvements",
+            "Proposed analytics dashboard"
+          ]
+        }
+      },
+      {
+        "id": "topic_0",
+        "type": "topic",
+        "label": "Q3 Revenue Review",
+        "first_seen": 0.0,
+        "last_seen": 68.0,
+        "attributes": {
+          "key_points": [
+            "18% total revenue growth (incl. acquisition)",
+            "8% organic growth",
+            "NA 62%, EMEA 25%, APAC 13%"
+          ],
+          "speakers_involved": [
+            "speaker_0",
+            "speaker_1",
+            "speaker_2"
+          ]
+        }
+      },
+      {
+        "id": "topic_1",
+        "type": "topic",
+        "label": "Marketing Budget Q4",
+        "first_seen": 85.0,
+        "last_seen": 131.0,
+        "attributes": {
+          "key_points": [
+            "15% budget increase proposed and approved",
+            "Target CAC: $45 (from $52)",
+            "Expected 3x ROI"
+          ],
+          "speakers_involved": [
+            "speaker_0",
+            "speaker_2"
+          ]
+        }
+      },
+      {
+        "id": "topic_2",
+        "type": "topic",
+        "label": "Hiring & Operations",
+        "first_seen": 131.0,
+        "last_seen": 158.0,
+        "attributes": {
+          "key_points": [
+            "8 positions closed in Q3",
+            "Time-to-hire improved: 42 -> 34 days",
+            "Q4 target: 28 days"
+          ],
+          "speakers_involved": [
+            "speaker_0",
+            "speaker_2"
+          ]
+        }
+      },
+      {
+        "id": "topic_3",
+        "type": "topic",
+        "label": "Cloud Costs & Technical",
+        "first_seen": 160.0,
+        "last_seen": 188.0,
+        "attributes": {
+          "key_points": [
+            "25% cloud cost increase projected",
+            "$15K monthly savings identified",
+            "ML pipeline driving costs"
+          ],
+          "speakers_involved": [
+            "speaker_0",
+            "speaker_1"
+          ]
+        }
+      },
+      {
+        "id": "topic_4",
+        "type": "topic",
+        "label": "Analytics Dashboard",
+        "first_seen": 205.0,
+        "last_seen": 245.0,
+        "attributes": {
+          "key_points": [
+            "Current reporting: 3 hours/week manual",
+            "Build in-house: 2 sprints (~4 weeks)",
+            "Approved for Q4 roadmap"
+          ],
+          "speakers_involved": [
+            "speaker_0",
+            "speaker_1",
+            "speaker_2"
+          ]
+        }
+      },
+      {
+        "id": "kpi_0",
+        "type": "kpi",
+        "label": "Revenue Growth: 18% (total)",
+        "first_seen": 8.5,
+        "last_seen": 60.0,
+        "attributes": {
+          "name": "Revenue Growth (Total)",
+          "value": "18% YoY",
+          "context": "Includes acquisition revenue"
+        }
+      },
+      {
+        "id": "kpi_1",
+        "type": "kpi",
+        "label": "Revenue Growth: 8% (organic)",
+        "first_seen": 40.0,
+        "last_seen": 60.0,
+        "attributes": {
+          "name": "Revenue Growth (Organic)",
+          "value": "8% YoY",
+          "context": "Excluding acquisition"
+        }
+      },
+      {
+        "id": "kpi_2",
+        "type": "kpi",
+        "label": "Bug Backlog: -40%",
+        "first_seen": 15.0,
+        "last_seen": 23.5,
+        "attributes": {
+          "name": "Bug Backlog Reduction",
+          "value": "40%",
+          "context": "Q3 engineering achievement"
+        }
+      },
+      {
+        "id": "kpi_3",
+        "type": "kpi",
+        "label": "CAC: $52 -> $45 target",
+        "first_seen": 102.0,
+        "last_seen": 113.0,
+        "attributes": {
+          "name": "Customer Acquisition Cost",
+          "value": "$52 current, $45 target",
+          "context": "Marketing efficiency metric"
+        }
+      },
+      {
+        "id": "kpi_4",
+        "type": "kpi",
+        "label": "Time-to-Hire: 34 days",
+        "first_seen": 132.0,
+        "last_seen": 151.0,
+        "attributes": {
+          "name": "Time-to-Hire",
+          "value": "34 days (from 42)",
+          "context": "Q3 improvement, Q4 target 28 days"
+        }
+      },
+      {
+        "id": "kpi_5",
+        "type": "kpi",
+        "label": "Cloud Costs: +25% projected",
+        "first_seen": 160.0,
+        "last_seen": 188.0,
+        "attributes": {
+          "name": "Cloud Cost Increase",
+          "value": "+25%",
+          "context": "Due to new ML pipeline"
+        }
+      },
+      {
+        "id": "slide_0",
+        "type": "slide",
+        "label": "Q3 Revenue Breakdown",
+        "first_seen": 24.0,
+        "last_seen": 50.5,
+        "attributes": {
+          "ocr_text": [
+            "Q3 Revenue Overview",
+            "Revenue Growth: +8% YoY",
+            "North America: 62%",
+            "EMEA: 25%",
+            "APAC: 13%"
+          ],
+          "scene_description": "Presentation slide showing Q3 revenue breakdown by region with bar chart"
+        }
+      },
+      {
+        "id": "slide_1",
+        "type": "slide",
+        "label": "Q4 Marketing Budget Proposal",
+        "first_seen": 85.0,
+        "last_seen": 113.0,
+        "attributes": {
+          "ocr_text": [
+            "Q4 Marketing Budget",
+            "Proposed Increase: 15%",
+            "Target CAC: $45",
+            "Expected ROI: 3x"
+          ],
+          "scene_description": "Slide showing marketing budget proposal with ROI projections"
+        }
+      },
+      {
+        "id": "slide_2",
+        "type": "slide",
+        "label": "Hiring Dashboard",
+        "first_seen": 132.0,
+        "last_seen": 158.0,
+        "attributes": {
+          "ocr_text": [
+            "Hiring Dashboard",
+            "Open Positions: 12",
+            "Closed Q3: 8",
+            "Avg Time-to-Hire: 34 days"
+          ],
+          "scene_description": "Dashboard slide showing hiring metrics and pipeline"
+        }
+      },
+      {
+        "id": "claim_0",
+        "type": "claim",
+        "label": "Revenue grew 18% YoY",
+        "first_seen": 8.5,
+        "last_seen": 8.5,
+        "attributes": {
+          "content": "Revenue grew 18% year-over-year",
+          "speaker": "speaker_0",
+          "type": "factual"
+        }
+      },
+      {
+        "id": "claim_1",
+        "type": "claim",
+        "label": "Slide shows 8% growth",
+        "first_seen": 40.0,
+        "last_seen": 40.0,
+        "attributes": {
+          "content": "Revenue growth +8% YoY shown on slide",
+          "source": "visual",
+          "type": "factual"
+        }
+      },
+      {
+        "id": "decision_0",
+        "type": "decision",
+        "label": "Approve 15% marketing budget increase",
+        "first_seen": 190.0,
+        "last_seen": 202.0,
+        "attributes": {
+          "context": "Contingent on ROI targets"
+        }
+      },
+      {
+        "id": "decision_1",
+        "type": "decision",
+        "label": "Build analytics dashboard in-house",
+        "first_seen": 225.0,
+        "last_seen": 245.0,
+        "attributes": {
+          "context": "2 sprints, Q4 roadmap"
+        }
+      }
     ],
     "edges": [
-      {"source": "speaker_0", "target": "topic_0", "relation": "mentioned", "timestamp": 0.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "Let's start with the Q3 budget review", "description": null, "frame_path": null}},
-      {"source": "speaker_0", "target": "kpi_0", "relation": "mentioned", "timestamp": 8.5, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "Revenue grew 18% year-over-year", "description": null, "frame_path": null}},
-      {"source": "speaker_1", "target": "kpi_2", "relation": "mentioned", "timestamp": 15.0, "confidence": 0.92, "evidence": {"source_type": "audio", "quote": "reduced our bug backlog by 40%", "description": null, "frame_path": null}},
-      {"source": "topic_0", "target": "slide_0", "relation": "shown_during", "timestamp": 24.0, "confidence": 0.9, "evidence": {"source_type": "visual", "quote": null, "description": "Revenue breakdown slide shown during Q3 review", "frame_path": null}},
-      {"source": "claim_0", "target": "speaker_0", "relation": "said_by", "timestamp": 8.5, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "Revenue grew 18% year-over-year", "description": null, "frame_path": null}},
-      {"source": "claim_0", "target": "claim_1", "relation": "contradicts", "timestamp": 40.0, "confidence": 0.88, "evidence": {"source_type": "merged", "quote": "Speaker says 18% but slide shows 8%", "description": "Alice claims 18% total growth; slide shows 8% organic growth. Discrepancy clarified as total vs organic.", "frame_path": null}},
-      {"source": "speaker_2", "target": "topic_0", "relation": "mentioned", "timestamp": 40.0, "confidence": 0.9, "evidence": {"source_type": "audio", "quote": "The slide shows revenue growth at 8%", "description": null, "frame_path": null}},
-      {"source": "speaker_0", "target": "topic_1", "relation": "mentioned", "timestamp": 85.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "proposing a 15% increase for Q4", "description": null, "frame_path": null}},
-      {"source": "speaker_0", "target": "kpi_3", "relation": "mentioned", "timestamp": 102.0, "confidence": 0.92, "evidence": {"source_type": "audio", "quote": "bring CAC back down to $45 from the current $52", "description": null, "frame_path": null}},
-      {"source": "topic_1", "target": "slide_1", "relation": "shown_during", "timestamp": 85.0, "confidence": 0.88, "evidence": {"source_type": "visual", "quote": null, "description": "Marketing budget slide shown during Q4 discussion", "frame_path": null}},
-      {"source": "speaker_2", "target": "kpi_4", "relation": "mentioned", "timestamp": 132.0, "confidence": 0.92, "evidence": {"source_type": "audio", "quote": "Average time-to-hire is 34 days, down from 42", "description": null, "frame_path": null}},
-      {"source": "topic_2", "target": "slide_2", "relation": "shown_during", "timestamp": 132.0, "confidence": 0.85, "evidence": {"source_type": "visual", "quote": null, "description": "Hiring dashboard slide", "frame_path": null}},
-      {"source": "speaker_1", "target": "kpi_5", "relation": "mentioned", "timestamp": 160.0, "confidence": 0.9, "evidence": {"source_type": "audio", "quote": "cloud costs are projected to increase 25%", "description": null, "frame_path": null}},
-      {"source": "speaker_0", "target": "decision_0", "relation": "decided", "timestamp": 190.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "we approve the 15% marketing budget increase for Q4", "description": null, "frame_path": null}},
-      {"source": "speaker_0", "target": "decision_1", "relation": "decided", "timestamp": 225.0, "confidence": 0.92, "evidence": {"source_type": "audio", "quote": "Approved. Bob, add it to the Q4 roadmap", "description": null, "frame_path": null}},
-      {"source": "speaker_1", "target": "decision_1", "relation": "committed_to", "timestamp": 216.0, "confidence": 0.9, "evidence": {"source_type": "audio", "quote": "We can build that in-house. Estimated 2 sprints", "description": null, "frame_path": null}}
+      {
+        "source": "speaker_0",
+        "target": "topic_0",
+        "relation": "mentioned",
+        "timestamp": 0.0,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "Let's start with the Q3 budget review",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_0",
+        "target": "kpi_0",
+        "relation": "mentioned",
+        "timestamp": 8.5,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "Revenue grew 18% year-over-year",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_1",
+        "target": "kpi_2",
+        "relation": "mentioned",
+        "timestamp": 15.0,
+        "confidence": 0.92,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "reduced our bug backlog by 40%",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "topic_0",
+        "target": "slide_0",
+        "relation": "shown_during",
+        "timestamp": 24.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "visual",
+          "quote": null,
+          "description": "Revenue breakdown slide shown during Q3 review",
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_0",
+        "target": "speaker_0",
+        "relation": "said_by",
+        "timestamp": 8.5,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "Revenue grew 18% year-over-year",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_0",
+        "target": "claim_1",
+        "relation": "contradicts",
+        "timestamp": 40.0,
+        "confidence": 0.88,
+        "evidence": {
+          "source_type": "merged",
+          "quote": "Speaker says 18% but slide shows 8%",
+          "description": "Alice claims 18% total growth; slide shows 8% organic growth. Discrepancy clarified as total vs organic.",
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_2",
+        "target": "topic_0",
+        "relation": "mentioned",
+        "timestamp": 40.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "The slide shows revenue growth at 8%",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_0",
+        "target": "topic_1",
+        "relation": "mentioned",
+        "timestamp": 85.0,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "proposing a 15% increase for Q4",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_0",
+        "target": "kpi_3",
+        "relation": "mentioned",
+        "timestamp": 102.0,
+        "confidence": 0.92,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "bring CAC back down to $45 from the current $52",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "topic_1",
+        "target": "slide_1",
+        "relation": "shown_during",
+        "timestamp": 85.0,
+        "confidence": 0.88,
+        "evidence": {
+          "source_type": "visual",
+          "quote": null,
+          "description": "Marketing budget slide shown during Q4 discussion",
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_2",
+        "target": "kpi_4",
+        "relation": "mentioned",
+        "timestamp": 132.0,
+        "confidence": 0.92,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "Average time-to-hire is 34 days, down from 42",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "topic_2",
+        "target": "slide_2",
+        "relation": "shown_during",
+        "timestamp": 132.0,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "visual",
+          "quote": null,
+          "description": "Hiring dashboard slide",
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_1",
+        "target": "kpi_5",
+        "relation": "mentioned",
+        "timestamp": 160.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "cloud costs are projected to increase 25%",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_0",
+        "target": "decision_0",
+        "relation": "decided",
+        "timestamp": 190.0,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "we approve the 15% marketing budget increase for Q4",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_0",
+        "target": "decision_1",
+        "relation": "decided",
+        "timestamp": 225.0,
+        "confidence": 0.92,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "Approved. Bob, add it to the Q4 roadmap",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_1",
+        "target": "decision_1",
+        "relation": "committed_to",
+        "timestamp": 216.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "We can build that in-house. Estimated 2 sprints",
+          "description": null,
+          "frame_path": null
+        }
+      }
     ],
     "timeline": [
-      {"timestamp": 0.0, "active_nodes": ["speaker_0"], "active_edges": [], "current_topic": "Q3 Revenue Review", "current_speaker": "Alice Chen"},
-      {"timestamp": 60.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "kpi_0", "kpi_1", "slide_0", "claim_0", "claim_1"], "active_edges": ["speaker_0->topic_0", "claim_0->claim_1"], "current_topic": "Q3 Revenue Review", "current_speaker": "Alice Chen"},
-      {"timestamp": 120.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "kpi_0", "kpi_1", "kpi_2", "kpi_3", "slide_0", "slide_1"], "active_edges": ["speaker_0->topic_0", "speaker_0->topic_1", "claim_0->claim_1"], "current_topic": "Marketing Budget Q4", "current_speaker": "Bob Martinez"},
-      {"timestamp": 180.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "topic_3", "kpi_0", "kpi_1", "kpi_2", "kpi_3", "kpi_4", "kpi_5", "slide_0", "slide_1", "slide_2"], "active_edges": ["speaker_0->topic_0", "speaker_0->topic_1", "speaker_1->kpi_5", "claim_0->claim_1"], "current_topic": "Cloud Costs & Technical", "current_speaker": "Bob Martinez"},
-      {"timestamp": 240.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "topic_3", "topic_4", "decision_0", "decision_1"], "active_edges": ["speaker_0->decision_0", "speaker_0->decision_1", "speaker_1->decision_1"], "current_topic": "Analytics Dashboard", "current_speaker": "Alice Chen"}
+      {
+        "timestamp": 0.0,
+        "active_nodes": [
+          "speaker_0"
+        ],
+        "active_edges": [],
+        "current_topic": "Q3 Revenue Review",
+        "current_speaker": "Alice Chen"
+      },
+      {
+        "timestamp": 60.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "kpi_0",
+          "kpi_1",
+          "slide_0",
+          "claim_0",
+          "claim_1"
+        ],
+        "active_edges": [
+          "speaker_0->topic_0",
+          "claim_0->claim_1"
+        ],
+        "current_topic": "Q3 Revenue Review",
+        "current_speaker": "Alice Chen"
+      },
+      {
+        "timestamp": 120.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "topic_1",
+          "kpi_0",
+          "kpi_1",
+          "kpi_2",
+          "kpi_3",
+          "slide_0",
+          "slide_1"
+        ],
+        "active_edges": [
+          "speaker_0->topic_0",
+          "speaker_0->topic_1",
+          "claim_0->claim_1"
+        ],
+        "current_topic": "Marketing Budget Q4",
+        "current_speaker": "Bob Martinez"
+      },
+      {
+        "timestamp": 180.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "topic_1",
+          "topic_2",
+          "topic_3",
+          "kpi_0",
+          "kpi_1",
+          "kpi_2",
+          "kpi_3",
+          "kpi_4",
+          "kpi_5",
+          "slide_0",
+          "slide_1",
+          "slide_2"
+        ],
+        "active_edges": [
+          "speaker_0->topic_0",
+          "speaker_0->topic_1",
+          "speaker_1->kpi_5",
+          "claim_0->claim_1"
+        ],
+        "current_topic": "Cloud Costs & Technical",
+        "current_speaker": "Bob Martinez"
+      },
+      {
+        "timestamp": 240.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "topic_1",
+          "topic_2",
+          "topic_3",
+          "topic_4",
+          "decision_0",
+          "decision_1"
+        ],
+        "active_edges": [
+          "speaker_0->decision_0",
+          "speaker_0->decision_1",
+          "speaker_1->decision_1"
+        ],
+        "current_topic": "Analytics Dashboard",
+        "current_speaker": "Alice Chen"
+      }
     ],
     "metadata": {
       "duration_seconds": 254.0,
       "total_nodes": 21,
       "total_edges": 16,
-      "node_types": {"speaker": 3, "topic": 5, "kpi": 6, "slide": 3, "claim": 2, "decision": 2}
+      "node_types": {
+        "speaker": 3,
+        "topic": 5,
+        "kpi": 6,
+        "slide": 3,
+        "claim": 2,
+        "decision": 2
+      }
     }
   },
   "insights": {
@@ -94,58 +807,151 @@
         "name": "Q3 Revenue Review",
         "start_time": 0.0,
         "end_time": 68.0,
-        "key_points": ["18% total revenue growth YoY (including acquisition)", "8% organic revenue growth shown on slides", "Regional split: NA 62%, EMEA 25%, APAC 13%", "Revenue discrepancy flagged and clarified by Carol"],
-        "speakers_involved": ["Alice Chen", "Bob Martinez", "Carol Zhang"],
+        "key_points": [
+          "18% total revenue growth YoY (including acquisition)",
+          "8% organic revenue growth shown on slides",
+          "Regional split: NA 62%, EMEA 25%, APAC 13%",
+          "Revenue discrepancy flagged and clarified by Carol"
+        ],
+        "speakers_involved": [
+          "Alice Chen",
+          "Bob Martinez",
+          "Carol Zhang"
+        ],
         "evidence": [
-          {"timestamp": 8.5, "source": "audio", "quote": "Revenue grew 18% year-over-year, which exceeded our initial targets"},
-          {"timestamp": 24.0, "source": "visual", "description": "Slide: Q3 Revenue Overview showing +8% YoY growth"},
-          {"timestamp": 40.0, "source": "audio", "quote": "The slide shows revenue growth at 8% year-over-year, but Alice just mentioned 18%"}
+          {
+            "timestamp": 8.5,
+            "source": "audio",
+            "quote": "Revenue grew 18% year-over-year, which exceeded our initial targets"
+          },
+          {
+            "timestamp": 24.0,
+            "source": "visual",
+            "description": "Slide: Q3 Revenue Overview showing +8% YoY growth"
+          },
+          {
+            "timestamp": 40.0,
+            "source": "audio",
+            "quote": "The slide shows revenue growth at 8% year-over-year, but Alice just mentioned 18%"
+          }
         ]
       },
       {
         "name": "Marketing Budget Q4",
         "start_time": 85.0,
         "end_time": 131.0,
-        "key_points": ["15% marketing budget increase proposed and approved", "Current CAC: $52, target: $45", "Expected 3x ROI", "5 additional engineering headcount for campaigns infrastructure"],
-        "speakers_involved": ["Alice Chen", "Carol Zhang", "Bob Martinez"],
+        "key_points": [
+          "15% marketing budget increase proposed and approved",
+          "Current CAC: $52, target: $45",
+          "Expected 3x ROI",
+          "5 additional engineering headcount for campaigns infrastructure"
+        ],
+        "speakers_involved": [
+          "Alice Chen",
+          "Carol Zhang",
+          "Bob Martinez"
+        ],
         "evidence": [
-          {"timestamp": 85.0, "source": "audio", "quote": "We're proposing a 15% increase for Q4"},
-          {"timestamp": 102.0, "source": "audio", "quote": "We expect the additional spend to bring CAC back down to $45 from the current $52"},
-          {"timestamp": 85.0, "source": "visual", "description": "Slide: Q4 Marketing Budget with ROI projections"}
+          {
+            "timestamp": 85.0,
+            "source": "audio",
+            "quote": "We're proposing a 15% increase for Q4"
+          },
+          {
+            "timestamp": 102.0,
+            "source": "audio",
+            "quote": "We expect the additional spend to bring CAC back down to $45 from the current $52"
+          },
+          {
+            "timestamp": 85.0,
+            "source": "visual",
+            "description": "Slide: Q4 Marketing Budget with ROI projections"
+          }
         ]
       },
       {
         "name": "Hiring & Operations",
         "start_time": 131.0,
         "end_time": 158.0,
-        "key_points": ["8 positions closed in Q3 out of 12 open", "Time-to-hire improved from 42 to 34 days", "Q4 target: 28 days", "Interview process streamlining planned"],
-        "speakers_involved": ["Alice Chen", "Carol Zhang"],
+        "key_points": [
+          "8 positions closed in Q3 out of 12 open",
+          "Time-to-hire improved from 42 to 34 days",
+          "Q4 target: 28 days",
+          "Interview process streamlining planned"
+        ],
+        "speakers_involved": [
+          "Alice Chen",
+          "Carol Zhang"
+        ],
         "evidence": [
-          {"timestamp": 132.0, "source": "audio", "quote": "we've closed 8 positions this quarter. Average time-to-hire is 34 days, down from 42"},
-          {"timestamp": 143.0, "source": "audio", "quote": "Let's set a target of 28 days for Q4"},
-          {"timestamp": 132.0, "source": "visual", "description": "Hiring Dashboard slide showing 12 open positions"}
+          {
+            "timestamp": 132.0,
+            "source": "audio",
+            "quote": "we've closed 8 positions this quarter. Average time-to-hire is 34 days, down from 42"
+          },
+          {
+            "timestamp": 143.0,
+            "source": "audio",
+            "quote": "Let's set a target of 28 days for Q4"
+          },
+          {
+            "timestamp": 132.0,
+            "source": "visual",
+            "description": "Hiring Dashboard slide showing 12 open positions"
+          }
         ]
       },
       {
         "name": "Cloud Costs & Technical",
         "start_time": 160.0,
         "end_time": 188.0,
-        "key_points": ["25% cloud cost increase projected due to ML pipeline", "$15K monthly savings identified through right-sizing", "Full optimization plan coming next week"],
-        "speakers_involved": ["Alice Chen", "Bob Martinez"],
+        "key_points": [
+          "25% cloud cost increase projected due to ML pipeline",
+          "$15K monthly savings identified through right-sizing",
+          "Full optimization plan coming next week"
+        ],
+        "speakers_involved": [
+          "Alice Chen",
+          "Bob Martinez"
+        ],
         "evidence": [
-          {"timestamp": 160.0, "source": "audio", "quote": "cloud costs are projected to increase 25% next quarter due to the new ML pipeline"},
-          {"timestamp": 178.0, "source": "audio", "quote": "We've already identified $15K in monthly savings through right-sizing"}
+          {
+            "timestamp": 160.0,
+            "source": "audio",
+            "quote": "cloud costs are projected to increase 25% next quarter due to the new ML pipeline"
+          },
+          {
+            "timestamp": 178.0,
+            "source": "audio",
+            "quote": "We've already identified $15K in monthly savings through right-sizing"
+          }
         ]
       },
       {
         "name": "Analytics Dashboard",
         "start_time": 205.0,
         "end_time": 245.0,
-        "key_points": ["Current manual reporting: 3 hours/week", "In-house build approved: 2 sprints (~4 weeks)", "Added to Q4 roadmap"],
-        "speakers_involved": ["Alice Chen", "Bob Martinez", "Carol Zhang"],
+        "key_points": [
+          "Current manual reporting: 3 hours/week",
+          "In-house build approved: 2 sprints (~4 weeks)",
+          "Added to Q4 roadmap"
+        ],
+        "speakers_involved": [
+          "Alice Chen",
+          "Bob Martinez",
+          "Carol Zhang"
+        ],
         "evidence": [
-          {"timestamp": 205.0, "source": "audio", "quote": "Current reporting takes 3 hours per week manually"},
-          {"timestamp": 216.0, "source": "audio", "quote": "We can build that in-house. Estimated 2 sprints, about 4 weeks"}
+          {
+            "timestamp": 205.0,
+            "source": "audio",
+            "quote": "Current reporting takes 3 hours per week manually"
+          },
+          {
+            "timestamp": 216.0,
+            "source": "audio",
+            "quote": "We can build that in-house. Estimated 2 sprints, about 4 weeks"
+          }
         ]
       }
     ],
@@ -154,31 +960,61 @@
         "description": "Update investor deck to align total vs organic revenue growth figures",
         "assignee": "Bob Martinez",
         "priority": "high",
-        "evidence": [{"timestamp": 69.0, "source": "audio", "quote": "Bob, can you take an action item to align the investor deck with these numbers by Friday?"}]
+        "evidence": [
+          {
+            "timestamp": 69.0,
+            "source": "audio",
+            "quote": "Bob, can you take an action item to align the investor deck with these numbers by Friday?"
+          }
+        ]
       },
       {
         "description": "Reduce time-to-hire to 28 days by streamlining interview process",
         "assignee": "Carol Zhang",
         "priority": "medium",
-        "evidence": [{"timestamp": 143.0, "source": "audio", "quote": "Let's set a target of 28 days for Q4. Carol, can you own that?"}]
+        "evidence": [
+          {
+            "timestamp": 143.0,
+            "source": "audio",
+            "quote": "Let's set a target of 28 days for Q4. Carol, can you own that?"
+          }
+        ]
       },
       {
         "description": "Present full cloud cost optimization plan",
         "assignee": "Bob Martinez",
         "priority": "medium",
-        "evidence": [{"timestamp": 178.0, "source": "audio", "quote": "I'll present the full optimization plan next week"}]
+        "evidence": [
+          {
+            "timestamp": 178.0,
+            "source": "audio",
+            "quote": "I'll present the full optimization plan next week"
+          }
+        ]
       },
       {
         "description": "Add analytics dashboard to Q4 roadmap (2 sprints)",
         "assignee": "Bob Martinez",
         "priority": "medium",
-        "evidence": [{"timestamp": 225.0, "source": "audio", "quote": "Bob, add it to the Q4 roadmap"}]
+        "evidence": [
+          {
+            "timestamp": 225.0,
+            "source": "audio",
+            "quote": "Bob, add it to the Q4 roadmap"
+          }
+        ]
       },
       {
         "description": "Send meeting notes by end of day",
         "assignee": "Bob Martinez",
         "priority": "low",
-        "evidence": [{"timestamp": 246.0, "source": "audio", "quote": "I'll send meeting notes by end of day"}]
+        "evidence": [
+          {
+            "timestamp": 246.0,
+            "source": "audio",
+            "quote": "I'll send meeting notes by end of day"
+          }
+        ]
       }
     ],
     "decisions": [
@@ -187,14 +1023,26 @@
         "made_by": "Alice Chen",
         "timestamp": 190.0,
         "context": "Contingent on achieving target CAC of $45 and 3x ROI. Includes 5 additional engineering headcount.",
-        "evidence": [{"timestamp": 190.0, "source": "audio", "quote": "we approve the 15% marketing budget increase for Q4, contingent on the ROI targets Carol outlined"}]
+        "evidence": [
+          {
+            "timestamp": 190.0,
+            "source": "audio",
+            "quote": "we approve the 15% marketing budget increase for Q4, contingent on the ROI targets Carol outlined"
+          }
+        ]
       },
       {
         "description": "Approved in-house analytics dashboard build",
         "made_by": "Alice Chen",
         "timestamp": 225.0,
         "context": "To replace 3 hours/week manual reporting. 2 sprints (~4 weeks) with current engineering team.",
-        "evidence": [{"timestamp": 225.0, "source": "audio", "quote": "Approved. Bob, add it to the Q4 roadmap"}]
+        "evidence": [
+          {
+            "timestamp": 225.0,
+            "source": "audio",
+            "quote": "Approved. Bob, add it to the Q4 roadmap"
+          }
+        ]
       }
     ],
     "contradictions": [
@@ -217,23 +1065,158 @@
       }
     ],
     "kpis": [
-      {"name": "Total Revenue Growth", "value": "18% YoY", "context": "Includes acquisition revenue. Exceeded initial targets.", "mentioned_by": "Alice Chen", "timestamp": 8.5, "evidence": [{"timestamp": 8.5, "source": "audio", "quote": "Revenue grew 18% year-over-year"}]},
-      {"name": "Organic Revenue Growth", "value": "8% YoY", "context": "Excluding acquisition. Shown on slide.", "mentioned_by": "Carol Zhang", "timestamp": 40.0, "evidence": [{"timestamp": 40.0, "source": "audio", "quote": "The slide shows revenue growth at 8%"}]},
-      {"name": "Bug Backlog Reduction", "value": "40%", "context": "Q3 engineering achievement alongside 3 major feature ships.", "mentioned_by": "Bob Martinez", "timestamp": 15.0, "evidence": [{"timestamp": 15.0, "source": "audio", "quote": "reduced our bug backlog by 40%"}]},
-      {"name": "Customer Acquisition Cost", "value": "$52 (current) -> $45 (target)", "context": "CAC increased 20% last quarter. Marketing budget increase aims to bring it down.", "mentioned_by": "Alice Chen", "timestamp": 102.0, "evidence": [{"timestamp": 102.0, "source": "audio", "quote": "bring CAC back down to $45 from the current $52"}]},
-      {"name": "Time-to-Hire", "value": "34 days (down from 42)", "context": "Q4 target is 28 days. Interview process streamlining planned.", "mentioned_by": "Carol Zhang", "timestamp": 132.0, "evidence": [{"timestamp": 132.0, "source": "audio", "quote": "Average time-to-hire is 34 days, down from 42"}]},
-      {"name": "Cloud Cost Increase", "value": "+25% projected", "context": "Driven by new ML pipeline. $15K/month savings identified.", "mentioned_by": "Bob Martinez", "timestamp": 160.0, "evidence": [{"timestamp": 160.0, "source": "audio", "quote": "cloud costs are projected to increase 25% next quarter"}]}
+      {
+        "name": "Total Revenue Growth",
+        "value": "18% YoY",
+        "context": "Includes acquisition revenue. Exceeded initial targets.",
+        "mentioned_by": "Alice Chen",
+        "timestamp": 8.5,
+        "evidence": [
+          {
+            "timestamp": 8.5,
+            "source": "audio",
+            "quote": "Revenue grew 18% year-over-year"
+          }
+        ]
+      },
+      {
+        "name": "Organic Revenue Growth",
+        "value": "8% YoY",
+        "context": "Excluding acquisition. Shown on slide.",
+        "mentioned_by": "Carol Zhang",
+        "timestamp": 40.0,
+        "evidence": [
+          {
+            "timestamp": 40.0,
+            "source": "audio",
+            "quote": "The slide shows revenue growth at 8%"
+          }
+        ]
+      },
+      {
+        "name": "Bug Backlog Reduction",
+        "value": "40%",
+        "context": "Q3 engineering achievement alongside 3 major feature ships.",
+        "mentioned_by": "Bob Martinez",
+        "timestamp": 15.0,
+        "evidence": [
+          {
+            "timestamp": 15.0,
+            "source": "audio",
+            "quote": "reduced our bug backlog by 40%"
+          }
+        ]
+      },
+      {
+        "name": "Customer Acquisition Cost",
+        "value": "$52 (current) -> $45 (target)",
+        "context": "CAC increased 20% last quarter. Marketing budget increase aims to bring it down.",
+        "mentioned_by": "Alice Chen",
+        "timestamp": 102.0,
+        "evidence": [
+          {
+            "timestamp": 102.0,
+            "source": "audio",
+            "quote": "bring CAC back down to $45 from the current $52"
+          }
+        ]
+      },
+      {
+        "name": "Time-to-Hire",
+        "value": "34 days (down from 42)",
+        "context": "Q4 target is 28 days. Interview process streamlining planned.",
+        "mentioned_by": "Carol Zhang",
+        "timestamp": 132.0,
+        "evidence": [
+          {
+            "timestamp": 132.0,
+            "source": "audio",
+            "quote": "Average time-to-hire is 34 days, down from 42"
+          }
+        ]
+      },
+      {
+        "name": "Cloud Cost Increase",
+        "value": "+25% projected",
+        "context": "Driven by new ML pipeline. $15K/month savings identified.",
+        "mentioned_by": "Bob Martinez",
+        "timestamp": 160.0,
+        "evidence": [
+          {
+            "timestamp": 160.0,
+            "source": "audio",
+            "quote": "cloud costs are projected to increase 25% next quarter"
+          }
+        ]
+      }
     ],
     "key_quotes": [
-      {"speaker": "Carol Zhang", "quote": "The slide shows revenue growth at 8% year-over-year, but Alice just mentioned 18%. Can we clarify?", "timestamp": 40.0, "context": "Flagged a critical discrepancy between spoken and visual data that could mislead stakeholders"},
-      {"speaker": "Alice Chen", "quote": "The 18% is the total company growth including the acquisition. The slide shows organic growth at 8%.", "timestamp": 51.0, "context": "Clarification of the revenue discrepancy — important distinction for investor communications"},
-      {"speaker": "Alice Chen", "quote": "We approve the 15% marketing budget increase for Q4, contingent on the ROI targets.", "timestamp": 190.0, "context": "Key budget decision with clear conditions attached"},
-      {"speaker": "Bob Martinez", "quote": "We've already identified $15K in monthly savings through right-sizing.", "timestamp": 178.0, "context": "Proactive cost management in response to projected cloud cost increase"}
+      {
+        "speaker": "Carol Zhang",
+        "quote": "The slide shows revenue growth at 8% year-over-year, but Alice just mentioned 18%. Can we clarify?",
+        "timestamp": 40.0,
+        "context": "Flagged a critical discrepancy between spoken and visual data that could mislead stakeholders"
+      },
+      {
+        "speaker": "Alice Chen",
+        "quote": "The 18% is the total company growth including the acquisition. The slide shows organic growth at 8%.",
+        "timestamp": 51.0,
+        "context": "Clarification of the revenue discrepancy \u2014 important distinction for investor communications"
+      },
+      {
+        "speaker": "Alice Chen",
+        "quote": "We approve the 15% marketing budget increase for Q4, contingent on the ROI targets.",
+        "timestamp": 190.0,
+        "context": "Key budget decision with clear conditions attached"
+      },
+      {
+        "speaker": "Bob Martinez",
+        "quote": "We've already identified $15K in monthly savings through right-sizing.",
+        "timestamp": 178.0,
+        "context": "Proactive cost management in response to projected cloud cost increase"
+      }
     ]
   },
   "vision_events": [
-    {"frame_index": 0, "timestamp": 24.0, "frame_path": "", "ocr_text": ["Q3 Revenue Overview", "Revenue Growth: +8% YoY", "North America: 62%", "EMEA: 25%", "APAC: 13%"], "scene_description": "Presentation slide with Q3 revenue breakdown by region, bar chart visible", "slide_title": "Q3 Revenue Overview"},
-    {"frame_index": 1, "timestamp": 85.0, "frame_path": "", "ocr_text": ["Q4 Marketing Budget", "Proposed Increase: 15%", "Target CAC: $45", "Expected ROI: 3x"], "scene_description": "Marketing budget proposal slide with ROI projections table", "slide_title": "Q4 Marketing Budget Proposal"},
-    {"frame_index": 2, "timestamp": 132.0, "frame_path": "", "ocr_text": ["Hiring Dashboard", "Open Positions: 12", "Closed Q3: 8", "Avg Time-to-Hire: 34 days"], "scene_description": "Dashboard view showing hiring pipeline metrics with charts", "slide_title": "Hiring Dashboard"}
+    {
+      "frame_index": 0,
+      "timestamp": 24.0,
+      "frame_path": "",
+      "ocr_text": [
+        "Q3 Revenue Overview",
+        "Revenue Growth: +8% YoY",
+        "North America: 62%",
+        "EMEA: 25%",
+        "APAC: 13%"
+      ],
+      "scene_description": "Presentation slide with Q3 revenue breakdown by region, bar chart visible",
+      "slide_title": "Q3 Revenue Overview"
+    },
+    {
+      "frame_index": 1,
+      "timestamp": 85.0,
+      "frame_path": "",
+      "ocr_text": [
+        "Q4 Marketing Budget",
+        "Proposed Increase: 15%",
+        "Target CAC: $45",
+        "Expected ROI: 3x"
+      ],
+      "scene_description": "Marketing budget proposal slide with ROI projections table",
+      "slide_title": "Q4 Marketing Budget Proposal"
+    },
+    {
+      "frame_index": 2,
+      "timestamp": 132.0,
+      "frame_path": "",
+      "ocr_text": [
+        "Hiring Dashboard",
+        "Open Positions: 12",
+        "Closed Q3: 8",
+        "Avg Time-to-Hire: 34 days"
+      ],
+      "scene_description": "Dashboard view showing hiring pipeline metrics with charts",
+      "slide_title": "Hiring Dashboard"
+    }
   ]
 }

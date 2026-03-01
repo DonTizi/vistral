@@ -1,134 +1,1221 @@
 {
   "job_id": "demo-podcast",
   "status": "completed",
-  "video_url": null,
+  "video_url": "https://www.youtube.com/watch?v=bzs0wFP_6ck",
   "transcript": [
-    {"speaker": "Maya Rodriguez", "text": "Welcome to AI Frontiers, the podcast where we explore the cutting edge of artificial intelligence and its impact on the world. I'm your host Maya Rodriguez.", "start": 0.0, "end": 9.0},
-    {"speaker": "Maya Rodriguez", "text": "Today we have two incredible guests. Dr. Li Wei, a leading AI researcher at the Institute for Advanced Computation, and Tom Davis, CEO of Helios AI, a startup that just closed a Series B round.", "start": 9.5, "end": 20.0},
-    {"speaker": "Dr. Li Wei", "text": "Thanks for having me, Maya. Always a pleasure to discuss the state of AI research.", "start": 21.0, "end": 25.0},
-    {"speaker": "Tom Davis", "text": "Great to be here. I'm a big fan of the show. Last time I was on, we were still pre-seed, so a lot has changed.", "start": 26.0, "end": 32.0},
-    {"speaker": "Maya Rodriguez", "text": "A lot has changed indeed. Tom, let's start with you. You just closed a 45 million dollar Series B. Tell us about that.", "start": 33.0, "end": 40.0},
-    {"speaker": "Tom Davis", "text": "Yeah, it's been a wild ride. We closed 45 million led by Sequoia with participation from a16z. The round values us at about 320 million dollars.", "start": 41.0, "end": 50.0},
-    {"speaker": "Tom Davis", "text": "The thesis is pretty simple. We believe enterprise AI adoption is bottlenecked by deployment complexity, not model capability. Our platform reduces deployment time from months to days.", "start": 51.0, "end": 62.0},
-    {"speaker": "Maya Rodriguez", "text": "That's a massive valuation for a Series B. Dr. Wei, from the research side, do you agree that deployment is the bottleneck?", "start": 63.0, "end": 70.0},
-    {"speaker": "Dr. Li Wei", "text": "I think it's one bottleneck, but I'd argue the bigger challenge is still model capability, particularly in reasoning and reliability.", "start": 71.0, "end": 79.0},
-    {"speaker": "Dr. Li Wei", "text": "Our latest research shows that even state-of-the-art models achieve only about 73% accuracy on complex multi-step reasoning tasks. That's not good enough for most enterprise use cases.", "start": 80.0, "end": 91.0},
-    {"speaker": "Tom Davis", "text": "I'd push back on that. Our customers are already getting massive value from current models. We're seeing 40% productivity gains in code review workflows and 60% reduction in documentation time.", "start": 92.0, "end": 104.0},
-    {"speaker": "Maya Rodriguez", "text": "Interesting tension there. Let's pivot to probably the hottest topic in AI right now: regulation. Dr. Wei, you've been advising the EU on AI governance. Where do you stand?", "start": 105.0, "end": 116.0},
-    {"speaker": "Dr. Li Wei", "text": "I'm firmly in the camp that we need strong, proactive regulation. The EU AI Act is a good start, but it doesn't go far enough.", "start": 117.0, "end": 126.0},
-    {"speaker": "Dr. Li Wei", "text": "We need mandatory safety evaluations before any model above 10 billion parameters can be deployed commercially. The potential for harm is too great to leave to self-regulation.", "start": 127.0, "end": 138.0},
-    {"speaker": "Dr. Li Wei", "text": "My research group published a paper last month showing that models above that threshold exhibit emergent behaviors that are fundamentally unpredictable. We can't test for what we can't predict.", "start": 139.0, "end": 151.0},
-    {"speaker": "Tom Davis", "text": "I strongly disagree. Mandatory pre-deployment evaluations would kill innovation. The compliance costs alone would wipe out most startups.", "start": 152.0, "end": 161.0},
-    {"speaker": "Tom Davis", "text": "We estimated it would add 6 to 8 months and about 2 million dollars to every deployment cycle. For a startup like ours burning 3 million a month, that's existential.", "start": 162.0, "end": 173.0},
-    {"speaker": "Tom Davis", "text": "I think the market should regulate itself. Bad actors will be punished by the market. We've seen this play out in social media already.", "start": 174.0, "end": 183.0},
-    {"speaker": "Dr. Li Wei", "text": "With all due respect Tom, saying social media self-regulated is a strange example. Most people would say that's a case study in the failure of self-regulation.", "start": 184.0, "end": 194.0},
-    {"speaker": "Maya Rodriguez", "text": "Point taken by Dr. Wei there. Let's move to another divisive topic: open source versus closed source AI models. This has been heating up significantly.", "start": 195.0, "end": 205.0},
-    {"speaker": "Tom Davis", "text": "I'm a strong proponent of open source. Helios is built entirely on open-source models. We use fine-tuned versions of Llama and Mistral for our enterprise products.", "start": 206.0, "end": 217.0},
-    {"speaker": "Tom Davis", "text": "Open source democratizes AI. It prevents any single company from becoming the gatekeeper of intelligence. Our 70 billion parameter fine-tuned model matches GPT-4 on enterprise benchmarks at a fraction of the cost.", "start": 218.0, "end": 231.0},
-    {"speaker": "Dr. Li Wei", "text": "I have to push back here. Open-sourcing frontier models is irresponsible. Once you release the weights, you cannot control how they're used.", "start": 232.0, "end": 241.0},
-    {"speaker": "Dr. Li Wei", "text": "We demonstrated in our lab that an open-source model can be fine-tuned to bypass its safety guardrails in under 200 GPU-hours. That's about 500 dollars on cloud compute. Anyone can do it.", "start": 242.0, "end": 254.0},
-    {"speaker": "Tom Davis", "text": "That argument proves too much. You could say the same about the internet, about encryption, about any dual-use technology. The benefits of openness massively outweigh the risks.", "start": 255.0, "end": 266.0},
-    {"speaker": "Dr. Li Wei", "text": "Encryption doesn't have the potential to generate convincing bioweapon synthesis instructions. The risk profiles are not comparable.", "start": 267.0, "end": 275.0},
-    {"speaker": "Maya Rodriguez", "text": "Heavy stuff. Let's lighten it up a bit and talk about what's actually working in AI right now. Tom, what are your customers most excited about?", "start": 276.0, "end": 285.0},
-    {"speaker": "Tom Davis", "text": "The killer app right now is AI-assisted code generation. We have customers reporting their engineering teams are shipping 35% more features per quarter after adopting our tools.", "start": 286.0, "end": 297.0},
-    {"speaker": "Tom Davis", "text": "But the one that surprises people is customer support automation. One of our enterprise clients reduced their average ticket resolution time from 4 hours to 22 minutes. That's a 91% improvement.", "start": 298.0, "end": 311.0},
-    {"speaker": "Dr. Li Wei", "text": "Those are impressive numbers, but I'd want to see the methodology. In our research, we often find that headline productivity metrics don't account for the time spent reviewing and correcting AI output.", "start": 312.0, "end": 324.0},
-    {"speaker": "Dr. Li Wei", "text": "We published a study with 500 developers and found that when you account for review time, the net productivity gain from AI code generation drops from the claimed 40% to about 15%.", "start": 325.0, "end": 337.0},
-    {"speaker": "Tom Davis", "text": "Our data doesn't support that. We measure end-to-end cycle time, not just code generation. The 35% number includes review, testing, and deployment.", "start": 338.0, "end": 348.0},
-    {"speaker": "Maya Rodriguez", "text": "Let's talk about the funding landscape. Tom, you're in the thick of it. How is the AI funding market shaping up in 2026?", "start": 349.0, "end": 358.0},
-    {"speaker": "Tom Davis", "text": "Honestly, it's bifurcating. If you're building foundation models, you need billions, and there are maybe five players who can raise that kind of capital.", "start": 359.0, "end": 369.0},
-    {"speaker": "Tom Davis", "text": "But if you're in the application layer like us, it's actually a great time to raise. Total AI startup funding hit 97 billion dollars globally last year. The application layer got about 40% of that.", "start": 370.0, "end": 383.0},
-    {"speaker": "Tom Davis", "text": "We're burning about 3 million a month, but our ARR is 18 million and growing 20% month-over-month. At this rate, we hit profitability in 14 months.", "start": 384.0, "end": 396.0},
-    {"speaker": "Dr. Li Wei", "text": "Those growth numbers are interesting. What concerns me from a research perspective is that so much funding is going to application-layer companies while fundamental research is underfunded.", "start": 397.0, "end": 409.0},
-    {"speaker": "Dr. Li Wei", "text": "My lab's annual budget is 12 million dollars. That's the cost of training a single mid-size model. We need more public investment in basic AI research.", "start": 410.0, "end": 420.0},
-    {"speaker": "Maya Rodriguez", "text": "Now let's get into ethical AI. This is something both of you care deeply about but from different angles.", "start": 421.0, "end": 428.0},
-    {"speaker": "Dr. Li Wei", "text": "Ethical AI starts with the training data. We've shown that bias in training data directly translates to discriminatory outputs. Our latest audit of three major commercial models found significant gender bias in 23% of professional context responses.", "start": 429.0, "end": 444.0},
-    {"speaker": "Dr. Li Wei", "text": "The 150 billion parameter model we tested showed the worst performance. Larger models don't automatically mean more fair models. In fact, they can amplify existing biases in the training data.", "start": 445.0, "end": 457.0},
-    {"speaker": "Tom Davis", "text": "We take bias very seriously at Helios. We've built an automated fairness evaluation pipeline that runs on every model update. Our bias score has dropped 67% since we implemented it.", "start": 458.0, "end": 470.0},
-    {"speaker": "Tom Davis", "text": "But I want to make a broader point. Perfect fairness is an unrealistic goal. The question should be: is the AI system more fair than the human process it's replacing? And in most cases, the answer is yes.", "start": 471.0, "end": 484.0},
-    {"speaker": "Dr. Li Wei", "text": "That's a dangerous framing. Just because a system is better than a flawed human process doesn't mean it's good enough. We should hold AI to the highest standard, not just a comparative one.", "start": 485.0, "end": 497.0},
-    {"speaker": "Maya Rodriguez", "text": "Both valid perspectives. Let me throw a curveball. Where do you each see AI in five years? What's the one prediction you'd stake your reputation on?", "start": 498.0, "end": 508.0},
-    {"speaker": "Tom Davis", "text": "By 2031, every knowledge worker will have a personalized AI assistant that handles 80% of routine cognitive tasks. The role of most professionals will shift from doing to directing and reviewing.", "start": 509.0, "end": 522.0},
-    {"speaker": "Tom Davis", "text": "Companies that don't adopt AI will go the way of companies that didn't adopt the internet. It's not optional anymore.", "start": 523.0, "end": 530.0},
-    {"speaker": "Dr. Li Wei", "text": "I'll make a more measured prediction. I believe we'll achieve robust multi-modal reasoning, models that can truly understand and synthesize across text, images, video, and sensor data.", "start": 531.0, "end": 543.0},
-    {"speaker": "Dr. Li Wei", "text": "But I think the hype around AGI is overblown. We're at least 15 to 20 years away from anything resembling general intelligence. The current paradigm of scaling has fundamental limitations.", "start": 544.0, "end": 557.0},
-    {"speaker": "Tom Davis", "text": "I actually agree with Li on the AGI timeline. But I think people focus too much on AGI and not enough on the enormous value that narrow AI is already delivering today.", "start": 558.0, "end": 569.0},
-    {"speaker": "Maya Rodriguez", "text": "Rare agreement between our guests! Before we wrap, let me ask about what's next for each of you.", "start": 570.0, "end": 577.0},
-    {"speaker": "Dr. Li Wei", "text": "We're about to publish a major paper on what we call compositional reasoning. It's a new training approach that significantly improves multi-step logical reasoning. Early results show a jump from 73% to 89% accuracy on our benchmark suite.", "start": 578.0, "end": 594.0},
-    {"speaker": "Tom Davis", "text": "For Helios, we're launching our enterprise platform v2 next quarter. Major upgrades to our deployment pipeline and we're adding support for on-premise air-gapped installations for government clients.", "start": 595.0, "end": 608.0},
-    {"speaker": "Tom Davis", "text": "We're also hiring aggressively. We want to go from 85 to 150 employees by end of year. If anyone listening is interested, check out our careers page.", "start": 609.0, "end": 619.0},
-    {"speaker": "Maya Rodriguez", "text": "And there's your call to action. This has been an incredible conversation. Dr. Li Wei, Tom Davis, thank you both for joining us on AI Frontiers.", "start": 620.0, "end": 630.0},
-    {"speaker": "Dr. Li Wei", "text": "Thank you Maya. Really enjoyed the debate.", "start": 631.0, "end": 634.0},
-    {"speaker": "Tom Davis", "text": "Thanks for having us. Always good to challenge each other's thinking.", "start": 635.0, "end": 639.0},
-    {"speaker": "Maya Rodriguez", "text": "That's a wrap on today's episode. If you enjoyed this conversation, please subscribe, leave a review, and share it with someone who cares about the future of AI. Until next time, I'm Maya Rodriguez, and this has been AI Frontiers.", "start": 640.0, "end": 655.0},
-    {"speaker": "Maya Rodriguez", "text": "Next week on the show, we'll be diving into AI in healthcare with the chief medical officer of a major hospital system. You won't want to miss it.", "start": 656.0, "end": 665.0},
-    {"speaker": "Maya Rodriguez", "text": "Show notes and links to everything we discussed today are available at aifrontiers.fm. See you next week.", "start": 666.0, "end": 672.0}
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "Welcome to AI Frontiers, the podcast where we explore the cutting edge of artificial intelligence and its impact on the world. I'm your host Maya Rodriguez.",
+      "start": 0.0,
+      "end": 9.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "Today we have two incredible guests. Dr. Li Wei, a leading AI researcher at the Institute for Advanced Computation, and Tom Davis, CEO of Helios AI, a startup that just closed a Series B round.",
+      "start": 9.5,
+      "end": 20.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "Thanks for having me, Maya. Always a pleasure to discuss the state of AI research.",
+      "start": 21.0,
+      "end": 25.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "Great to be here. I'm a big fan of the show. Last time I was on, we were still pre-seed, so a lot has changed.",
+      "start": 26.0,
+      "end": 32.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "A lot has changed indeed. Tom, let's start with you. You just closed a 45 million dollar Series B. Tell us about that.",
+      "start": 33.0,
+      "end": 40.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "Yeah, it's been a wild ride. We closed 45 million led by Sequoia with participation from a16z. The round values us at about 320 million dollars.",
+      "start": 41.0,
+      "end": 50.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "The thesis is pretty simple. We believe enterprise AI adoption is bottlenecked by deployment complexity, not model capability. Our platform reduces deployment time from months to days.",
+      "start": 51.0,
+      "end": 62.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "That's a massive valuation for a Series B. Dr. Wei, from the research side, do you agree that deployment is the bottleneck?",
+      "start": 63.0,
+      "end": 70.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "I think it's one bottleneck, but I'd argue the bigger challenge is still model capability, particularly in reasoning and reliability.",
+      "start": 71.0,
+      "end": 79.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "Our latest research shows that even state-of-the-art models achieve only about 73% accuracy on complex multi-step reasoning tasks. That's not good enough for most enterprise use cases.",
+      "start": 80.0,
+      "end": 91.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "I'd push back on that. Our customers are already getting massive value from current models. We're seeing 40% productivity gains in code review workflows and 60% reduction in documentation time.",
+      "start": 92.0,
+      "end": 104.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "Interesting tension there. Let's pivot to probably the hottest topic in AI right now: regulation. Dr. Wei, you've been advising the EU on AI governance. Where do you stand?",
+      "start": 105.0,
+      "end": 116.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "I'm firmly in the camp that we need strong, proactive regulation. The EU AI Act is a good start, but it doesn't go far enough.",
+      "start": 117.0,
+      "end": 126.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "We need mandatory safety evaluations before any model above 10 billion parameters can be deployed commercially. The potential for harm is too great to leave to self-regulation.",
+      "start": 127.0,
+      "end": 138.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "My research group published a paper last month showing that models above that threshold exhibit emergent behaviors that are fundamentally unpredictable. We can't test for what we can't predict.",
+      "start": 139.0,
+      "end": 151.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "I strongly disagree. Mandatory pre-deployment evaluations would kill innovation. The compliance costs alone would wipe out most startups.",
+      "start": 152.0,
+      "end": 161.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "We estimated it would add 6 to 8 months and about 2 million dollars to every deployment cycle. For a startup like ours burning 3 million a month, that's existential.",
+      "start": 162.0,
+      "end": 173.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "I think the market should regulate itself. Bad actors will be punished by the market. We've seen this play out in social media already.",
+      "start": 174.0,
+      "end": 183.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "With all due respect Tom, saying social media self-regulated is a strange example. Most people would say that's a case study in the failure of self-regulation.",
+      "start": 184.0,
+      "end": 194.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "Point taken by Dr. Wei there. Let's move to another divisive topic: open source versus closed source AI models. This has been heating up significantly.",
+      "start": 195.0,
+      "end": 205.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "I'm a strong proponent of open source. Helios is built entirely on open-source models. We use fine-tuned versions of Llama and Mistral for our enterprise products.",
+      "start": 206.0,
+      "end": 217.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "Open source democratizes AI. It prevents any single company from becoming the gatekeeper of intelligence. Our 70 billion parameter fine-tuned model matches GPT-4 on enterprise benchmarks at a fraction of the cost.",
+      "start": 218.0,
+      "end": 231.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "I have to push back here. Open-sourcing frontier models is irresponsible. Once you release the weights, you cannot control how they're used.",
+      "start": 232.0,
+      "end": 241.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "We demonstrated in our lab that an open-source model can be fine-tuned to bypass its safety guardrails in under 200 GPU-hours. That's about 500 dollars on cloud compute. Anyone can do it.",
+      "start": 242.0,
+      "end": 254.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "That argument proves too much. You could say the same about the internet, about encryption, about any dual-use technology. The benefits of openness massively outweigh the risks.",
+      "start": 255.0,
+      "end": 266.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "Encryption doesn't have the potential to generate convincing bioweapon synthesis instructions. The risk profiles are not comparable.",
+      "start": 267.0,
+      "end": 275.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "Heavy stuff. Let's lighten it up a bit and talk about what's actually working in AI right now. Tom, what are your customers most excited about?",
+      "start": 276.0,
+      "end": 285.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "The killer app right now is AI-assisted code generation. We have customers reporting their engineering teams are shipping 35% more features per quarter after adopting our tools.",
+      "start": 286.0,
+      "end": 297.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "But the one that surprises people is customer support automation. One of our enterprise clients reduced their average ticket resolution time from 4 hours to 22 minutes. That's a 91% improvement.",
+      "start": 298.0,
+      "end": 311.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "Those are impressive numbers, but I'd want to see the methodology. In our research, we often find that headline productivity metrics don't account for the time spent reviewing and correcting AI output.",
+      "start": 312.0,
+      "end": 324.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "We published a study with 500 developers and found that when you account for review time, the net productivity gain from AI code generation drops from the claimed 40% to about 15%.",
+      "start": 325.0,
+      "end": 337.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "Our data doesn't support that. We measure end-to-end cycle time, not just code generation. The 35% number includes review, testing, and deployment.",
+      "start": 338.0,
+      "end": 348.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "Let's talk about the funding landscape. Tom, you're in the thick of it. How is the AI funding market shaping up in 2026?",
+      "start": 349.0,
+      "end": 358.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "Honestly, it's bifurcating. If you're building foundation models, you need billions, and there are maybe five players who can raise that kind of capital.",
+      "start": 359.0,
+      "end": 369.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "But if you're in the application layer like us, it's actually a great time to raise. Total AI startup funding hit 97 billion dollars globally last year. The application layer got about 40% of that.",
+      "start": 370.0,
+      "end": 383.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "We're burning about 3 million a month, but our ARR is 18 million and growing 20% month-over-month. At this rate, we hit profitability in 14 months.",
+      "start": 384.0,
+      "end": 396.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "Those growth numbers are interesting. What concerns me from a research perspective is that so much funding is going to application-layer companies while fundamental research is underfunded.",
+      "start": 397.0,
+      "end": 409.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "My lab's annual budget is 12 million dollars. That's the cost of training a single mid-size model. We need more public investment in basic AI research.",
+      "start": 410.0,
+      "end": 420.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "Now let's get into ethical AI. This is something both of you care deeply about but from different angles.",
+      "start": 421.0,
+      "end": 428.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "Ethical AI starts with the training data. We've shown that bias in training data directly translates to discriminatory outputs. Our latest audit of three major commercial models found significant gender bias in 23% of professional context responses.",
+      "start": 429.0,
+      "end": 444.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "The 150 billion parameter model we tested showed the worst performance. Larger models don't automatically mean more fair models. In fact, they can amplify existing biases in the training data.",
+      "start": 445.0,
+      "end": 457.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "We take bias very seriously at Helios. We've built an automated fairness evaluation pipeline that runs on every model update. Our bias score has dropped 67% since we implemented it.",
+      "start": 458.0,
+      "end": 470.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "But I want to make a broader point. Perfect fairness is an unrealistic goal. The question should be: is the AI system more fair than the human process it's replacing? And in most cases, the answer is yes.",
+      "start": 471.0,
+      "end": 484.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "That's a dangerous framing. Just because a system is better than a flawed human process doesn't mean it's good enough. We should hold AI to the highest standard, not just a comparative one.",
+      "start": 485.0,
+      "end": 497.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "Both valid perspectives. Let me throw a curveball. Where do you each see AI in five years? What's the one prediction you'd stake your reputation on?",
+      "start": 498.0,
+      "end": 508.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "By 2031, every knowledge worker will have a personalized AI assistant that handles 80% of routine cognitive tasks. The role of most professionals will shift from doing to directing and reviewing.",
+      "start": 509.0,
+      "end": 522.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "Companies that don't adopt AI will go the way of companies that didn't adopt the internet. It's not optional anymore.",
+      "start": 523.0,
+      "end": 530.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "I'll make a more measured prediction. I believe we'll achieve robust multi-modal reasoning, models that can truly understand and synthesize across text, images, video, and sensor data.",
+      "start": 531.0,
+      "end": 543.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "But I think the hype around AGI is overblown. We're at least 15 to 20 years away from anything resembling general intelligence. The current paradigm of scaling has fundamental limitations.",
+      "start": 544.0,
+      "end": 557.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "I actually agree with Li on the AGI timeline. But I think people focus too much on AGI and not enough on the enormous value that narrow AI is already delivering today.",
+      "start": 558.0,
+      "end": 569.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "Rare agreement between our guests! Before we wrap, let me ask about what's next for each of you.",
+      "start": 570.0,
+      "end": 577.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "We're about to publish a major paper on what we call compositional reasoning. It's a new training approach that significantly improves multi-step logical reasoning. Early results show a jump from 73% to 89% accuracy on our benchmark suite.",
+      "start": 578.0,
+      "end": 594.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "For Helios, we're launching our enterprise platform v2 next quarter. Major upgrades to our deployment pipeline and we're adding support for on-premise air-gapped installations for government clients.",
+      "start": 595.0,
+      "end": 608.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "We're also hiring aggressively. We want to go from 85 to 150 employees by end of year. If anyone listening is interested, check out our careers page.",
+      "start": 609.0,
+      "end": 619.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "And there's your call to action. This has been an incredible conversation. Dr. Li Wei, Tom Davis, thank you both for joining us on AI Frontiers.",
+      "start": 620.0,
+      "end": 630.0
+    },
+    {
+      "speaker": "Dr. Li Wei",
+      "text": "Thank you Maya. Really enjoyed the debate.",
+      "start": 631.0,
+      "end": 634.0
+    },
+    {
+      "speaker": "Tom Davis",
+      "text": "Thanks for having us. Always good to challenge each other's thinking.",
+      "start": 635.0,
+      "end": 639.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "That's a wrap on today's episode. If you enjoyed this conversation, please subscribe, leave a review, and share it with someone who cares about the future of AI. Until next time, I'm Maya Rodriguez, and this has been AI Frontiers.",
+      "start": 640.0,
+      "end": 655.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "Next week on the show, we'll be diving into AI in healthcare with the chief medical officer of a major hospital system. You won't want to miss it.",
+      "start": 656.0,
+      "end": 665.0
+    },
+    {
+      "speaker": "Maya Rodriguez",
+      "text": "Show notes and links to everything we discussed today are available at aifrontiers.fm. See you next week.",
+      "start": 666.0,
+      "end": 672.0
+    }
   ],
   "graph": {
     "nodes": [
-      {"id": "speaker_0", "type": "speaker", "label": "Maya Rodriguez", "first_seen": 0.0, "last_seen": 672.0, "attributes": {"role": "Podcast Host", "key_contributions": ["Moderated discussion", "Navigated between research and business perspectives", "Probed disagreements between guests"]}},
-      {"id": "speaker_1", "type": "speaker", "label": "Dr. Li Wei", "first_seen": 21.0, "last_seen": 634.0, "attributes": {"role": "AI Researcher / Institute for Advanced Computation", "key_contributions": ["Advocated for strong AI regulation", "Presented research on model accuracy and bias", "Cautioned against open-sourcing frontier models"]}},
-      {"id": "speaker_2", "type": "speaker", "label": "Tom Davis", "first_seen": 26.0, "last_seen": 639.0, "attributes": {"role": "CEO of Helios AI", "key_contributions": ["Shared Series B funding details", "Advocated for open-source AI and market self-regulation", "Presented enterprise AI adoption metrics"]}},
-      {"id": "topic_0", "type": "topic", "label": "Startup Funding & Growth", "first_seen": 33.0, "last_seen": 104.0, "attributes": {"key_points": ["$45M Series B led by Sequoia", "$320M valuation", "Enterprise AI deployment platform", "40% productivity gains, 60% documentation time reduction"], "speakers_involved": ["speaker_0", "speaker_1", "speaker_2"]}},
-      {"id": "topic_1", "type": "topic", "label": "AI Regulation", "first_seen": 105.0, "last_seen": 194.0, "attributes": {"key_points": ["EU AI Act assessment", "Mandatory safety evaluations proposed for 10B+ param models", "Compliance cost concerns: 6-8 months, $2M per deployment", "Debate on self-regulation vs proactive governance"], "speakers_involved": ["speaker_0", "speaker_1", "speaker_2"]}},
-      {"id": "topic_2", "type": "topic", "label": "Open Source vs Closed Source AI", "first_seen": 195.0, "last_seen": 275.0, "attributes": {"key_points": ["Helios built on open-source Llama and Mistral", "70B fine-tuned model matches GPT-4 on enterprise benchmarks", "Safety guardrails bypassed in 200 GPU-hours ($500)", "Debate on democratization vs risk of misuse"], "speakers_involved": ["speaker_0", "speaker_1", "speaker_2"]}},
-      {"id": "topic_3", "type": "topic", "label": "AI Productivity & Enterprise Applications", "first_seen": 276.0, "last_seen": 396.0, "attributes": {"key_points": ["35% more features shipped per quarter with AI code gen", "Customer support resolution: 4 hours to 22 minutes", "Net productivity debate: 40% claimed vs 15% after review time", "AI funding: $97B globally, 40% to application layer"], "speakers_involved": ["speaker_0", "speaker_1", "speaker_2"]}},
-      {"id": "topic_4", "type": "topic", "label": "Ethical AI & Bias", "first_seen": 421.0, "last_seen": 557.0, "attributes": {"key_points": ["23% gender bias found in professional context responses", "Larger models can amplify training data biases", "Helios bias score dropped 67% with automated fairness pipeline", "Debate on comparative vs absolute fairness standards"], "speakers_involved": ["speaker_0", "speaker_1", "speaker_2"]}},
-      {"id": "kpi_0", "type": "kpi", "label": "Series B: $45M at $320M valuation", "first_seen": 41.0, "last_seen": 50.0, "attributes": {"name": "Series B Funding", "value": "$45M at $320M valuation", "context": "Led by Sequoia with a16z participation. Helios AI enterprise platform."}},
-      {"id": "kpi_1", "type": "kpi", "label": "Reasoning Accuracy: 73%", "first_seen": 80.0, "last_seen": 91.0, "attributes": {"name": "Multi-step Reasoning Accuracy", "value": "73%", "context": "State-of-the-art models on complex multi-step reasoning tasks. Dr. Wei's research."}},
-      {"id": "kpi_2", "type": "kpi", "label": "Model Size Threshold: 10B params", "first_seen": 127.0, "last_seen": 138.0, "attributes": {"name": "Regulation Model Size Threshold", "value": "10 billion parameters", "context": "Dr. Wei proposes mandatory safety evaluations above this threshold."}},
-      {"id": "kpi_3", "type": "kpi", "label": "Global AI Funding: $97B", "first_seen": 370.0, "last_seen": 383.0, "attributes": {"name": "Global AI Startup Funding", "value": "$97 billion (2025)", "context": "Application layer received ~40% ($39B). Foundation model layer requires billions per company."}},
-      {"id": "kpi_4", "type": "kpi", "label": "Helios ARR: $18M, 20% MoM growth", "first_seen": 384.0, "last_seen": 396.0, "attributes": {"name": "Helios Annual Recurring Revenue", "value": "$18M ARR, 20% month-over-month growth", "context": "Burning $3M/month. Projected profitability in 14 months."}},
-      {"id": "claim_0", "type": "claim", "label": "Dr. Wei: Strong regulation needed, market can't self-regulate", "first_seen": 117.0, "last_seen": 151.0, "attributes": {"content": "Mandatory safety evaluations needed for models above 10B parameters. Self-regulation insufficient.", "speaker": "speaker_1", "type": "opinion"}},
-      {"id": "claim_1", "type": "claim", "label": "Tom: Market should self-regulate, compliance kills startups", "first_seen": 152.0, "last_seen": 183.0, "attributes": {"content": "Pre-deployment mandates add 6-8 months and $2M cost. Market will punish bad actors.", "speaker": "speaker_2", "type": "opinion"}},
-      {"id": "claim_2", "type": "claim", "label": "Tom: Open source is essential for AI democratization", "first_seen": 206.0, "last_seen": 266.0, "attributes": {"content": "Open-source models prevent gatekeeping of intelligence. Benefits of openness outweigh risks.", "speaker": "speaker_2", "type": "opinion"}},
-      {"id": "claim_3", "type": "claim", "label": "Dr. Wei: Open-sourcing frontier models is irresponsible", "first_seen": 232.0, "last_seen": 275.0, "attributes": {"content": "Released weights cannot be controlled. Safety guardrails bypassed for $500. Risk profiles incomparable to other technologies.", "speaker": "speaker_1", "type": "opinion"}},
-      {"id": "claim_4", "type": "claim", "label": "Tom: AI code gen gives 35-40% productivity gains", "first_seen": 92.0, "last_seen": 348.0, "attributes": {"content": "Customers see 35% more features per quarter. 40% productivity gains in code review workflows.", "speaker": "speaker_2", "type": "factual"}},
-      {"id": "claim_5", "type": "claim", "label": "Dr. Wei: Net productivity gain is only 15% after review time", "first_seen": 325.0, "last_seen": 337.0, "attributes": {"content": "Study of 500 developers shows headline 40% drops to 15% when accounting for AI output review time.", "speaker": "speaker_1", "type": "factual"}},
-      {"id": "decision_0", "type": "decision", "label": "Helios launching enterprise platform v2 next quarter", "first_seen": 595.0, "last_seen": 608.0, "attributes": {"context": "Air-gapped on-premise installations for government clients"}},
-      {"id": "decision_1", "type": "decision", "label": "Helios scaling from 85 to 150 employees by year end", "first_seen": 609.0, "last_seen": 619.0, "attributes": {"context": "Aggressive hiring to support growth and platform v2 launch"}}
+      {
+        "id": "speaker_0",
+        "type": "speaker",
+        "label": "Maya Rodriguez",
+        "first_seen": 0.0,
+        "last_seen": 672.0,
+        "attributes": {
+          "role": "Podcast Host",
+          "key_contributions": [
+            "Moderated discussion",
+            "Navigated between research and business perspectives",
+            "Probed disagreements between guests"
+          ]
+        }
+      },
+      {
+        "id": "speaker_1",
+        "type": "speaker",
+        "label": "Dr. Li Wei",
+        "first_seen": 21.0,
+        "last_seen": 634.0,
+        "attributes": {
+          "role": "AI Researcher / Institute for Advanced Computation",
+          "key_contributions": [
+            "Advocated for strong AI regulation",
+            "Presented research on model accuracy and bias",
+            "Cautioned against open-sourcing frontier models"
+          ]
+        }
+      },
+      {
+        "id": "speaker_2",
+        "type": "speaker",
+        "label": "Tom Davis",
+        "first_seen": 26.0,
+        "last_seen": 639.0,
+        "attributes": {
+          "role": "CEO of Helios AI",
+          "key_contributions": [
+            "Shared Series B funding details",
+            "Advocated for open-source AI and market self-regulation",
+            "Presented enterprise AI adoption metrics"
+          ]
+        }
+      },
+      {
+        "id": "topic_0",
+        "type": "topic",
+        "label": "Startup Funding & Growth",
+        "first_seen": 33.0,
+        "last_seen": 104.0,
+        "attributes": {
+          "key_points": [
+            "$45M Series B led by Sequoia",
+            "$320M valuation",
+            "Enterprise AI deployment platform",
+            "40% productivity gains, 60% documentation time reduction"
+          ],
+          "speakers_involved": [
+            "speaker_0",
+            "speaker_1",
+            "speaker_2"
+          ]
+        }
+      },
+      {
+        "id": "topic_1",
+        "type": "topic",
+        "label": "AI Regulation",
+        "first_seen": 105.0,
+        "last_seen": 194.0,
+        "attributes": {
+          "key_points": [
+            "EU AI Act assessment",
+            "Mandatory safety evaluations proposed for 10B+ param models",
+            "Compliance cost concerns: 6-8 months, $2M per deployment",
+            "Debate on self-regulation vs proactive governance"
+          ],
+          "speakers_involved": [
+            "speaker_0",
+            "speaker_1",
+            "speaker_2"
+          ]
+        }
+      },
+      {
+        "id": "topic_2",
+        "type": "topic",
+        "label": "Open Source vs Closed Source AI",
+        "first_seen": 195.0,
+        "last_seen": 275.0,
+        "attributes": {
+          "key_points": [
+            "Helios built on open-source Llama and Mistral",
+            "70B fine-tuned model matches GPT-4 on enterprise benchmarks",
+            "Safety guardrails bypassed in 200 GPU-hours ($500)",
+            "Debate on democratization vs risk of misuse"
+          ],
+          "speakers_involved": [
+            "speaker_0",
+            "speaker_1",
+            "speaker_2"
+          ]
+        }
+      },
+      {
+        "id": "topic_3",
+        "type": "topic",
+        "label": "AI Productivity & Enterprise Applications",
+        "first_seen": 276.0,
+        "last_seen": 396.0,
+        "attributes": {
+          "key_points": [
+            "35% more features shipped per quarter with AI code gen",
+            "Customer support resolution: 4 hours to 22 minutes",
+            "Net productivity debate: 40% claimed vs 15% after review time",
+            "AI funding: $97B globally, 40% to application layer"
+          ],
+          "speakers_involved": [
+            "speaker_0",
+            "speaker_1",
+            "speaker_2"
+          ]
+        }
+      },
+      {
+        "id": "topic_4",
+        "type": "topic",
+        "label": "Ethical AI & Bias",
+        "first_seen": 421.0,
+        "last_seen": 557.0,
+        "attributes": {
+          "key_points": [
+            "23% gender bias found in professional context responses",
+            "Larger models can amplify training data biases",
+            "Helios bias score dropped 67% with automated fairness pipeline",
+            "Debate on comparative vs absolute fairness standards"
+          ],
+          "speakers_involved": [
+            "speaker_0",
+            "speaker_1",
+            "speaker_2"
+          ]
+        }
+      },
+      {
+        "id": "kpi_0",
+        "type": "kpi",
+        "label": "Series B: $45M at $320M valuation",
+        "first_seen": 41.0,
+        "last_seen": 50.0,
+        "attributes": {
+          "name": "Series B Funding",
+          "value": "$45M at $320M valuation",
+          "context": "Led by Sequoia with a16z participation. Helios AI enterprise platform."
+        }
+      },
+      {
+        "id": "kpi_1",
+        "type": "kpi",
+        "label": "Reasoning Accuracy: 73%",
+        "first_seen": 80.0,
+        "last_seen": 91.0,
+        "attributes": {
+          "name": "Multi-step Reasoning Accuracy",
+          "value": "73%",
+          "context": "State-of-the-art models on complex multi-step reasoning tasks. Dr. Wei's research."
+        }
+      },
+      {
+        "id": "kpi_2",
+        "type": "kpi",
+        "label": "Model Size Threshold: 10B params",
+        "first_seen": 127.0,
+        "last_seen": 138.0,
+        "attributes": {
+          "name": "Regulation Model Size Threshold",
+          "value": "10 billion parameters",
+          "context": "Dr. Wei proposes mandatory safety evaluations above this threshold."
+        }
+      },
+      {
+        "id": "kpi_3",
+        "type": "kpi",
+        "label": "Global AI Funding: $97B",
+        "first_seen": 370.0,
+        "last_seen": 383.0,
+        "attributes": {
+          "name": "Global AI Startup Funding",
+          "value": "$97 billion (2025)",
+          "context": "Application layer received ~40% ($39B). Foundation model layer requires billions per company."
+        }
+      },
+      {
+        "id": "kpi_4",
+        "type": "kpi",
+        "label": "Helios ARR: $18M, 20% MoM growth",
+        "first_seen": 384.0,
+        "last_seen": 396.0,
+        "attributes": {
+          "name": "Helios Annual Recurring Revenue",
+          "value": "$18M ARR, 20% month-over-month growth",
+          "context": "Burning $3M/month. Projected profitability in 14 months."
+        }
+      },
+      {
+        "id": "claim_0",
+        "type": "claim",
+        "label": "Dr. Wei: Strong regulation needed, market can't self-regulate",
+        "first_seen": 117.0,
+        "last_seen": 151.0,
+        "attributes": {
+          "content": "Mandatory safety evaluations needed for models above 10B parameters. Self-regulation insufficient.",
+          "speaker": "speaker_1",
+          "type": "opinion"
+        }
+      },
+      {
+        "id": "claim_1",
+        "type": "claim",
+        "label": "Tom: Market should self-regulate, compliance kills startups",
+        "first_seen": 152.0,
+        "last_seen": 183.0,
+        "attributes": {
+          "content": "Pre-deployment mandates add 6-8 months and $2M cost. Market will punish bad actors.",
+          "speaker": "speaker_2",
+          "type": "opinion"
+        }
+      },
+      {
+        "id": "claim_2",
+        "type": "claim",
+        "label": "Tom: Open source is essential for AI democratization",
+        "first_seen": 206.0,
+        "last_seen": 266.0,
+        "attributes": {
+          "content": "Open-source models prevent gatekeeping of intelligence. Benefits of openness outweigh risks.",
+          "speaker": "speaker_2",
+          "type": "opinion"
+        }
+      },
+      {
+        "id": "claim_3",
+        "type": "claim",
+        "label": "Dr. Wei: Open-sourcing frontier models is irresponsible",
+        "first_seen": 232.0,
+        "last_seen": 275.0,
+        "attributes": {
+          "content": "Released weights cannot be controlled. Safety guardrails bypassed for $500. Risk profiles incomparable to other technologies.",
+          "speaker": "speaker_1",
+          "type": "opinion"
+        }
+      },
+      {
+        "id": "claim_4",
+        "type": "claim",
+        "label": "Tom: AI code gen gives 35-40% productivity gains",
+        "first_seen": 92.0,
+        "last_seen": 348.0,
+        "attributes": {
+          "content": "Customers see 35% more features per quarter. 40% productivity gains in code review workflows.",
+          "speaker": "speaker_2",
+          "type": "factual"
+        }
+      },
+      {
+        "id": "claim_5",
+        "type": "claim",
+        "label": "Dr. Wei: Net productivity gain is only 15% after review time",
+        "first_seen": 325.0,
+        "last_seen": 337.0,
+        "attributes": {
+          "content": "Study of 500 developers shows headline 40% drops to 15% when accounting for AI output review time.",
+          "speaker": "speaker_1",
+          "type": "factual"
+        }
+      },
+      {
+        "id": "decision_0",
+        "type": "decision",
+        "label": "Helios launching enterprise platform v2 next quarter",
+        "first_seen": 595.0,
+        "last_seen": 608.0,
+        "attributes": {
+          "context": "Air-gapped on-premise installations for government clients"
+        }
+      },
+      {
+        "id": "decision_1",
+        "type": "decision",
+        "label": "Helios scaling from 85 to 150 employees by year end",
+        "first_seen": 609.0,
+        "last_seen": 619.0,
+        "attributes": {
+          "context": "Aggressive hiring to support growth and platform v2 launch"
+        }
+      }
     ],
     "edges": [
-      {"source": "speaker_0", "target": "topic_0", "relation": "mentioned", "timestamp": 33.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "You just closed a 45 million dollar Series B. Tell us about that.", "description": null, "frame_path": null}},
-      {"source": "speaker_2", "target": "kpi_0", "relation": "mentioned", "timestamp": 41.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "We closed 45 million led by Sequoia. The round values us at about 320 million dollars.", "description": null, "frame_path": null}},
-      {"source": "speaker_1", "target": "kpi_1", "relation": "mentioned", "timestamp": 80.0, "confidence": 0.93, "evidence": {"source_type": "audio", "quote": "even state-of-the-art models achieve only about 73% accuracy on complex multi-step reasoning tasks", "description": null, "frame_path": null}},
-      {"source": "speaker_0", "target": "topic_1", "relation": "mentioned", "timestamp": 105.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "probably the hottest topic in AI right now: regulation", "description": null, "frame_path": null}},
-      {"source": "claim_0", "target": "speaker_1", "relation": "said_by", "timestamp": 117.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "I'm firmly in the camp that we need strong, proactive regulation", "description": null, "frame_path": null}},
-      {"source": "claim_1", "target": "speaker_2", "relation": "said_by", "timestamp": 152.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "Mandatory pre-deployment evaluations would kill innovation", "description": null, "frame_path": null}},
-      {"source": "claim_0", "target": "claim_1", "relation": "contradicts", "timestamp": 152.0, "confidence": 0.92, "evidence": {"source_type": "merged", "quote": "Dr. Wei advocates mandatory regulation; Tom says it would kill startups", "description": "Dr. Wei argues for mandatory safety evaluations for models above 10B parameters, citing unpredictable emergent behaviors. Tom Davis counters that compliance costs of $2M and 6-8 month delays would be existential for startups, advocating market self-regulation instead.", "frame_path": null}},
-      {"source": "speaker_1", "target": "kpi_2", "relation": "mentioned", "timestamp": 127.0, "confidence": 0.90, "evidence": {"source_type": "audio", "quote": "mandatory safety evaluations before any model above 10 billion parameters can be deployed", "description": null, "frame_path": null}},
-      {"source": "speaker_0", "target": "topic_2", "relation": "mentioned", "timestamp": 195.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "open source versus closed source AI models. This has been heating up significantly.", "description": null, "frame_path": null}},
-      {"source": "claim_2", "target": "speaker_2", "relation": "said_by", "timestamp": 206.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "I'm a strong proponent of open source. Helios is built entirely on open-source models.", "description": null, "frame_path": null}},
-      {"source": "claim_3", "target": "speaker_1", "relation": "said_by", "timestamp": 232.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "Open-sourcing frontier models is irresponsible", "description": null, "frame_path": null}},
-      {"source": "claim_2", "target": "claim_3", "relation": "contradicts", "timestamp": 232.0, "confidence": 0.90, "evidence": {"source_type": "merged", "quote": "Tom champions open source; Dr. Wei calls it irresponsible", "description": "Tom Davis advocates open-source AI as essential for democratization, with his 70B model matching GPT-4 at lower cost. Dr. Wei counters that open-sourcing frontier models enables safety guardrail bypass for $500 and poses bioweapon risks that outweigh democratization benefits.", "frame_path": null}},
-      {"source": "speaker_0", "target": "topic_3", "relation": "mentioned", "timestamp": 276.0, "confidence": 0.92, "evidence": {"source_type": "audio", "quote": "what's actually working in AI right now", "description": null, "frame_path": null}},
-      {"source": "claim_4", "target": "speaker_2", "relation": "said_by", "timestamp": 92.0, "confidence": 0.93, "evidence": {"source_type": "audio", "quote": "We're seeing 40% productivity gains in code review workflows", "description": null, "frame_path": null}},
-      {"source": "claim_5", "target": "speaker_1", "relation": "said_by", "timestamp": 325.0, "confidence": 0.93, "evidence": {"source_type": "audio", "quote": "the net productivity gain from AI code generation drops from the claimed 40% to about 15%", "description": null, "frame_path": null}},
-      {"source": "speaker_2", "target": "kpi_3", "relation": "mentioned", "timestamp": 370.0, "confidence": 0.92, "evidence": {"source_type": "audio", "quote": "Total AI startup funding hit 97 billion dollars globally last year", "description": null, "frame_path": null}},
-      {"source": "speaker_2", "target": "kpi_4", "relation": "mentioned", "timestamp": 384.0, "confidence": 0.95, "evidence": {"source_type": "audio", "quote": "our ARR is 18 million and growing 20% month-over-month", "description": null, "frame_path": null}},
-      {"source": "speaker_0", "target": "topic_4", "relation": "mentioned", "timestamp": 421.0, "confidence": 0.92, "evidence": {"source_type": "audio", "quote": "ethical AI. This is something both of you care deeply about", "description": null, "frame_path": null}},
-      {"source": "speaker_2", "target": "decision_0", "relation": "committed_to", "timestamp": 595.0, "confidence": 0.90, "evidence": {"source_type": "audio", "quote": "we're launching our enterprise platform v2 next quarter", "description": null, "frame_path": null}},
-      {"source": "speaker_2", "target": "decision_1", "relation": "committed_to", "timestamp": 609.0, "confidence": 0.90, "evidence": {"source_type": "audio", "quote": "We want to go from 85 to 150 employees by end of year", "description": null, "frame_path": null}}
+      {
+        "source": "speaker_0",
+        "target": "topic_0",
+        "relation": "mentioned",
+        "timestamp": 33.0,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "You just closed a 45 million dollar Series B. Tell us about that.",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_2",
+        "target": "kpi_0",
+        "relation": "mentioned",
+        "timestamp": 41.0,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "We closed 45 million led by Sequoia. The round values us at about 320 million dollars.",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_1",
+        "target": "kpi_1",
+        "relation": "mentioned",
+        "timestamp": 80.0,
+        "confidence": 0.93,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "even state-of-the-art models achieve only about 73% accuracy on complex multi-step reasoning tasks",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_0",
+        "target": "topic_1",
+        "relation": "mentioned",
+        "timestamp": 105.0,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "probably the hottest topic in AI right now: regulation",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_0",
+        "target": "speaker_1",
+        "relation": "said_by",
+        "timestamp": 117.0,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "I'm firmly in the camp that we need strong, proactive regulation",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_1",
+        "target": "speaker_2",
+        "relation": "said_by",
+        "timestamp": 152.0,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "Mandatory pre-deployment evaluations would kill innovation",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_0",
+        "target": "claim_1",
+        "relation": "contradicts",
+        "timestamp": 152.0,
+        "confidence": 0.92,
+        "evidence": {
+          "source_type": "merged",
+          "quote": "Dr. Wei advocates mandatory regulation; Tom says it would kill startups",
+          "description": "Dr. Wei argues for mandatory safety evaluations for models above 10B parameters, citing unpredictable emergent behaviors. Tom Davis counters that compliance costs of $2M and 6-8 month delays would be existential for startups, advocating market self-regulation instead.",
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_1",
+        "target": "kpi_2",
+        "relation": "mentioned",
+        "timestamp": 127.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "mandatory safety evaluations before any model above 10 billion parameters can be deployed",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_0",
+        "target": "topic_2",
+        "relation": "mentioned",
+        "timestamp": 195.0,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "open source versus closed source AI models. This has been heating up significantly.",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_2",
+        "target": "speaker_2",
+        "relation": "said_by",
+        "timestamp": 206.0,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "I'm a strong proponent of open source. Helios is built entirely on open-source models.",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_3",
+        "target": "speaker_1",
+        "relation": "said_by",
+        "timestamp": 232.0,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "Open-sourcing frontier models is irresponsible",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_2",
+        "target": "claim_3",
+        "relation": "contradicts",
+        "timestamp": 232.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "merged",
+          "quote": "Tom champions open source; Dr. Wei calls it irresponsible",
+          "description": "Tom Davis advocates open-source AI as essential for democratization, with his 70B model matching GPT-4 at lower cost. Dr. Wei counters that open-sourcing frontier models enables safety guardrail bypass for $500 and poses bioweapon risks that outweigh democratization benefits.",
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_0",
+        "target": "topic_3",
+        "relation": "mentioned",
+        "timestamp": 276.0,
+        "confidence": 0.92,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "what's actually working in AI right now",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_4",
+        "target": "speaker_2",
+        "relation": "said_by",
+        "timestamp": 92.0,
+        "confidence": 0.93,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "We're seeing 40% productivity gains in code review workflows",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_5",
+        "target": "speaker_1",
+        "relation": "said_by",
+        "timestamp": 325.0,
+        "confidence": 0.93,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "the net productivity gain from AI code generation drops from the claimed 40% to about 15%",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_2",
+        "target": "kpi_3",
+        "relation": "mentioned",
+        "timestamp": 370.0,
+        "confidence": 0.92,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "Total AI startup funding hit 97 billion dollars globally last year",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_2",
+        "target": "kpi_4",
+        "relation": "mentioned",
+        "timestamp": 384.0,
+        "confidence": 0.95,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "our ARR is 18 million and growing 20% month-over-month",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_0",
+        "target": "topic_4",
+        "relation": "mentioned",
+        "timestamp": 421.0,
+        "confidence": 0.92,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "ethical AI. This is something both of you care deeply about",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_2",
+        "target": "decision_0",
+        "relation": "committed_to",
+        "timestamp": 595.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "we're launching our enterprise platform v2 next quarter",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "speaker_2",
+        "target": "decision_1",
+        "relation": "committed_to",
+        "timestamp": 609.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "We want to go from 85 to 150 employees by end of year",
+          "description": null,
+          "frame_path": null
+        }
+      }
     ],
     "timeline": [
-      {"timestamp": 0.0, "active_nodes": ["speaker_0"], "active_edges": [], "current_topic": "Introduction", "current_speaker": "Maya Rodriguez"},
-      {"timestamp": 60.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "kpi_0"], "active_edges": ["speaker_0->topic_0", "speaker_2->kpi_0"], "current_topic": "Startup Funding & Growth", "current_speaker": "Tom Davis"},
-      {"timestamp": 120.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "kpi_0", "kpi_1", "kpi_2", "claim_0"], "active_edges": ["speaker_0->topic_1", "speaker_1->kpi_1", "claim_0->speaker_1"], "current_topic": "AI Regulation", "current_speaker": "Dr. Li Wei"},
-      {"timestamp": 180.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "kpi_0", "kpi_1", "kpi_2", "claim_0", "claim_1"], "active_edges": ["claim_0->claim_1", "claim_1->speaker_2"], "current_topic": "AI Regulation", "current_speaker": "Tom Davis"},
-      {"timestamp": 240.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "kpi_0", "kpi_1", "kpi_2", "claim_0", "claim_1", "claim_2", "claim_3"], "active_edges": ["claim_0->claim_1", "claim_2->claim_3"], "current_topic": "Open Source vs Closed Source AI", "current_speaker": "Dr. Li Wei"},
-      {"timestamp": 300.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "topic_3", "kpi_0", "kpi_1", "kpi_2", "claim_0", "claim_1", "claim_2", "claim_3", "claim_4"], "active_edges": ["claim_0->claim_1", "claim_2->claim_3", "speaker_0->topic_3"], "current_topic": "AI Productivity & Enterprise Applications", "current_speaker": "Tom Davis"},
-      {"timestamp": 360.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "topic_3", "kpi_0", "kpi_1", "kpi_2", "kpi_3", "claim_0", "claim_1", "claim_2", "claim_3", "claim_4", "claim_5"], "active_edges": ["claim_0->claim_1", "claim_2->claim_3", "speaker_2->kpi_3"], "current_topic": "AI Productivity & Enterprise Applications", "current_speaker": "Tom Davis"},
-      {"timestamp": 420.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "topic_3", "topic_4", "kpi_0", "kpi_1", "kpi_2", "kpi_3", "kpi_4", "claim_0", "claim_1", "claim_2", "claim_3", "claim_4", "claim_5"], "active_edges": ["claim_0->claim_1", "claim_2->claim_3", "speaker_0->topic_4", "speaker_2->kpi_4"], "current_topic": "Ethical AI & Bias", "current_speaker": "Maya Rodriguez"},
-      {"timestamp": 480.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "topic_3", "topic_4", "kpi_0", "kpi_1", "kpi_2", "kpi_3", "kpi_4"], "active_edges": ["claim_0->claim_1", "claim_2->claim_3"], "current_topic": "Ethical AI & Bias", "current_speaker": "Tom Davis"},
-      {"timestamp": 540.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "topic_3", "topic_4", "kpi_0", "kpi_1", "kpi_2", "kpi_3", "kpi_4"], "active_edges": ["claim_0->claim_1", "claim_2->claim_3"], "current_topic": "Future Predictions", "current_speaker": "Dr. Li Wei"},
-      {"timestamp": 600.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "topic_3", "topic_4", "kpi_0", "kpi_1", "kpi_2", "kpi_3", "kpi_4", "decision_0"], "active_edges": ["speaker_2->decision_0"], "current_topic": "What's Next", "current_speaker": "Tom Davis"},
-      {"timestamp": 660.0, "active_nodes": ["speaker_0", "speaker_1", "speaker_2", "topic_0", "topic_1", "topic_2", "topic_3", "topic_4", "kpi_0", "kpi_1", "kpi_2", "kpi_3", "kpi_4", "decision_0", "decision_1"], "active_edges": ["speaker_2->decision_0", "speaker_2->decision_1"], "current_topic": "Wrap-up", "current_speaker": "Maya Rodriguez"}
+      {
+        "timestamp": 0.0,
+        "active_nodes": [
+          "speaker_0"
+        ],
+        "active_edges": [],
+        "current_topic": "Introduction",
+        "current_speaker": "Maya Rodriguez"
+      },
+      {
+        "timestamp": 60.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "kpi_0"
+        ],
+        "active_edges": [
+          "speaker_0->topic_0",
+          "speaker_2->kpi_0"
+        ],
+        "current_topic": "Startup Funding & Growth",
+        "current_speaker": "Tom Davis"
+      },
+      {
+        "timestamp": 120.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "topic_1",
+          "kpi_0",
+          "kpi_1",
+          "kpi_2",
+          "claim_0"
+        ],
+        "active_edges": [
+          "speaker_0->topic_1",
+          "speaker_1->kpi_1",
+          "claim_0->speaker_1"
+        ],
+        "current_topic": "AI Regulation",
+        "current_speaker": "Dr. Li Wei"
+      },
+      {
+        "timestamp": 180.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "topic_1",
+          "kpi_0",
+          "kpi_1",
+          "kpi_2",
+          "claim_0",
+          "claim_1"
+        ],
+        "active_edges": [
+          "claim_0->claim_1",
+          "claim_1->speaker_2"
+        ],
+        "current_topic": "AI Regulation",
+        "current_speaker": "Tom Davis"
+      },
+      {
+        "timestamp": 240.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "topic_1",
+          "topic_2",
+          "kpi_0",
+          "kpi_1",
+          "kpi_2",
+          "claim_0",
+          "claim_1",
+          "claim_2",
+          "claim_3"
+        ],
+        "active_edges": [
+          "claim_0->claim_1",
+          "claim_2->claim_3"
+        ],
+        "current_topic": "Open Source vs Closed Source AI",
+        "current_speaker": "Dr. Li Wei"
+      },
+      {
+        "timestamp": 300.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "topic_1",
+          "topic_2",
+          "topic_3",
+          "kpi_0",
+          "kpi_1",
+          "kpi_2",
+          "claim_0",
+          "claim_1",
+          "claim_2",
+          "claim_3",
+          "claim_4"
+        ],
+        "active_edges": [
+          "claim_0->claim_1",
+          "claim_2->claim_3",
+          "speaker_0->topic_3"
+        ],
+        "current_topic": "AI Productivity & Enterprise Applications",
+        "current_speaker": "Tom Davis"
+      },
+      {
+        "timestamp": 360.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "topic_1",
+          "topic_2",
+          "topic_3",
+          "kpi_0",
+          "kpi_1",
+          "kpi_2",
+          "kpi_3",
+          "claim_0",
+          "claim_1",
+          "claim_2",
+          "claim_3",
+          "claim_4",
+          "claim_5"
+        ],
+        "active_edges": [
+          "claim_0->claim_1",
+          "claim_2->claim_3",
+          "speaker_2->kpi_3"
+        ],
+        "current_topic": "AI Productivity & Enterprise Applications",
+        "current_speaker": "Tom Davis"
+      },
+      {
+        "timestamp": 420.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "topic_1",
+          "topic_2",
+          "topic_3",
+          "topic_4",
+          "kpi_0",
+          "kpi_1",
+          "kpi_2",
+          "kpi_3",
+          "kpi_4",
+          "claim_0",
+          "claim_1",
+          "claim_2",
+          "claim_3",
+          "claim_4",
+          "claim_5"
+        ],
+        "active_edges": [
+          "claim_0->claim_1",
+          "claim_2->claim_3",
+          "speaker_0->topic_4",
+          "speaker_2->kpi_4"
+        ],
+        "current_topic": "Ethical AI & Bias",
+        "current_speaker": "Maya Rodriguez"
+      },
+      {
+        "timestamp": 480.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "topic_1",
+          "topic_2",
+          "topic_3",
+          "topic_4",
+          "kpi_0",
+          "kpi_1",
+          "kpi_2",
+          "kpi_3",
+          "kpi_4"
+        ],
+        "active_edges": [
+          "claim_0->claim_1",
+          "claim_2->claim_3"
+        ],
+        "current_topic": "Ethical AI & Bias",
+        "current_speaker": "Tom Davis"
+      },
+      {
+        "timestamp": 540.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "topic_1",
+          "topic_2",
+          "topic_3",
+          "topic_4",
+          "kpi_0",
+          "kpi_1",
+          "kpi_2",
+          "kpi_3",
+          "kpi_4"
+        ],
+        "active_edges": [
+          "claim_0->claim_1",
+          "claim_2->claim_3"
+        ],
+        "current_topic": "Future Predictions",
+        "current_speaker": "Dr. Li Wei"
+      },
+      {
+        "timestamp": 600.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "topic_1",
+          "topic_2",
+          "topic_3",
+          "topic_4",
+          "kpi_0",
+          "kpi_1",
+          "kpi_2",
+          "kpi_3",
+          "kpi_4",
+          "decision_0"
+        ],
+        "active_edges": [
+          "speaker_2->decision_0"
+        ],
+        "current_topic": "What's Next",
+        "current_speaker": "Tom Davis"
+      },
+      {
+        "timestamp": 660.0,
+        "active_nodes": [
+          "speaker_0",
+          "speaker_1",
+          "speaker_2",
+          "topic_0",
+          "topic_1",
+          "topic_2",
+          "topic_3",
+          "topic_4",
+          "kpi_0",
+          "kpi_1",
+          "kpi_2",
+          "kpi_3",
+          "kpi_4",
+          "decision_0",
+          "decision_1"
+        ],
+        "active_edges": [
+          "speaker_2->decision_0",
+          "speaker_2->decision_1"
+        ],
+        "current_topic": "Wrap-up",
+        "current_speaker": "Maya Rodriguez"
+      }
     ],
     "metadata": {
       "duration_seconds": 672.0,
       "total_nodes": 22,
       "total_edges": 20,
-      "node_types": {"speaker": 3, "topic": 5, "kpi": 5, "claim": 6, "decision": 2}
+      "node_types": {
+        "speaker": 3,
+        "topic": 5,
+        "kpi": 5,
+        "claim": 6,
+        "decision": 2
+      }
     }
   },
   "insights": {
@@ -138,60 +1225,169 @@
         "name": "Startup Funding & Growth",
         "start_time": 33.0,
         "end_time": 104.0,
-        "key_points": ["Helios AI closed $45M Series B at $320M valuation", "Led by Sequoia with a16z participation", "Enterprise AI deployment platform reduces deployment from months to days", "Customers report 40% productivity gains and 60% documentation time reduction"],
-        "speakers_involved": ["Maya Rodriguez", "Tom Davis", "Dr. Li Wei"],
+        "key_points": [
+          "Helios AI closed $45M Series B at $320M valuation",
+          "Led by Sequoia with a16z participation",
+          "Enterprise AI deployment platform reduces deployment from months to days",
+          "Customers report 40% productivity gains and 60% documentation time reduction"
+        ],
+        "speakers_involved": [
+          "Maya Rodriguez",
+          "Tom Davis",
+          "Dr. Li Wei"
+        ],
         "evidence": [
-          {"timestamp": 41.0, "source": "audio", "quote": "We closed 45 million led by Sequoia with participation from a16z. The round values us at about 320 million dollars."},
-          {"timestamp": 51.0, "source": "audio", "quote": "enterprise AI adoption is bottlenecked by deployment complexity, not model capability"},
-          {"timestamp": 92.0, "source": "audio", "quote": "We're seeing 40% productivity gains in code review workflows and 60% reduction in documentation time"}
+          {
+            "timestamp": 41.0,
+            "source": "audio",
+            "quote": "We closed 45 million led by Sequoia with participation from a16z. The round values us at about 320 million dollars."
+          },
+          {
+            "timestamp": 51.0,
+            "source": "audio",
+            "quote": "enterprise AI adoption is bottlenecked by deployment complexity, not model capability"
+          },
+          {
+            "timestamp": 92.0,
+            "source": "audio",
+            "quote": "We're seeing 40% productivity gains in code review workflows and 60% reduction in documentation time"
+          }
         ]
       },
       {
         "name": "AI Regulation",
         "start_time": 105.0,
         "end_time": 194.0,
-        "key_points": ["Dr. Wei advocates mandatory safety evaluations for 10B+ parameter models", "Tom warns compliance costs of $2M and 6-8 months would kill startups", "Debate on self-regulation vs proactive governance", "Dr. Wei cites unpredictable emergent behaviors in large models", "Tom argues market will punish bad actors; Dr. Wei rebuts with social media example"],
-        "speakers_involved": ["Maya Rodriguez", "Dr. Li Wei", "Tom Davis"],
+        "key_points": [
+          "Dr. Wei advocates mandatory safety evaluations for 10B+ parameter models",
+          "Tom warns compliance costs of $2M and 6-8 months would kill startups",
+          "Debate on self-regulation vs proactive governance",
+          "Dr. Wei cites unpredictable emergent behaviors in large models",
+          "Tom argues market will punish bad actors; Dr. Wei rebuts with social media example"
+        ],
+        "speakers_involved": [
+          "Maya Rodriguez",
+          "Dr. Li Wei",
+          "Tom Davis"
+        ],
         "evidence": [
-          {"timestamp": 127.0, "source": "audio", "quote": "We need mandatory safety evaluations before any model above 10 billion parameters can be deployed commercially"},
-          {"timestamp": 162.0, "source": "audio", "quote": "it would add 6 to 8 months and about 2 million dollars to every deployment cycle"},
-          {"timestamp": 184.0, "source": "audio", "quote": "saying social media self-regulated is a strange example. Most people would say that's a case study in the failure of self-regulation"}
+          {
+            "timestamp": 127.0,
+            "source": "audio",
+            "quote": "We need mandatory safety evaluations before any model above 10 billion parameters can be deployed commercially"
+          },
+          {
+            "timestamp": 162.0,
+            "source": "audio",
+            "quote": "it would add 6 to 8 months and about 2 million dollars to every deployment cycle"
+          },
+          {
+            "timestamp": 184.0,
+            "source": "audio",
+            "quote": "saying social media self-regulated is a strange example. Most people would say that's a case study in the failure of self-regulation"
+          }
         ]
       },
       {
         "name": "Open Source vs Closed Source AI",
         "start_time": 195.0,
         "end_time": 275.0,
-        "key_points": ["Helios built entirely on open-source Llama and Mistral models", "70B fine-tuned model matches GPT-4 on enterprise benchmarks", "Dr. Wei: safety guardrails bypassed in 200 GPU-hours ($500)", "Risk of bioweapon synthesis from unrestricted model access", "Debate on dual-use technology risk comparisons"],
-        "speakers_involved": ["Maya Rodriguez", "Tom Davis", "Dr. Li Wei"],
+        "key_points": [
+          "Helios built entirely on open-source Llama and Mistral models",
+          "70B fine-tuned model matches GPT-4 on enterprise benchmarks",
+          "Dr. Wei: safety guardrails bypassed in 200 GPU-hours ($500)",
+          "Risk of bioweapon synthesis from unrestricted model access",
+          "Debate on dual-use technology risk comparisons"
+        ],
+        "speakers_involved": [
+          "Maya Rodriguez",
+          "Tom Davis",
+          "Dr. Li Wei"
+        ],
         "evidence": [
-          {"timestamp": 218.0, "source": "audio", "quote": "Open source democratizes AI. It prevents any single company from becoming the gatekeeper of intelligence"},
-          {"timestamp": 242.0, "source": "audio", "quote": "an open-source model can be fine-tuned to bypass its safety guardrails in under 200 GPU-hours. That's about 500 dollars"},
-          {"timestamp": 267.0, "source": "audio", "quote": "Encryption doesn't have the potential to generate convincing bioweapon synthesis instructions"}
+          {
+            "timestamp": 218.0,
+            "source": "audio",
+            "quote": "Open source democratizes AI. It prevents any single company from becoming the gatekeeper of intelligence"
+          },
+          {
+            "timestamp": 242.0,
+            "source": "audio",
+            "quote": "an open-source model can be fine-tuned to bypass its safety guardrails in under 200 GPU-hours. That's about 500 dollars"
+          },
+          {
+            "timestamp": 267.0,
+            "source": "audio",
+            "quote": "Encryption doesn't have the potential to generate convincing bioweapon synthesis instructions"
+          }
         ]
       },
       {
         "name": "AI Productivity & Enterprise Applications",
         "start_time": 276.0,
         "end_time": 396.0,
-        "key_points": ["35% more features per quarter with AI code generation", "Customer support resolution: 4 hours to 22 minutes (91% improvement)", "Disputed: headline 40% productivity drops to 15% after accounting for review time", "Global AI funding: $97B, 40% to application layer", "Helios: $18M ARR, 20% MoM growth, profitability in 14 months"],
-        "speakers_involved": ["Maya Rodriguez", "Tom Davis", "Dr. Li Wei"],
+        "key_points": [
+          "35% more features per quarter with AI code generation",
+          "Customer support resolution: 4 hours to 22 minutes (91% improvement)",
+          "Disputed: headline 40% productivity drops to 15% after accounting for review time",
+          "Global AI funding: $97B, 40% to application layer",
+          "Helios: $18M ARR, 20% MoM growth, profitability in 14 months"
+        ],
+        "speakers_involved": [
+          "Maya Rodriguez",
+          "Tom Davis",
+          "Dr. Li Wei"
+        ],
         "evidence": [
-          {"timestamp": 298.0, "source": "audio", "quote": "reduced their average ticket resolution time from 4 hours to 22 minutes"},
-          {"timestamp": 325.0, "source": "audio", "quote": "the net productivity gain from AI code generation drops from the claimed 40% to about 15%"},
-          {"timestamp": 384.0, "source": "audio", "quote": "our ARR is 18 million and growing 20% month-over-month"}
+          {
+            "timestamp": 298.0,
+            "source": "audio",
+            "quote": "reduced their average ticket resolution time from 4 hours to 22 minutes"
+          },
+          {
+            "timestamp": 325.0,
+            "source": "audio",
+            "quote": "the net productivity gain from AI code generation drops from the claimed 40% to about 15%"
+          },
+          {
+            "timestamp": 384.0,
+            "source": "audio",
+            "quote": "our ARR is 18 million and growing 20% month-over-month"
+          }
         ]
       },
       {
         "name": "Ethical AI & Bias",
         "start_time": 421.0,
         "end_time": 557.0,
-        "key_points": ["23% gender bias in professional context responses across 3 major commercial models", "150B parameter model showed worst bias performance", "Helios automated fairness pipeline reduced bias score by 67%", "Debate: comparative fairness (better than humans) vs absolute fairness standards", "AGI timeline: both guests agree 15-20+ years away"],
-        "speakers_involved": ["Maya Rodriguez", "Dr. Li Wei", "Tom Davis"],
+        "key_points": [
+          "23% gender bias in professional context responses across 3 major commercial models",
+          "150B parameter model showed worst bias performance",
+          "Helios automated fairness pipeline reduced bias score by 67%",
+          "Debate: comparative fairness (better than humans) vs absolute fairness standards",
+          "AGI timeline: both guests agree 15-20+ years away"
+        ],
+        "speakers_involved": [
+          "Maya Rodriguez",
+          "Dr. Li Wei",
+          "Tom Davis"
+        ],
         "evidence": [
-          {"timestamp": 429.0, "source": "audio", "quote": "Our latest audit of three major commercial models found significant gender bias in 23% of professional context responses"},
-          {"timestamp": 458.0, "source": "audio", "quote": "Our bias score has dropped 67% since we implemented it"},
-          {"timestamp": 485.0, "source": "audio", "quote": "Just because a system is better than a flawed human process doesn't mean it's good enough"}
+          {
+            "timestamp": 429.0,
+            "source": "audio",
+            "quote": "Our latest audit of three major commercial models found significant gender bias in 23% of professional context responses"
+          },
+          {
+            "timestamp": 458.0,
+            "source": "audio",
+            "quote": "Our bias score has dropped 67% since we implemented it"
+          },
+          {
+            "timestamp": 485.0,
+            "source": "audio",
+            "quote": "Just because a system is better than a flawed human process doesn't mean it's good enough"
+          }
         ]
       }
     ],
@@ -200,13 +1396,25 @@
         "description": "Dr. Li Wei to publish paper on compositional reasoning (73% to 89% accuracy improvement)",
         "assignee": "Dr. Li Wei",
         "priority": "high",
-        "evidence": [{"timestamp": 578.0, "source": "audio", "quote": "We're about to publish a major paper on what we call compositional reasoning. Early results show a jump from 73% to 89% accuracy."}]
+        "evidence": [
+          {
+            "timestamp": 578.0,
+            "source": "audio",
+            "quote": "We're about to publish a major paper on what we call compositional reasoning. Early results show a jump from 73% to 89% accuracy."
+          }
+        ]
       },
       {
         "description": "Helios AI to launch enterprise platform v2 with on-premise air-gapped installation support",
         "assignee": "Tom Davis",
         "priority": "high",
-        "evidence": [{"timestamp": 595.0, "source": "audio", "quote": "we're launching our enterprise platform v2 next quarter. Major upgrades and adding support for on-premise air-gapped installations for government clients."}]
+        "evidence": [
+          {
+            "timestamp": 595.0,
+            "source": "audio",
+            "quote": "we're launching our enterprise platform v2 next quarter. Major upgrades and adding support for on-premise air-gapped installations for government clients."
+          }
+        ]
       }
     ],
     "decisions": [
@@ -215,14 +1423,26 @@
         "made_by": "Tom Davis",
         "timestamp": 595.0,
         "context": "Adding on-premise air-gapped installations to serve government clients. Major pipeline upgrades.",
-        "evidence": [{"timestamp": 595.0, "source": "audio", "quote": "we're launching our enterprise platform v2 next quarter"}]
+        "evidence": [
+          {
+            "timestamp": 595.0,
+            "source": "audio",
+            "quote": "we're launching our enterprise platform v2 next quarter"
+          }
+        ]
       },
       {
         "description": "Helios AI scaling team from 85 to 150 employees by end of year",
         "made_by": "Tom Davis",
         "timestamp": 609.0,
         "context": "Aggressive hiring to support platform v2 launch and growth trajectory.",
-        "evidence": [{"timestamp": 609.0, "source": "audio", "quote": "We want to go from 85 to 150 employees by end of year"}]
+        "evidence": [
+          {
+            "timestamp": 609.0,
+            "source": "audio",
+            "quote": "We want to go from 85 to 150 employees by end of year"
+          }
+        ]
       }
     ],
     "contradictions": [
@@ -262,20 +1482,120 @@
       }
     ],
     "kpis": [
-      {"name": "Series B Funding", "value": "$45M at $320M valuation", "context": "Led by Sequoia with a16z participation. Enterprise AI deployment platform.", "mentioned_by": "Tom Davis", "timestamp": 41.0, "evidence": [{"timestamp": 41.0, "source": "audio", "quote": "We closed 45 million led by Sequoia. The round values us at about 320 million dollars."}]},
-      {"name": "Multi-step Reasoning Accuracy", "value": "73% (current), 89% (new approach)", "context": "State-of-the-art models on complex reasoning tasks. Compositional reasoning approach shows improvement.", "mentioned_by": "Dr. Li Wei", "timestamp": 80.0, "evidence": [{"timestamp": 80.0, "source": "audio", "quote": "even state-of-the-art models achieve only about 73% accuracy on complex multi-step reasoning tasks"}]},
-      {"name": "Global AI Startup Funding (2025)", "value": "$97 billion", "context": "Application layer received ~40%. Foundation model companies need billions individually.", "mentioned_by": "Tom Davis", "timestamp": 370.0, "evidence": [{"timestamp": 370.0, "source": "audio", "quote": "Total AI startup funding hit 97 billion dollars globally last year"}]},
-      {"name": "Helios ARR & Growth", "value": "$18M ARR, 20% MoM growth", "context": "Burning $3M/month. Projected profitability in 14 months at current growth rate.", "mentioned_by": "Tom Davis", "timestamp": 384.0, "evidence": [{"timestamp": 384.0, "source": "audio", "quote": "our ARR is 18 million and growing 20% month-over-month"}]},
-      {"name": "Gender Bias in Commercial Models", "value": "23% of professional contexts", "context": "Audit of 3 major commercial models. 150B parameter model showed worst bias. Larger models can amplify biases.", "mentioned_by": "Dr. Li Wei", "timestamp": 429.0, "evidence": [{"timestamp": 429.0, "source": "audio", "quote": "Our latest audit of three major commercial models found significant gender bias in 23% of professional context responses"}]}
+      {
+        "name": "Series B Funding",
+        "value": "$45M at $320M valuation",
+        "context": "Led by Sequoia with a16z participation. Enterprise AI deployment platform.",
+        "mentioned_by": "Tom Davis",
+        "timestamp": 41.0,
+        "evidence": [
+          {
+            "timestamp": 41.0,
+            "source": "audio",
+            "quote": "We closed 45 million led by Sequoia. The round values us at about 320 million dollars."
+          }
+        ]
+      },
+      {
+        "name": "Multi-step Reasoning Accuracy",
+        "value": "73% (current), 89% (new approach)",
+        "context": "State-of-the-art models on complex reasoning tasks. Compositional reasoning approach shows improvement.",
+        "mentioned_by": "Dr. Li Wei",
+        "timestamp": 80.0,
+        "evidence": [
+          {
+            "timestamp": 80.0,
+            "source": "audio",
+            "quote": "even state-of-the-art models achieve only about 73% accuracy on complex multi-step reasoning tasks"
+          }
+        ]
+      },
+      {
+        "name": "Global AI Startup Funding (2025)",
+        "value": "$97 billion",
+        "context": "Application layer received ~40%. Foundation model companies need billions individually.",
+        "mentioned_by": "Tom Davis",
+        "timestamp": 370.0,
+        "evidence": [
+          {
+            "timestamp": 370.0,
+            "source": "audio",
+            "quote": "Total AI startup funding hit 97 billion dollars globally last year"
+          }
+        ]
+      },
+      {
+        "name": "Helios ARR & Growth",
+        "value": "$18M ARR, 20% MoM growth",
+        "context": "Burning $3M/month. Projected profitability in 14 months at current growth rate.",
+        "mentioned_by": "Tom Davis",
+        "timestamp": 384.0,
+        "evidence": [
+          {
+            "timestamp": 384.0,
+            "source": "audio",
+            "quote": "our ARR is 18 million and growing 20% month-over-month"
+          }
+        ]
+      },
+      {
+        "name": "Gender Bias in Commercial Models",
+        "value": "23% of professional contexts",
+        "context": "Audit of 3 major commercial models. 150B parameter model showed worst bias. Larger models can amplify biases.",
+        "mentioned_by": "Dr. Li Wei",
+        "timestamp": 429.0,
+        "evidence": [
+          {
+            "timestamp": 429.0,
+            "source": "audio",
+            "quote": "Our latest audit of three major commercial models found significant gender bias in 23% of professional context responses"
+          }
+        ]
+      }
     ],
     "key_quotes": [
-      {"speaker": "Tom Davis", "quote": "Enterprise AI adoption is bottlenecked by deployment complexity, not model capability.", "timestamp": 51.0, "context": "Core thesis behind Helios AI's $320M valuation and Series B raise"},
-      {"speaker": "Dr. Li Wei", "quote": "We need mandatory safety evaluations before any model above 10 billion parameters can be deployed commercially. The potential for harm is too great to leave to self-regulation.", "timestamp": 127.0, "context": "Strong stance on proactive AI regulation, drawing on research into emergent behaviors"},
-      {"speaker": "Tom Davis", "quote": "Mandatory pre-deployment evaluations would kill innovation. The compliance costs alone would wipe out most startups.", "timestamp": 152.0, "context": "Counter-argument from the startup perspective on regulation costs"},
-      {"speaker": "Dr. Li Wei", "quote": "Saying social media self-regulated is a strange example. Most people would say that's a case study in the failure of self-regulation.", "timestamp": 184.0, "context": "Sharp rebuttal to Tom's claim that markets can self-regulate AI"},
-      {"speaker": "Dr. Li Wei", "quote": "An open-source model can be fine-tuned to bypass its safety guardrails in under 200 GPU-hours. That's about 500 dollars on cloud compute. Anyone can do it.", "timestamp": 242.0, "context": "Research-backed argument against open-sourcing frontier models"},
-      {"speaker": "Tom Davis", "quote": "Companies that don't adopt AI will go the way of companies that didn't adopt the internet. It's not optional anymore.", "timestamp": 523.0, "context": "Bold prediction on AI adoption becoming table stakes for businesses"},
-      {"speaker": "Dr. Li Wei", "quote": "Just because a system is better than a flawed human process doesn't mean it's good enough. We should hold AI to the highest standard, not just a comparative one.", "timestamp": 485.0, "context": "Philosophical stance on ethical AI standards and fairness"}
+      {
+        "speaker": "Tom Davis",
+        "quote": "Enterprise AI adoption is bottlenecked by deployment complexity, not model capability.",
+        "timestamp": 51.0,
+        "context": "Core thesis behind Helios AI's $320M valuation and Series B raise"
+      },
+      {
+        "speaker": "Dr. Li Wei",
+        "quote": "We need mandatory safety evaluations before any model above 10 billion parameters can be deployed commercially. The potential for harm is too great to leave to self-regulation.",
+        "timestamp": 127.0,
+        "context": "Strong stance on proactive AI regulation, drawing on research into emergent behaviors"
+      },
+      {
+        "speaker": "Tom Davis",
+        "quote": "Mandatory pre-deployment evaluations would kill innovation. The compliance costs alone would wipe out most startups.",
+        "timestamp": 152.0,
+        "context": "Counter-argument from the startup perspective on regulation costs"
+      },
+      {
+        "speaker": "Dr. Li Wei",
+        "quote": "Saying social media self-regulated is a strange example. Most people would say that's a case study in the failure of self-regulation.",
+        "timestamp": 184.0,
+        "context": "Sharp rebuttal to Tom's claim that markets can self-regulate AI"
+      },
+      {
+        "speaker": "Dr. Li Wei",
+        "quote": "An open-source model can be fine-tuned to bypass its safety guardrails in under 200 GPU-hours. That's about 500 dollars on cloud compute. Anyone can do it.",
+        "timestamp": 242.0,
+        "context": "Research-backed argument against open-sourcing frontier models"
+      },
+      {
+        "speaker": "Tom Davis",
+        "quote": "Companies that don't adopt AI will go the way of companies that didn't adopt the internet. It's not optional anymore.",
+        "timestamp": 523.0,
+        "context": "Bold prediction on AI adoption becoming table stakes for businesses"
+      },
+      {
+        "speaker": "Dr. Li Wei",
+        "quote": "Just because a system is better than a flawed human process doesn't mean it's good enough. We should hold AI to the highest standard, not just a comparative one.",
+        "timestamp": 485.0,
+        "context": "Philosophical stance on ethical AI standards and fairness"
+      }
     ]
   },
   "vision_events": []

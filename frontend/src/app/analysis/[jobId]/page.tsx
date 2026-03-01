@@ -6,6 +6,8 @@ import { api } from '@/lib/api';
 import { formatTime, cn, NODE_COLORS, SPEAKER_COLORS, RELATION_COLORS } from '@/lib/utils';
 import { useVideoSync } from '@/hooks/useVideoSync';
 import { Badge } from '@/components/ui/Badge';
+import { YouTubePlayer } from '@/components/YouTubePlayer';
+import type { YouTubePlayer as YTPlayer } from '@/hooks/useVideoSync';
 import type { JobResults, GraphNode, TranscriptSegment } from '@/lib/types';
 
 const ForceGraph2D = dynamic(() => import('react-force-graph-2d'), { ssr: false });
@@ -38,7 +40,7 @@ export default function AnalysisPage() {
   });
   const [editing, setEditing] = useState<{ speaker: string; value: string } | null>(null);
   const editInputRef = useRef<HTMLInputElement>(null);
-  const { currentTime, seekTo, bindVideo } = useVideoSync();
+  const { currentTime, seekTo, bindVideo, bindYouTube } = useVideoSync();
   const transcriptRef = useRef<HTMLDivElement>(null);
 
   // Persist speaker names to localStorage
@@ -239,7 +241,13 @@ export default function AnalysisPage() {
             'bg-black relative shrink-0 transition-all duration-200',
             videoCollapsed ? 'h-0 overflow-hidden' : 'aspect-video'
           )}>
-            {data.video_url ? (
+            {data.video_url?.includes('youtube.com') || data.video_url?.includes('youtu.be') ? (
+              <YouTubePlayer
+                url={data.video_url}
+                onReady={bindYouTube}
+                className="w-full h-full"
+              />
+            ) : data.video_url ? (
               <video
                 ref={bindVideo}
                 src={api.getVideoUrl(jobId)}
