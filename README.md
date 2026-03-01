@@ -1,140 +1,202 @@
-# VISTRAL
-
-**Video Intelligence via Spatial-Temporal Reasoning and Analysis by Mistral**
-
-VISTRAL extracts traceable, multimodal insights from enterprise videos, meetings, interviews, podcasts by building a **Temporal Knowledge Graph** from audio transcription and visual analysis. Every insight is backed by timestamped evidence chains linking back to what was said and what was shown on screen.
-
-Built entirely on the **Mistral AI stack**: Voxtral for speech-to-text, Pixtral for vision/OCR, and Mistral Small for reasoning.
-
 <p align="center">
-  <img src="docs/architecture/02-container/container.png" alt="VISTRAL Container Diagram" width="800" />
+  <img src="frontend/src/app/icon.svg" width="64" height="64" alt="Vistral Logo" />
 </p>
 
-## Key Features
+<h1 align="center">Vistral</h1>
 
-- **Temporal Knowledge Graph** — Structured graph with 6 node types (speakers, topics, claims, KPIs, slides, decisions) and 7 relation types, enabling rich querying and native contradiction detection
-- **Multimodal Contradiction Detection** — Automatically flags discrepancies between what speakers say and what slides show (e.g., "18% growth" spoken vs "8% growth" on a slide)
-- **Two-Pass LLM Architecture** — Pass A extracts entities from transcript; Pass B reasons over the serialized graph (3.5k tokens) instead of raw transcript (40k tokens), achieving 91% token reduction
-- **Evidence Chains** — Every action item, decision, KPI, and contradiction links to exact timestamps, quotes, and visual evidence
-- **Adaptive Frame Extraction** — FFmpeg scene detection + perceptual hash dedup reduces vision API costs by 70%+
-- **Interactive Timeline** — Click any topic, speaker segment, or event marker to seek the video instantly
-- **Force-Directed Graph Visualization** — Explore the knowledge graph with color-coded nodes and clickable navigation
-- **Real-Time Processing** — SSE-powered progress tracking across 6 pipeline stages
+<p align="center">
+  <strong>Temporal Knowledge Graphs from videos — with traceable evidence chains.</strong>
+</p>
 
-## Architecture
+<p align="center">
+  Built entirely on the Mistral AI stack: Voxtral (ASR) + Pixtral (Vision) + Mistral Small (Reasoning)
+</p>
 
-The processing pipeline runs in 5 stages with 3 parallelism windows:
+---
+
+## What is Vistral?
+
+Vistral turns any video (meetings, interviews, podcasts) into a **Temporal Knowledge Graph** — a structured, queryable representation of everything that was said, shown, and decided, with every insight linked to an exact timestamp and source.
+
+Unlike traditional video summarizers that output flat bullet points, Vistral preserves **temporal relationships** and **cross-modal signals**: it can detect when a speaker's claim contradicts what's on a slide, track how topics evolve across speakers, and link every action item back to the exact moment it was assigned.
+
+### Key capabilities
+
+- **Automatic speaker diarization** — identifies who said what, with talk-time stats
+- **Topic segmentation** — breaks the video into thematic arcs with time ranges
+- **Action items & decisions** — extracted with assignee, priority, and evidence chains
+- **Contradiction detection** — flags discrepancies between audio claims and visual content
+- **KPI extraction** — pulls out quantitative metrics with context
+- **Interactive timeline** — click any event to jump to the exact video moment
+- **Force-directed knowledge graph** — explore entities and relationships visually
+- **Key quotes** — highlights impactful statements with speaker attribution
+
+## How it works
+
+Vistral runs an **8-stage pipeline** with 3 parallelism windows, processing a 10-minute video in ~2 minutes:
 
 ```
-1. Audio Extraction ─┐
-                     ├─ parallel
-2. Frame Extraction ─┘
-                        3. Voxtral ASR ────────┐
-                        4. Frame Dedup          ├─ parallel
-                        5. Pass A (Entities) ───┤
-                        6. Pixtral Vision ──────┘
-                                                   7. Graph Construction
-                                                   8. Pass B (Insights)
+Video Upload
+    │
+    ├── Audio Extraction (FFmpeg)
+    └── Frame Extraction (FFmpeg scene detection)
+            │
+            ├── Voxtral ASR (transcription + speaker diarization)
+            ├── Frame Deduplication (perceptual hashing, 70%+ cost reduction)
+            ├── Pass A: Entity Extraction (Mistral Small on transcript)
+            └── Pixtral Vision Analysis (OCR, scene understanding)
+                    │
+                    └── Knowledge Graph Construction
+                            │
+                            └── Pass B: Insight Reasoning (Mistral Small on graph)
 ```
+
+**Two-pass LLM architecture:**
+- **Pass A** (Perception): Extracts entities from the raw transcript — speakers, topics, claims, KPIs
+- The pipeline builds a compact **Temporal Knowledge Graph** (~3.5k tokens vs ~40k for raw transcript — **91% token reduction**)
+- **Pass B** (Reasoning): Reasons over the serialized graph to produce insights with evidence chains
 
 <p align="center">
   <img src="docs/architecture/05-data-pipeline/data-pipeline.png" alt="Data Pipeline" width="800" />
 </p>
 
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | Next.js 16, React 19, TailwindCSS 4, Framer Motion, react-force-graph-2d |
-| Backend | Python, FastAPI, uvicorn, httpx |
-| Speech-to-Text | Voxtral Mini (diarized transcription) |
-| Vision/OCR | Pixtral Large (scene understanding, slide OCR) |
-| Reasoning | Mistral Small (entity extraction, insight generation) |
-| Media Processing | FFmpeg (audio/frame extraction, scene detection) |
-| Frame Dedup | Pillow + imagehash (perceptual hashing) |
-
-## Getting Started
+## Getting started
 
 ### Prerequisites
 
-- Python 3.11+
-- Node.js 20+
-- FFmpeg installed and in PATH
-- Mistral API key
+- **Python 3.11+**
+- **Node.js 18+**
+- **FFmpeg** — for audio/frame extraction
+- **yt-dlp** (optional) — for YouTube URL support
+- **Mistral API key** — get one at [console.mistral.ai](https://console.mistral.ai)
 
-### Backend
+#### Install system dependencies
+
+```bash
+# macOS
+brew install ffmpeg yt-dlp
+
+# Ubuntu/Debian
+sudo apt install ffmpeg
+pip install yt-dlp
+```
+
+### Installation
+
+```bash
+git clone https://github.com/DonTizi/vistral.git
+cd vistral
+```
+
+**Backend:**
 
 ```bash
 cd backend
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-
-export MISTRAL_API_KEY="your-key-here"
-uvicorn backend.main:app --reload --port 8000
 ```
 
-### Frontend
+**Frontend:**
 
 ```bash
 cd frontend
 npm install
+```
+
+### Configuration
+
+Create a `.env` file in the project root:
+
+```env
+MISTRAL_API_KEY=your_api_key_here
+```
+
+Or set it through the in-app settings modal (gear icon in the sidebar).
+
+### Running
+
+```bash
+# Terminal 1 — Backend (port 8000)
+cd backend
+source .venv/bin/activate
+uvicorn backend.main:app --reload --port 8000
+
+# Terminal 2 — Frontend (port 3000)
+cd frontend
 npm run dev
 ```
 
-The app will be available at `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000).
 
-### Try the Demos
+### Try the demos
 
-VISTRAL ships with 3 pre-computed demos that work without a Mistral API key:
+Vistral ships with **2 pre-computed demo analyses** that work without an API key:
 
-- **Meeting** — Q3 budget review with slides, 3 speakers, contradiction detection
-- **Interview** — Senior engineer candidate assessment
-- **Podcast** — AI industry trends with expert panel
+- **AI Agent Deployment Challenges** — Arthur Mensch on enterprise AI, SaaS replacement, and agentic workflows
+- **Mistral AI — $2B Funding Round** — CNBC interview with Arthur Mensch on funding, talent, and competition
 
-Click any demo card on the landing page to explore the full analysis UI.
+Click any demo card on the landing page to explore the full analysis dashboard.
 
-## API Endpoints
+## Tech stack
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/upload` | Upload a video file (MP4/WebM/MOV, max 500MB) |
-| `GET` | `/api/jobs/{id}/stream` | SSE stream of pipeline progress events |
-| `GET` | `/api/jobs/{id}/results` | Complete analysis results (JSON) |
-| `GET` | `/api/jobs/{id}/video` | Serve uploaded video with Range support |
-| `GET` | `/api/demo/{name}` | Pre-computed demo results (meeting/interview/podcast) |
-| `GET` | `/api/health` | Health check |
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Next.js 16, React 19, TailwindCSS 4, react-force-graph-2d |
+| Backend | Python, FastAPI, uvicorn |
+| ASR | Voxtral Mini — speech-to-text with speaker diarization |
+| Vision | Pixtral 12B — OCR, scene understanding, slide detection |
+| Reasoning | Mistral Small — entity extraction and insight reasoning |
+| Media | FFmpeg (audio/frames), imagehash (perceptual dedup) |
+| Real-time | Server-Sent Events for live pipeline progress |
 
-## Project Structure
+## Project structure
 
 ```
 vistral/
 ├── backend/
 │   ├── main.py                  # FastAPI entry point
-│   ├── config.py                # Configuration and constants
-│   ├── models.py                # Data models (graph, transcript, insights)
+│   ├── config.py                # Environment config & constants
+│   ├── models.py                # Shared data models (graph, transcript, insights)
 │   ├── pipeline/
-│   │   ├── orchestrator.py      # Pipeline coordinator with SSE events
+│   │   ├── orchestrator.py      # Pipeline coordinator with SSE progress
 │   │   ├── audio_extractor.py   # FFmpeg audio extraction
-│   │   ├── frame_extractor.py   # FFmpeg scene-based frame extraction
+│   │   ├── frame_extractor.py   # Scene detection + frame extraction
 │   │   ├── frame_dedup.py       # Perceptual hash deduplication
-│   │   ├── transcriber.py       # Voxtral ASR with diarization
-│   │   ├── vision_analyzer.py   # Pixtral vision analysis
-│   │   ├── graph_builder.py     # Temporal Knowledge Graph construction
-│   │   └── reasoner.py          # Two-pass LLM reasoning (Pass A + B)
+│   │   ├── transcriber.py       # Voxtral ASR + diarization
+│   │   ├── vision_analyzer.py   # Pixtral batched vision analysis
+│   │   ├── graph_builder.py     # Knowledge graph construction
+│   │   └── reasoner.py          # Two-pass LLM reasoning
 │   ├── prompts/                 # LLM prompt templates
-│   └── routers/                 # FastAPI route handlers
+│   └── routers/                 # API endpoints (upload, jobs, demo, settings)
 ├── frontend/
-│   └── src/
-│       ├── app/                 # Next.js pages (landing, processing, analysis)
-│       ├── components/          # UI components (Badge, Card, ProgressBar, logos)
-│       ├── hooks/               # useSSE, useVideoSync
-│       └── lib/                 # API client, types, utilities
-├── precompute/demos/            # Pre-computed demo results
+│   ├── src/app/
+│   │   ├── page.tsx             # Landing page (upload + demos)
+│   │   ├── processing/          # Real-time progress page
+│   │   └── analysis/            # Analysis dashboard (8-tab UI)
+│   ├── src/components/          # Sidebar, YouTubePlayer, UI primitives
+│   ├── src/hooks/               # useSSE, useVideoSync
+│   └── src/lib/                 # API client, types, utils
+├── precompute/demos/            # Pre-computed demo analyses (JSON)
 └── docs/
-    ├── architecture/            # C4 diagrams (PlantUML + rendered PNG/SVG)
+    ├── architecture/            # C4 diagrams (PlantUML + rendered images)
     └── adr/                     # Architecture Decision Records
 ```
+
+## API
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/upload` | Upload video file (MP4, WebM, MOV — max 500MB) |
+| `POST` | `/api/upload-url` | Process a YouTube URL |
+| `GET` | `/api/jobs` | List all completed analyses |
+| `GET` | `/api/jobs/{id}/stream` | SSE stream of pipeline progress |
+| `GET` | `/api/jobs/{id}/results` | Complete analysis results (JSON) |
+| `GET` | `/api/jobs/{id}/video` | Serve uploaded video with Range support |
+| `GET` | `/api/demo/{name}` | Pre-computed demo results |
+| `PUT` | `/api/settings/api-key` | Update Mistral API key |
+| `DELETE` | `/api/data` | Purge all jobs and uploads |
+| `GET` | `/api/health` | Health check |
 
 ## Configuration
 
@@ -149,10 +211,11 @@ Key settings in `backend/config.py`:
 | `MAX_FRAMES_PER_BATCH` | 15 | Frames per Pixtral API call |
 | `PHASH_THRESHOLD` | 8 | Hamming distance for frame dedup |
 | `SCENE_DETECT_THRESHOLD` | 0.3 | FFmpeg scene detection sensitivity |
-| `MIN_FRAME_INTERVAL` | 30s | Fallback frame extraction interval |
 | `MAX_UPLOAD_SIZE_MB` | 500 | Maximum upload file size |
 
-## Architecture Decision Records
+## Architecture decisions
+
+Documented in [`docs/adr/`](docs/adr/):
 
 | ADR | Decision |
 |-----|----------|
@@ -161,8 +224,7 @@ Key settings in `backend/config.py`:
 | [003](docs/adr/003-mistral-small-over-large.md) | Mistral Small over Large for reasoning |
 | [004](docs/adr/004-sse-for-realtime-progress.md) | Server-Sent Events for real-time progress |
 | [005](docs/adr/005-json-files-over-database.md) | JSON file storage over database |
-| [006](docs/adr/006-adaptive-frame-extraction-with-dedup.md) | Adaptive frame extraction with perceptual hash dedup |
 
 ## License
 
-This project was built for the Mistral AI Hackathon.
+MIT
