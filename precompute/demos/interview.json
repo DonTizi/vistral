@@ -4,356 +4,125 @@
   "video_url": "https://www.youtube.com/watch?v=-aklIBXwXT4",
   "transcript": [
     {
-      "speaker": "Sarah Kim",
-      "text": "Alright, thanks for coming in today James. I'm Sarah Kim, Engineering Manager here at Nexus. I've got your resume pulled up and I'm really excited to chat.",
+      "speaker": "Andrew Ross Sorkin",
+      "text": "It's a French AI startup, Mistral AI, announcing a nearly $2 billion Series C funding round. It's led by chipmaker equipment giant ASML. Mistral now valued at nearly $14 billion. Joining us right now, the founder and CEO of Mistral AI, Arthur Mensch. It's great to see you this morning. Congratulations on the new fundraising. I think the big question now is what do you do with the money and how do you compete with all these other players as everybody seems to be racing against each other?",
       "start": 0.0,
-      "end": 9.0
+      "end": 29.5
     },
     {
-      "speaker": "Sarah Kim",
-      "text": "Let me also introduce David Cho, one of our senior staff engineers who'll be sitting in for the panel portion.",
-      "start": 9.5,
-      "end": 15.0
+      "speaker": "Arthur Mensch",
+      "text": "Well, what do we do with the money? We're going to be investing it in continuing to be a Frontier AI lab.",
+      "start": 31.1,
+      "end": 35.5
     },
     {
-      "speaker": "David Cho",
-      "text": "Hey James, good to meet you. I'll mostly be listening and jumping in with some technical questions later.",
-      "start": 15.5,
-      "end": 21.0
+      "speaker": "Arthur Mensch",
+      "text": "As you've seen, this is a partnership that allows us to go more into verticals, to bring value into high-end industry, which is the semiconductor industry. And so we're very happy and very excited by what's coming next. We'll be investing this money in training better models in physics, training better models in all of the capabilities that we need. And of course, in our growth across the globe, in Europe, in the US, where we're growing very fast as well. And in Asia.",
+      "start": 36.9,
+      "end": 61.8
     },
     {
-      "speaker": "James Park",
-      "text": "Thanks Sarah, thanks David. Really glad to be here. I've been following Nexus for a while now. The distributed systems work you're doing is right up my alley.",
-      "start": 22.0,
-      "end": 30.0
+      "speaker": "Andrew Ross Sorkin",
+      "text": "Is there a fight for talent at the same level in Europe as we are hearing about in Silicon Valley? This idea that there are people who are being offered 50, 100 million dollar checks to come work at these labs?",
+      "start": 62.8,
+      "end": 76.1
     },
     {
-      "speaker": "Sarah Kim",
-      "text": "Great to hear. So let's start with your background. Can you walk us through your experience with large-scale distributed systems?",
-      "start": 31.0,
-      "end": 38.0
+      "speaker": "Arthur Mensch",
+      "text": "Well, I mean, Europe is a great place to hire from. It's one of the places where you have the best schools in computer science and in mathematics. So we do benefit from a very strong employer brand. And it goes there. with the end-to-end AI offering for which we are defining the category, where not only do we bring product, but we also bring a unique expertise in building models and in connecting models to context and data. And so the employer brand that we have in Europe has allowed us to build a very strong forward-deployed team that we send along with our products to actually create ROI with enterprises.",
+      "start": 77.7,
+      "end": 112.7
     },
     {
-      "speaker": "James Park",
-      "text": "Absolutely. I've been working in backend infrastructure for about 8 years now. Most recently at Stratum, I was the tech lead on their real-time data pipeline.",
-      "start": 39.0,
-      "end": 48.0
+      "speaker": "Andrew Ross Sorkin",
+      "text": "But in terms of just being able to compete for this talent, when we read these headlines, I mean, we're constantly reading new headlines about Meta picking off this team and OpenAI picking off this team and Google trying to do this and do that. Is that, I mean, you're competing among that group. How complicated and difficult is that at this point?",
+      "start": 113.7,
+      "end": 134.4
     },
     {
-      "speaker": "James Park",
-      "text": "We were processing around 2 million events per second across 400 nodes. The system had to maintain sub-50 millisecond latency at the 99th percentile.",
-      "start": 48.5,
-      "end": 58.0
+      "speaker": "Arthur Mensch",
+      "text": "Well, it's turning out to be quite okay for us. We are actually able to constantly hire people from big tech. I think the culture that we promote, which is a culture of science, a culture of transparency as well, is something that AI scientists, to be honest with you, are really looking for. And so if we look at the competition that we have with Meta and Google, well, we've been hiring around 40 or 50 people from these companies. So, so far, I think we're doing well.",
+      "start": 135.3,
+      "end": 159.9
     },
     {
-      "speaker": "Sarah Kim",
-      "text": "That's impressive scale. What was the most challenging aspect of maintaining that latency target?",
-      "start": 59.0,
-      "end": 64.0
+      "speaker": "Andrew Ross Sorkin",
+      "text": "When you sort of look out a couple of years from now at this space that you're in, and there are a whole bunch of players, obviously, do you say to yourself there's only going to be two or three or four of them? Do you think that there's going to be thousands of them? What does the competitive landscape ultimately look like in your mind?",
+      "start": 160.9,
+      "end": 177.9
     },
     {
-      "speaker": "James Park",
-      "text": "Honestly, it was the tail latency. Getting P50 down is relatively straightforward, but P99 is a different beast. We had to redesign our partitioning strategy three times.",
-      "start": 65.0,
-      "end": 75.0
+      "speaker": "Arthur Mensch",
+      "text": "Well, I think we are defining. a category where there is basically no other player in that we are bringing a fully integrated solution from infrastructure. We've announced Mistral Computer a couple of months ago with NVIDIA. So from infrastructure to models to solutions. And it's actually, if you look at... At enterprises'needs today, if they only take models, in general, they struggle and they end up having zero ROI. And so our focus is to bring ROI to enterprises, to all of the enterprises that we work for, so ASML, CMACGM, for instance. And to do that, not only do we bring models, but we bring all of the stack that allows to build the custom applications, and we bring the expertise that is lacking in those enterprises. So in that respect, I think we're defining a category that is playing out to be extremely important and will play out to be very important in the coming years. And if you look at... The few labs that are able to do frontier AI, well, we're probably the only one in Europe, and there won't be that many of them because it's actually a fairly costly endeavor and also the reason why we are raising and announcing this race today.",
+      "start": 178.6,
+      "end": 237.9
     },
     {
-      "speaker": "James Park",
-      "text": "The key insight was moving to a consistent hashing scheme with virtual nodes. That eliminated the hot partition problem that was causing our tail latency spikes.",
-      "start": 75.5,
-      "end": 85.0
+      "speaker": "Andrew Ross Sorkin",
+      "text": "You know, the other big question right now is whether we are in a gold rush or some kind of sugar rush as it relates to sort of the broader economy, which is being propped up to some degree by all of the spending in AI. And yet the cash flow around AI, for the most part, doesn't necessarily add. The math does not get you there. And we just learned yesterday or earlier, I think, in the past week that OpenAI, for example, you know, had hoped to be able to break even sooner than they had originally. Plan to break even sooner and then now believes that to keep up effectively, they're going to have to spend $80 billion more than anticipated. And so the question is when, you know, when you, I don't know if you can see me, but when do the lines cross? Meaning when do you get to a point where these things are profitable enterprises or even just... You know, not money-losing enterprises.",
+      "start": 238.4,
+      "end": 293.6
     },
     {
-      "speaker": "Sarah Kim",
-      "text": "That's a solid approach. Now, your resume mentions you led a team of 12 engineers at Stratum. Can you tell me about that experience?",
-      "start": 86.0,
-      "end": 94.0
+      "speaker": "Arthur Mensch",
+      "text": "I think what matters there is the long-term value for customers. So they need to be creating value out of AI systems. And so for this, they will need help. I think it will take a decade for them to fully transform the way they operate and to fully transform their product. So that's a decade of growth for us.",
+      "start": 294.9,
+      "end": 313.1
     },
     {
-      "speaker": "James Park",
-      "text": "Right, so I was leading a team of about 15 engineers. We were split into three squads: ingest, processing, and storage.",
-      "start": 95.0,
-      "end": 103.0
-    },
-    {
-      "speaker": "David Cho",
-      "text": "Just a quick note, James. Your resume says 12 engineers, but you just mentioned 15. Could you clarify that?",
-      "start": 104.0,
-      "end": 111.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "Oh, good catch. So it started as 12 when I first took on the lead role, and we grew to 15 over the two years. I should have been clearer about that.",
-      "start": 112.0,
-      "end": 121.0
-    },
-    {
-      "speaker": "Sarah Kim",
-      "text": "No worries, growth is a good thing. Let's move into system design. I'd like you to design a real-time notification system that can handle 500,000 concurrent users.",
-      "start": 122.0,
-      "end": 132.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "Great problem. Let me think about this from the top down. First, we need to consider the connection layer. For 500K concurrent users, I'd go with WebSocket connections behind a load balancer.",
-      "start": 133.0,
-      "end": 144.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "We'd need roughly 50 WebSocket servers assuming each can handle about 10,000 connections. Each server maintains a local connection registry.",
-      "start": 145.0,
-      "end": 154.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "For the messaging layer, I'd use a pub-sub system. Kafka would be my choice here because of its durability guarantees and replay capability.",
-      "start": 155.0,
-      "end": 164.0
-    },
-    {
-      "speaker": "David Cho",
-      "text": "Why Kafka over something lighter like Redis pub-sub? For notifications, do you really need the durability overhead?",
-      "start": 165.0,
-      "end": 172.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "That's a fair challenge. For pure real-time with no delivery guarantees, Redis pub-sub would be fine. But in my experience, users expect notifications to be reliable.",
-      "start": 173.0,
-      "end": 183.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "If a user is temporarily disconnected and reconnects, they should see missed notifications. Kafka's consumer offsets give us that for free. With Redis you'd need to build that yourself.",
-      "start": 184.0,
-      "end": 195.0
-    },
-    {
-      "speaker": "David Cho",
-      "text": "Good reasoning. How would you handle the fanout problem? Say one event needs to notify 100,000 users.",
-      "start": 196.0,
-      "end": 203.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "For high-fanout scenarios, I'd use a two-tier approach. Hot topics with many subscribers get their own dedicated Kafka partitions. We'd pre-compute the subscriber lists and fan out at the WebSocket server level.",
-      "start": 204.0,
-      "end": 216.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "The key metric I'd target is end-to-end delivery under 200 milliseconds for P95. That includes Kafka produce, consume, and WebSocket push.",
-      "start": 217.0,
-      "end": 227.0
-    },
-    {
-      "speaker": "Sarah Kim",
-      "text": "Solid design. Let's shift gears to coding philosophy. How do you approach code reviews?",
-      "start": 228.0,
-      "end": 235.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "I believe code reviews are the single most important engineering practice. They're not just about catching bugs, they're about knowledge sharing and maintaining consistency.",
-      "start": 236.0,
-      "end": 247.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "At Stratum, I introduced a rule that no PR ships without at least two approvals, and one has to be from someone outside your immediate squad.",
-      "start": 248.0,
-      "end": 258.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "That cross-squad review really helped break down silos. Before that, we had three different error handling patterns across the codebase. Within a quarter, we converged on one.",
-      "start": 259.0,
-      "end": 270.0
-    },
-    {
-      "speaker": "Sarah Kim",
-      "text": "I love that approach. We actually have a similar philosophy here. What about testing? How do you think about test coverage?",
-      "start": 271.0,
-      "end": 279.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "I'm a big advocate for testing at the right level. I don't obsess over coverage percentages. 80% coverage with well-designed tests beats 95% coverage with brittle unit tests every time.",
-      "start": 280.0,
-      "end": 292.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "For distributed systems specifically, I invest heavily in integration tests and chaos testing. We ran weekly game days at Stratum where we'd inject failures into production-like environments.",
-      "start": 293.0,
-      "end": 305.0
-    },
-    {
-      "speaker": "David Cho",
-      "text": "Weekly game days, that's commitment. What was the most interesting failure mode you discovered through those?",
-      "start": 306.0,
-      "end": 313.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "We found that when three specific Kafka brokers went down simultaneously, our consumer group rebalancing took 45 seconds instead of the expected 5. That would have been catastrophic in production.",
-      "start": 314.0,
-      "end": 326.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "Turned out it was a configuration issue with session timeouts. Five-minute fix once we found it, but it would have been a P0 incident if we hadn't caught it.",
-      "start": 327.0,
-      "end": 337.0
-    },
-    {
-      "speaker": "Sarah Kim",
-      "text": "Let's talk about culture fit. What kind of engineering culture do you thrive in?",
-      "start": 340.0,
-      "end": 346.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "I do my best work in environments with high trust and low bureaucracy. I want to be able to ship fast but also have the discipline to do things right.",
-      "start": 347.0,
-      "end": 357.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "I'm big on documentation. I know engineers hate writing docs, but I believe an undocumented system is a ticking time bomb. At Stratum, I set up a culture where every design decision goes through an RFC process.",
-      "start": 358.0,
-      "end": 372.0
-    },
-    {
-      "speaker": "Sarah Kim",
-      "text": "That resonates deeply with us. We actually just implemented an RFC process last quarter. What about work-life balance?",
-      "start": 373.0,
-      "end": 381.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "I'm a firm believer in sustainable pace. Crunch time happens, but it shouldn't be the norm. I've seen teams burn out from chronic overtime, and the code quality always suffers.",
-      "start": 382.0,
-      "end": 393.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "I also care about mentorship. Helping junior engineers grow is one of the most rewarding parts of being a senior engineer. At Stratum, I set up a structured mentorship program for new hires.",
-      "start": 394.0,
-      "end": 406.0
-    },
-    {
-      "speaker": "David Cho",
-      "text": "That's great to hear. Quick technical question to close out: if you had to pick one technology you're most excited about right now, what would it be?",
-      "start": 407.0,
-      "end": 416.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "Without hesitation, it's eBPF. The ability to run sandboxed programs in the kernel without modifying kernel source code is a game changer for observability.",
-      "start": 417.0,
-      "end": 427.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "We used it at Stratum for network-level tracing and it gave us visibility we never had before. I'd love to bring that expertise here.",
-      "start": 428.0,
-      "end": 436.0
-    },
-    {
-      "speaker": "Sarah Kim",
-      "text": "That's actually something we've been exploring. This has been a great conversation, James. Let me outline next steps.",
-      "start": 437.0,
-      "end": 445.0
-    },
-    {
-      "speaker": "Sarah Kim",
-      "text": "We'd like to bring you back for a follow-up session with the VP of Engineering. I'll also need to set up a reference check. And David, could you prepare a brief technical assessment for James?",
-      "start": 446.0,
-      "end": 458.0
-    },
-    {
-      "speaker": "David Cho",
-      "text": "Absolutely. I'll put together a take-home that focuses on distributed systems design. Should take about two hours.",
-      "start": 459.0,
-      "end": 466.0
-    },
-    {
-      "speaker": "James Park",
-      "text": "Sounds great. I'm really excited about the opportunity. Thanks for your time today, both of you.",
-      "start": 467.0,
-      "end": 474.0
-    },
-    {
-      "speaker": "Sarah Kim",
-      "text": "Thank you James. We'll be in touch early next week. Have a great rest of your day.",
-      "start": 475.0,
-      "end": 480.0
+      "speaker": "Arthur Mensch",
+      "text": "What matters there is, first, you need to create long-term value for your customers so that you can actually get a cut of it. And then you need to have contained spending in what you do on the infrastructure side. And so in that respect, since we've only burned around 400 million since our inception two years and a half ago, I think we've been spending less than a percent of what our competitors in the U.S. Have been doing. And still we've been able to release models that are now on the podium in terms of human preferences. So what matters is to spend not too much and then to make money by creating value with customers. And for us strategically, we think it only comes with an end-to-end integrated solution offering.",
+      "start": 314.2,
+      "end": 354.2
     }
   ],
   "graph": {
     "nodes": [
       {
-        "id": "speaker_0",
+        "id": "Andrew Ross Sorkin",
         "type": "speaker",
-        "label": "Sarah Kim",
-        "first_seen": 0.0,
-        "last_seen": 480.0,
+        "label": "Andrew Ross Sorkin",
+        "first_seen": 62.8,
+        "last_seen": 293.6,
         "attributes": {
-          "role": "Engineering Manager / Interviewer",
+          "role": "interviewer",
           "key_contributions": [
-            "Led the interview",
-            "Assessed system design skills",
-            "Outlined next steps"
+            "Introduces Mistral AI and its recent funding round",
+            "Asks about the use of funds and competition",
+            "Inquires about talent acquisition and competition",
+            "Discusses the competitive landscape and profitability of AI enterprises"
           ]
         }
       },
       {
-        "id": "speaker_1",
+        "id": "Arthur Mensch",
         "type": "speaker",
-        "label": "James Park",
-        "first_seen": 22.0,
-        "last_seen": 474.0,
+        "label": "Arthur Mensch",
+        "first_seen": 31.1,
+        "last_seen": 354.2,
         "attributes": {
-          "role": "Candidate / Senior Engineer",
+          "role": "CEO of Mistral AI",
           "key_contributions": [
-            "Presented distributed systems experience",
-            "Designed notification system",
-            "Shared coding philosophy"
-          ]
-        }
-      },
-      {
-        "id": "speaker_2",
-        "type": "speaker",
-        "label": "David Cho",
-        "first_seen": 15.5,
-        "last_seen": 466.0,
-        "attributes": {
-          "role": "Senior Staff Engineer / Panel Member",
-          "key_contributions": [
-            "Asked probing technical questions",
-            "Flagged resume discrepancy",
-            "Assigned take-home assessment"
+            "Explains the use of funds for AI research and global expansion",
+            "Discusses talent acquisition and competition",
+            "Describes Mistral AI's unique offering and competitive advantage",
+            "Talks about the long-term value and profitability of AI enterprises"
           ]
         }
       },
       {
         "id": "topic_0",
         "type": "topic",
-        "label": "Background & Experience",
-        "first_seen": 31.0,
-        "last_seen": 121.0,
+        "label": "Funding and Use of Funds",
+        "first_seen": 0.0,
+        "last_seen": 61.8,
         "attributes": {
           "key_points": [
-            "8 years in backend infrastructure",
-            "Tech lead at Stratum on real-time data pipeline",
-            "2M events/sec across 400 nodes",
-            "Led team of 12-15 engineers"
+            "Mistral AI's $2 billion Series C funding round",
+            "Investment in AI research and global expansion",
+            "Partnership with ASML for semiconductor industry"
           ],
           "speakers_involved": [
-            "speaker_0",
             "speaker_1",
             "speaker_2"
           ]
@@ -362,18 +131,16 @@
       {
         "id": "topic_1",
         "type": "topic",
-        "label": "System Design: Notification System",
-        "first_seen": 122.0,
-        "last_seen": 227.0,
+        "label": "Talent Acquisition and Competition",
+        "first_seen": 62.8,
+        "last_seen": 159.9,
         "attributes": {
           "key_points": [
-            "WebSocket connections with 50 servers",
-            "Kafka-based pub-sub messaging layer",
-            "Two-tier fanout for high-subscriber topics",
-            "P95 target: 200ms end-to-end"
+            "Competition for talent in Europe vs. Silicon Valley",
+            "Mistral AI's employer brand and hiring strategy",
+            "Competition with Meta, OpenAI, and Google for AI talent"
           ],
           "speakers_involved": [
-            "speaker_0",
             "speaker_1",
             "speaker_2"
           ]
@@ -382,18 +149,16 @@
       {
         "id": "topic_2",
         "type": "topic",
-        "label": "Coding Philosophy & Testing",
-        "first_seen": 228.0,
-        "last_seen": 337.0,
+        "label": "Competitive Landscape",
+        "first_seen": 160.9,
+        "last_seen": 237.9,
         "attributes": {
           "key_points": [
-            "Two-approval code review policy with cross-squad reviews",
-            "Prefers well-designed tests over high coverage numbers",
-            "Weekly chaos testing game days",
-            "Discovered critical Kafka rebalancing bug"
+            "Mistral AI's unique offering and competitive advantage",
+            "Focus on bringing ROI to enterprises",
+            "Defining a new category in the AI industry"
           ],
           "speakers_involved": [
-            "speaker_0",
             "speaker_1",
             "speaker_2"
           ]
@@ -402,334 +167,495 @@
       {
         "id": "topic_3",
         "type": "topic",
-        "label": "Culture Fit & Values",
-        "first_seen": 340.0,
-        "last_seen": 436.0,
+        "label": "Profitability and Long-term Value",
+        "first_seen": 238.4,
+        "last_seen": 354.2,
         "attributes": {
           "key_points": [
-            "Values high trust and low bureaucracy",
-            "Strong advocate for documentation and RFCs",
-            "Believes in sustainable pace over crunch",
-            "Passionate about mentorship",
-            "Excited about eBPF for observability"
+            "Concerns about AI industry's profitability",
+            "Long-term value creation for customers",
+            "Contained spending and strategic investments",
+            "Mistral AI's financial performance and growth strategy"
           ],
           "speakers_involved": [
-            "speaker_0",
             "speaker_1",
             "speaker_2"
           ]
         }
       },
       {
-        "id": "kpi_0",
-        "type": "kpi",
-        "label": "Years of Experience: 8",
-        "first_seen": 39.0,
-        "last_seen": 48.0,
-        "attributes": {
-          "name": "Years of Experience",
-          "value": "8 years",
-          "context": "Backend infrastructure and distributed systems"
-        }
-      },
-      {
-        "id": "kpi_1",
-        "type": "kpi",
-        "label": "System Scale: 2M events/sec",
-        "first_seen": 48.5,
-        "last_seen": 58.0,
-        "attributes": {
-          "name": "System Scale (Throughput)",
-          "value": "2 million events per second",
-          "context": "Real-time data pipeline at Stratum across 400 nodes"
-        }
-      },
-      {
-        "id": "kpi_2",
-        "type": "kpi",
-        "label": "Latency Target: <50ms P99",
-        "first_seen": 48.5,
-        "last_seen": 85.0,
-        "attributes": {
-          "name": "Latency Target",
-          "value": "Sub-50ms at P99",
-          "context": "Tail latency for the real-time pipeline, achieved through consistent hashing with virtual nodes"
-        }
-      },
-      {
-        "id": "kpi_3",
-        "type": "kpi",
-        "label": "Team Size: 12-15 engineers",
-        "first_seen": 86.0,
-        "last_seen": 121.0,
-        "attributes": {
-          "name": "Team Size",
-          "value": "12 growing to 15",
-          "context": "Three squads: ingest, processing, and storage at Stratum"
-        }
-      },
-      {
         "id": "claim_0",
         "type": "claim",
-        "label": "Resume states team of 12 engineers",
-        "first_seen": 86.0,
-        "last_seen": 94.0,
+        "label": "We're going to be investing it in continuing to be a Frontier AI lab.",
+        "first_seen": 31.1,
+        "last_seen": 31.1,
         "attributes": {
-          "content": "Resume says James led a team of 12 engineers at Stratum",
-          "source": "visual",
+          "content": "We're going to be investing it in continuing to be a Frontier AI lab.",
           "type": "factual"
         }
       },
       {
         "id": "claim_1",
         "type": "claim",
-        "label": "James says team was 15 engineers",
-        "first_seen": 95.0,
-        "last_seen": 103.0,
+        "label": "Europe is a great place to hire from. It's one of the places where you have the ",
+        "first_seen": 77.7,
+        "last_seen": 77.7,
         "attributes": {
-          "content": "James states he was leading about 15 engineers",
-          "speaker": "speaker_1",
+          "content": "Europe is a great place to hire from. It's one of the places where you have the best schools in computer science and in mathematics.",
           "type": "factual"
         }
       },
       {
-        "id": "decision_0",
-        "type": "decision",
-        "label": "Schedule follow-up with VP Engineering",
-        "first_seen": 446.0,
-        "last_seen": 458.0,
+        "id": "claim_2",
+        "type": "claim",
+        "label": "We are actually able to constantly hire people from big tech.",
+        "first_seen": 135.3,
+        "last_seen": 135.3,
         "attributes": {
-          "context": "Next step in the interview process"
+          "content": "We are actually able to constantly hire people from big tech.",
+          "type": "factual"
         }
       },
       {
-        "id": "decision_1",
-        "type": "decision",
-        "label": "Conduct reference check",
-        "first_seen": 446.0,
-        "last_seen": 458.0,
+        "id": "claim_3",
+        "type": "claim",
+        "label": "We are defining a category where there is basically no other player.",
+        "first_seen": 178.6,
+        "last_seen": 178.6,
         "attributes": {
-          "context": "Standard hiring process verification"
+          "content": "We are defining a category where there is basically no other player.",
+          "type": "factual"
         }
       },
       {
-        "id": "decision_2",
-        "type": "decision",
-        "label": "Assign take-home technical assessment",
-        "first_seen": 459.0,
-        "last_seen": 466.0,
+        "id": "claim_4",
+        "type": "claim",
+        "label": "We've been spending less than a percent of what our competitors in the U.S. have",
+        "first_seen": 314.2,
+        "last_seen": 314.2,
         "attributes": {
-          "context": "Distributed systems design, estimated 2 hours"
+          "content": "We've been spending less than a percent of what our competitors in the U.S. have been doing.",
+          "type": "factual"
+        }
+      },
+      {
+        "id": "kpi_0",
+        "type": "kpi",
+        "label": "Funding Round: $2 billion",
+        "first_seen": 0.0,
+        "last_seen": 0.0,
+        "attributes": {
+          "name": "Funding Round",
+          "value": "$2 billion",
+          "context": "Series C funding round"
+        }
+      },
+      {
+        "id": "kpi_1",
+        "type": "kpi",
+        "label": "Company Valuation: $14 billion",
+        "first_seen": 0.0,
+        "last_seen": 0.0,
+        "attributes": {
+          "name": "Company Valuation",
+          "value": "$14 billion",
+          "context": "Post-funding valuation"
+        }
+      },
+      {
+        "id": "kpi_2",
+        "type": "kpi",
+        "label": "Hiring from Big Tech: 40-50 people",
+        "first_seen": 135.3,
+        "last_seen": 135.3,
+        "attributes": {
+          "name": "Hiring from Big Tech",
+          "value": "40-50 people",
+          "context": "Hiring from Meta and Google"
+        }
+      },
+      {
+        "id": "kpi_3",
+        "type": "kpi",
+        "label": "Burn Rate: $400 million",
+        "first_seen": 314.2,
+        "last_seen": 314.2,
+        "attributes": {
+          "name": "Burn Rate",
+          "value": "$400 million",
+          "context": "Since inception two and a half years ago"
+        }
+      },
+      {
+        "id": "slide_0",
+        "type": "slide",
+        "label": "ASML TAKES 11% STAKE IN MISTRAL AI",
+        "first_seen": 0.0,
+        "last_seen": 0.0,
+        "attributes": {
+          "ocr_text": [
+            "ASML TAKES 11% STAKE IN MISTRAL AI",
+            "NEW FUNDING ROUND VALUES MISTRAL AT ABOUT $14B"
+          ],
+          "scene_description": "Two men in a split-screen interview on CNBC discussing ASML's investment in Mistral AI.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0001.jpg"
+        }
+      },
+      {
+        "id": "slide_1",
+        "type": "slide",
+        "label": "ASML TAKES 11% STAKE IN MISTRAL AI",
+        "first_seen": 11.111,
+        "last_seen": 11.111,
+        "attributes": {
+          "ocr_text": [
+            "ASML TAKES 11% STAKE IN MISTRAL AI",
+            "NEW FUNDING ROUND VALUES MISTRAL AT ABOUT $14B"
+          ],
+          "scene_description": "Close-up of the individual in casual attire speaking during the CNBC interview.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0002.jpg"
+        }
+      },
+      {
+        "id": "slide_2",
+        "type": "slide",
+        "label": "ASML HOLDING ASML",
+        "first_seen": 31.298,
+        "last_seen": 31.298,
+        "attributes": {
+          "ocr_text": [
+            "ASML HOLDING ASML",
+            "INTRA DAY 796.60 +0.35 +0.04%",
+            "1-YR +6.24%",
+            "EXTENDED HOURS",
+            "ASML TAKES 11% STAKE IN MISTRAL AI",
+            "NEW FUNDING ROUND VALUES MISTRAL AT ABOUT $14B"
+          ],
+          "scene_description": "Interview with the individual in casual attire alongside a stock chart for ASML.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0003.jpg"
+        }
+      },
+      {
+        "id": "slide_3",
+        "type": "slide",
+        "label": "MISTRAL AI",
+        "first_seen": 109.376,
+        "last_seen": 109.376,
+        "attributes": {
+          "ocr_text": [
+            "MISTRAL AI",
+            "LATEST RAISE",
+            "Series C round of \u20ac1.7B (nearly $2B)",
+            "\u20ac11.7B ($13.76B) valuation",
+            "ASML becomes a strategic partner",
+            "ASML TAKES 11% STAKE IN MISTRAL AI",
+            "NEW FUNDING ROUND VALUES MISTRAL AT ABOUT $14B"
+          ],
+          "scene_description": "Interview with the individual in casual attire alongside a summary of Mistral AI's latest funding details.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0007.jpg"
+        }
+      },
+      {
+        "id": "slide_4",
+        "type": "slide",
+        "label": "ASML TAKES 11% STAKE IN MISTRAL AI",
+        "first_seen": 139.406,
+        "last_seen": 139.406,
+        "attributes": {
+          "ocr_text": [
+            "ASML TAKES 11% STAKE IN MISTRAL AI",
+            "NEW FUNDING ROUND VALUES MISTRAL AT ABOUT $14B"
+          ],
+          "scene_description": "Split-screen interview with both individuals, emphasizing the financial partnership between ASML and Mistral AI.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0008.jpg"
         }
       }
     ],
     "edges": [
       {
-        "source": "speaker_0",
+        "source": "Andrew Ross Sorkin",
         "target": "topic_0",
         "relation": "mentioned",
-        "timestamp": 31.0,
-        "confidence": 0.95,
+        "timestamp": 0.0,
+        "confidence": 0.85,
         "evidence": {
           "source_type": "audio",
-          "quote": "Can you walk us through your experience with large-scale distributed systems?",
+          "quote": null,
           "description": null,
           "frame_path": null
         }
       },
       {
-        "source": "speaker_1",
-        "target": "kpi_0",
+        "source": "Arthur Mensch",
+        "target": "topic_0",
         "relation": "mentioned",
-        "timestamp": 39.0,
-        "confidence": 0.95,
+        "timestamp": 0.0,
+        "confidence": 0.85,
         "evidence": {
           "source_type": "audio",
-          "quote": "I've been working in backend infrastructure for about 8 years now",
+          "quote": null,
           "description": null,
           "frame_path": null
         }
       },
       {
-        "source": "speaker_1",
-        "target": "kpi_1",
+        "source": "Andrew Ross Sorkin",
+        "target": "topic_1",
         "relation": "mentioned",
-        "timestamp": 48.5,
-        "confidence": 0.93,
+        "timestamp": 62.8,
+        "confidence": 0.85,
         "evidence": {
           "source_type": "audio",
-          "quote": "processing around 2 million events per second across 400 nodes",
+          "quote": null,
           "description": null,
           "frame_path": null
         }
       },
       {
-        "source": "speaker_1",
-        "target": "kpi_2",
+        "source": "Arthur Mensch",
+        "target": "topic_1",
         "relation": "mentioned",
-        "timestamp": 48.5,
-        "confidence": 0.93,
+        "timestamp": 62.8,
+        "confidence": 0.85,
         "evidence": {
           "source_type": "audio",
-          "quote": "maintain sub-50 millisecond latency at the 99th percentile",
+          "quote": null,
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "Andrew Ross Sorkin",
+        "target": "topic_2",
+        "relation": "mentioned",
+        "timestamp": 160.9,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "audio",
+          "quote": null,
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "Arthur Mensch",
+        "target": "topic_2",
+        "relation": "mentioned",
+        "timestamp": 160.9,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "audio",
+          "quote": null,
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "Andrew Ross Sorkin",
+        "target": "topic_3",
+        "relation": "mentioned",
+        "timestamp": 238.4,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "audio",
+          "quote": null,
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "Arthur Mensch",
+        "target": "topic_3",
+        "relation": "mentioned",
+        "timestamp": 238.4,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "audio",
+          "quote": null,
           "description": null,
           "frame_path": null
         }
       },
       {
         "source": "claim_0",
-        "target": "speaker_0",
+        "target": "Arthur Mensch",
         "relation": "said_by",
-        "timestamp": 86.0,
+        "timestamp": 31.1,
         "confidence": 0.9,
         "evidence": {
           "source_type": "audio",
-          "quote": "your resume mentions you led a team of 12 engineers",
+          "quote": "We're going to be investing it in continuing to be a Frontier AI lab.",
           "description": null,
           "frame_path": null
         }
       },
       {
         "source": "claim_1",
-        "target": "speaker_1",
+        "target": "Arthur Mensch",
         "relation": "said_by",
-        "timestamp": 95.0,
-        "confidence": 0.95,
-        "evidence": {
-          "source_type": "audio",
-          "quote": "I was leading a team of about 15 engineers",
-          "description": null,
-          "frame_path": null
-        }
-      },
-      {
-        "source": "claim_0",
-        "target": "claim_1",
-        "relation": "contradicts",
-        "timestamp": 104.0,
-        "confidence": 0.85,
-        "evidence": {
-          "source_type": "merged",
-          "quote": "Resume says 12 engineers but candidate says 15",
-          "description": "Resume states team of 12 engineers, candidate verbally claims 15. Candidate explains it grew from 12 to 15 over two years. Minor discrepancy but raises attention to detail.",
-          "frame_path": null
-        }
-      },
-      {
-        "source": "speaker_2",
-        "target": "topic_0",
-        "relation": "mentioned",
-        "timestamp": 104.0,
-        "confidence": 0.88,
-        "evidence": {
-          "source_type": "audio",
-          "quote": "Your resume says 12 engineers, but you just mentioned 15",
-          "description": null,
-          "frame_path": null
-        }
-      },
-      {
-        "source": "speaker_1",
-        "target": "topic_1",
-        "relation": "mentioned",
-        "timestamp": 133.0,
-        "confidence": 0.95,
-        "evidence": {
-          "source_type": "audio",
-          "quote": "For 500K concurrent users, I'd go with WebSocket connections behind a load balancer",
-          "description": null,
-          "frame_path": null
-        }
-      },
-      {
-        "source": "speaker_2",
-        "target": "topic_1",
-        "relation": "mentioned",
-        "timestamp": 165.0,
+        "timestamp": 77.7,
         "confidence": 0.9,
         "evidence": {
           "source_type": "audio",
-          "quote": "Why Kafka over something lighter like Redis pub-sub?",
+          "quote": "Europe is a great place to hire from. It's one of the places where you have the best schools in computer science and in mathematics.",
           "description": null,
           "frame_path": null
         }
       },
       {
-        "source": "speaker_1",
+        "source": "claim_2",
+        "target": "Arthur Mensch",
+        "relation": "said_by",
+        "timestamp": 135.3,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "We are actually able to constantly hire people from big tech.",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_3",
+        "target": "Arthur Mensch",
+        "relation": "said_by",
+        "timestamp": 178.6,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "We are defining a category where there is basically no other player.",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_4",
+        "target": "Arthur Mensch",
+        "relation": "said_by",
+        "timestamp": 314.2,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "We've been spending less than a percent of what our competitors in the U.S. have been doing.",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "Andrew Ross Sorkin",
+        "target": "kpi_0",
+        "relation": "mentioned",
+        "timestamp": 0.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "Funding Round: $2 billion",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "Andrew Ross Sorkin",
+        "target": "kpi_1",
+        "relation": "mentioned",
+        "timestamp": 0.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "Company Valuation: $14 billion",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "Arthur Mensch",
+        "target": "kpi_2",
+        "relation": "mentioned",
+        "timestamp": 135.3,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "Hiring from Big Tech: 40-50 people",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "Arthur Mensch",
         "target": "kpi_3",
         "relation": "mentioned",
-        "timestamp": 95.0,
-        "confidence": 0.92,
+        "timestamp": 314.2,
+        "confidence": 0.9,
         "evidence": {
           "source_type": "audio",
-          "quote": "I was leading a team of about 15 engineers",
+          "quote": "Burn Rate: $400 million",
           "description": null,
           "frame_path": null
         }
       },
       {
-        "source": "speaker_1",
-        "target": "topic_2",
-        "relation": "mentioned",
-        "timestamp": 236.0,
-        "confidence": 0.95,
+        "source": "topic_0",
+        "target": "slide_0",
+        "relation": "shown_during",
+        "timestamp": 0.0,
+        "confidence": 0.85,
         "evidence": {
-          "source_type": "audio",
-          "quote": "code reviews are the single most important engineering practice",
-          "description": null,
-          "frame_path": null
+          "source_type": "visual",
+          "quote": null,
+          "description": "Two men in a split-screen interview on CNBC discussing ASML's investment in Mistral AI.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0001.jpg"
         }
       },
       {
-        "source": "speaker_1",
-        "target": "topic_3",
-        "relation": "mentioned",
-        "timestamp": 347.0,
-        "confidence": 0.92,
+        "source": "topic_0",
+        "target": "slide_1",
+        "relation": "shown_during",
+        "timestamp": 11.111,
+        "confidence": 0.85,
         "evidence": {
-          "source_type": "audio",
-          "quote": "I do my best work in environments with high trust and low bureaucracy",
-          "description": null,
-          "frame_path": null
+          "source_type": "visual",
+          "quote": null,
+          "description": "Close-up of the individual in casual attire speaking during the CNBC interview.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0002.jpg"
         }
       },
       {
-        "source": "speaker_0",
-        "target": "decision_0",
-        "relation": "decided",
-        "timestamp": 446.0,
-        "confidence": 0.95,
+        "source": "topic_0",
+        "target": "slide_2",
+        "relation": "shown_during",
+        "timestamp": 31.298,
+        "confidence": 0.85,
         "evidence": {
-          "source_type": "audio",
-          "quote": "We'd like to bring you back for a follow-up session with the VP of Engineering",
-          "description": null,
-          "frame_path": null
+          "source_type": "visual",
+          "quote": null,
+          "description": "Interview with the individual in casual attire alongside a stock chart for ASML.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0003.jpg"
         }
       },
       {
-        "source": "speaker_0",
-        "target": "decision_1",
-        "relation": "decided",
-        "timestamp": 446.0,
-        "confidence": 0.93,
+        "source": "topic_1",
+        "target": "slide_3",
+        "relation": "shown_during",
+        "timestamp": 109.376,
+        "confidence": 0.85,
         "evidence": {
-          "source_type": "audio",
-          "quote": "I'll also need to set up a reference check",
-          "description": null,
-          "frame_path": null
+          "source_type": "visual",
+          "quote": null,
+          "description": "Interview with the individual in casual attire alongside a summary of Mistral AI's latest funding details.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0007.jpg"
         }
       },
       {
-        "source": "speaker_2",
-        "target": "decision_2",
-        "relation": "committed_to",
-        "timestamp": 459.0,
-        "confidence": 0.95,
+        "source": "topic_1",
+        "target": "slide_4",
+        "relation": "shown_during",
+        "timestamp": 139.406,
+        "confidence": 0.85,
         "evidence": {
-          "source_type": "audio",
-          "quote": "I'll put together a take-home that focuses on distributed systems design",
-          "description": null,
-          "frame_path": null
+          "source_type": "visual",
+          "quote": null,
+          "description": "Split-screen interview with both individuals, emphasizing the financial partnership between ASML and Mistral AI.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0008.jpg"
         }
       }
     ],
@@ -737,515 +663,500 @@
       {
         "timestamp": 0.0,
         "active_nodes": [
-          "speaker_0"
+          "topic_0",
+          "kpi_0",
+          "kpi_1",
+          "slide_0"
         ],
-        "active_edges": [],
-        "current_topic": "Introduction",
-        "current_speaker": "Sarah Kim"
+        "active_edges": [
+          "speaker_1->topic_0",
+          "speaker_2->topic_0",
+          "speaker_1->kpi_0",
+          "speaker_1->kpi_1",
+          "topic_0->slide_0"
+        ],
+        "current_topic": "Funding and Use of Funds",
+        "current_speaker": null
       },
       {
         "timestamp": 60.0,
         "active_nodes": [
-          "speaker_0",
-          "speaker_1",
-          "speaker_2",
-          "topic_0",
-          "kpi_0",
-          "kpi_1",
-          "kpi_2"
+          "Arthur Mensch",
+          "topic_0"
         ],
         "active_edges": [
-          "speaker_0->topic_0",
+          "speaker_1->topic_0",
+          "speaker_2->topic_0",
+          "claim_0->speaker_2",
           "speaker_1->kpi_0",
           "speaker_1->kpi_1",
-          "speaker_1->kpi_2"
+          "topic_0->slide_0",
+          "topic_0->slide_1",
+          "topic_0->slide_2"
         ],
-        "current_topic": "Background & Experience",
-        "current_speaker": "James Park"
+        "current_topic": "Funding and Use of Funds",
+        "current_speaker": "Arthur Mensch"
       },
       {
         "timestamp": 120.0,
         "active_nodes": [
-          "speaker_0",
-          "speaker_1",
-          "speaker_2",
-          "topic_0",
-          "kpi_0",
-          "kpi_1",
-          "kpi_2",
-          "kpi_3",
-          "claim_0",
-          "claim_1"
+          "Andrew Ross Sorkin",
+          "Arthur Mensch",
+          "topic_1"
         ],
         "active_edges": [
-          "speaker_0->topic_0",
+          "speaker_1->topic_0",
+          "speaker_2->topic_0",
+          "speaker_1->topic_1",
+          "speaker_2->topic_1",
+          "claim_0->speaker_2",
+          "claim_1->speaker_2",
           "speaker_1->kpi_0",
           "speaker_1->kpi_1",
-          "claim_0->claim_1"
+          "topic_0->slide_0",
+          "topic_0->slide_1",
+          "topic_0->slide_2",
+          "topic_1->slide_3"
         ],
-        "current_topic": "Background & Experience",
-        "current_speaker": "James Park"
+        "current_topic": "Talent Acquisition and Competition",
+        "current_speaker": "Arthur Mensch"
       },
       {
         "timestamp": 180.0,
         "active_nodes": [
-          "speaker_0",
-          "speaker_1",
-          "speaker_2",
-          "topic_0",
-          "topic_1",
-          "kpi_0",
-          "kpi_1",
-          "kpi_2",
-          "kpi_3",
-          "claim_0",
-          "claim_1"
+          "Andrew Ross Sorkin",
+          "Arthur Mensch",
+          "topic_2"
         ],
         "active_edges": [
-          "speaker_0->topic_0",
+          "speaker_1->topic_0",
+          "speaker_2->topic_0",
           "speaker_1->topic_1",
           "speaker_2->topic_1",
-          "claim_0->claim_1"
+          "speaker_1->topic_2",
+          "speaker_2->topic_2",
+          "claim_0->speaker_2",
+          "claim_1->speaker_2",
+          "claim_2->speaker_2",
+          "claim_3->speaker_2",
+          "speaker_1->kpi_0",
+          "speaker_1->kpi_1",
+          "speaker_2->kpi_2",
+          "topic_0->slide_0",
+          "topic_0->slide_1",
+          "topic_0->slide_2",
+          "topic_1->slide_3",
+          "topic_1->slide_4"
         ],
-        "current_topic": "System Design: Notification System",
-        "current_speaker": "James Park"
+        "current_topic": "Competitive Landscape",
+        "current_speaker": "Arthur Mensch"
       },
       {
         "timestamp": 240.0,
         "active_nodes": [
-          "speaker_0",
-          "speaker_1",
-          "speaker_2",
-          "topic_0",
-          "topic_1",
-          "topic_2",
-          "kpi_0",
-          "kpi_1",
-          "kpi_2",
-          "kpi_3",
-          "claim_0",
-          "claim_1"
+          "Andrew Ross Sorkin",
+          "Arthur Mensch",
+          "topic_3"
         ],
         "active_edges": [
+          "speaker_1->topic_0",
+          "speaker_2->topic_0",
           "speaker_1->topic_1",
+          "speaker_2->topic_1",
           "speaker_1->topic_2",
-          "claim_0->claim_1"
+          "speaker_2->topic_2",
+          "speaker_1->topic_3",
+          "speaker_2->topic_3",
+          "claim_0->speaker_2",
+          "claim_1->speaker_2",
+          "claim_2->speaker_2",
+          "claim_3->speaker_2",
+          "speaker_1->kpi_0",
+          "speaker_1->kpi_1",
+          "speaker_2->kpi_2",
+          "topic_0->slide_0",
+          "topic_0->slide_1",
+          "topic_0->slide_2",
+          "topic_1->slide_3",
+          "topic_1->slide_4"
         ],
-        "current_topic": "Coding Philosophy & Testing",
-        "current_speaker": "James Park"
+        "current_topic": "Profitability and Long-term Value",
+        "current_speaker": "Arthur Mensch"
       },
       {
         "timestamp": 300.0,
         "active_nodes": [
-          "speaker_0",
-          "speaker_1",
-          "speaker_2",
-          "topic_0",
-          "topic_1",
-          "topic_2",
-          "kpi_0",
-          "kpi_1",
-          "kpi_2",
-          "kpi_3"
+          "Arthur Mensch",
+          "topic_3"
         ],
         "active_edges": [
-          "speaker_1->topic_2"
+          "speaker_1->topic_0",
+          "speaker_2->topic_0",
+          "speaker_1->topic_1",
+          "speaker_2->topic_1",
+          "speaker_1->topic_2",
+          "speaker_2->topic_2",
+          "speaker_1->topic_3",
+          "speaker_2->topic_3",
+          "claim_0->speaker_2",
+          "claim_1->speaker_2",
+          "claim_2->speaker_2",
+          "claim_3->speaker_2",
+          "speaker_1->kpi_0",
+          "speaker_1->kpi_1",
+          "speaker_2->kpi_2",
+          "topic_0->slide_0",
+          "topic_0->slide_1",
+          "topic_0->slide_2",
+          "topic_1->slide_3",
+          "topic_1->slide_4"
         ],
-        "current_topic": "Coding Philosophy & Testing",
-        "current_speaker": "James Park"
-      },
-      {
-        "timestamp": 360.0,
-        "active_nodes": [
-          "speaker_0",
-          "speaker_1",
-          "speaker_2",
-          "topic_0",
-          "topic_1",
-          "topic_2",
-          "topic_3",
-          "kpi_0",
-          "kpi_1",
-          "kpi_2",
-          "kpi_3"
-        ],
-        "active_edges": [
-          "speaker_1->topic_3"
-        ],
-        "current_topic": "Culture Fit & Values",
-        "current_speaker": "James Park"
-      },
-      {
-        "timestamp": 420.0,
-        "active_nodes": [
-          "speaker_0",
-          "speaker_1",
-          "speaker_2",
-          "topic_0",
-          "topic_1",
-          "topic_2",
-          "topic_3",
-          "kpi_0",
-          "kpi_1",
-          "kpi_2",
-          "kpi_3"
-        ],
-        "active_edges": [
-          "speaker_1->topic_3"
-        ],
-        "current_topic": "Culture Fit & Values",
-        "current_speaker": "James Park"
-      },
-      {
-        "timestamp": 480.0,
-        "active_nodes": [
-          "speaker_0",
-          "speaker_1",
-          "speaker_2",
-          "topic_0",
-          "topic_1",
-          "topic_2",
-          "topic_3",
-          "decision_0",
-          "decision_1",
-          "decision_2"
-        ],
-        "active_edges": [
-          "speaker_0->decision_0",
-          "speaker_0->decision_1",
-          "speaker_2->decision_2"
-        ],
-        "current_topic": "Next Steps",
-        "current_speaker": "Sarah Kim"
+        "current_topic": "Profitability and Long-term Value",
+        "current_speaker": "Arthur Mensch"
       }
     ],
     "metadata": {
-      "duration_seconds": 480.0,
-      "total_nodes": 16,
-      "total_edges": 16,
+      "duration_seconds": 354.2,
+      "total_nodes": 20,
+      "total_edges": 22,
       "node_types": {
-        "speaker": 3,
+        "speaker": 2,
         "topic": 4,
+        "claim": 5,
         "kpi": 4,
-        "claim": 2,
-        "decision": 3
+        "slide": 5
       }
     }
   },
   "insights": {
-    "summary": "Technical interview for a Senior Engineer position at Nexus, conducted by Sarah Kim (Engineering Manager) with David Cho (Senior Staff Engineer) on the panel. Candidate James Park demonstrated strong distributed systems expertise with 8 years of experience, including leading a real-time data pipeline processing 2M events/sec at Stratum. He delivered a solid system design for a notification system and showed strong coding philosophy around code reviews and chaos testing. A minor discrepancy was noted between his resume (12 engineers) and verbal statement (15 engineers), which he clarified as team growth. The panel decided to advance him to a follow-up interview with the VP of Engineering.",
+    "summary": "The video is an interview with Arthur Mensch, CEO of Mistral AI, discussing their recent $2 billion funding round, talent acquisition strategies, competitive landscape, and long-term profitability. Key points include Mistral's focus on being a frontier AI lab, hiring from big tech, and their unique position in the market.",
     "topics": [
       {
-        "name": "Background & Experience",
-        "start_time": 31.0,
-        "end_time": 121.0,
+        "name": "Funding and Use of Funds",
+        "start_time": 0.0,
+        "end_time": 62.0,
         "key_points": [
-          "8 years in backend infrastructure and distributed systems",
-          "Tech lead at Stratum on real-time data pipeline",
-          "2M events/sec across 400 nodes with sub-50ms P99 latency",
-          "Solved tail latency with consistent hashing and virtual nodes",
-          "Led team that grew from 12 to 15 engineers across 3 squads"
+          "Mistral AI secured $2 billion in funding",
+          "Company valuation is $14 billion",
+          "Funds will be used to continue as a frontier AI lab"
         ],
         "speakers_involved": [
-          "Sarah Kim",
-          "James Park",
-          "David Cho"
+          "Andrew Ross Sorkin",
+          "Arthur Mensch"
         ],
         "evidence": [
           {
-            "timestamp": 39.0,
+            "timestamp": 0.0,
             "source": "audio",
-            "quote": "I've been working in backend infrastructure for about 8 years now"
+            "quote": "Funding Round: $2 billion"
           },
           {
-            "timestamp": 48.5,
+            "timestamp": 0.0,
             "source": "audio",
-            "quote": "processing around 2 million events per second across 400 nodes"
+            "quote": "Company Valuation: $14 billion"
           },
           {
-            "timestamp": 75.5,
+            "timestamp": 31.0,
             "source": "audio",
-            "quote": "moving to a consistent hashing scheme with virtual nodes"
+            "quote": "We're going to be investing it in continuing to be a Frontier AI lab."
           }
         ]
       },
       {
-        "name": "System Design: Notification System",
-        "start_time": 122.0,
-        "end_time": 227.0,
+        "name": "Talent Acquisition and Competition",
+        "start_time": 63.0,
+        "end_time": 160.0,
         "key_points": [
-          "WebSocket-based connection layer with 50 servers for 500K users",
-          "Kafka pub-sub for durability and replay over Redis",
-          "Two-tier fanout for high-subscriber topics",
-          "P95 target of 200ms end-to-end delivery"
+          "Europe is a great place to hire from",
+          "Hiring 40-50 people from big tech",
+          "Constantly hiring from big tech"
         ],
         "speakers_involved": [
-          "Sarah Kim",
-          "James Park",
-          "David Cho"
+          "Andrew Ross Sorkin",
+          "Arthur Mensch"
         ],
         "evidence": [
           {
-            "timestamp": 145.0,
+            "timestamp": 78.0,
             "source": "audio",
-            "quote": "roughly 50 WebSocket servers assuming each can handle about 10,000 connections"
+            "quote": "Europe is a great place to hire from. It's one of the places where you have the"
           },
           {
-            "timestamp": 184.0,
+            "timestamp": 135.0,
             "source": "audio",
-            "quote": "Kafka's consumer offsets give us that for free. With Redis you'd need to build that yourself"
+            "quote": "Hiring from Big Tech: 40-50 people"
           },
           {
-            "timestamp": 217.0,
+            "timestamp": 135.0,
             "source": "audio",
-            "quote": "end-to-end delivery under 200 milliseconds for P95"
+            "quote": "We are actually able to constantly hire people from big tech."
           }
         ]
       },
       {
-        "name": "Coding Philosophy & Testing",
-        "start_time": 228.0,
-        "end_time": 337.0,
+        "name": "Competitive Landscape",
+        "start_time": 161.0,
+        "end_time": 238.0,
         "key_points": [
-          "Two-approval code review policy with cross-squad reviews",
-          "Eliminated inconsistent error handling patterns",
-          "Favors well-designed tests over high coverage metrics",
-          "Weekly chaos testing game days",
-          "Discovered critical Kafka rebalancing bug through game day"
+          "Defining a category with no other players",
+          "Unique position in the market"
         ],
         "speakers_involved": [
-          "Sarah Kim",
-          "James Park",
-          "David Cho"
+          "Andrew Ross Sorkin",
+          "Arthur Mensch"
         ],
         "evidence": [
           {
-            "timestamp": 248.0,
+            "timestamp": 179.0,
             "source": "audio",
-            "quote": "no PR ships without at least two approvals, and one has to be from someone outside your immediate squad"
-          },
+            "quote": "We are defining a category where there is basically no other player."
+          }
+        ]
+      },
+      {
+        "name": "Profitability and Long-term Value",
+        "start_time": 238.0,
+        "end_time": 354.0,
+        "key_points": [
+          "Burn rate is $400 million",
+          "Spending less than a percent of what competitors in the U.S. spend"
+        ],
+        "speakers_involved": [
+          "Andrew Ross Sorkin",
+          "Arthur Mensch"
+        ],
+        "evidence": [
           {
-            "timestamp": 280.0,
+            "timestamp": 314.0,
             "source": "audio",
-            "quote": "80% coverage with well-designed tests beats 95% coverage with brittle unit tests every time"
+            "quote": "Burn Rate: $400 million"
           },
           {
             "timestamp": 314.0,
             "source": "audio",
-            "quote": "our consumer group rebalancing took 45 seconds instead of the expected 5"
-          }
-        ]
-      },
-      {
-        "name": "Culture Fit & Values",
-        "start_time": 340.0,
-        "end_time": 436.0,
-        "key_points": [
-          "Values high trust and low bureaucracy",
-          "Strong advocate for documentation and RFC processes",
-          "Believes in sustainable pace over crunch culture",
-          "Passionate about mentorship and growing junior engineers",
-          "Excited about eBPF for observability"
-        ],
-        "speakers_involved": [
-          "Sarah Kim",
-          "James Park",
-          "David Cho"
-        ],
-        "evidence": [
-          {
-            "timestamp": 358.0,
-            "source": "audio",
-            "quote": "an undocumented system is a ticking time bomb"
-          },
-          {
-            "timestamp": 382.0,
-            "source": "audio",
-            "quote": "I'm a firm believer in sustainable pace. Crunch time happens, but it shouldn't be the norm"
-          },
-          {
-            "timestamp": 417.0,
-            "source": "audio",
-            "quote": "it's eBPF. The ability to run sandboxed programs in the kernel without modifying kernel source code is a game changer"
+            "quote": "We've been spending less than a percent of what our competitors in the U.S. have"
           }
         ]
       }
     ],
     "action_items": [
       {
-        "description": "Schedule follow-up interview with the VP of Engineering",
-        "assignee": "Sarah Kim",
+        "description": "Continue investing in being a frontier AI lab",
+        "assignee": "Arthur Mensch",
         "priority": "high",
         "evidence": [
           {
-            "timestamp": 446.0,
+            "timestamp": 31.0,
             "source": "audio",
-            "quote": "We'd like to bring you back for a follow-up session with the VP of Engineering"
+            "quote": "We're going to be investing it in continuing to be a Frontier AI lab."
           }
         ]
       },
       {
-        "description": "Conduct reference check for James Park",
-        "assignee": "Sarah Kim",
-        "priority": "high",
-        "evidence": [
-          {
-            "timestamp": 446.0,
-            "source": "audio",
-            "quote": "I'll also need to set up a reference check"
-          }
-        ]
-      },
-      {
-        "description": "Prepare distributed systems take-home assessment (2 hours estimated)",
-        "assignee": "David Cho",
+        "description": "Continue hiring from big tech",
+        "assignee": "Arthur Mensch",
         "priority": "medium",
         "evidence": [
           {
-            "timestamp": 459.0,
+            "timestamp": 135.0,
             "source": "audio",
-            "quote": "I'll put together a take-home that focuses on distributed systems design. Should take about two hours."
+            "quote": "We are actually able to constantly hire people from big tech."
           }
         ]
       }
     ],
     "decisions": [
       {
-        "description": "Advance James Park to follow-up interview round with VP Engineering",
-        "made_by": "Sarah Kim",
-        "timestamp": 446.0,
-        "context": "Based on strong performance in system design, coding philosophy, and culture fit discussions.",
+        "description": "To continue investing in being a frontier AI lab",
+        "made_by": "Arthur Mensch",
+        "timestamp": 31.0,
+        "context": "Discussing the use of funds",
         "evidence": [
           {
-            "timestamp": 446.0,
+            "timestamp": 31.0,
             "source": "audio",
-            "quote": "We'd like to bring you back for a follow-up session with the VP of Engineering"
-          }
-        ]
-      },
-      {
-        "description": "Assign take-home technical assessment focused on distributed systems",
-        "made_by": "David Cho",
-        "timestamp": 459.0,
-        "context": "To further evaluate candidate's distributed systems design capabilities. Estimated at 2 hours.",
-        "evidence": [
-          {
-            "timestamp": 459.0,
-            "source": "audio",
-            "quote": "I'll put together a take-home that focuses on distributed systems design"
+            "quote": "We're going to be investing it in continuing to be a Frontier AI lab."
           }
         ]
       }
     ],
-    "contradictions": [
-      {
-        "description": "Team size discrepancy: resume says 12 engineers, candidate verbally states 15",
-        "claim_a": {
-          "source": "Sarah Kim (reading resume)",
-          "quote": "your resume mentions you led a team of 12 engineers at Stratum",
-          "timestamp": 86.0,
-          "source_type": "audio"
-        },
-        "claim_b": {
-          "source": "James Park",
-          "quote": "I was leading a team of about 15 engineers",
-          "timestamp": 95.0,
-          "source_type": "audio"
-        },
-        "explanation": "James Park's resume states he led a team of 12 engineers, but during the interview he said 15. When flagged by David Cho, James clarified the team started at 12 and grew to 15 over two years. While the explanation is reasonable, the resume should be updated to reflect the accurate range. This minor inconsistency was caught by the panel.",
-        "severity": "low"
-      }
-    ],
+    "contradictions": [],
     "kpis": [
       {
-        "name": "Years of Experience",
-        "value": "8 years",
-        "context": "Backend infrastructure and distributed systems. Most recently tech lead at Stratum.",
-        "mentioned_by": "James Park",
-        "timestamp": 39.0,
+        "name": "Funding Round",
+        "value": "$2 billion",
+        "context": "Amount of funding secured",
+        "mentioned_by": "Andrew Ross Sorkin",
+        "timestamp": 0.0,
         "evidence": [
           {
-            "timestamp": 39.0,
+            "timestamp": 0.0,
             "source": "audio",
-            "quote": "I've been working in backend infrastructure for about 8 years now"
+            "quote": "Funding Round: $2 billion"
           }
         ]
       },
       {
-        "name": "System Throughput",
-        "value": "2M events/sec",
-        "context": "Real-time data pipeline at Stratum across 400 nodes.",
-        "mentioned_by": "James Park",
-        "timestamp": 48.5,
+        "name": "Company Valuation",
+        "value": "$14 billion",
+        "context": "Current company valuation",
+        "mentioned_by": "Andrew Ross Sorkin",
+        "timestamp": 0.0,
         "evidence": [
           {
-            "timestamp": 48.5,
+            "timestamp": 0.0,
             "source": "audio",
-            "quote": "processing around 2 million events per second across 400 nodes"
+            "quote": "Company Valuation: $14 billion"
           }
         ]
       },
       {
-        "name": "Latency Target (P99)",
-        "value": "Sub-50ms",
-        "context": "Tail latency for the data pipeline. Achieved through consistent hashing with virtual nodes.",
-        "mentioned_by": "James Park",
-        "timestamp": 48.5,
+        "name": "Hiring from Big Tech",
+        "value": "40-50 people",
+        "context": "Number of people hired from big tech",
+        "mentioned_by": "Arthur Mensch",
+        "timestamp": 135.0,
         "evidence": [
           {
-            "timestamp": 48.5,
+            "timestamp": 135.0,
             "source": "audio",
-            "quote": "maintain sub-50 millisecond latency at the 99th percentile"
+            "quote": "Hiring from Big Tech: 40-50 people"
           }
         ]
       },
       {
-        "name": "Team Size",
-        "value": "12 to 15 engineers",
-        "context": "Grew over two years. Three squads: ingest, processing, storage.",
-        "mentioned_by": "James Park",
-        "timestamp": 95.0,
+        "name": "Burn Rate",
+        "value": "$400 million",
+        "context": "Current burn rate",
+        "mentioned_by": "Arthur Mensch",
+        "timestamp": 314.0,
         "evidence": [
           {
-            "timestamp": 95.0,
+            "timestamp": 314.0,
             "source": "audio",
-            "quote": "I was leading a team of about 15 engineers. We were split into three squads"
+            "quote": "Burn Rate: $400 million"
           }
         ]
       }
     ],
     "key_quotes": [
       {
-        "speaker": "James Park",
-        "quote": "Getting P50 down is relatively straightforward, but P99 is a different beast. We had to redesign our partitioning strategy three times.",
-        "timestamp": 65.0,
-        "context": "Demonstrating deep understanding of distributed systems latency challenges"
+        "speaker": "Arthur Mensch",
+        "quote": "We're going to be investing it in continuing to be a Frontier AI lab.",
+        "timestamp": 31.0,
+        "context": "Important statement on the use of funds"
       },
       {
-        "speaker": "James Park",
-        "quote": "Code reviews are the single most important engineering practice. They're not just about catching bugs, they're about knowledge sharing and maintaining consistency.",
-        "timestamp": 236.0,
-        "context": "Revealing engineering philosophy and leadership approach"
+        "speaker": "Arthur Mensch",
+        "quote": "We are defining a category where there is basically no other player.",
+        "timestamp": 179.0,
+        "context": "Highlighting Mistral's unique position in the market"
       },
       {
-        "speaker": "James Park",
-        "quote": "80% coverage with well-designed tests beats 95% coverage with brittle unit tests every time.",
-        "timestamp": 280.0,
-        "context": "Pragmatic testing philosophy focused on value over vanity metrics"
-      },
-      {
-        "speaker": "James Park",
-        "quote": "An undocumented system is a ticking time bomb.",
-        "timestamp": 358.0,
-        "context": "Strong stance on documentation culture, aligned with Nexus's RFC process"
-      },
-      {
-        "speaker": "David Cho",
-        "quote": "Your resume says 12 engineers, but you just mentioned 15. Could you clarify that?",
-        "timestamp": 104.0,
-        "context": "Panel member catching a discrepancy between resume and verbal claim"
+        "speaker": "Arthur Mensch",
+        "quote": "We've been spending less than a percent of what our competitors in the U.S. have",
+        "timestamp": 314.0,
+        "context": "Discussing profitability and long-term value"
       }
     ]
   },
-  "vision_events": []
+  "vision_events": [
+    {
+      "frame_index": 0,
+      "timestamp": 0.0,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0001.jpg",
+      "ocr_text": [
+        "ASML TAKES 11% STAKE IN MISTRAL AI",
+        "NEW FUNDING ROUND VALUES MISTRAL AT ABOUT $14B"
+      ],
+      "scene_description": "Two men in a split-screen interview on CNBC discussing ASML's investment in Mistral AI.",
+      "slide_title": null,
+      "objects": [
+        "CNBC logo",
+        "Squawk Box banner",
+        "two individuals (one in suit, one in casual shirt)",
+        "CNBC+ branding"
+      ]
+    },
+    {
+      "frame_index": 1,
+      "timestamp": 11.111,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0002.jpg",
+      "ocr_text": [
+        "ASML TAKES 11% STAKE IN MISTRAL AI",
+        "NEW FUNDING ROUND VALUES MISTRAL AT ABOUT $14B"
+      ],
+      "scene_description": "Close-up of the individual in casual attire speaking during the CNBC interview.",
+      "slide_title": null,
+      "objects": [
+        "CNBC logo",
+        "Squawk Box banner",
+        "plant in background",
+        "individual speaking"
+      ]
+    },
+    {
+      "frame_index": 2,
+      "timestamp": 31.298,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0003.jpg",
+      "ocr_text": [
+        "ASML HOLDING ASML",
+        "INTRA DAY 796.60 +0.35 +0.04%",
+        "1-YR +6.24%",
+        "EXTENDED HOURS",
+        "ASML TAKES 11% STAKE IN MISTRAL AI",
+        "NEW FUNDING ROUND VALUES MISTRAL AT ABOUT $14B"
+      ],
+      "scene_description": "Interview with the individual in casual attire alongside a stock chart for ASML.",
+      "slide_title": null,
+      "objects": [
+        "CNBC logo",
+        "Squawk Box banner",
+        "stock price chart (green area graph)",
+        "plant in background",
+        "individual speaking"
+      ]
+    },
+    {
+      "frame_index": 6,
+      "timestamp": 109.376,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0007.jpg",
+      "ocr_text": [
+        "MISTRAL AI",
+        "LATEST RAISE",
+        "Series C round of \u20ac1.7B (nearly $2B)",
+        "\u20ac11.7B ($13.76B) valuation",
+        "ASML becomes a strategic partner",
+        "ASML TAKES 11% STAKE IN MISTRAL AI",
+        "NEW FUNDING ROUND VALUES MISTRAL AT ABOUT $14B"
+      ],
+      "scene_description": "Interview with the individual in casual attire alongside a summary of Mistral AI's latest funding details.",
+      "slide_title": null,
+      "objects": [
+        "CNBC logo",
+        "Squawk Box banner",
+        "text box with funding details",
+        "plant in background",
+        "individual speaking"
+      ]
+    },
+    {
+      "frame_index": 7,
+      "timestamp": 139.406,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/b398945a/frames/frame_0008.jpg",
+      "ocr_text": [
+        "ASML TAKES 11% STAKE IN MISTRAL AI",
+        "NEW FUNDING ROUND VALUES MISTRAL AT ABOUT $14B"
+      ],
+      "scene_description": "Split-screen interview with both individuals, emphasizing the financial partnership between ASML and Mistral AI.",
+      "slide_title": null,
+      "objects": [
+        "CNBC logo",
+        "Squawk Box banner",
+        "two individuals (one in suit, one in casual shirt)",
+        "CNBC+ branding"
+      ]
+    }
+  ],
+  "processing_time": 44.0
 }

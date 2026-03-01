@@ -69,9 +69,12 @@ export default function AnalysisPage() {
     })();
   }, [jobId, isDemo]);
 
-  // Focus edit input when editing speaker
+  // Focus edit input only when entering edit mode (not on every keystroke)
+  const prevEditingRef = useRef<string | null>(null);
   useEffect(() => {
-    if (editing && editInputRef.current) {
+    const wasEditing = prevEditingRef.current;
+    prevEditingRef.current = editing?.speaker ?? null;
+    if (editing && !wasEditing && editInputRef.current) {
       editInputRef.current.focus();
       editInputRef.current.select();
     }
@@ -121,9 +124,18 @@ export default function AnalysisPage() {
 
   const speakerList = useMemo(() => {
     if (!data) return [];
+    // Use transcript as canonical source; only add insight speakers if truly new
     const all = new Set(data.transcript.map(s => s.speaker));
+    // Normalize: build a lowercase lookup to avoid duplicates like speaker_1 vs Speaker 1
+    const normalized = new Set([...all].map(s => s.toLowerCase().replace(/[\s_]+/g, '')));
     for (const t of data.insights.topics) {
-      for (const s of t.speakers_involved) all.add(s);
+      for (const s of t.speakers_involved) {
+        const norm = s.toLowerCase().replace(/[\s_]+/g, '');
+        if (!normalized.has(norm)) {
+          all.add(s);
+          normalized.add(norm);
+        }
+      }
     }
     return [...all];
   }, [data]);
@@ -285,21 +297,26 @@ export default function AnalysisPage() {
               </div>
 
               {/* Time ruler — readable */}
-              <div className="relative h-3.5">
-                {Array.from({ length: Math.ceil(videoDuration / 60) + 1 }, (_, i) => {
-                  const pos = (i * 60 / videoDuration) * 100;
-                  if (pos > 100) return null;
-                  return (
-                    <div key={i} className="absolute flex flex-col items-center" style={{ left: `${pos}%`, transform: 'translateX(-50%)' }}>
-                      <div className="w-px h-1.5 bg-[#444]" />
-                      <span className="text-[8px] text-[#666] font-mono tabular-nums">{formatTime(i * 60)}</span>
-                    </div>
-                  );
-                })}
+              <div className="flex items-center gap-2">
+                <div className="w-20 shrink-0" />
+                <div className="relative h-3.5 flex-1">
+                  {Array.from({ length: Math.ceil(videoDuration / 60) + 1 }, (_, i) => {
+                    const pos = (i * 60 / videoDuration) * 100;
+                    if (pos > 100) return null;
+                    return (
+                      <div key={i} className="absolute flex flex-col items-center" style={{ left: `${pos}%`, transform: 'translateX(-50%)' }}>
+                        <div className="w-px h-1.5 bg-[#444]" />
+                        <span className="text-[8px] text-[#666] font-mono tabular-nums">{formatTime(i * 60)}</span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Topics bar — active highlight + hide text on tiny segments */}
-              <div className="relative h-8 rounded overflow-hidden timeline-track">
+              <div className="flex items-center gap-2">
+                <div className="w-20 shrink-0" />
+                <div className="relative h-8 flex-1 rounded overflow-hidden timeline-track">
                 {insights.topics.map((topic, i) => {
                   const left = (topic.start_time / videoDuration) * 100;
                   const width = ((topic.end_time - topic.start_time) / videoDuration) * 100;
@@ -333,6 +350,7 @@ export default function AnalysisPage() {
                   <div className="absolute -top-[3px] left-1/2 -translate-x-1/2 w-[7px] h-[7px] bg-[#FA500F] rotate-45 rounded-[1px]" />
                   <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] bg-[#FA500F] rotate-45 rounded-[1px] opacity-50" />
                 </div>
+              </div>
               </div>
 
               {/* Speaker segments — taller, stronger contrast */}

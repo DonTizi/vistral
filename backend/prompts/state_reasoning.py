@@ -12,8 +12,8 @@ Extract the following and return as JSON:
 {{
   "speakers": [
     {{
-      "id": "speaker_0",
-      "name": "Speaker A",
+      "id": "speaker_1",
+      "name": "speaker_1",
       "role": "inferred role or unknown",
       "key_contributions": ["brief point 1", "brief point 2"]
     }}
@@ -65,8 +65,7 @@ Extract the following and return as JSON:
 }}
 
 Rules:
-- Assign speaker IDs consistently (speaker_0, speaker_1, etc.) matching the transcript labels
-- Try to infer real names if speakers address each other by name
+- Use the EXACT speaker labels from the transcript (e.g. speaker_1, speaker_2) as both "id" and "name" — NEVER invent names like "Speaker A" or use real names
 - Every claim must have a timestamp from the transcript
 - KPIs are quantitative metrics mentioned (revenue, growth rates, costs, headcount, etc.)
 - Be exhaustive — extract ALL entities, not just the obvious ones

@@ -17,7 +17,7 @@ Produce a JSON response with this structure:
       "start_time": 30.0,
       "end_time": 180.0,
       "key_points": ["point 1", "point 2", "point 3"],
-      "speakers_involved": ["Speaker A", "Speaker B"],
+      "speakers_involved": ["speaker_1", "speaker_2"],
       "evidence": [
         {{"timestamp": 32.5, "source": "audio", "quote": "exact quote from transcript"}},
         {{"timestamp": 35.0, "source": "visual", "description": "Slide showing X"}}
@@ -27,7 +27,7 @@ Produce a JSON response with this structure:
   "action_items": [
     {{
       "description": "Clear, actionable task description",
-      "assignee": "Speaker name",
+      "assignee": "speaker_1",
       "priority": "high",
       "evidence": [
         {{"timestamp": 145.2, "source": "audio", "quote": "exact quote"}}
@@ -37,7 +37,7 @@ Produce a JSON response with this structure:
   "decisions": [
     {{
       "description": "What was decided",
-      "made_by": "Speaker name",
+      "made_by": "speaker_1",
       "timestamp": 245.0,
       "context": "Context around the decision",
       "evidence": [
@@ -49,7 +49,7 @@ Produce a JSON response with this structure:
     {{
       "description": "Brief description of the contradiction",
       "claim_a": {{
-        "source": "Speaker name",
+        "source": "speaker_1",
         "quote": "What they said",
         "timestamp": 45.2,
         "source_type": "audio"
@@ -69,7 +69,7 @@ Produce a JSON response with this structure:
       "name": "KPI name",
       "value": "value with unit",
       "context": "What this KPI represents",
-      "mentioned_by": "Speaker name",
+      "mentioned_by": "speaker_1",
       "timestamp": 45.2,
       "evidence": [
         {{"timestamp": 45.2, "source": "audio", "quote": "exact quote"}}
@@ -78,7 +78,7 @@ Produce a JSON response with this structure:
   ],
   "key_quotes": [
     {{
-      "speaker": "Speaker name",
+      "speaker": "speaker_1",
       "quote": "Notable or important quote",
       "timestamp": 120.0,
       "context": "Why this quote matters"
@@ -87,6 +87,7 @@ Produce a JSON response with this structure:
 }}
 
 Rules:
+- ALWAYS use the exact speaker IDs from the graph (e.g. speaker_1, speaker_2) — NEVER invent names like "Speaker A" or real names
 - Every insight MUST have at least one evidence entry with timestamp and source
 - Contradictions compare audio claims vs visual claims, or conflicting statements by different speakers
 - Priority for action items: high = explicitly assigned with urgency, medium = discussed, low = implied

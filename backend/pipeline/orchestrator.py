@@ -11,6 +11,7 @@ Orchestration pattern:
 import asyncio
 import json
 import logging
+import re
 import time
 from contextlib import asynccontextmanager
 from dataclasses import asdict
@@ -82,6 +83,124 @@ _TICKER_MESSAGES: dict[str, list[str]] = {
         "Generating executive summary",
     ],
 }
+
+
+def _build_speaker_map(transcript, entities):
+    """Build mapping from LLM speaker IDs/names to canonical transcript labels.
+
+    The transcript contains diarization labels (e.g. speaker_1, speaker_2).
+    The LLM may use different IDs (speaker_0) and friendly names (Speaker 1).
+    This builds a mapping so all references can be normalized to transcript labels.
+    """
+    # Get unique transcript speakers in order of first appearance
+    transcript_speakers = []
+    seen = set()
+    for seg in transcript:
+        if seg.speaker not in seen:
+            transcript_speakers.append(seg.speaker)
+            seen.add(seg.speaker)
+
+    speaker_map = {}
+    entity_speakers = entities.speakers
+    matched_entity_ids = set()
+
+    # Pass 1: Try direct ID match (entity ID already matches a transcript label)
+    for sp in entity_speakers:
+        sid = sp["id"]
+        if sid in seen:
+            speaker_map[sid] = sid
+            name = sp.get("name")
+            if name and name != sid:
+                speaker_map[name] = sid
+            matched_entity_ids.add(sid)
+
+    # Pass 2: Try number-based matching (e.g. speaker_0 → speaker_1 if transcript is 1-indexed)
+    def _extract_number(label):
+        m = re.search(r'(\d+)$', str(label))
+        return int(m.group(1)) if m else None
+
+    transcript_by_num = {}
+    for label in transcript_speakers:
+        num = _extract_number(label)
+        if num is not None:
+            transcript_by_num[num] = label
+
+    for sp in entity_speakers:
+        sid = sp["id"]
+        if sid in matched_entity_ids:
+            continue
+        num = _extract_number(sid)
+        if num is not None and num in transcript_by_num:
+            speaker_map[sid] = transcript_by_num[num]
+            name = sp.get("name")
+            if name and name != sid:
+                speaker_map[name] = transcript_by_num[num]
+            matched_entity_ids.add(sid)
+
+    # Pass 3: Fallback — match remaining by order of appearance
+    unmatched_entities = [sp for sp in entity_speakers if sp["id"] not in matched_entity_ids]
+    used_transcript_labels = set(speaker_map.values())
+    unmatched_transcript = [s for s in transcript_speakers if s not in used_transcript_labels]
+
+    for sp, transcript_label in zip(unmatched_entities, unmatched_transcript):
+        sid = sp["id"]
+        speaker_map[sid] = transcript_label
+        name = sp.get("name")
+        if name and name != sid:
+            speaker_map[name] = transcript_label
+
+    return speaker_map
+
+
+def _normalize_entity_speakers(entities, speaker_map):
+    """Normalize entity speaker IDs to use canonical transcript labels."""
+    for sp in entities.speakers:
+        canonical = speaker_map.get(sp["id"])
+        if canonical:
+            sp["id"] = canonical
+
+    for tp in entities.topics:
+        tp["speakers_involved"] = [speaker_map.get(s, s) for s in tp.get("speakers_involved", [])]
+
+    for claim in entities.claims:
+        if "speaker_id" in claim:
+            claim["speaker_id"] = speaker_map.get(claim["speaker_id"], claim["speaker_id"])
+
+    for kpi in entities.kpis:
+        if "mentioned_by" in kpi:
+            kpi["mentioned_by"] = speaker_map.get(kpi["mentioned_by"], kpi["mentioned_by"])
+
+    for item in entities.action_items_raw:
+        if "assigned_to" in item:
+            item["assigned_to"] = speaker_map.get(item["assigned_to"], item["assigned_to"])
+
+    for d in entities.decisions_raw:
+        if "made_by" in d:
+            d["made_by"] = speaker_map.get(d["made_by"], d["made_by"])
+
+
+def _normalize_insights(insights, speaker_map):
+    """Replace LLM speaker names in insights with canonical transcript labels."""
+    for topic in insights.get("topics", []):
+        topic["speakers_involved"] = [speaker_map.get(s, s) for s in topic.get("speakers_involved", [])]
+
+    for item in insights.get("action_items", []):
+        if "assignee" in item:
+            item["assignee"] = speaker_map.get(item["assignee"], item["assignee"])
+
+    for d in insights.get("decisions", []):
+        if "made_by" in d:
+            d["made_by"] = speaker_map.get(d["made_by"], d["made_by"])
+
+    for q in insights.get("key_quotes", []):
+        if "speaker" in q:
+            q["speaker"] = speaker_map.get(q["speaker"], q["speaker"])
+
+    for c in insights.get("contradictions", []):
+        for key in ("claim_a", "claim_b"):
+            claim = c.get(key, {})
+            if "source" in claim:
+                claim["source"] = speaker_map.get(claim["source"], claim["source"])
 
 
 class PipelineOrchestrator:
@@ -169,6 +288,10 @@ class PipelineOrchestrator:
                 entities, vision_events = await asyncio.gather(entities_task, vision_task)
             await self._emit("vision", 65, f"Vision: {len(vision_events)} events. Entities extracted.")
 
+            # Normalize entity speaker IDs/names to match transcript diarization labels
+            speaker_map = _build_speaker_map(transcript, entities)
+            _normalize_entity_speakers(entities, speaker_map)
+
             # --- Step 4: Knowledge Graph construction ---
             await self._emit("graph", 70, "Building Temporal Knowledge Graph")
             async with self._progress_ticker("graph", 70, 79):
@@ -180,6 +303,8 @@ class PipelineOrchestrator:
             await self._emit("insights", 85, "Extracting insights from knowledge graph")
             async with self._progress_ticker("insights", 85, 94):
                 insights = await extract_insights(serialized)
+            # Normalize insight speaker references to match transcript labels
+            _normalize_insights(insights, speaker_map)
             await self._emit("insights", 95, "Insights extracted with evidence chains")
 
             # --- Save results ---

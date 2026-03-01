@@ -112,10 +112,11 @@ def _start_pipeline(job_id: str, video_path: Path) -> dict:
 
 def _download_youtube(url: str, output_path: str) -> None:
     """Download best ≤720p via yt-dlp. Runs in a thread."""
+    yt_dlp = _YT_DLP_PATH or "yt-dlp"
     result = subprocess.run(
         [
-            "yt-dlp",
-            "-f", "bestvideo[height<=720]+bestaudio/best[height<=720]/best",
+            yt_dlp,
+            "-f", "bv*[height<=720]+ba/b[height<=720]/b",
             "--merge-output-format", "mp4",
             "--no-playlist",
             "-o", output_path,
@@ -123,7 +124,7 @@ def _download_youtube(url: str, output_path: str) -> None:
         ],
         capture_output=True,
         text=True,
-        timeout=300,
+        timeout=600,
     )
     if result.returncode != 0:
         stderr = result.stderr.strip().split("\n")[-1] if result.stderr else "Unknown error"

@@ -21,7 +21,7 @@ function formatRelativeDate(timestamp: number): string {
   if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
   if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
   if (diff < 604800) return `${Math.floor(diff / 86400)}d ago`;
-  return new Date(timestamp * 1000).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+  return new Date(timestamp * 1000).toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
 }
 
 function HomeIcon({ className }: { className?: string }) {
@@ -463,14 +463,14 @@ export function Sidebar() {
           }`}
         >
           <HomeIcon className="w-4 h-4" />
-          Accueil
+          Home
         </a>
         <a
           href="/"
           className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[12px] font-medium text-[#999] hover:bg-[#222] hover:text-[#ccc] transition-colors mt-0.5"
         >
           <PlusIcon className="w-4 h-4" />
-          Nouvelle analyse
+          New analysis
         </a>
       </div>
 
@@ -489,13 +489,12 @@ export function Sidebar() {
         {!historyCollapsed && (
           <div className="mt-1 space-y-0.5">
             {/* Demo entries */}
-            {['meeting', 'interview', 'podcast'].map((demo) => {
+            {['meeting', 'interview'].map((demo) => {
               const demoId = `demo-${demo}`;
               const isActive = currentJobId === demoId;
               const labels: Record<string, string> = {
-                meeting: 'Enterprise Meeting',
-                interview: 'Technical Interview',
-                podcast: 'Tech Podcast',
+                meeting: 'AI Agent Deployment Challenges',
+                interview: 'Mistral AI — $2B Funding Round',
               };
               return (
                 <a
@@ -544,7 +543,7 @@ export function Sidebar() {
 
             {analyses.length === 0 && (
               <div className="px-2.5 py-3 text-[11px] text-[#444] text-center">
-                Aucune analyse pour le moment
+                No analyses yet
               </div>
             )}
           </div>

@@ -39,7 +39,7 @@ def build_graph(
         node = GraphNode(
             id=sp["id"],
             type=NodeType.SPEAKER,
-            label=sp.get("name", sp["id"]),
+            label=sp["id"],
             first_seen=first_seen,
             last_seen=last_seen,
             attributes={

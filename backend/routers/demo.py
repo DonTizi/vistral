@@ -10,7 +10,7 @@ from backend.config import DEMOS_DIR
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
-VALID_DEMOS = {"meeting", "interview", "podcast"}
+VALID_DEMOS = {"meeting", "interview"}
 
 
 @router.get("/api/demo/{name}")

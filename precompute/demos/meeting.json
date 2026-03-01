@@ -4,248 +4,110 @@
   "video_url": "https://www.youtube.com/watch?v=VjBSIMVVQkY",
   "transcript": [
     {
-      "speaker": "Alice Chen",
-      "text": "Good morning everyone. Let's start with the Q3 budget review. As you know, we've had a strong quarter.",
-      "start": 0.0,
-      "end": 8.5
+      "speaker": "Arthur Mensch",
+      "text": "I would say this is happening, this is definitely happening slowly. The reason why it's happening slowly is that what we call agent TKI is all of the tools that you will use to delegate a task to an AI system. And it's actually fairly hard to do it in a controlled fashion, with the right governance, and in a way that is making the CEO comfortable, the CIO comfortable. The reason for that is that an AI, if you give it all of the tools that you have in an enterprise, it can do everything. But you want to make sure that when you're running a workflow or a process, everything is observable, reproducible, and can improve over time. And it takes some infrastructure. You need to have the right tools in place, the right connection to data, the right management of access, and the right controls. And so the ability to provide both tranquility to CEO and CIO, but yet the flexibility of deploying the agents and giving the power of the tool to the business users is something that is hard to do. And that's, I would say, one of the big sources of friction today in the enterprise. That's what we are working on addressing with our product studio that gives you all of the guardrails and all of the governance layer and the hosting layer so that you can deploy AI agents in the same place. They can connect to each other and the business users can actually define the kind of process they want to automate. So we'll get there. It does take time. It takes a change in mindset as well because the way you build software, with artificial intelligence is very different from the way we used to build software because it's non-deterministic. So we bring the mindset change by bringing our forward deployment engineers that show the way and do iconic use cases that are a way to show what we can do with AI and how this can be reproduced across the companies. We bring the tools so that our customers do not have to rebuild everything every time, which is what has slowed them down as well. And we are starting to see our customers deploy things at scale that are fairly complicated. So I'm quite hopeful that in the coming two years, this is really going to scale.",
+      "start": 0.2,
+      "end": 126.1
     },
     {
-      "speaker": "Alice Chen",
-      "text": "Revenue grew 18% year-over-year, which exceeded our initial targets.",
-      "start": 8.5,
-      "end": 14.2
+      "speaker": "Interviewer",
+      "text": "And that's really interesting what you say. It's a lot more complex perhaps than that's being made out because the public markets, if you look what happened with the software sell-off and Anthropic and Coworks, they believe that actually a lot of these agentic systems could wipe out a lot of the need for existing SaaS and software that companies are paying for. What's your view on that? Do you think that agentic AI is going to be able to take on a lot of the workloads that enterprise are currently paying for from other vendors?",
+      "start": 126.7,
+      "end": 153.4
     },
     {
-      "speaker": "Bob Martinez",
-      "text": "That's great news. On the engineering side, we shipped 3 major features and reduced our bug backlog by 40%.",
-      "start": 15.0,
-      "end": 23.5
+      "speaker": "Arthur Mensch",
+      "text": "Well, AI is making us able to develop software at the speed of light. So as long as you have the right infrastructure in place, you have the right plumbing, you're connected to the right systems of records, and as long as you're giving the design tools for creating applications to the business users in a way where they can just describe their needs and that's going to create their application, then we do and we do see with our customers and in a couple of days and in a couple of days, We can create a really fully custom application to run a workflow, to run a procurement workflow, or to run supply chain workflows, for instance, in a way where, I would say, five years ago, you would actually need a vertical SaaS. And so there is definitely a shift and a replatforming that is happening where the interface is no longer the thing where there's no longer the mode.",
+      "start": 154.0,
+      "end": 203.3
     },
     {
-      "speaker": "Alice Chen",
-      "text": "Excellent. Now let's look at the slide. Here's our revenue breakdown by region.",
-      "start": 24.0,
-      "end": 30.0
+      "speaker": "Arthur Mensch",
+      "text": "What really matters is the connection, what really matters is the context layer on top, where the agents are constantly pulling from system of records to figure out what is happening. So there is replatforming happening. Now, I mean, enterprise software, I would say, are there to stay because they have very big distribution and they're also moving toward making their system more agentic and more relying on AI. But the replatforming is a big opportunity for us because we see now have more than 100 enterprise customers that are coming to us also with that wheel of maybe changing and replatforming their IT system. So maybe getting rid of certain things that they bought like 20 years ago and that is starting to be a bit expensive, it's starting to be hard to customize and to maintain. And they see AI as a way to replatform the thing so that it becomes more efficient and less costly.",
+      "start": 204.7,
+      "end": 255.2
     },
     {
-      "speaker": "Alice Chen",
-      "text": "North America accounts for 62% of revenue, EMEA at 25%, and APAC at 13%.",
-      "start": 30.0,
-      "end": 38.0
+      "speaker": "Interviewer",
+      "text": "Fascinating. So how much of an enterprise's current SaaS workload do you think could be taken over by some of these systems?",
+      "start": 255.7,
+      "end": 262.8
     },
     {
-      "speaker": "Carol Zhang",
-      "text": "I want to flag something. The slide shows revenue growth at 8% year-over-year, but Alice just mentioned 18%. Can we clarify?",
-      "start": 40.0,
-      "end": 50.5
+      "speaker": "Arthur Mensch",
+      "text": "Well, I'd say the systems of records are not going to change and to move because the data gravity remains very high. But it's hard to estimate, but I'd say everything that is too vertical is going to need to go a bit more horizontal because the verticalization can really occur very quickly.",
+      "start": 263.1,
+      "end": 281.0
     },
     {
-      "speaker": "Alice Chen",
-      "text": "Good catch Carol. The 18% is the total company growth including the acquisition. The slide shows organic growth at 8%.",
-      "start": 51.0,
-      "end": 60.0
-    },
-    {
-      "speaker": "Bob Martinez",
-      "text": "That's an important distinction. We should make sure our investor deck is consistent about this.",
-      "start": 61.0,
-      "end": 68.0
-    },
-    {
-      "speaker": "Alice Chen",
-      "text": "Agreed. Bob, can you take an action item to align the investor deck with these numbers by Friday?",
-      "start": 69.0,
-      "end": 76.0
-    },
-    {
-      "speaker": "Bob Martinez",
-      "text": "Sure, I'll have that updated by end of day Thursday.",
-      "start": 77.0,
-      "end": 81.0
-    },
-    {
-      "speaker": "Alice Chen",
-      "text": "Now let's discuss the marketing budget. We're proposing a 15% increase for Q4.",
-      "start": 85.0,
-      "end": 93.0
-    },
-    {
-      "speaker": "Carol Zhang",
-      "text": "What's the expected ROI on that increase? Last quarter our CAC went up by 20%.",
-      "start": 94.0,
-      "end": 101.0
-    },
-    {
-      "speaker": "Alice Chen",
-      "text": "Great question. We expect the additional spend to bring CAC back down to $45 from the current $52. Our target is a 3x return.",
-      "start": 102.0,
-      "end": 113.0
-    },
-    {
-      "speaker": "Bob Martinez",
-      "text": "The engineering team will need an additional headcount of 5 to support the new campaigns infrastructure.",
-      "start": 114.0,
-      "end": 122.0
-    },
-    {
-      "speaker": "Alice Chen",
-      "text": "That's already budgeted. Let's move to hiring. We have 12 open positions across the company.",
-      "start": 123.0,
-      "end": 131.0
-    },
-    {
-      "speaker": "Carol Zhang",
-      "text": "On the hiring front, we've closed 8 positions this quarter. Average time-to-hire is 34 days, down from 42.",
-      "start": 132.0,
-      "end": 142.0
-    },
-    {
-      "speaker": "Alice Chen",
-      "text": "Impressive improvement. Let's set a target of 28 days for Q4. Carol, can you own that?",
-      "start": 143.0,
-      "end": 151.0
-    },
-    {
-      "speaker": "Carol Zhang",
-      "text": "Absolutely. I'll put together a plan to streamline our interview process.",
-      "start": 152.0,
-      "end": 158.0
-    },
-    {
-      "speaker": "Bob Martinez",
-      "text": "One more thing on the technical side. Our cloud costs are projected to increase 25% next quarter due to the new ML pipeline.",
-      "start": 160.0,
-      "end": 172.0
-    },
-    {
-      "speaker": "Alice Chen",
-      "text": "That's concerning. Can we optimize before that hits?",
-      "start": 173.0,
-      "end": 177.0
-    },
-    {
-      "speaker": "Bob Martinez",
-      "text": "We've already identified $15K in monthly savings through right-sizing. I'll present the full optimization plan next week.",
-      "start": 178.0,
-      "end": 188.0
-    },
-    {
-      "speaker": "Alice Chen",
-      "text": "Perfect. Let's make the decision now: we approve the 15% marketing budget increase for Q4, contingent on the ROI targets Carol outlined.",
-      "start": 190.0,
-      "end": 202.0
-    },
-    {
-      "speaker": "Carol Zhang",
-      "text": "I'd like to also propose we invest in a new analytics dashboard. Current reporting takes 3 hours per week manually.",
-      "start": 205.0,
-      "end": 215.0
-    },
-    {
-      "speaker": "Bob Martinez",
-      "text": "We can build that in-house. Estimated 2 sprints, about 4 weeks with the current team.",
-      "start": 216.0,
-      "end": 224.0
-    },
-    {
-      "speaker": "Alice Chen",
-      "text": "Approved. Bob, add it to the Q4 roadmap. Let's wrap up. Great meeting everyone. Key takeaways: marketing budget approved, investor deck needs updating, hiring target is 28 days, and we're building the analytics dashboard.",
-      "start": 225.0,
-      "end": 245.0
-    },
-    {
-      "speaker": "Bob Martinez",
-      "text": "Clear. I'll send meeting notes by end of day.",
-      "start": 246.0,
-      "end": 250.0
-    },
-    {
-      "speaker": "Carol Zhang",
-      "text": "Thanks everyone. See you next week.",
-      "start": 251.0,
-      "end": 254.0
+      "speaker": "Arthur Mensch",
+      "text": "I do expect the large enterprise software that manage big systems of records to try and move up because they need to defend, they don't want to become the system of record commodity to companies like us. But we really think that I would say more than half of what's currently being bought by IT in terms of SaaS is going to shift toward AI.",
+      "start": 282.3,
+      "end": 304.2
     }
   ],
   "graph": {
     "nodes": [
       {
-        "id": "speaker_0",
+        "id": "Arthur Mensch",
         "type": "speaker",
-        "label": "Alice Chen",
-        "first_seen": 0.0,
-        "last_seen": 245.0,
+        "label": "Arthur Mensch",
+        "first_seen": 0.2,
+        "last_seen": 304.2,
         "attributes": {
-          "role": "CEO / Meeting Lead",
+          "role": "unknown",
           "key_contributions": [
-            "Led Q3 review",
-            "Approved marketing budget",
-            "Set hiring targets"
+            "AI agent deployment challenges and solutions",
+            "Infrastructure and governance for AI agents",
+            "Impact of AI on enterprise software",
+            "Replatforming opportunities with AI"
           ]
         }
       },
       {
-        "id": "speaker_1",
+        "id": "Interviewer",
         "type": "speaker",
-        "label": "Bob Martinez",
-        "first_seen": 15.0,
-        "last_seen": 250.0,
+        "label": "Interviewer",
+        "first_seen": 126.7,
+        "last_seen": 262.8,
         "attributes": {
-          "role": "VP Engineering",
+          "role": "unknown",
           "key_contributions": [
-            "Reported engineering metrics",
-            "Identified cloud cost savings",
-            "Committed to analytics dashboard"
-          ]
-        }
-      },
-      {
-        "id": "speaker_2",
-        "type": "speaker",
-        "label": "Carol Zhang",
-        "first_seen": 40.0,
-        "last_seen": 254.0,
-        "attributes": {
-          "role": "VP Operations / HR",
-          "key_contributions": [
-            "Flagged revenue discrepancy",
-            "Reported hiring improvements",
-            "Proposed analytics dashboard"
+            "Market perception of agentic AI",
+            "Potential of agentic AI to replace existing SaaS"
           ]
         }
       },
       {
         "id": "topic_0",
         "type": "topic",
-        "label": "Q3 Revenue Review",
-        "first_seen": 0.0,
-        "last_seen": 68.0,
+        "label": "AI Agent Deployment Challenges",
+        "first_seen": 0.2,
+        "last_seen": 126.1,
         "attributes": {
           "key_points": [
-            "18% total revenue growth (incl. acquisition)",
-            "8% organic growth",
-            "NA 62%, EMEA 25%, APAC 13%"
+            "Slow adoption of AI agents due to governance and control issues",
+            "Need for infrastructure, data connections, and access management",
+            "Importance of observability, reproducibility, and improvement in AI workflows",
+            "Mindset change required for AI software development"
           ],
           "speakers_involved": [
-            "speaker_0",
-            "speaker_1",
-            "speaker_2"
+            "speaker_1"
           ]
         }
       },
       {
         "id": "topic_1",
         "type": "topic",
-        "label": "Marketing Budget Q4",
-        "first_seen": 85.0,
-        "last_seen": 131.0,
+        "label": "Market Perception of Agentic AI",
+        "first_seen": 126.7,
+        "last_seen": 153.4,
         "attributes": {
           "key_points": [
-            "15% budget increase proposed and approved",
-            "Target CAC: $45 (from $52)",
-            "Expected 3x ROI"
+            "Public market beliefs about agentic AI replacing existing SaaS",
+            "Potential of agentic AI to take on enterprise workloads"
           ],
           "speakers_involved": [
-            "speaker_0",
             "speaker_2"
           ]
         }
@@ -253,260 +115,427 @@
       {
         "id": "topic_2",
         "type": "topic",
-        "label": "Hiring & Operations",
-        "first_seen": 131.0,
-        "last_seen": 158.0,
+        "label": "AI Impact on Enterprise Software",
+        "first_seen": 154.0,
+        "last_seen": 255.2,
         "attributes": {
           "key_points": [
-            "8 positions closed in Q3",
-            "Time-to-hire improved: 42 -> 34 days",
-            "Q4 target: 28 days"
+            "AI enabling rapid software development",
+            "Replatforming opportunities with AI",
+            "Shift from vertical to horizontal software solutions",
+            "Enterprise software evolution with AI"
           ],
           "speakers_involved": [
-            "speaker_0",
-            "speaker_2"
+            "speaker_1"
           ]
         }
       },
       {
         "id": "topic_3",
         "type": "topic",
-        "label": "Cloud Costs & Technical",
-        "first_seen": 160.0,
-        "last_seen": 188.0,
+        "label": "SaaS Workload Replacement by AI",
+        "first_seen": 255.7,
+        "last_seen": 281.0,
         "attributes": {
           "key_points": [
-            "25% cloud cost increase projected",
-            "$15K monthly savings identified",
-            "ML pipeline driving costs"
+            "Estimation of SaaS workload that could be taken over by AI",
+            "Data gravity and systems of records"
           ],
           "speakers_involved": [
-            "speaker_0",
-            "speaker_1"
-          ]
-        }
-      },
-      {
-        "id": "topic_4",
-        "type": "topic",
-        "label": "Analytics Dashboard",
-        "first_seen": 205.0,
-        "last_seen": 245.0,
-        "attributes": {
-          "key_points": [
-            "Current reporting: 3 hours/week manual",
-            "Build in-house: 2 sprints (~4 weeks)",
-            "Approved for Q4 roadmap"
-          ],
-          "speakers_involved": [
-            "speaker_0",
             "speaker_1",
             "speaker_2"
           ]
         }
       },
       {
-        "id": "kpi_0",
-        "type": "kpi",
-        "label": "Revenue Growth: 18% (total)",
-        "first_seen": 8.5,
-        "last_seen": 60.0,
+        "id": "topic_4",
+        "type": "topic",
+        "label": "Future of Enterprise Software with AI",
+        "first_seen": 282.3,
+        "last_seen": 304.2,
         "attributes": {
-          "name": "Revenue Growth (Total)",
-          "value": "18% YoY",
-          "context": "Includes acquisition revenue"
-        }
-      },
-      {
-        "id": "kpi_1",
-        "type": "kpi",
-        "label": "Revenue Growth: 8% (organic)",
-        "first_seen": 40.0,
-        "last_seen": 60.0,
-        "attributes": {
-          "name": "Revenue Growth (Organic)",
-          "value": "8% YoY",
-          "context": "Excluding acquisition"
-        }
-      },
-      {
-        "id": "kpi_2",
-        "type": "kpi",
-        "label": "Bug Backlog: -40%",
-        "first_seen": 15.0,
-        "last_seen": 23.5,
-        "attributes": {
-          "name": "Bug Backlog Reduction",
-          "value": "40%",
-          "context": "Q3 engineering achievement"
-        }
-      },
-      {
-        "id": "kpi_3",
-        "type": "kpi",
-        "label": "CAC: $52 -> $45 target",
-        "first_seen": 102.0,
-        "last_seen": 113.0,
-        "attributes": {
-          "name": "Customer Acquisition Cost",
-          "value": "$52 current, $45 target",
-          "context": "Marketing efficiency metric"
-        }
-      },
-      {
-        "id": "kpi_4",
-        "type": "kpi",
-        "label": "Time-to-Hire: 34 days",
-        "first_seen": 132.0,
-        "last_seen": 151.0,
-        "attributes": {
-          "name": "Time-to-Hire",
-          "value": "34 days (from 42)",
-          "context": "Q3 improvement, Q4 target 28 days"
-        }
-      },
-      {
-        "id": "kpi_5",
-        "type": "kpi",
-        "label": "Cloud Costs: +25% projected",
-        "first_seen": 160.0,
-        "last_seen": 188.0,
-        "attributes": {
-          "name": "Cloud Cost Increase",
-          "value": "+25%",
-          "context": "Due to new ML pipeline"
-        }
-      },
-      {
-        "id": "slide_0",
-        "type": "slide",
-        "label": "Q3 Revenue Breakdown",
-        "first_seen": 24.0,
-        "last_seen": 50.5,
-        "attributes": {
-          "ocr_text": [
-            "Q3 Revenue Overview",
-            "Revenue Growth: +8% YoY",
-            "North America: 62%",
-            "EMEA: 25%",
-            "APAC: 13%"
+          "key_points": [
+            "Large enterprise software moving up the value chain",
+            "Shift of IT SaaS spending towards AI"
           ],
-          "scene_description": "Presentation slide showing Q3 revenue breakdown by region with bar chart"
-        }
-      },
-      {
-        "id": "slide_1",
-        "type": "slide",
-        "label": "Q4 Marketing Budget Proposal",
-        "first_seen": 85.0,
-        "last_seen": 113.0,
-        "attributes": {
-          "ocr_text": [
-            "Q4 Marketing Budget",
-            "Proposed Increase: 15%",
-            "Target CAC: $45",
-            "Expected ROI: 3x"
-          ],
-          "scene_description": "Slide showing marketing budget proposal with ROI projections"
-        }
-      },
-      {
-        "id": "slide_2",
-        "type": "slide",
-        "label": "Hiring Dashboard",
-        "first_seen": 132.0,
-        "last_seen": 158.0,
-        "attributes": {
-          "ocr_text": [
-            "Hiring Dashboard",
-            "Open Positions: 12",
-            "Closed Q3: 8",
-            "Avg Time-to-Hire: 34 days"
-          ],
-          "scene_description": "Dashboard slide showing hiring metrics and pipeline"
+          "speakers_involved": [
+            "speaker_1"
+          ]
         }
       },
       {
         "id": "claim_0",
         "type": "claim",
-        "label": "Revenue grew 18% YoY",
-        "first_seen": 8.5,
-        "last_seen": 8.5,
+        "label": "AI agents can do everything if given all enterprise tools",
+        "first_seen": 20.0,
+        "last_seen": 20.0,
         "attributes": {
-          "content": "Revenue grew 18% year-over-year",
-          "speaker": "speaker_0",
+          "content": "AI agents can do everything if given all enterprise tools",
           "type": "factual"
         }
       },
       {
         "id": "claim_1",
         "type": "claim",
-        "label": "Slide shows 8% growth",
-        "first_seen": 40.0,
-        "last_seen": 40.0,
+        "label": "AI software development is non-deterministic",
+        "first_seen": 80.0,
+        "last_seen": 80.0,
         "attributes": {
-          "content": "Revenue growth +8% YoY shown on slide",
-          "source": "visual",
+          "content": "AI software development is non-deterministic",
           "type": "factual"
         }
       },
       {
-        "id": "decision_0",
-        "type": "decision",
-        "label": "Approve 15% marketing budget increase",
-        "first_seen": 190.0,
-        "last_seen": 202.0,
+        "id": "claim_2",
+        "type": "claim",
+        "label": "AI can create custom applications in a few days",
+        "first_seen": 170.0,
+        "last_seen": 170.0,
         "attributes": {
-          "context": "Contingent on ROI targets"
+          "content": "AI can create custom applications in a few days",
+          "type": "factual"
         }
       },
       {
-        "id": "decision_1",
-        "type": "decision",
-        "label": "Build analytics dashboard in-house",
-        "first_seen": 225.0,
-        "last_seen": 245.0,
+        "id": "claim_3",
+        "type": "claim",
+        "label": "More than half of current IT SaaS spending will shift to AI",
+        "first_seen": 290.0,
+        "last_seen": 290.0,
         "attributes": {
-          "context": "2 sprints, Q4 roadmap"
+          "content": "More than half of current IT SaaS spending will shift to AI",
+          "type": "predictive"
+        }
+      },
+      {
+        "id": "kpi_0",
+        "type": "kpi",
+        "label": "AI Agent Deployment Time: a few days",
+        "first_seen": 170.0,
+        "last_seen": 170.0,
+        "attributes": {
+          "name": "AI Agent Deployment Time",
+          "value": "a few days",
+          "context": "Creating custom applications"
+        }
+      },
+      {
+        "id": "slide_0",
+        "type": "slide",
+        "label": "MISTRAL AI CEO: OVER HALF OF WHAT\u2019S BEING BOUGHT B",
+        "first_seen": 0.0,
+        "last_seen": 0.0,
+        "attributes": {
+          "ocr_text": [
+            "MISTRAL AI CEO: OVER HALF OF WHAT\u2019S BEING BOUGHT BY IT IN TERMS OF SAAS IS GOING TO SHIFT TO AI"
+          ],
+          "scene_description": "A news anchor in a studio setting with a Parisian skyline background discussing AI trends.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0001.jpg"
+        }
+      },
+      {
+        "id": "slide_1",
+        "type": "slide",
+        "label": "MISTRAL AI CEO: OVER HALF OF WHAT\u2019S BEING BOUGHT B",
+        "first_seen": 0.434,
+        "last_seen": 0.434,
+        "attributes": {
+          "ocr_text": [
+            "MISTRAL AI CEO: OVER HALF OF WHAT\u2019S BEING BOUGHT BY IT IN TERMS OF SAAS IS GOING TO SHIFT TO AI"
+          ],
+          "scene_description": "A man in a suit being interviewed outdoors in a tropical setting with palm trees.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0002.jpg"
+        }
+      },
+      {
+        "id": "slide_2",
+        "type": "slide",
+        "label": "MISTRAL AI CEO: ADOPTION OF AGENTIC AI TAKES TIME,",
+        "first_seen": 30.463,
+        "last_seen": 30.463,
+        "attributes": {
+          "ocr_text": [
+            "MISTRAL AI CEO: ADOPTION OF AGENTIC AI TAKES TIME, TAKES A CHANGE IN MINDSET"
+          ],
+          "scene_description": "A man in a suit speaking in an outdoor setting with greenery and wooden panels.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0003.jpg"
+        }
+      },
+      {
+        "id": "slide_3",
+        "type": "slide",
+        "label": "MISTRAL AI CEO: STARTING TO SEE OUR CUSTOMERS DEPL",
+        "first_seen": 44.244,
+        "last_seen": 44.244,
+        "attributes": {
+          "ocr_text": [
+            "MISTRAL AI CEO: STARTING TO SEE OUR CUSTOMERS DEPLOYING THINGS AT SCALE"
+          ],
+          "scene_description": "A man in a maroon suit being interviewed indoors near a window with a partially visible 'India Accelerates' poster.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0004.jpg"
+        }
+      },
+      {
+        "id": "slide_4",
+        "type": "slide",
+        "label": "MISTRAL AI CEO: STARTING TO SEE OUR CUSTOMERS DEPL",
+        "first_seen": 76.776,
+        "last_seen": 76.776,
+        "attributes": {
+          "ocr_text": [
+            "MISTRAL AI CEO: STARTING TO SEE OUR CUSTOMERS DEPLOYING THINGS AT SCALE"
+          ],
+          "scene_description": "A man in a suit speaking outdoors with greenery and wooden panels in the background.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0006.jpg"
+        }
+      },
+      {
+        "id": "slide_5",
+        "type": "slide",
+        "label": "MISTRAL AI CEO: STARTING TO SEE OUR CUSTOMERS DEPL",
+        "first_seen": 86.119,
+        "last_seen": 86.119,
+        "attributes": {
+          "ocr_text": [
+            "MISTRAL AI CEO: STARTING TO SEE OUR CUSTOMERS DEPLOYING THINGS AT SCALE"
+          ],
+          "scene_description": "A man in a maroon suit being interviewed indoors near a window with a partially visible 'India Accelerates' poster.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0007.jpg"
+        }
+      },
+      {
+        "id": "slide_6",
+        "type": "slide",
+        "label": "MISTRAL AI CEO: STARTING TO SEE OUR CUSTOMERS DEPL",
+        "first_seen": 154.354,
+        "last_seen": 154.354,
+        "attributes": {
+          "ocr_text": [
+            "MISTRAL AI CEO: STARTING TO SEE OUR CUSTOMERS DEPLOYING THINGS AT SCALE"
+          ],
+          "scene_description": "A man in a suit speaking outdoors with greenery and wooden panels in the background.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0011.jpg"
+        }
+      },
+      {
+        "id": "slide_7",
+        "type": "slide",
+        "label": "MISTRAL AI CEO: AI IS MAKING US ABLE TO DEVELOP SO",
+        "first_seen": 184.384,
+        "last_seen": 184.384,
+        "attributes": {
+          "ocr_text": [
+            "MISTRAL AI CEO: AI IS MAKING US ABLE TO DEVELOP SOFTWARE AT THE SPEED OF LIGHT"
+          ],
+          "scene_description": "A man in a suit speaking outdoors with greenery and wooden panels in the background.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0012.jpg"
+        }
+      },
+      {
+        "id": "slide_8",
+        "type": "slide",
+        "label": "MARKET ALERT",
+        "first_seen": 193.193,
+        "last_seen": 193.193,
+        "attributes": {
+          "ocr_text": [
+            "MARKET ALERT",
+            "MISTRAL AI CEO: AI IS MAKING US ABLE TO DEVELOP SOFTWARE AT THE SPEED OF LIGHT",
+            "INDIA ACCELERATES 2026",
+            "Where visionaries meet"
+          ],
+          "scene_description": "A man in a red suit jacket is being interviewed in front of a backdrop featuring the 'India Accelerates 2026' event signage.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0013.jpg"
+        }
+      },
+      {
+        "id": "slide_9",
+        "type": "slide",
+        "label": "MARKET ALERT",
+        "first_seen": 196.863,
+        "last_seen": 196.863,
+        "attributes": {
+          "ocr_text": [
+            "MARKET ALERT",
+            "MISTRAL AI CEO: AI IS MAKING US ABLE TO DEVELOP SOFTWARE AT THE SPEED OF LIGHT",
+            "INDIA ACCELERATES 2026"
+          ],
+          "scene_description": "A man in a suit is speaking in an outdoor or semi-outdoor setting with greenery and an event backdrop.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0014.jpg"
+        }
+      },
+      {
+        "id": "slide_10",
+        "type": "slide",
+        "label": "MARKET ALERT",
+        "first_seen": 263.463,
+        "last_seen": 263.463,
+        "attributes": {
+          "ocr_text": [
+            "MARKET ALERT",
+            "MISTRAL AI CEO: AI IS MAKING US ABLE TO DEVELOP SOFTWARE AT THE SPEED OF LIGHT",
+            "INDIA ACCELERATES 2026"
+          ],
+          "scene_description": "A man in a suit is speaking with a blurred face, standing in front of an event backdrop.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0017.jpg"
+        }
+      },
+      {
+        "id": "slide_11",
+        "type": "slide",
+        "label": "MARKET ALERT",
+        "first_seen": 304.504,
+        "last_seen": 304.504,
+        "attributes": {
+          "ocr_text": [
+            "MARKET ALERT",
+            "MISTRAL AI CEO: OVER HALF OF WHAT\u2019S BEING BOUGHT BY IT IN TERMS OF SAAS IS GOING TO SHIFT TO AI"
+          ],
+          "scene_description": "A woman in a green top is presenting or being interviewed in front of a cityscape background.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0019.jpg"
         }
       }
     ],
     "edges": [
       {
-        "source": "speaker_0",
+        "source": "Arthur Mensch",
         "target": "topic_0",
         "relation": "mentioned",
-        "timestamp": 0.0,
-        "confidence": 0.95,
+        "timestamp": 0.2,
+        "confidence": 0.85,
         "evidence": {
           "source_type": "audio",
-          "quote": "Let's start with the Q3 budget review",
+          "quote": null,
           "description": null,
           "frame_path": null
         }
       },
       {
-        "source": "speaker_0",
+        "source": "Interviewer",
+        "target": "topic_1",
+        "relation": "mentioned",
+        "timestamp": 126.7,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "audio",
+          "quote": null,
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "Arthur Mensch",
+        "target": "topic_2",
+        "relation": "mentioned",
+        "timestamp": 154.0,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "audio",
+          "quote": null,
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "Arthur Mensch",
+        "target": "topic_3",
+        "relation": "mentioned",
+        "timestamp": 255.7,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "audio",
+          "quote": null,
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "Interviewer",
+        "target": "topic_3",
+        "relation": "mentioned",
+        "timestamp": 255.7,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "audio",
+          "quote": null,
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "Arthur Mensch",
+        "target": "topic_4",
+        "relation": "mentioned",
+        "timestamp": 282.3,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "audio",
+          "quote": null,
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_0",
+        "target": "Arthur Mensch",
+        "relation": "said_by",
+        "timestamp": 20.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "AI agents can do everything if given all enterprise tools",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_1",
+        "target": "Arthur Mensch",
+        "relation": "said_by",
+        "timestamp": 80.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "AI software development is non-deterministic",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_2",
+        "target": "Arthur Mensch",
+        "relation": "said_by",
+        "timestamp": 170.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "AI can create custom applications in a few days",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "claim_3",
+        "target": "Arthur Mensch",
+        "relation": "said_by",
+        "timestamp": 290.0,
+        "confidence": 0.9,
+        "evidence": {
+          "source_type": "audio",
+          "quote": "More than half of current IT SaaS spending will shift to AI",
+          "description": null,
+          "frame_path": null
+        }
+      },
+      {
+        "source": "Arthur Mensch",
         "target": "kpi_0",
         "relation": "mentioned",
-        "timestamp": 8.5,
-        "confidence": 0.95,
+        "timestamp": 170.0,
+        "confidence": 0.9,
         "evidence": {
           "source_type": "audio",
-          "quote": "Revenue grew 18% year-over-year",
-          "description": null,
-          "frame_path": null
-        }
-      },
-      {
-        "source": "speaker_1",
-        "target": "kpi_2",
-        "relation": "mentioned",
-        "timestamp": 15.0,
-        "confidence": 0.92,
-        "evidence": {
-          "source_type": "audio",
-          "quote": "reduced our bug backlog by 40%",
+          "quote": "AI Agent Deployment Time: a few days",
           "description": null,
           "frame_path": null
         }
@@ -515,169 +544,156 @@
         "source": "topic_0",
         "target": "slide_0",
         "relation": "shown_during",
-        "timestamp": 24.0,
-        "confidence": 0.9,
-        "evidence": {
-          "source_type": "visual",
-          "quote": null,
-          "description": "Revenue breakdown slide shown during Q3 review",
-          "frame_path": null
-        }
-      },
-      {
-        "source": "claim_0",
-        "target": "speaker_0",
-        "relation": "said_by",
-        "timestamp": 8.5,
-        "confidence": 0.95,
-        "evidence": {
-          "source_type": "audio",
-          "quote": "Revenue grew 18% year-over-year",
-          "description": null,
-          "frame_path": null
-        }
-      },
-      {
-        "source": "claim_0",
-        "target": "claim_1",
-        "relation": "contradicts",
-        "timestamp": 40.0,
-        "confidence": 0.88,
-        "evidence": {
-          "source_type": "merged",
-          "quote": "Speaker says 18% but slide shows 8%",
-          "description": "Alice claims 18% total growth; slide shows 8% organic growth. Discrepancy clarified as total vs organic.",
-          "frame_path": null
-        }
-      },
-      {
-        "source": "speaker_2",
-        "target": "topic_0",
-        "relation": "mentioned",
-        "timestamp": 40.0,
-        "confidence": 0.9,
-        "evidence": {
-          "source_type": "audio",
-          "quote": "The slide shows revenue growth at 8%",
-          "description": null,
-          "frame_path": null
-        }
-      },
-      {
-        "source": "speaker_0",
-        "target": "topic_1",
-        "relation": "mentioned",
-        "timestamp": 85.0,
-        "confidence": 0.95,
-        "evidence": {
-          "source_type": "audio",
-          "quote": "proposing a 15% increase for Q4",
-          "description": null,
-          "frame_path": null
-        }
-      },
-      {
-        "source": "speaker_0",
-        "target": "kpi_3",
-        "relation": "mentioned",
-        "timestamp": 102.0,
-        "confidence": 0.92,
-        "evidence": {
-          "source_type": "audio",
-          "quote": "bring CAC back down to $45 from the current $52",
-          "description": null,
-          "frame_path": null
-        }
-      },
-      {
-        "source": "topic_1",
-        "target": "slide_1",
-        "relation": "shown_during",
-        "timestamp": 85.0,
-        "confidence": 0.88,
-        "evidence": {
-          "source_type": "visual",
-          "quote": null,
-          "description": "Marketing budget slide shown during Q4 discussion",
-          "frame_path": null
-        }
-      },
-      {
-        "source": "speaker_2",
-        "target": "kpi_4",
-        "relation": "mentioned",
-        "timestamp": 132.0,
-        "confidence": 0.92,
-        "evidence": {
-          "source_type": "audio",
-          "quote": "Average time-to-hire is 34 days, down from 42",
-          "description": null,
-          "frame_path": null
-        }
-      },
-      {
-        "source": "topic_2",
-        "target": "slide_2",
-        "relation": "shown_during",
-        "timestamp": 132.0,
+        "timestamp": 0.0,
         "confidence": 0.85,
         "evidence": {
           "source_type": "visual",
           "quote": null,
-          "description": "Hiring dashboard slide",
-          "frame_path": null
+          "description": "A news anchor in a studio setting with a Parisian skyline background discussing AI trends.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0001.jpg"
         }
       },
       {
-        "source": "speaker_1",
-        "target": "kpi_5",
-        "relation": "mentioned",
-        "timestamp": 160.0,
-        "confidence": 0.9,
+        "source": "topic_0",
+        "target": "slide_1",
+        "relation": "shown_during",
+        "timestamp": 0.434,
+        "confidence": 0.85,
         "evidence": {
-          "source_type": "audio",
-          "quote": "cloud costs are projected to increase 25%",
-          "description": null,
-          "frame_path": null
+          "source_type": "visual",
+          "quote": null,
+          "description": "A man in a suit being interviewed outdoors in a tropical setting with palm trees.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0002.jpg"
         }
       },
       {
-        "source": "speaker_0",
-        "target": "decision_0",
-        "relation": "decided",
-        "timestamp": 190.0,
-        "confidence": 0.95,
+        "source": "topic_0",
+        "target": "slide_2",
+        "relation": "shown_during",
+        "timestamp": 30.463,
+        "confidence": 0.85,
         "evidence": {
-          "source_type": "audio",
-          "quote": "we approve the 15% marketing budget increase for Q4",
-          "description": null,
-          "frame_path": null
+          "source_type": "visual",
+          "quote": null,
+          "description": "A man in a suit speaking in an outdoor setting with greenery and wooden panels.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0003.jpg"
         }
       },
       {
-        "source": "speaker_0",
-        "target": "decision_1",
-        "relation": "decided",
-        "timestamp": 225.0,
-        "confidence": 0.92,
+        "source": "topic_0",
+        "target": "slide_3",
+        "relation": "shown_during",
+        "timestamp": 44.244,
+        "confidence": 0.85,
         "evidence": {
-          "source_type": "audio",
-          "quote": "Approved. Bob, add it to the Q4 roadmap",
-          "description": null,
-          "frame_path": null
+          "source_type": "visual",
+          "quote": null,
+          "description": "A man in a maroon suit being interviewed indoors near a window with a partially visible 'India Accelerates' poster.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0004.jpg"
         }
       },
       {
-        "source": "speaker_1",
-        "target": "decision_1",
-        "relation": "committed_to",
-        "timestamp": 216.0,
-        "confidence": 0.9,
+        "source": "topic_0",
+        "target": "slide_4",
+        "relation": "shown_during",
+        "timestamp": 76.776,
+        "confidence": 0.85,
         "evidence": {
-          "source_type": "audio",
-          "quote": "We can build that in-house. Estimated 2 sprints",
-          "description": null,
-          "frame_path": null
+          "source_type": "visual",
+          "quote": null,
+          "description": "A man in a suit speaking outdoors with greenery and wooden panels in the background.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0006.jpg"
+        }
+      },
+      {
+        "source": "topic_0",
+        "target": "slide_5",
+        "relation": "shown_during",
+        "timestamp": 86.119,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "visual",
+          "quote": null,
+          "description": "A man in a maroon suit being interviewed indoors near a window with a partially visible 'India Accelerates' poster.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0007.jpg"
+        }
+      },
+      {
+        "source": "topic_2",
+        "target": "slide_6",
+        "relation": "shown_during",
+        "timestamp": 154.354,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "visual",
+          "quote": null,
+          "description": "A man in a suit speaking outdoors with greenery and wooden panels in the background.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0011.jpg"
+        }
+      },
+      {
+        "source": "topic_2",
+        "target": "slide_7",
+        "relation": "shown_during",
+        "timestamp": 184.384,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "visual",
+          "quote": null,
+          "description": "A man in a suit speaking outdoors with greenery and wooden panels in the background.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0012.jpg"
+        }
+      },
+      {
+        "source": "topic_2",
+        "target": "slide_8",
+        "relation": "shown_during",
+        "timestamp": 193.193,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "visual",
+          "quote": null,
+          "description": "A man in a red suit jacket is being interviewed in front of a backdrop featuring the 'India Accelerates 2026' event signage.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0013.jpg"
+        }
+      },
+      {
+        "source": "topic_2",
+        "target": "slide_9",
+        "relation": "shown_during",
+        "timestamp": 196.863,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "visual",
+          "quote": null,
+          "description": "A man in a suit is speaking in an outdoor or semi-outdoor setting with greenery and an event backdrop.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0014.jpg"
+        }
+      },
+      {
+        "source": "topic_3",
+        "target": "slide_10",
+        "relation": "shown_during",
+        "timestamp": 263.463,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "visual",
+          "quote": null,
+          "description": "A man in a suit is speaking with a blurred face, standing in front of an event backdrop.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0017.jpg"
+        }
+      },
+      {
+        "source": "topic_4",
+        "target": "slide_11",
+        "relation": "shown_during",
+        "timestamp": 304.504,
+        "confidence": 0.85,
+        "evidence": {
+          "source_type": "visual",
+          "quote": null,
+          "description": "A woman in a green top is presenting or being interviewed in front of a cityscape background.",
+          "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0019.jpg"
         }
       }
     ],
@@ -685,538 +701,528 @@
       {
         "timestamp": 0.0,
         "active_nodes": [
-          "speaker_0"
+          "slide_0"
         ],
-        "active_edges": [],
-        "current_topic": "Q3 Revenue Review",
-        "current_speaker": "Alice Chen"
+        "active_edges": [
+          "topic_0->slide_0"
+        ],
+        "current_topic": null,
+        "current_speaker": null
       },
       {
         "timestamp": 60.0,
         "active_nodes": [
-          "speaker_0",
-          "speaker_1",
-          "speaker_2",
-          "topic_0",
-          "kpi_0",
-          "kpi_1",
-          "slide_0",
-          "claim_0",
-          "claim_1"
+          "Arthur Mensch",
+          "topic_0"
         ],
         "active_edges": [
-          "speaker_0->topic_0",
-          "claim_0->claim_1"
+          "speaker_1->topic_0",
+          "claim_0->speaker_1",
+          "topic_0->slide_0",
+          "topic_0->slide_1",
+          "topic_0->slide_2",
+          "topic_0->slide_3"
         ],
-        "current_topic": "Q3 Revenue Review",
-        "current_speaker": "Alice Chen"
+        "current_topic": "AI Agent Deployment Challenges",
+        "current_speaker": "Speaker A"
       },
       {
         "timestamp": 120.0,
         "active_nodes": [
-          "speaker_0",
-          "speaker_1",
-          "speaker_2",
-          "topic_0",
-          "topic_1",
-          "kpi_0",
-          "kpi_1",
-          "kpi_2",
-          "kpi_3",
-          "slide_0",
-          "slide_1"
+          "Arthur Mensch",
+          "topic_0"
         ],
         "active_edges": [
-          "speaker_0->topic_0",
-          "speaker_0->topic_1",
-          "claim_0->claim_1"
+          "speaker_1->topic_0",
+          "claim_0->speaker_1",
+          "claim_1->speaker_1",
+          "topic_0->slide_0",
+          "topic_0->slide_1",
+          "topic_0->slide_2",
+          "topic_0->slide_3",
+          "topic_0->slide_4",
+          "topic_0->slide_5"
         ],
-        "current_topic": "Marketing Budget Q4",
-        "current_speaker": "Bob Martinez"
+        "current_topic": "AI Agent Deployment Challenges",
+        "current_speaker": "Speaker A"
       },
       {
         "timestamp": 180.0,
         "active_nodes": [
-          "speaker_0",
-          "speaker_1",
-          "speaker_2",
-          "topic_0",
-          "topic_1",
-          "topic_2",
-          "topic_3",
-          "kpi_0",
-          "kpi_1",
-          "kpi_2",
-          "kpi_3",
-          "kpi_4",
-          "kpi_5",
-          "slide_0",
-          "slide_1",
-          "slide_2"
+          "Arthur Mensch",
+          "Interviewer",
+          "topic_2"
         ],
         "active_edges": [
-          "speaker_0->topic_0",
-          "speaker_0->topic_1",
-          "speaker_1->kpi_5",
-          "claim_0->claim_1"
+          "speaker_1->topic_0",
+          "speaker_2->topic_1",
+          "speaker_1->topic_2",
+          "claim_0->speaker_1",
+          "claim_1->speaker_1",
+          "claim_2->speaker_1",
+          "speaker_1->kpi_0",
+          "topic_0->slide_0",
+          "topic_0->slide_1",
+          "topic_0->slide_2",
+          "topic_0->slide_3",
+          "topic_0->slide_4",
+          "topic_0->slide_5",
+          "topic_2->slide_6"
         ],
-        "current_topic": "Cloud Costs & Technical",
-        "current_speaker": "Bob Martinez"
+        "current_topic": "AI Impact on Enterprise Software",
+        "current_speaker": "Speaker B"
       },
       {
         "timestamp": 240.0,
         "active_nodes": [
-          "speaker_0",
-          "speaker_1",
-          "speaker_2",
-          "topic_0",
-          "topic_1",
-          "topic_2",
-          "topic_3",
-          "topic_4",
-          "decision_0",
-          "decision_1"
+          "Arthur Mensch",
+          "Interviewer",
+          "topic_2"
         ],
         "active_edges": [
-          "speaker_0->decision_0",
-          "speaker_0->decision_1",
-          "speaker_1->decision_1"
+          "speaker_1->topic_0",
+          "speaker_2->topic_1",
+          "speaker_1->topic_2",
+          "claim_0->speaker_1",
+          "claim_1->speaker_1",
+          "claim_2->speaker_1",
+          "speaker_1->kpi_0",
+          "topic_0->slide_0",
+          "topic_0->slide_1",
+          "topic_0->slide_2",
+          "topic_0->slide_3",
+          "topic_0->slide_4",
+          "topic_0->slide_5",
+          "topic_2->slide_6",
+          "topic_2->slide_7",
+          "topic_2->slide_8",
+          "topic_2->slide_9"
         ],
-        "current_topic": "Analytics Dashboard",
-        "current_speaker": "Alice Chen"
+        "current_topic": "AI Impact on Enterprise Software",
+        "current_speaker": "Speaker B"
+      },
+      {
+        "timestamp": 300.0,
+        "active_nodes": [
+          "Arthur Mensch",
+          "topic_4"
+        ],
+        "active_edges": [
+          "speaker_1->topic_0",
+          "speaker_2->topic_1",
+          "speaker_1->topic_2",
+          "speaker_1->topic_3",
+          "speaker_2->topic_3",
+          "speaker_1->topic_4",
+          "claim_0->speaker_1",
+          "claim_1->speaker_1",
+          "claim_2->speaker_1",
+          "claim_3->speaker_1",
+          "speaker_1->kpi_0",
+          "topic_0->slide_0",
+          "topic_0->slide_1",
+          "topic_0->slide_2",
+          "topic_0->slide_3",
+          "topic_0->slide_4",
+          "topic_0->slide_5",
+          "topic_2->slide_6",
+          "topic_2->slide_7",
+          "topic_2->slide_8",
+          "topic_2->slide_9",
+          "topic_3->slide_10"
+        ],
+        "current_topic": "Future of Enterprise Software with AI",
+        "current_speaker": "Speaker A"
       }
     ],
     "metadata": {
-      "duration_seconds": 254.0,
-      "total_nodes": 21,
-      "total_edges": 16,
+      "duration_seconds": 304.2,
+      "total_nodes": 24,
+      "total_edges": 23,
       "node_types": {
-        "speaker": 3,
+        "speaker": 2,
         "topic": 5,
-        "kpi": 6,
-        "slide": 3,
-        "claim": 2,
-        "decision": 2
+        "claim": 4,
+        "kpi": 1,
+        "slide": 12
       }
     }
   },
   "insights": {
-    "summary": "Q3 budget review meeting led by Alice Chen (CEO) with Bob Martinez (VP Engineering) and Carol Zhang (VP Operations). Key outcomes: 18% total revenue growth (8% organic), approved 15% Q4 marketing budget increase, set 28-day hiring target, and approved in-house analytics dashboard build. A revenue figure discrepancy between speaker claims (18%) and slide data (8%) was identified and clarified as total vs organic growth.",
+    "summary": "The video discusses the challenges and future of AI agent deployment in enterprise software. Key points include the non-deterministic nature of AI software development, the potential for AI to replace SaaS workloads, and the impact of AI on enterprise software.",
     "topics": [
       {
-        "name": "Q3 Revenue Review",
+        "name": "AI Agent Deployment Challenges",
         "start_time": 0.0,
-        "end_time": 68.0,
+        "end_time": 126.0,
         "key_points": [
-          "18% total revenue growth YoY (including acquisition)",
-          "8% organic revenue growth shown on slides",
-          "Regional split: NA 62%, EMEA 25%, APAC 13%",
-          "Revenue discrepancy flagged and clarified by Carol"
+          "AI agents can do everything if given all enterprise tools",
+          "AI software development is non-deterministic"
         ],
         "speakers_involved": [
-          "Alice Chen",
-          "Bob Martinez",
-          "Carol Zhang"
+          "Arthur Mensch"
         ],
         "evidence": [
           {
-            "timestamp": 8.5,
+            "timestamp": 20.0,
             "source": "audio",
-            "quote": "Revenue grew 18% year-over-year, which exceeded our initial targets"
+            "quote": "AI agents can do everything if given all enterprise tools"
           },
           {
-            "timestamp": 24.0,
+            "timestamp": 80.0,
+            "source": "audio",
+            "quote": "AI software development is non-deterministic"
+          }
+        ]
+      },
+      {
+        "name": "Market Perception of Agentic AI",
+        "start_time": 127.0,
+        "end_time": 153.0,
+        "key_points": [
+          "Adoption of agentic AI takes time"
+        ],
+        "speakers_involved": [
+          "Interviewer"
+        ],
+        "evidence": [
+          {
+            "timestamp": 30.0,
             "source": "visual",
-            "description": "Slide: Q3 Revenue Overview showing +8% YoY growth"
-          },
-          {
-            "timestamp": 40.0,
-            "source": "audio",
-            "quote": "The slide shows revenue growth at 8% year-over-year, but Alice just mentioned 18%"
+            "description": "Slide showing 'MISTRAL AI CEO: ADOPTION OF AGENTIC AI TAKES TIME'"
           }
         ]
       },
       {
-        "name": "Marketing Budget Q4",
-        "start_time": 85.0,
-        "end_time": 131.0,
+        "name": "AI Impact on Enterprise Software",
+        "start_time": 154.0,
+        "end_time": 255.0,
         "key_points": [
-          "15% marketing budget increase proposed and approved",
-          "Current CAC: $52, target: $45",
-          "Expected 3x ROI",
-          "5 additional engineering headcount for campaigns infrastructure"
+          "AI can create custom applications in a few days"
         ],
         "speakers_involved": [
-          "Alice Chen",
-          "Carol Zhang",
-          "Bob Martinez"
+          "Arthur Mensch"
         ],
         "evidence": [
           {
-            "timestamp": 85.0,
+            "timestamp": 170.0,
             "source": "audio",
-            "quote": "We're proposing a 15% increase for Q4"
-          },
+            "quote": "AI can create custom applications in a few days"
+          }
+        ]
+      },
+      {
+        "name": "SaaS Workload Replacement by AI",
+        "start_time": 256.0,
+        "end_time": 281.0,
+        "key_points": [
+          "More than half of current IT SaaS spending will shift to AI"
+        ],
+        "speakers_involved": [
+          "Arthur Mensch",
+          "Interviewer"
+        ],
+        "evidence": [
           {
-            "timestamp": 102.0,
+            "timestamp": 290.0,
             "source": "audio",
-            "quote": "We expect the additional spend to bring CAC back down to $45 from the current $52"
-          },
+            "quote": "More than half of current IT SaaS spending will shift to AI"
+          }
+        ]
+      },
+      {
+        "name": "Future of Enterprise Software with AI",
+        "start_time": 282.0,
+        "end_time": 304.0,
+        "key_points": [
+          "AI is making us able to develop software faster"
+        ],
+        "speakers_involved": [
+          "Arthur Mensch"
+        ],
+        "evidence": [
           {
-            "timestamp": 85.0,
+            "timestamp": 184.0,
             "source": "visual",
-            "description": "Slide: Q4 Marketing Budget with ROI projections"
-          }
-        ]
-      },
-      {
-        "name": "Hiring & Operations",
-        "start_time": 131.0,
-        "end_time": 158.0,
-        "key_points": [
-          "8 positions closed in Q3 out of 12 open",
-          "Time-to-hire improved from 42 to 34 days",
-          "Q4 target: 28 days",
-          "Interview process streamlining planned"
-        ],
-        "speakers_involved": [
-          "Alice Chen",
-          "Carol Zhang"
-        ],
-        "evidence": [
-          {
-            "timestamp": 132.0,
-            "source": "audio",
-            "quote": "we've closed 8 positions this quarter. Average time-to-hire is 34 days, down from 42"
-          },
-          {
-            "timestamp": 143.0,
-            "source": "audio",
-            "quote": "Let's set a target of 28 days for Q4"
-          },
-          {
-            "timestamp": 132.0,
-            "source": "visual",
-            "description": "Hiring Dashboard slide showing 12 open positions"
-          }
-        ]
-      },
-      {
-        "name": "Cloud Costs & Technical",
-        "start_time": 160.0,
-        "end_time": 188.0,
-        "key_points": [
-          "25% cloud cost increase projected due to ML pipeline",
-          "$15K monthly savings identified through right-sizing",
-          "Full optimization plan coming next week"
-        ],
-        "speakers_involved": [
-          "Alice Chen",
-          "Bob Martinez"
-        ],
-        "evidence": [
-          {
-            "timestamp": 160.0,
-            "source": "audio",
-            "quote": "cloud costs are projected to increase 25% next quarter due to the new ML pipeline"
-          },
-          {
-            "timestamp": 178.0,
-            "source": "audio",
-            "quote": "We've already identified $15K in monthly savings through right-sizing"
-          }
-        ]
-      },
-      {
-        "name": "Analytics Dashboard",
-        "start_time": 205.0,
-        "end_time": 245.0,
-        "key_points": [
-          "Current manual reporting: 3 hours/week",
-          "In-house build approved: 2 sprints (~4 weeks)",
-          "Added to Q4 roadmap"
-        ],
-        "speakers_involved": [
-          "Alice Chen",
-          "Bob Martinez",
-          "Carol Zhang"
-        ],
-        "evidence": [
-          {
-            "timestamp": 205.0,
-            "source": "audio",
-            "quote": "Current reporting takes 3 hours per week manually"
-          },
-          {
-            "timestamp": 216.0,
-            "source": "audio",
-            "quote": "We can build that in-house. Estimated 2 sprints, about 4 weeks"
+            "description": "Slide showing 'MISTRAL AI CEO: AI IS MAKING US ABLE TO DEVELOP SO'"
           }
         ]
       }
     ],
     "action_items": [
       {
-        "description": "Update investor deck to align total vs organic revenue growth figures",
-        "assignee": "Bob Martinez",
+        "description": "Investigate the non-deterministic nature of AI software development and its implications",
+        "assignee": "Arthur Mensch",
         "priority": "high",
         "evidence": [
           {
-            "timestamp": 69.0,
+            "timestamp": 80.0,
             "source": "audio",
-            "quote": "Bob, can you take an action item to align the investor deck with these numbers by Friday?"
+            "quote": "AI software development is non-deterministic"
           }
         ]
       },
       {
-        "description": "Reduce time-to-hire to 28 days by streamlining interview process",
-        "assignee": "Carol Zhang",
-        "priority": "medium",
+        "description": "Explore the potential for AI to replace SaaS workloads and develop a strategy for this transition",
+        "assignee": "Arthur Mensch",
+        "priority": "high",
         "evidence": [
           {
-            "timestamp": 143.0,
+            "timestamp": 290.0,
             "source": "audio",
-            "quote": "Let's set a target of 28 days for Q4. Carol, can you own that?"
-          }
-        ]
-      },
-      {
-        "description": "Present full cloud cost optimization plan",
-        "assignee": "Bob Martinez",
-        "priority": "medium",
-        "evidence": [
-          {
-            "timestamp": 178.0,
-            "source": "audio",
-            "quote": "I'll present the full optimization plan next week"
-          }
-        ]
-      },
-      {
-        "description": "Add analytics dashboard to Q4 roadmap (2 sprints)",
-        "assignee": "Bob Martinez",
-        "priority": "medium",
-        "evidence": [
-          {
-            "timestamp": 225.0,
-            "source": "audio",
-            "quote": "Bob, add it to the Q4 roadmap"
-          }
-        ]
-      },
-      {
-        "description": "Send meeting notes by end of day",
-        "assignee": "Bob Martinez",
-        "priority": "low",
-        "evidence": [
-          {
-            "timestamp": 246.0,
-            "source": "audio",
-            "quote": "I'll send meeting notes by end of day"
+            "quote": "More than half of current IT SaaS spending will shift to AI"
           }
         ]
       }
     ],
     "decisions": [
       {
-        "description": "Approved 15% marketing budget increase for Q4",
-        "made_by": "Alice Chen",
-        "timestamp": 190.0,
-        "context": "Contingent on achieving target CAC of $45 and 3x ROI. Includes 5 additional engineering headcount.",
+        "description": "AI can create custom applications in a few days",
+        "made_by": "Arthur Mensch",
+        "timestamp": 170.0,
+        "context": "Discussion on AI impact on enterprise software",
         "evidence": [
           {
-            "timestamp": 190.0,
+            "timestamp": 170.0,
             "source": "audio",
-            "quote": "we approve the 15% marketing budget increase for Q4, contingent on the ROI targets Carol outlined"
-          }
-        ]
-      },
-      {
-        "description": "Approved in-house analytics dashboard build",
-        "made_by": "Alice Chen",
-        "timestamp": 225.0,
-        "context": "To replace 3 hours/week manual reporting. 2 sprints (~4 weeks) with current engineering team.",
-        "evidence": [
-          {
-            "timestamp": 225.0,
-            "source": "audio",
-            "quote": "Approved. Bob, add it to the Q4 roadmap"
+            "quote": "AI can create custom applications in a few days"
           }
         ]
       }
     ],
-    "contradictions": [
-      {
-        "description": "Revenue growth figure discrepancy: 18% (spoken) vs 8% (slide)",
-        "claim_a": {
-          "source": "Alice Chen",
-          "quote": "Revenue grew 18% year-over-year",
-          "timestamp": 8.5,
-          "source_type": "audio"
-        },
-        "claim_b": {
-          "source": "Q3 Revenue Slide",
-          "quote": "Revenue Growth: +8% YoY",
-          "timestamp": 24.0,
-          "source_type": "visual"
-        },
-        "explanation": "Alice claims 18% total revenue growth including the acquisition, but the slide displays 8% which represents organic growth only. Carol flagged this discrepancy. While clarified during the meeting, this inconsistency could mislead stakeholders reviewing the slides without context.",
-        "severity": "high"
-      }
-    ],
+    "contradictions": [],
     "kpis": [
       {
-        "name": "Total Revenue Growth",
-        "value": "18% YoY",
-        "context": "Includes acquisition revenue. Exceeded initial targets.",
-        "mentioned_by": "Alice Chen",
-        "timestamp": 8.5,
+        "name": "AI Agent Deployment Time",
+        "value": "a few days",
+        "context": "Time taken for AI to create custom applications",
+        "mentioned_by": "Arthur Mensch",
+        "timestamp": 170.0,
         "evidence": [
           {
-            "timestamp": 8.5,
+            "timestamp": 170.0,
             "source": "audio",
-            "quote": "Revenue grew 18% year-over-year"
-          }
-        ]
-      },
-      {
-        "name": "Organic Revenue Growth",
-        "value": "8% YoY",
-        "context": "Excluding acquisition. Shown on slide.",
-        "mentioned_by": "Carol Zhang",
-        "timestamp": 40.0,
-        "evidence": [
-          {
-            "timestamp": 40.0,
-            "source": "audio",
-            "quote": "The slide shows revenue growth at 8%"
-          }
-        ]
-      },
-      {
-        "name": "Bug Backlog Reduction",
-        "value": "40%",
-        "context": "Q3 engineering achievement alongside 3 major feature ships.",
-        "mentioned_by": "Bob Martinez",
-        "timestamp": 15.0,
-        "evidence": [
-          {
-            "timestamp": 15.0,
-            "source": "audio",
-            "quote": "reduced our bug backlog by 40%"
-          }
-        ]
-      },
-      {
-        "name": "Customer Acquisition Cost",
-        "value": "$52 (current) -> $45 (target)",
-        "context": "CAC increased 20% last quarter. Marketing budget increase aims to bring it down.",
-        "mentioned_by": "Alice Chen",
-        "timestamp": 102.0,
-        "evidence": [
-          {
-            "timestamp": 102.0,
-            "source": "audio",
-            "quote": "bring CAC back down to $45 from the current $52"
-          }
-        ]
-      },
-      {
-        "name": "Time-to-Hire",
-        "value": "34 days (down from 42)",
-        "context": "Q4 target is 28 days. Interview process streamlining planned.",
-        "mentioned_by": "Carol Zhang",
-        "timestamp": 132.0,
-        "evidence": [
-          {
-            "timestamp": 132.0,
-            "source": "audio",
-            "quote": "Average time-to-hire is 34 days, down from 42"
-          }
-        ]
-      },
-      {
-        "name": "Cloud Cost Increase",
-        "value": "+25% projected",
-        "context": "Driven by new ML pipeline. $15K/month savings identified.",
-        "mentioned_by": "Bob Martinez",
-        "timestamp": 160.0,
-        "evidence": [
-          {
-            "timestamp": 160.0,
-            "source": "audio",
-            "quote": "cloud costs are projected to increase 25% next quarter"
+            "quote": "AI can create custom applications in a few days"
           }
         ]
       }
     ],
     "key_quotes": [
       {
-        "speaker": "Carol Zhang",
-        "quote": "The slide shows revenue growth at 8% year-over-year, but Alice just mentioned 18%. Can we clarify?",
-        "timestamp": 40.0,
-        "context": "Flagged a critical discrepancy between spoken and visual data that could mislead stakeholders"
+        "speaker": "Arthur Mensch",
+        "quote": "AI agents can do everything if given all enterprise tools",
+        "timestamp": 20.0,
+        "context": "Highlighting the potential of AI agents"
       },
       {
-        "speaker": "Alice Chen",
-        "quote": "The 18% is the total company growth including the acquisition. The slide shows organic growth at 8%.",
-        "timestamp": 51.0,
-        "context": "Clarification of the revenue discrepancy \u2014 important distinction for investor communications"
+        "speaker": "Arthur Mensch",
+        "quote": "AI software development is non-deterministic",
+        "timestamp": 80.0,
+        "context": "Discussing the challenges of AI software development"
       },
       {
-        "speaker": "Alice Chen",
-        "quote": "We approve the 15% marketing budget increase for Q4, contingent on the ROI targets.",
-        "timestamp": 190.0,
-        "context": "Key budget decision with clear conditions attached"
+        "speaker": "Arthur Mensch",
+        "quote": "AI can create custom applications in a few days",
+        "timestamp": 170.0,
+        "context": "Showcasing the speed of AI in software development"
       },
       {
-        "speaker": "Bob Martinez",
-        "quote": "We've already identified $15K in monthly savings through right-sizing.",
-        "timestamp": 178.0,
-        "context": "Proactive cost management in response to projected cloud cost increase"
+        "speaker": "Arthur Mensch",
+        "quote": "More than half of current IT SaaS spending will shift to AI",
+        "timestamp": 290.0,
+        "context": "Predicting the future impact of AI on SaaS spending"
       }
     ]
   },
   "vision_events": [
     {
       "frame_index": 0,
-      "timestamp": 24.0,
-      "frame_path": "",
+      "timestamp": 0.0,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0001.jpg",
       "ocr_text": [
-        "Q3 Revenue Overview",
-        "Revenue Growth: +8% YoY",
-        "North America: 62%",
-        "EMEA: 25%",
-        "APAC: 13%"
+        "MISTRAL AI CEO: OVER HALF OF WHAT\u2019S BEING BOUGHT BY IT IN TERMS OF SAAS IS GOING TO SHIFT TO AI"
       ],
-      "scene_description": "Presentation slide with Q3 revenue breakdown by region, bar chart visible",
-      "slide_title": "Q3 Revenue Overview"
+      "scene_description": "A news anchor in a studio setting with a Parisian skyline background discussing AI trends.",
+      "slide_title": null,
+      "objects": [
+        "news studio backdrop",
+        "Eiffel Tower",
+        "anchor desk"
+      ]
     },
     {
       "frame_index": 1,
-      "timestamp": 85.0,
-      "frame_path": "",
+      "timestamp": 0.434,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0002.jpg",
       "ocr_text": [
-        "Q4 Marketing Budget",
-        "Proposed Increase: 15%",
-        "Target CAC: $45",
-        "Expected ROI: 3x"
+        "MISTRAL AI CEO: OVER HALF OF WHAT\u2019S BEING BOUGHT BY IT IN TERMS OF SAAS IS GOING TO SHIFT TO AI"
       ],
-      "scene_description": "Marketing budget proposal slide with ROI projections table",
-      "slide_title": "Q4 Marketing Budget Proposal"
+      "scene_description": "A man in a suit being interviewed outdoors in a tropical setting with palm trees.",
+      "slide_title": null,
+      "objects": [
+        "palm trees",
+        "outdoor seating",
+        "interviewer"
+      ]
     },
     {
       "frame_index": 2,
-      "timestamp": 132.0,
-      "frame_path": "",
+      "timestamp": 30.463,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0003.jpg",
       "ocr_text": [
-        "Hiring Dashboard",
-        "Open Positions: 12",
-        "Closed Q3: 8",
-        "Avg Time-to-Hire: 34 days"
+        "MISTRAL AI CEO: ADOPTION OF AGENTIC AI TAKES TIME, TAKES A CHANGE IN MINDSET"
       ],
-      "scene_description": "Dashboard view showing hiring pipeline metrics with charts",
-      "slide_title": "Hiring Dashboard"
+      "scene_description": "A man in a suit speaking in an outdoor setting with greenery and wooden panels.",
+      "slide_title": null,
+      "objects": [
+        "palm fronds",
+        "wooden wall",
+        "outdoor event backdrop"
+      ]
+    },
+    {
+      "frame_index": 3,
+      "timestamp": 44.244,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0004.jpg",
+      "ocr_text": [
+        "MISTRAL AI CEO: STARTING TO SEE OUR CUSTOMERS DEPLOYING THINGS AT SCALE"
+      ],
+      "scene_description": "A man in a maroon suit being interviewed indoors near a window with a partially visible 'India Accelerates' poster.",
+      "slide_title": null,
+      "objects": [
+        "India Accelerates poster",
+        "window",
+        "interior wall"
+      ]
+    },
+    {
+      "frame_index": 5,
+      "timestamp": 76.776,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0006.jpg",
+      "ocr_text": [
+        "MISTRAL AI CEO: STARTING TO SEE OUR CUSTOMERS DEPLOYING THINGS AT SCALE"
+      ],
+      "scene_description": "A man in a suit speaking outdoors with greenery and wooden panels in the background.",
+      "slide_title": null,
+      "objects": [
+        "palm trees",
+        "wooden wall",
+        "outdoor setting"
+      ]
+    },
+    {
+      "frame_index": 6,
+      "timestamp": 86.119,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0007.jpg",
+      "ocr_text": [
+        "MISTRAL AI CEO: STARTING TO SEE OUR CUSTOMERS DEPLOYING THINGS AT SCALE"
+      ],
+      "scene_description": "A man in a maroon suit being interviewed indoors near a window with a partially visible 'India Accelerates' poster.",
+      "slide_title": null,
+      "objects": [
+        "India Accelerates poster",
+        "window",
+        "interior wall"
+      ]
+    },
+    {
+      "frame_index": 10,
+      "timestamp": 154.354,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0011.jpg",
+      "ocr_text": [
+        "MISTRAL AI CEO: STARTING TO SEE OUR CUSTOMERS DEPLOYING THINGS AT SCALE"
+      ],
+      "scene_description": "A man in a suit speaking outdoors with greenery and wooden panels in the background.",
+      "slide_title": null,
+      "objects": [
+        "palm trees",
+        "wooden wall",
+        "outdoor setting"
+      ]
+    },
+    {
+      "frame_index": 11,
+      "timestamp": 184.384,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0012.jpg",
+      "ocr_text": [
+        "MISTRAL AI CEO: AI IS MAKING US ABLE TO DEVELOP SOFTWARE AT THE SPEED OF LIGHT"
+      ],
+      "scene_description": "A man in a suit speaking outdoors with greenery and wooden panels in the background.",
+      "slide_title": null,
+      "objects": [
+        "palm trees",
+        "wooden wall",
+        "outdoor setting"
+      ]
+    },
+    {
+      "frame_index": 12,
+      "timestamp": 193.193,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0013.jpg",
+      "ocr_text": [
+        "MARKET ALERT",
+        "MISTRAL AI CEO: AI IS MAKING US ABLE TO DEVELOP SOFTWARE AT THE SPEED OF LIGHT",
+        "INDIA ACCELERATES 2026",
+        "Where visionaries meet"
+      ],
+      "scene_description": "A man in a red suit jacket is being interviewed in front of a backdrop featuring the 'India Accelerates 2026' event signage.",
+      "slide_title": null,
+      "objects": [
+        "microphone",
+        "event backdrop with 'India Accelerates 2026' logo",
+        "plant in background"
+      ]
+    },
+    {
+      "frame_index": 13,
+      "timestamp": 196.863,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0014.jpg",
+      "ocr_text": [
+        "MARKET ALERT",
+        "MISTRAL AI CEO: AI IS MAKING US ABLE TO DEVELOP SOFTWARE AT THE SPEED OF LIGHT",
+        "INDIA ACCELERATES 2026"
+      ],
+      "scene_description": "A man in a suit is speaking in an outdoor or semi-outdoor setting with greenery and an event backdrop.",
+      "slide_title": null,
+      "objects": [
+        "microphone",
+        "event backdrop with 'India Accelerates 2026' logo",
+        "palm plant",
+        "wooden paneling"
+      ]
+    },
+    {
+      "frame_index": 16,
+      "timestamp": 263.463,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0017.jpg",
+      "ocr_text": [
+        "MARKET ALERT",
+        "MISTRAL AI CEO: AI IS MAKING US ABLE TO DEVELOP SOFTWARE AT THE SPEED OF LIGHT",
+        "INDIA ACCELERATES 2026"
+      ],
+      "scene_description": "A man in a suit is speaking with a blurred face, standing in front of an event backdrop.",
+      "slide_title": null,
+      "objects": [
+        "event backdrop with 'India Accelerates 2026' logo",
+        "palm plant",
+        "wooden paneling"
+      ]
+    },
+    {
+      "frame_index": 18,
+      "timestamp": 304.504,
+      "frame_path": "/Users/dontizi/Downloads/Projects/vistral/backend/data/jobs/238a0349/frames/frame_0019.jpg",
+      "ocr_text": [
+        "MARKET ALERT",
+        "MISTRAL AI CEO: OVER HALF OF WHAT\u2019S BEING BOUGHT BY IT IN TERMS OF SAAS IS GOING TO SHIFT TO AI"
+      ],
+      "scene_description": "A woman in a green top is presenting or being interviewed in front of a cityscape background.",
+      "slide_title": null,
+      "objects": [
+        "cityscape background with Eiffel Tower",
+        "abstract graphic in background"
+      ]
     }
-  ]
+  ],
+  "processing_time": 34.9
 }
